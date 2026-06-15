@@ -25,7 +25,7 @@ class Tester:
         news2vector = {}
         news_dataset = NewsDataset(self.args, news_file)
         news_dataloader = news_dataset.get_dataloader(batch_size=self.args.batch_size, \
-            shuffle=False, num_workers=8)
+            shuffle=False, num_workers=self.args.num_workers)
         for batch in tqdm(news_dataloader, desc="Calculating vectors for news"):
             news_ids =  batch["id"] # batch, 1
             if any(id not in news2vector for id in news_ids):
@@ -40,7 +40,7 @@ class Tester:
         user2vector = {}
         user_dataset = UserDataset(self.args, self.args.test_behaviors_file, human_newsvector, llm_newsvector, ratio)
         user_dataloader = user_dataset.get_dataloader(batch_size=self.args.batch_size, \
-            shuffle=False, num_workers=8)
+            shuffle=False, num_workers=self.args.num_workers)
         for batch in tqdm(user_dataloader,
                             desc="Calculating vectors for users"):
             user_strings = batch["clicked_news_string"]
@@ -61,6 +61,7 @@ class Tester:
             blended_dict[key] = blended_value
         return blended_dict
 
+    @torch.no_grad()
     def evaluates(self):
         checkpoint = torch.load(self.args.load_ckpt_name)
         self.model.load_state_dict(checkpoint['model_state_dict'], strict=False)
@@ -78,7 +79,7 @@ class Tester:
             self.user2vector = self.get_user2vector(human_news2vector, llm_news2vector, ratio)
             behaviors_dataset = BehaviorsDataset(self.args, self.args.test_behaviors_file)
             behaviors_dataloader = behaviors_dataset.get_dataloader(batch_size=1, \
-                shuffle=False, num_workers=8)
+                shuffle=False, num_workers=self.args.num_workers)
             for batch in tqdm(behaviors_dataloader,
                                 desc="Calculating probabilities"):
                 candidate_news = batch["candidate_news"]

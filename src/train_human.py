@@ -46,6 +46,8 @@ class Trainer_main:
         self.last_ratio = 0
 
     def save_model(self, path):
+        if os.path.dirname(path):
+            os.makedirs(os.path.dirname(path), exist_ok=True)
         torch.save(
             {
                 'model_state_dict': self.model.state_dict(),
@@ -83,7 +85,7 @@ class Trainer_main:
         news2vector = {}
         news_dataset = NewsDataset(self.args, news_file)
         news_dataloader = news_dataset.get_dataloader(batch_size=self.args.batch_size, \
-            shuffle=False, num_workers=8)
+            shuffle=False, num_workers=self.args.num_workers)
         for batch in tqdm(news_dataloader, desc="Calculating vectors for news"):
             news_ids =  batch["id"] # batch, 1
             if any(id not in news2vector for id in news_ids):
@@ -120,7 +122,7 @@ class Trainer_main:
         seed_torch(self.args.seed)
         for ep in range(self.args.epochs):
             dataset = BaseDataset(self.args, self.args.behaviors_file, None, None, None, epoch=0)
-            dataloader = dataset.get_dataloader(batch_size=self.args.batch_size, shuffle=False, num_workers=8)
+            dataloader = dataset.get_dataloader(batch_size=self.args.batch_size, shuffle=False, num_workers=self.args.num_workers)
 
             loss = self.train_epoch(dataloader)
             logging.info(f"EPOCH[{ep + 1}] LOSS:{loss}")

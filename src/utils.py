@@ -68,6 +68,8 @@ class ScalarMovingAverage:
         return self
 
     def get_avg_weight(self):
+        if self.avg_count == 0:
+            return 0.0
         return self.avg_sum / self.avg_count
 
 class metrics:
@@ -140,4 +142,6 @@ def get_mean(array):
 
 def get_rate(array):
     a_len = len(array)
+    if a_len == 0:
+        return 0.0, 0.0, 0.0
     return np.sum(array > 0)/a_len, np.sum(array < 0)/a_len, np.sum(array == 0)/a_len

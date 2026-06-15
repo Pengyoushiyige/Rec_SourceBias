@@ -60,14 +60,14 @@ class UserSASRec(torch.nn.Module):
         position_ids = torch.arange(
             item_seq.size(1), dtype=torch.long, device=item_seq.device
         )
-        position_ids = position_ids.unsqueeze(0).expand_as(torch.ones(item_seq.shape[0], item_seq.shape[1]).cuda())
+        position_ids = position_ids.unsqueeze(0).expand_as(torch.ones(item_seq.shape[0], item_seq.shape[1], device=item_seq.device))
         position_embedding = self.position_embedding(position_ids)
         # item_emb = self.item_embedding(item_seq)
         item_emb = item_seq
         input_emb = item_emb + position_embedding
         input_emb = self.LayerNorm(input_emb)
         input_emb = self.dropout(input_emb)
-        mask = torch.zeros((item_seq.shape[0], item_seq.shape[1])).cuda()
+        mask = torch.zeros((item_seq.shape[0], item_seq.shape[1]), device=item_seq.device)
         for i, value in enumerate(item_seq_len):
             mask[i, :value] = 1
         extended_attention_mask = self.get_attention_mask(mask, bidirectional=True)
