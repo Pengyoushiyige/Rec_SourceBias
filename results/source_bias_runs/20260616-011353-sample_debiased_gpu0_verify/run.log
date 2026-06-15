@@ -1,0 +1,66 @@
+# started_at: 2026-06-16T01:13:53
+# cwd: E:\Lab\Rec_SourceBias
+# command: E:\Lab\Rec_SourceBias\.venv\Scripts\python.exe src/run.py --mode loop --dataset Amazon_Beauty_sample --behaviors_file1 behaviors1.tsv --behaviors_file2 behaviors2.tsv --test_behaviors_file behaviors.tsv --human_news_file news_parsed_bert-base-uncased.tsv --llm_news_file news_parsed_bert-base-uncased.tsv --loop_epochs 2 --epochs 1 --batch_size 4 --gpu 0 --num_workers 0 --debias --debias_type emb_entropy --llm_rewirte_news_file news_parsed_bert-base-uncased.tsv
+
+2026-06-16 01:13:55.291664: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From E:\Lab\Rec_SourceBias\.venv\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+[INFO 2026-06-16 01:14:01,082] Namespace(mode='loop', dataset='Amazon_Beauty_sample', model_type='BERT4Rec', batch_size=4, shuffle_buffer_size=10000, num_workers=0, log_steps=100, epochs=1, lr=0.001, weight_decay=1e-05, news_attributes=['abstract'], num_words_abstract=100, user_log_length=10, word_embedding_dim=768, user_log_mask=True, drop_rate=0.2, save_steps=100000, max_steps_per_epoch=1000000, load_ckpt_name='epoch-3.pt', gpu='0', plm_model='bert-base-uncased', llm_model='llama', negative_sampling_ratio=1, behaviors_file='dataset\\Amazon_Beauty_sample\\train\\behaviors.tsv', behaviors_file1='dataset\\Amazon_Beauty_sample\\train\\behaviors1.tsv', behaviors_file2='dataset\\Amazon_Beauty_sample\\train\\behaviors2.tsv', test_behaviors_file='dataset\\Amazon_Beauty_sample\\dev\\behaviors.tsv', human_news_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', HGC_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', llm_news_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', llm_rewirte_news_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', seed=2023, debias=True, debias_type='emb_entropy', disturb_ratio=0.5, eta=-1, loop_epochs=2, user_loss=0.01, news_loss=1, test_epoch=3, text_source='', text_parsed_target='', ckpt_dir='')
+[INFO 2026-06-16 01:14:01,082] args: Namespace(mode='loop', dataset='Amazon_Beauty_sample', model_type='BERT4Rec', batch_size=4, shuffle_buffer_size=10000, num_workers=0, log_steps=100, epochs=1, lr=0.001, weight_decay=1e-05, news_attributes=['abstract'], num_words_abstract=100, user_log_length=10, word_embedding_dim=768, user_log_mask=True, drop_rate=0.2, save_steps=100000, max_steps_per_epoch=1000000, load_ckpt_name='epoch-3.pt', gpu='0', plm_model='bert-base-uncased', llm_model='llama', negative_sampling_ratio=1, behaviors_file='dataset\\Amazon_Beauty_sample\\train\\behaviors.tsv', behaviors_file1='dataset\\Amazon_Beauty_sample\\train\\behaviors1.tsv', behaviors_file2='dataset\\Amazon_Beauty_sample\\train\\behaviors2.tsv', test_behaviors_file='dataset\\Amazon_Beauty_sample\\dev\\behaviors.tsv', human_news_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', HGC_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', llm_news_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', llm_rewirte_news_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', seed=2023, debias=True, debias_type='emb_entropy', disturb_ratio=0.5, eta=-1, loop_epochs=2, user_loss=0.01, news_loss=1, test_epoch=3, text_source='', text_parsed_target='', ckpt_dir='')
+[INFO 2026-06-16 01:14:02,431] Training...
+
+  0%|          | 0/637 [00:00<?, ?it/s]
+ 50%|����������     | 319/637 [00:00<00:00, 3122.67it/s]
+100%|��������������������| 637/637 [00:00<00:00, 3560.08it/s]
+
+Calculating vectors for news:   0%|          | 0/160 [00:00<?, ?it/s]
+Calculating vectors for news:   1%|          | 1/160 [00:01<05:09,  1.95s/it]
+Calculating vectors for news:   5%|��         | 8/160 [00:02<00:29,  5.22it/s]
+Calculating vectors for news:   9%|��         | 15/160 [00:02<00:13, 10.81it/s]
+Calculating vectors for news:  14%|����        | 22/160 [00:02<00:07, 17.26it/s]
+Calculating vectors for news:  19%|����        | 30/160 [00:02<00:05, 25.23it/s]
+Calculating vectors for news:  23%|������       | 37/160 [00:02<00:03, 32.33it/s]
+Calculating vectors for news:  28%|������       | 44/160 [00:02<00:02, 38.90it/s]
+Calculating vectors for news:  32%|��������      | 51/160 [00:02<00:02, 44.75it/s]
+Calculating vectors for news:  37%|��������      | 59/160 [00:02<00:01, 51.58it/s]
+Calculating vectors for news:  42%|����������     | 67/160 [00:02<00:01, 57.13it/s]
+Calculating vectors for news:  47%|����������     | 75/160 [00:03<00:01, 60.95it/s]
+Calculating vectors for news:  52%|������������    | 83/160 [00:03<00:01, 64.16it/s]
+Calculating vectors for news:  57%|������������    | 91/160 [00:03<00:01, 66.18it/s]
+Calculating vectors for news:  62%|��������������   | 99/160 [00:03<00:00, 66.41it/s]
+Calculating vectors for news:  66%|��������������   | 106/160 [00:03<00:00, 67.21it/s]
+Calculating vectors for news:  71%|��������������   | 113/160 [00:03<00:00, 66.34it/s]
+Calculating vectors for news:  75%|����������������  | 120/160 [00:03<00:00, 66.61it/s]
+Calculating vectors for news:  79%|����������������  | 127/160 [00:03<00:00, 67.07it/s]
+Calculating vectors for news:  84%|������������������ | 134/160 [00:03<00:00, 67.85it/s]
+Calculating vectors for news:  88%|������������������ | 141/160 [00:04<00:00, 68.10it/s]
+Calculating vectors for news:  92%|��������������������| 148/160 [00:04<00:00, 68.30it/s]
+Calculating vectors for news:  97%|��������������������| 155/160 [00:04<00:00, 67.93it/s]
+Calculating vectors for news: 100%|��������������������| 160/160 [00:04<00:00, 36.18it/s]
+Traceback (most recent call last):
+  File "E:\Lab\Rec_SourceBias\src\run.py", line 33, in <module>
+    trainer.run()
+  File "E:\Lab\Rec_SourceBias\src\train_loop.py", line 246, in run
+    self.llm_text2vector = self.get_news2vector(self.args.llm_news_file)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\utils\_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\src\train_loop.py", line 154, in get_news2vector
+    news_dataset = NewsDataset(self.args, news_file)
+  File "E:\Lab\Rec_SourceBias\src\Dataset.py", line 173, in __init__
+    self.news_parsed = pd.read_csv(
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\pandas\io\parsers\readers.py", line 948, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\pandas\io\parsers\readers.py", line 611, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\pandas\io\parsers\readers.py", line 1448, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\pandas\io\parsers\readers.py", line 1723, in _make_engine
+    return mapping[engine](f, **self.options)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 93, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "parsers.pyx", line 579, in pandas._libs.parsers.TextReader.__cinit__
+  File "parsers.pyx", line 668, in pandas._libs.parsers.TextReader._get_header
+  File "parsers.pyx", line 879, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "parsers.pyx", line 890, in pandas._libs.parsers.TextReader._check_tokenize_status
+  File "parsers.pyx", line 2058, in pandas._libs.parsers.raise_parser_error
+pandas.errors.ParserError: Error tokenizing data. C error: out of memory

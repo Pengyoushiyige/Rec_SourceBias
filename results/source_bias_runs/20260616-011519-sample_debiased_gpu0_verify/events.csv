@@ -1,0 +1,7 @@
+event,loop_epoch,epoch,loss,llm_ratio
+train_loss,,1,1.784027099609375,
+loop_epoch,1,,,
+llm_ratio,1,,,0.0
+train_loss,1,1,4.428991317749023,
+loop_epoch,2,,,
+llm_ratio,2,,,0.0

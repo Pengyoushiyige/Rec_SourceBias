@@ -107,7 +107,8 @@ set UV_CACHE_DIR=e:\.uv_cache
 
 #### Windows Compatibility Notes
 - Ensure your Python version is **3.10.x** (specifically tested on `3.10.13` or similar compatible 3.10 releases).
-- GPU execution requires CUDA-compatible PyTorch binaries. If not using a GPU, command arguments must fallback to CPU execution (`--gpu -1`).
+- GPU execution requires CUDA-compatible PyTorch binaries. On this workstation, use `--gpu 0` for the NVIDIA RTX 4060 Laptop GPU.
+- CPU fallback (`--gpu -1`) is only a troubleshooting option for machines without a usable CUDA GPU.
 - Windows-specific multiprocessing serialization and pickling limitations require setting `--num_workers 0` in PyTorch DataLoader configurations.
 
 ---
@@ -127,7 +128,7 @@ To avoid processing millions of logs and items during debugging or workflow veri
 
 Use these copy-pasteable commands to run each stage of the pipeline on the sample dataset. 
 
-*Note: For Windows/CPU compatibility and multiprocessing stability, CPU execution uses `--gpu -1` and PyTorch worker limits require `--num_workers 0`.*
+*Note: Use `--gpu 0` on this workstation. PyTorch worker limits still require `--num_workers 0` on Windows.*
 
 ### A. Data Preprocessing
 Tokenizes the news/item text abstract using BERT and outputs parsed IDs and masks:
@@ -138,30 +139,87 @@ python src/data_preprocess.py --text_source dataset/Amazon_Beauty_sample/text/ne
 ### B. Model Training (HGC Only)
 Trains the recommender model solely on human-generated content behavior logs and saves the checkpoint to `save/sample_model/`:
 ```bash
-python src/run.py --mode train --dataset Amazon_Beauty_sample --behaviors_file behaviors.tsv --human_news_file news_parsed_bert-base-uncased.tsv --ckpt_dir save/sample_model --epochs 1 --batch_size 4 --gpu -1 --num_workers 0
+python src/run.py --mode train --dataset Amazon_Beauty_sample --behaviors_file behaviors.tsv --human_news_file news_parsed_bert-base-uncased.tsv --ckpt_dir save/sample_model --epochs 1 --batch_size 4 --gpu 0 --num_workers 0
 ```
 
 ### C. Model Testing / Evaluation
 Evaluates the trained checkpoint over varying mixtures of human and LLM-generated content:
 ```bash
-python src/run.py --mode test --dataset Amazon_Beauty_sample --behaviors_file behaviors.tsv --test_behaviors_file behaviors.tsv --human_news_file news_parsed_bert-base-uncased.tsv --llm_news_file news_parsed_bert-base-uncased.tsv --load_ckpt_name save/sample_model/epoch-1.pt --batch_size 4 --gpu -1 --num_workers 0
+python src/run.py --mode test --dataset Amazon_Beauty_sample --behaviors_file behaviors.tsv --test_behaviors_file behaviors.tsv --human_news_file news_parsed_bert-base-uncased.tsv --llm_news_file news_parsed_bert-base-uncased.tsv --load_ckpt_name save/sample_model/epoch-1.pt --batch_size 4 --gpu 0 --num_workers 0
 ```
 
 ### D. Standard Feedback Loop Simulation
 Simulates the multi-epoch recommendation feedback loop, using two behavior splits to model user clicks updates over time:
 ```bash
-python src/run.py --mode loop --dataset Amazon_Beauty_sample --behaviors_file1 behaviors1.tsv --behaviors_file2 behaviors2.tsv --test_behaviors_file behaviors.tsv --human_news_file news_parsed_bert-base-uncased.tsv --llm_news_file news_parsed_bert-base-uncased.tsv --loop_epochs 2 --epochs 1 --batch_size 4 --gpu -1 --num_workers 0
+python src/run.py --mode loop --dataset Amazon_Beauty_sample --behaviors_file1 behaviors1.tsv --behaviors_file2 behaviors2.tsv --test_behaviors_file behaviors.tsv --human_news_file news_parsed_bert-base-uncased.tsv --llm_news_file news_llama_parsed_bert-base-uncased.tsv --loop_epochs 10 --epochs 1 --batch_size 1 --gpu 0 --num_workers 0
 ```
 
 ### E. Debiased Feedback Loop Simulation
 Simulates the feedback loop with debiased alignment (using `--debias` and `--debias_type emb_entropy` along with LLM-rewritten news text):
 ```bash
-python src/run.py --mode loop --debias --debias_type emb_entropy --dataset Amazon_Beauty_sample --behaviors_file1 behaviors1.tsv --behaviors_file2 behaviors2.tsv --test_behaviors_file behaviors.tsv --human_news_file news_parsed_bert-base-uncased.tsv --llm_news_file news_parsed_bert-base-uncased.tsv --llm_rewirte_news_file news_parsed_bert-base-uncased.tsv --loop_epochs 2 --epochs 1 --batch_size 4 --gpu -1 --num_workers 0
+python src/run.py --mode loop --debias --debias_type emb_entropy --dataset Amazon_Beauty_sample --behaviors_file1 behaviors1.tsv --behaviors_file2 behaviors2.tsv --test_behaviors_file behaviors.tsv --human_news_file news_parsed_bert-base-uncased.tsv --llm_news_file news_llama_parsed_bert-base-uncased.tsv --llm_rewirte_news_file news_gpt-3.5-turbo-0613-rewrite_parsed_bert-base-uncased.tsv --loop_epochs 10 --epochs 1 --batch_size 1 --gpu 0 --num_workers 0
 ```
 
 ---
 
-## 6. Key Parameters Guide
+## 6. Saved Source-Bias Run Bundles
+
+The raw `src/run.py` commands print metrics to the terminal through Python logging. For reproducible source-bias experiments, use the capture wrapper so the terminal output is also saved locally and parsed into chart-ready files.
+
+### A. Capture a Standard Feedback Loop Run
+```bash
+python scripts/run_source_bias_capture.py --run-name sample_standard_gpu0_loop10 --dataset Amazon_Beauty_sample --human_news_file news_parsed_bert-base-uncased.tsv --llm_news_file news_llama_parsed_bert-base-uncased.tsv --loop_epochs 10 --epochs 1 --batch_size 1 --gpu 0 --num_workers 0
+```
+
+Use at least `--loop_epochs 10` for source-bias visualization. Two epochs are enough only for smoke testing; they are too short to show feedback-loop dynamics.
+
+Each run creates a timestamped folder under `results/source_bias_runs/<run_id>/`:
+
+| File | Purpose |
+|---|---|
+| `run.log` | Complete raw stdout/stderr log, including progress bars, warnings, arguments, metrics, and errors if a run fails. |
+| `metrics.csv` | Parsed MAP/NDCG rows by `loop_epoch`, `test_ratio`, and `test_type` (`Human`, `LLM`, `Human Target`, `LLM Target`). |
+| `events.csv` | Parsed training loss and `llm_ratio` events across feedback-loop epochs. |
+| `metrics.jsonl` | JSON-lines version of the metric rows for downstream scripts. |
+| `summary.json` | Command, return code, start/end time, and output paths. |
+
+### B. Generate Clean Tables and SVG Charts
+After a run finishes, replace `<run_id>` with the created folder name:
+```bash
+python scripts/plot_source_bias_run.py results/source_bias_runs/<run_id>
+```
+
+This writes:
+
+| File | Purpose |
+|---|---|
+| `analysis/source_bias_summary.csv` | Clean one-row-per-loop-epoch table with LLM ratio and Human-vs-LLM deltas. |
+| `analysis/source_bias_summary.md` | Short textual summary of the saved run. |
+| `analysis/source_bias_dashboard.svg` | Presentation-oriented summary chart combining LLM selection ratio and LLM-target MAP5 advantage. |
+| `analysis/map5_by_epoch.svg` | MAP5 trend chart by source/test type. |
+| `analysis/llm_ratio_by_epoch.svg` | LLM selection-ratio trend chart. |
+
+### C. How Source Bias Appears
+The most direct source-bias signal is `events.csv` column `llm_ratio`: when it increases across loop epochs, the simulated feedback loop is selecting more LLM/AIGC items. The supporting ranking signal is in `metrics.csv`: compare `Human Target` and `LLM Target` MAP/NDCG across epochs to see how target-source preference changes as the loop evolves.
+
+For meaningful source comparison, `--human_news_file` and `--llm_news_file` must point to different parsed source files. On the sample dataset, use `news_parsed_bert-base-uncased.tsv` for HGC and `news_llama_parsed_bert-base-uncased.tsv` for LLM/AIGC. Passing the same parsed file to both sides is only useful for parser smoke tests and will not reproduce source bias.
+
+### D. Full Amazon_Beauty Standard Loop Reference Run
+The current local full-data standard loop reference run uses `Amazon_Beauty`, distinct HGC and LLM parsed item files, `--gpu 0`, and 10 loop epochs:
+```bash
+python scripts/run_source_bias_capture.py --run-name amazon_beauty_standard_distinct_gpu0_loop10 --dataset Amazon_Beauty --human_news_file news_parsed_bert-base-uncased.tsv --llm_news_file news_llama_parsed_bert-base-uncased.tsv --loop_epochs 10 --epochs 1 --batch_size 16 --gpu 0 --num_workers 0
+```
+
+Saved run bundle:
+```text
+results/source_bias_runs/20260616-012303-amazon_beauty_standard_distinct_gpu0_loop10/
+```
+
+This run completed successfully with 40 parsed metric rows and 30 parsed event rows. The LLM selection ratio moved from `0.5468571428571428` at loop epoch 1 to `0.652` at loop epoch 10, with expected intermediate fluctuations. The LLM-target minus Human-target MAP5 gap moved from about `+5.95` to about `+12.68`, which is the cleaner ranking-side source-bias signal for this run. Raw LLM-vs-Human MAP5 stayed negative, so the evidence should be described as feedback-loop source selection and target-preference amplification, not as a universal LLM ranking win. For reports, start from `analysis/source_bias_dashboard.svg`; use `analysis/source_bias_summary.csv` for any custom plotting.
+
+---
+
+## 7. Key Parameters Guide
 
 The behavior of the entry point `src/run.py` is configured via command-line arguments defined in `src/parameters.py`. Below are the key parameters:
 
@@ -177,9 +235,11 @@ The behavior of the entry point `src/run.py` is configured via command-line argu
 | `--gpu` | `str` | `0` | GPU device ID (e.g., `'0'`, `'1'`). Set to `'-1'` for CPU execution fallback. |
 | `--num_workers` | `int` | `0` | PyTorch DataLoader worker subprocess count. **Must be `0` on Windows** to avoid pickling and process spawning loops. |
 
+The capture wrapper sets `PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128` by default to avoid allocator failures observed under Windows/WDDM while still using `--gpu 0`.
+
 ---
 
-## 7. Troubleshooting
+## 8. Troubleshooting
 
 During local pipeline setup and execution, several common issues may arise:
 
@@ -189,7 +249,7 @@ During local pipeline setup and execution, several common issues may arise:
   ```python
   self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
   ```
-  Ensure `--gpu -1` is supplied to ensure CPU fallback and prevent CUDA lookup exceptions.
+  On this workstation, keep `--gpu 0` to use the RTX 4060. Use `--gpu -1` only when intentionally forcing CPU fallback on a machine without CUDA.
 
 ### 2. Windows Multiprocessing & Pickling Limits
 - **Symptom**: `AttributeError: Can't pickle local object...` or infinite child process spawns when running dataloaders.

@@ -1,0 +1,4 @@
+{"loop_epoch": 1, "test_ratio": 0.0, "test_type": "Human", "MAP1": 0.0, "MAP3": 0.0, "MAP5": 0.0, "nDCG1": 0.0, "nDCG3": 0.0, "nDCG5": 0.0}
+{"loop_epoch": 1, "test_ratio": 0.0, "test_type": "LLM", "MAP1": 0.0, "MAP3": 0.0, "MAP5": 0.0, "nDCG1": 0.0, "nDCG3": 0.0, "nDCG5": 0.0}
+{"loop_epoch": 1, "test_ratio": 0.0, "test_type": "Human Target", "MAP1": 0.0, "MAP3": 0.0, "MAP5": 0.0, "nDCG1": 0.0, "nDCG3": 0.0, "nDCG5": 0.0}
+{"loop_epoch": 1, "test_ratio": 0.0, "test_type": "LLM Target", "MAP1": 0.0, "MAP3": 0.0, "MAP5": 0.0, "nDCG1": 0.0, "nDCG3": 0.0, "nDCG5": 0.0}

@@ -1,0 +1,216 @@
+# started_at: 2026-06-16T01:15:19
+# cwd: E:\Lab\Rec_SourceBias
+# command: E:\Lab\Rec_SourceBias\.venv\Scripts\python.exe src/run.py --mode loop --dataset Amazon_Beauty_sample --behaviors_file1 behaviors1.tsv --behaviors_file2 behaviors2.tsv --test_behaviors_file behaviors.tsv --human_news_file news_parsed_bert-base-uncased.tsv --llm_news_file news_parsed_bert-base-uncased.tsv --loop_epochs 2 --epochs 1 --batch_size 4 --gpu 0 --num_workers 0 --debias --debias_type emb_entropy --llm_rewirte_news_file news_parsed_bert-base-uncased.tsv
+
+2026-06-16 01:15:22.201904: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From E:\Lab\Rec_SourceBias\.venv\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+[INFO 2026-06-16 01:15:26,966] Namespace(mode='loop', dataset='Amazon_Beauty_sample', model_type='BERT4Rec', batch_size=4, shuffle_buffer_size=10000, num_workers=0, log_steps=100, epochs=1, lr=0.001, weight_decay=1e-05, news_attributes=['abstract'], num_words_abstract=100, user_log_length=10, word_embedding_dim=768, user_log_mask=True, drop_rate=0.2, save_steps=100000, max_steps_per_epoch=1000000, load_ckpt_name='epoch-3.pt', gpu='0', plm_model='bert-base-uncased', llm_model='llama', negative_sampling_ratio=1, behaviors_file='dataset\\Amazon_Beauty_sample\\train\\behaviors.tsv', behaviors_file1='dataset\\Amazon_Beauty_sample\\train\\behaviors1.tsv', behaviors_file2='dataset\\Amazon_Beauty_sample\\train\\behaviors2.tsv', test_behaviors_file='dataset\\Amazon_Beauty_sample\\dev\\behaviors.tsv', human_news_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', HGC_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', llm_news_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', llm_rewirte_news_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', seed=2023, debias=True, debias_type='emb_entropy', disturb_ratio=0.5, eta=-1, loop_epochs=2, user_loss=0.01, news_loss=1, test_epoch=3, text_source='', text_parsed_target='', ckpt_dir='')
+[INFO 2026-06-16 01:15:26,967] args: Namespace(mode='loop', dataset='Amazon_Beauty_sample', model_type='BERT4Rec', batch_size=4, shuffle_buffer_size=10000, num_workers=0, log_steps=100, epochs=1, lr=0.001, weight_decay=1e-05, news_attributes=['abstract'], num_words_abstract=100, user_log_length=10, word_embedding_dim=768, user_log_mask=True, drop_rate=0.2, save_steps=100000, max_steps_per_epoch=1000000, load_ckpt_name='epoch-3.pt', gpu='0', plm_model='bert-base-uncased', llm_model='llama', negative_sampling_ratio=1, behaviors_file='dataset\\Amazon_Beauty_sample\\train\\behaviors.tsv', behaviors_file1='dataset\\Amazon_Beauty_sample\\train\\behaviors1.tsv', behaviors_file2='dataset\\Amazon_Beauty_sample\\train\\behaviors2.tsv', test_behaviors_file='dataset\\Amazon_Beauty_sample\\dev\\behaviors.tsv', human_news_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', HGC_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', llm_news_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', llm_rewirte_news_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', seed=2023, debias=True, debias_type='emb_entropy', disturb_ratio=0.5, eta=-1, loop_epochs=2, user_loss=0.01, news_loss=1, test_epoch=3, text_source='', text_parsed_target='', ckpt_dir='')
+[INFO 2026-06-16 01:15:28,141] Training...
+
+  0%|          | 0/637 [00:00<?, ?it/s]
+ 72%|����������������  | 458/637 [00:00<00:00, 4564.66it/s]
+100%|��������������������| 637/637 [00:00<00:00, 4562.75it/s]
+
+Calculating vectors for news:   0%|          | 0/160 [00:00<?, ?it/s]
+Calculating vectors for news:   1%|          | 1/160 [00:00<00:19,  8.25it/s]
+Calculating vectors for news:   5%|��         | 8/160 [00:00<00:03, 39.57it/s]
+Calculating vectors for news:   9%|��         | 15/160 [00:00<00:02, 50.41it/s]
+Calculating vectors for news:  14%|����        | 22/160 [00:00<00:02, 57.17it/s]
+Calculating vectors for news:  18%|����        | 29/160 [00:00<00:02, 60.66it/s]
+Calculating vectors for news:  22%|������       | 36/160 [00:00<00:02, 61.59it/s]
+Calculating vectors for news:  27%|������       | 43/160 [00:00<00:01, 63.28it/s]
+Calculating vectors for news:  31%|��������      | 50/160 [00:00<00:01, 64.51it/s]
+Calculating vectors for news:  36%|��������      | 57/160 [00:00<00:01, 65.48it/s]
+Calculating vectors for news:  40%|��������      | 64/160 [00:01<00:01, 65.93it/s]
+Calculating vectors for news:  44%|����������     | 71/160 [00:01<00:01, 66.28it/s]
+Calculating vectors for news:  49%|����������     | 79/160 [00:01<00:01, 66.40it/s]
+Calculating vectors for news:  54%|������������    | 86/160 [00:01<00:01, 65.82it/s]
+Calculating vectors for news:  58%|������������    | 93/160 [00:01<00:01, 66.11it/s]
+Calculating vectors for news:  62%|��������������   | 100/160 [00:01<00:00, 65.88it/s]
+Calculating vectors for news:  67%|��������������   | 107/160 [00:01<00:00, 66.53it/s]
+Calculating vectors for news:  71%|����������������  | 114/160 [00:01<00:00, 66.95it/s]
+Calculating vectors for news:  76%|����������������  | 121/160 [00:01<00:00, 67.07it/s]
+Calculating vectors for news:  80%|����������������  | 128/160 [00:02<00:00, 65.93it/s]
+Calculating vectors for news:  84%|������������������ | 135/160 [00:02<00:00, 65.10it/s]
+Calculating vectors for news:  89%|������������������ | 142/160 [00:02<00:00, 65.02it/s]
+Calculating vectors for news:  93%|��������������������| 149/160 [00:02<00:00, 65.28it/s]
+Calculating vectors for news:  98%|��������������������| 156/160 [00:02<00:00, 64.99it/s]
+Calculating vectors for news: 100%|��������������������| 160/160 [00:02<00:00, 63.04it/s]
+[INFO 2026-06-16 01:15:30,969] Reusing cached news vectors for dataset\Amazon_Beauty_sample\text\news_parsed_bert-base-uncased.tsv
+[INFO 2026-06-16 01:15:30,969] Reusing cached news vectors for dataset\Amazon_Beauty_sample\text\news_parsed_bert-base-uncased.tsv
+
+Calculating vectors for users:   0%|          | 0/4 [00:00<?, ?it/s]
+Calculating vectors for users: 100%|��������������������| 4/4 [00:00<00:00, 108.24it/s]
+   impression_id  ...                                        impressions
+0           3168  ...  B00ISW8ZVS-1 B00279BKRY-0 B000OYJ9AO-0 B000OYJ...
+1          12619  ...  B00KWE08Q0-1 B001AZIY6Q-0 B00390DN34-0 B005G9L...
+2            452  ...  B00LG63DOM-1 B001CN3QKK-0 B007USPWS0-0 B00B840...
+3          11907  ...  B00IOZWC2M-1 B00GCQMSVA-0 B000GCR6S6-0 B0006PL...
+4          11922  ...  B00I2OR6YE-1 B000C1UFM0-0 B000C1W5LE-0 B006SMM...
+
+[5 rows x 5 columns]
+
+0it [00:00, ?it/s]
+15it [00:00, ?it/s]
+
+new ratio: 0
+
+  0%|          | 0/4 [00:00<?, ?it/s][INFO 2026-06-16 01:15:31,149] Ed: 0, train_loss: inf, acc: nan
+
+100%|��������������������| 4/4 [00:00<00:00, 35.25it/s]
+100%|��������������������| 4/4 [00:00<00:00, 35.25it/s]
+[INFO 2026-06-16 01:15:31,192] EPOCH[1] LOSS:1.784027099609375
+[INFO 2026-06-16 01:15:31,192] Epoch: 1
+
+Calculating vectors for users:   0%|          | 0/4 [00:00<?, ?it/s]
+Calculating vectors for users: 100%|��������������������| 4/4 [00:00<00:00, 387.40it/s]
+
+Calculating probabilities:   0%|          | 0/15 [00:00<?, ?it/s]
+Calculating probabilities: 100%|��������������������| 15/15 [00:00<?, ?it/s]
+[INFO 2026-06-16 01:15:31,206] 
+[INFO 2026-06-16 01:15:31,206] ************************************************************
+[INFO 2026-06-16 01:15:31,206] Test Ratio: 0
+[INFO 2026-06-16 01:15:31,206] Test Type: Human
+[INFO 2026-06-16 01:15:31,206] 
+[INFO 2026-06-16 01:15:31,206] MAP1: 0.0
+[INFO 2026-06-16 01:15:31,206] MAP3: 0.0
+[INFO 2026-06-16 01:15:31,206] MAP5: 0.0
+[INFO 2026-06-16 01:15:31,206] 
+[INFO 2026-06-16 01:15:31,206] nDCG1: 0.0
+[INFO 2026-06-16 01:15:31,206] nDCG3: 0.0
+[INFO 2026-06-16 01:15:31,206] nDCG5: 0.0
+[INFO 2026-06-16 01:15:31,206] ************************************************************
+[INFO 2026-06-16 01:15:31,206] 
+[INFO 2026-06-16 01:15:31,206] 
+[INFO 2026-06-16 01:15:31,206] ************************************************************
+[INFO 2026-06-16 01:15:31,206] Test Ratio: 0
+[INFO 2026-06-16 01:15:31,206] Test Type: LLM
+[INFO 2026-06-16 01:15:31,206] 
+[INFO 2026-06-16 01:15:31,206] MAP1: 0.0
+[INFO 2026-06-16 01:15:31,206] MAP3: 0.0
+[INFO 2026-06-16 01:15:31,206] MAP5: 0.0
+[INFO 2026-06-16 01:15:31,206] 
+[INFO 2026-06-16 01:15:31,206] nDCG1: 0.0
+[INFO 2026-06-16 01:15:31,206] nDCG3: 0.0
+[INFO 2026-06-16 01:15:31,206] nDCG5: 0.0
+[INFO 2026-06-16 01:15:31,206] ************************************************************
+[INFO 2026-06-16 01:15:31,206] 
+[INFO 2026-06-16 01:15:31,206] 
+[INFO 2026-06-16 01:15:31,206] ************************************************************
+[INFO 2026-06-16 01:15:31,206] Test Ratio: 0
+[INFO 2026-06-16 01:15:31,206] Test Type: Human Target
+[INFO 2026-06-16 01:15:31,206] 
+[INFO 2026-06-16 01:15:31,206] MAP1: 0.0
+[INFO 2026-06-16 01:15:31,206] MAP3: 0.0
+[INFO 2026-06-16 01:15:31,206] MAP5: 0.0
+[INFO 2026-06-16 01:15:31,206] 
+[INFO 2026-06-16 01:15:31,206] nDCG1: 0.0
+[INFO 2026-06-16 01:15:31,206] nDCG3: 0.0
+[INFO 2026-06-16 01:15:31,206] nDCG5: 0.0
+[INFO 2026-06-16 01:15:31,206] ************************************************************
+[INFO 2026-06-16 01:15:31,206] 
+[INFO 2026-06-16 01:15:31,206] 
+[INFO 2026-06-16 01:15:31,206] ************************************************************
+[INFO 2026-06-16 01:15:31,206] Test Ratio: 0
+[INFO 2026-06-16 01:15:31,206] Test Type: LLM Target
+[INFO 2026-06-16 01:15:31,206] 
+[INFO 2026-06-16 01:15:31,206] MAP1: 0.0
+[INFO 2026-06-16 01:15:31,206] MAP3: 0.0
+[INFO 2026-06-16 01:15:31,206] MAP5: 0.0
+[INFO 2026-06-16 01:15:31,206] 
+[INFO 2026-06-16 01:15:31,206] nDCG1: 0.0
+[INFO 2026-06-16 01:15:31,206] nDCG3: 0.0
+[INFO 2026-06-16 01:15:31,206] nDCG5: 0.0
+[INFO 2026-06-16 01:15:31,206] ************************************************************
+[INFO 2026-06-16 01:15:31,206] 
+[INFO 2026-06-16 01:15:31,206] llm ratio: 0.0
+
+Calculating vectors for users:   0%|          | 0/4 [00:00<?, ?it/s]
+Calculating vectors for users: 100%|��������������������| 4/4 [00:00<00:00, 389.86it/s]
+   impression_id  ...                                        impressions
+0          12854  ...  B0068Z7MT8-1 B008JWW7MK-0 B002CL6D56-0 B002CL6...
+1           1367  ...  B000TK99NU-1 B0000531NU-0 B001MS7HF0-0 B0009ET...
+2           8354  ...  B00150LT40-1 B0077S35WS-0 B0023AV31U-0 B00099Z...
+3           9379  ...  B003AT1CLE-1 B00166KXTU-0 B00B0LKBPW-0 B004T19...
+4           4738  ...  B009JVVRK8-1 B000WE1PP8-0 B005F4EACU-0 B006Z43...
+
+[5 rows x 5 columns]
+
+0it [00:00, ?it/s]
+15it [00:00, ?it/s]
+
+0it [00:00, ?it/s]
+15it [00:00, ?it/s]
+
+new ratio: 0.3333333333333333
+
+  0%|          | 0/4 [00:00<?, ?it/s][INFO 2026-06-16 01:15:31,270] Ed: 0, train_loss: inf, acc: inf
+
+100%|��������������������| 4/4 [00:00<00:00, 98.60it/s]
+[INFO 2026-06-16 01:15:31,297] EPOCH[1] LOSS:4.428991317749023
+[INFO 2026-06-16 01:15:31,297] Epoch: 2
+
+Calculating vectors for users:   0%|          | 0/4 [00:00<?, ?it/s]
+Calculating vectors for users: 100%|��������������������| 4/4 [00:00<00:00, 386.57it/s]
+
+Calculating probabilities:   0%|          | 0/15 [00:00<?, ?it/s]
+Calculating probabilities: 100%|��������������������| 15/15 [00:00<?, ?it/s]
+[INFO 2026-06-16 01:15:31,318] 
+[INFO 2026-06-16 01:15:31,318] ************************************************************
+[INFO 2026-06-16 01:15:31,318] Test Ratio: 0.3333333333333333
+[INFO 2026-06-16 01:15:31,318] Test Type: Human
+[INFO 2026-06-16 01:15:31,318] 
+[INFO 2026-06-16 01:15:31,318] MAP1: 0.0
+[INFO 2026-06-16 01:15:31,318] MAP3: 0.0
+[INFO 2026-06-16 01:15:31,318] MAP5: 0.0
+[INFO 2026-06-16 01:15:31,318] 
+[INFO 2026-06-16 01:15:31,318] nDCG1: 0.0
+[INFO 2026-06-16 01:15:31,318] nDCG3: 0.0
+[INFO 2026-06-16 01:15:31,318] nDCG5: 0.0
+[INFO 2026-06-16 01:15:31,318] ************************************************************
+[INFO 2026-06-16 01:15:31,318] 
+[INFO 2026-06-16 01:15:31,318] 
+[INFO 2026-06-16 01:15:31,318] ************************************************************
+[INFO 2026-06-16 01:15:31,318] Test Ratio: 0.3333333333333333
+[INFO 2026-06-16 01:15:31,318] Test Type: LLM
+[INFO 2026-06-16 01:15:31,318] 
+[INFO 2026-06-16 01:15:31,318] MAP1: 0.0
+[INFO 2026-06-16 01:15:31,318] MAP3: 0.0
+[INFO 2026-06-16 01:15:31,318] MAP5: 0.0
+[INFO 2026-06-16 01:15:31,318] 
+[INFO 2026-06-16 01:15:31,318] nDCG1: 0.0
+[INFO 2026-06-16 01:15:31,318] nDCG3: 0.0
+[INFO 2026-06-16 01:15:31,318] nDCG5: 0.0
+[INFO 2026-06-16 01:15:31,318] ************************************************************
+[INFO 2026-06-16 01:15:31,318] 
+[INFO 2026-06-16 01:15:31,318] 
+[INFO 2026-06-16 01:15:31,318] ************************************************************
+[INFO 2026-06-16 01:15:31,318] Test Ratio: 0.3333333333333333
+[INFO 2026-06-16 01:15:31,318] Test Type: Human Target
+[INFO 2026-06-16 01:15:31,318] 
+[INFO 2026-06-16 01:15:31,318] MAP1: 0.0
+[INFO 2026-06-16 01:15:31,318] MAP3: 0.0
+[INFO 2026-06-16 01:15:31,318] MAP5: 0.0
+[INFO 2026-06-16 01:15:31,318] 
+[INFO 2026-06-16 01:15:31,318] nDCG1: 0.0
+[INFO 2026-06-16 01:15:31,318] nDCG3: 0.0
+[INFO 2026-06-16 01:15:31,318] nDCG5: 0.0
+[INFO 2026-06-16 01:15:31,318] ************************************************************
+[INFO 2026-06-16 01:15:31,318] 
+[INFO 2026-06-16 01:15:31,318] 
+[INFO 2026-06-16 01:15:31,318] ************************************************************
+[INFO 2026-06-16 01:15:31,318] Test Ratio: 0.3333333333333333
+[INFO 2026-06-16 01:15:31,318] Test Type: LLM Target
+[INFO 2026-06-16 01:15:31,318] 
+[INFO 2026-06-16 01:15:31,318] MAP1: 0.0
+[INFO 2026-06-16 01:15:31,318] MAP3: 0.0
+[INFO 2026-06-16 01:15:31,318] MAP5: 0.0
+[INFO 2026-06-16 01:15:31,318] 
+[INFO 2026-06-16 01:15:31,318] nDCG1: 0.0
+[INFO 2026-06-16 01:15:31,318] nDCG3: 0.0
+[INFO 2026-06-16 01:15:31,318] nDCG5: 0.0
+[INFO 2026-06-16 01:15:31,318] ************************************************************
+[INFO 2026-06-16 01:15:31,318] 
+[INFO 2026-06-16 01:15:31,318] llm ratio: 0.0

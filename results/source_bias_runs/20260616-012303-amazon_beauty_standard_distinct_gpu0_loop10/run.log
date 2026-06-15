@@ -1,0 +1,2257 @@
+# started_at: 2026-06-16T01:23:03
+# cwd: E:\Lab\Rec_SourceBias
+# command: E:\Lab\Rec_SourceBias\.venv\Scripts\python.exe src/run.py --mode loop --dataset Amazon_Beauty --behaviors_file1 behaviors1.tsv --behaviors_file2 behaviors2.tsv --test_behaviors_file behaviors.tsv --human_news_file news_parsed_bert-base-uncased.tsv --llm_news_file news_llama_parsed_bert-base-uncased.tsv --loop_epochs 10 --epochs 1 --batch_size 16 --gpu 0 --num_workers 0
+
+2026-06-16 01:23:06.480965: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From E:\Lab\Rec_SourceBias\.venv\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+[INFO 2026-06-16 01:23:12,512] Namespace(mode='loop', dataset='Amazon_Beauty', model_type='BERT4Rec', batch_size=16, shuffle_buffer_size=10000, num_workers=0, log_steps=100, epochs=1, lr=0.001, weight_decay=1e-05, news_attributes=['abstract'], num_words_abstract=100, user_log_length=10, word_embedding_dim=768, user_log_mask=True, drop_rate=0.2, save_steps=100000, max_steps_per_epoch=1000000, load_ckpt_name='epoch-3.pt', gpu='0', plm_model='bert-base-uncased', llm_model='llama', negative_sampling_ratio=1, behaviors_file='dataset\\Amazon_Beauty\\train\\behaviors.tsv', behaviors_file1='dataset\\Amazon_Beauty\\train\\behaviors1.tsv', behaviors_file2='dataset\\Amazon_Beauty\\train\\behaviors2.tsv', test_behaviors_file='dataset\\Amazon_Beauty\\dev\\behaviors.tsv', human_news_file='dataset\\Amazon_Beauty\\text\\news_parsed_bert-base-uncased.tsv', HGC_file='dataset\\Amazon_Beauty\\text\\news_parsed_bert-base-uncased.tsv', llm_news_file='dataset\\Amazon_Beauty\\text\\news_llama_parsed_bert-base-uncased.tsv', llm_rewirte_news_file='dataset\\Amazon_Beauty\\text\\news_llama_rewrite_bert-base-uncased.tsv', seed=2023, debias=False, debias_type='emb_entropy', disturb_ratio=0.5, eta=-1, loop_epochs=10, user_loss=0.01, news_loss=1, test_epoch=3, text_source='', text_parsed_target='', ckpt_dir='')
+[INFO 2026-06-16 01:23:12,514] args: Namespace(mode='loop', dataset='Amazon_Beauty', model_type='BERT4Rec', batch_size=16, shuffle_buffer_size=10000, num_workers=0, log_steps=100, epochs=1, lr=0.001, weight_decay=1e-05, news_attributes=['abstract'], num_words_abstract=100, user_log_length=10, word_embedding_dim=768, user_log_mask=True, drop_rate=0.2, save_steps=100000, max_steps_per_epoch=1000000, load_ckpt_name='epoch-3.pt', gpu='0', plm_model='bert-base-uncased', llm_model='llama', negative_sampling_ratio=1, behaviors_file='dataset\\Amazon_Beauty\\train\\behaviors.tsv', behaviors_file1='dataset\\Amazon_Beauty\\train\\behaviors1.tsv', behaviors_file2='dataset\\Amazon_Beauty\\train\\behaviors2.tsv', test_behaviors_file='dataset\\Amazon_Beauty\\dev\\behaviors.tsv', human_news_file='dataset\\Amazon_Beauty\\text\\news_parsed_bert-base-uncased.tsv', HGC_file='dataset\\Amazon_Beauty\\text\\news_parsed_bert-base-uncased.tsv', llm_news_file='dataset\\Amazon_Beauty\\text\\news_llama_parsed_bert-base-uncased.tsv', llm_rewirte_news_file='dataset\\Amazon_Beauty\\text\\news_llama_rewrite_bert-base-uncased.tsv', seed=2023, debias=False, debias_type='emb_entropy', disturb_ratio=0.5, eta=-1, loop_epochs=10, user_loss=0.01, news_loss=1, test_epoch=3, text_source='', text_parsed_target='', ckpt_dir='')
+[INFO 2026-06-16 01:23:13,825] Training...
+
+  0%|          | 0/11897 [00:00<?, ?it/s]
+  3%|��         | 343/11897 [00:00<00:03, 3414.22it/s]
+  6%|��         | 704/11897 [00:00<00:03, 3490.36it/s]
+  9%|��         | 1065/11897 [00:00<00:03, 3518.69it/s]
+ 12%|����        | 1467/11897 [00:00<00:02, 3540.73it/s]
+ 15%|����        | 1821/11897 [00:00<00:02, 3459.06it/s]
+ 18%|����        | 2173/11897 [00:00<00:02, 3425.30it/s]
+ 21%|����        | 2516/11897 [00:00<00:02, 3325.29it/s]
+ 24%|������       | 2865/11897 [00:00<00:02, 3289.42it/s]
+ 27%|������       | 3257/11897 [00:00<00:02, 3463.94it/s]
+ 30%|������       | 3616/11897 [00:01<00:02, 3427.96it/s]
+ 33%|��������      | 3960/11897 [00:01<00:02, 3293.83it/s]
+ 36%|��������      | 4291/11897 [00:01<00:02, 3230.56it/s]
+ 39%|��������      | 4615/11897 [00:01<00:02, 3149.85it/s]
+ 42%|����������     | 4943/11897 [00:01<00:02, 3168.34it/s]
+ 44%|����������     | 5281/11897 [00:01<00:02, 3213.93it/s]
+ 47%|����������     | 5624/11897 [00:01<00:01, 3267.15it/s]
+ 50%|����������     | 5978/11897 [00:01<00:01, 3343.88it/s]
+ 53%|������������    | 6313/11897 [00:01<00:01, 3329.32it/s]
+ 56%|������������    | 6664/11897 [00:01<00:01, 3353.53it/s]
+ 60%|������������    | 7085/11897 [00:02<00:01, 3597.77it/s]
+ 63%|��������������   | 7481/11897 [00:02<00:01, 3697.72it/s]
+ 66%|��������������   | 7896/11897 [00:02<00:01, 3750.68it/s]
+ 70%|��������������   | 8272/11897 [00:02<00:00, 3677.03it/s]
+ 73%|����������������  | 8640/11897 [00:02<00:00, 3414.49it/s]
+ 76%|����������������  | 8985/11897 [00:02<00:00, 3316.98it/s]
+ 78%|����������������  | 9320/11897 [00:02<00:00, 3214.83it/s]
+ 82%|������������������ | 9711/11897 [00:02<00:00, 3344.38it/s]
+ 85%|������������������ | 10093/11897 [00:02<00:00, 3454.32it/s]
+ 88%|������������������ | 10456/11897 [00:03<00:00, 3503.04it/s]
+ 91%|������������������ | 10822/11897 [00:03<00:00, 3500.95it/s]
+ 94%|��������������������| 11174/11897 [00:03<00:00, 3297.44it/s]
+ 97%|��������������������| 11547/11897 [00:03<00:00, 3391.17it/s]
+100%|��������������������| 11897/11897 [00:03<00:00, 3410.76it/s]
+
+Calculating vectors for news:   0%|          | 0/744 [00:00<?, ?it/s]
+Calculating vectors for news:   0%|          | 1/744 [00:00<02:23,  5.19it/s]
+Calculating vectors for news:   0%|          | 3/744 [00:00<01:06, 11.11it/s]
+Calculating vectors for news:   1%|          | 5/744 [00:00<00:52, 14.13it/s]
+Calculating vectors for news:   1%|          | 7/744 [00:00<00:46, 15.98it/s]
+Calculating vectors for news:   1%|          | 9/744 [00:00<00:42, 17.12it/s]
+Calculating vectors for news:   1%|��         | 11/744 [00:00<00:40, 17.91it/s]
+Calculating vectors for news:   2%|��         | 14/744 [00:00<00:39, 18.71it/s]
+Calculating vectors for news:   2%|��         | 17/744 [00:01<00:37, 19.24it/s]
+Calculating vectors for news:   3%|��         | 20/744 [00:01<00:37, 19.55it/s]
+Calculating vectors for news:   3%|��         | 23/744 [00:01<00:36, 19.77it/s]
+Calculating vectors for news:   3%|��         | 26/744 [00:01<00:36, 19.93it/s]
+Calculating vectors for news:   4%|��         | 28/744 [00:01<00:36, 19.57it/s]
+Calculating vectors for news:   4%|��         | 30/744 [00:01<00:37, 18.82it/s]
+Calculating vectors for news:   4%|��         | 32/744 [00:01<00:39, 18.18it/s]
+Calculating vectors for news:   5%|��         | 35/744 [00:01<00:37, 18.93it/s]
+Calculating vectors for news:   5%|��         | 37/744 [00:02<00:37, 19.11it/s]
+Calculating vectors for news:   5%|��         | 40/744 [00:02<00:35, 19.58it/s]
+Calculating vectors for news:   6%|��         | 42/744 [00:02<00:37, 18.91it/s]
+Calculating vectors for news:   6%|��         | 44/744 [00:02<00:38, 18.25it/s]
+Calculating vectors for news:   6%|��         | 46/744 [00:02<00:39, 17.71it/s]
+Calculating vectors for news:   6%|��         | 48/744 [00:02<00:40, 17.30it/s]
+Calculating vectors for news:   7%|��         | 50/744 [00:02<00:40, 17.07it/s]
+Calculating vectors for news:   7%|��         | 52/744 [00:02<00:40, 16.91it/s]
+Calculating vectors for news:   7%|��         | 54/744 [00:03<00:41, 16.81it/s]
+Calculating vectors for news:   8%|��         | 56/744 [00:03<00:41, 16.55it/s]
+Calculating vectors for news:   8%|��         | 58/744 [00:03<00:41, 16.58it/s]
+Calculating vectors for news:   8%|��         | 60/744 [00:03<00:41, 16.55it/s]
+Calculating vectors for news:   8%|��         | 62/744 [00:03<00:41, 16.54it/s]
+Calculating vectors for news:   9%|��         | 64/744 [00:03<00:41, 16.44it/s]
+Calculating vectors for news:   9%|��         | 66/744 [00:03<00:41, 16.49it/s]
+Calculating vectors for news:   9%|��         | 68/744 [00:03<00:40, 16.51it/s]
+Calculating vectors for news:   9%|��         | 70/744 [00:04<00:40, 16.51it/s]
+Calculating vectors for news:  10%|��         | 72/744 [00:04<00:40, 16.45it/s]
+Calculating vectors for news:  10%|��         | 74/744 [00:04<00:40, 16.43it/s]
+Calculating vectors for news:  10%|��         | 76/744 [00:04<00:38, 17.16it/s]
+Calculating vectors for news:  11%|��         | 79/744 [00:04<00:36, 18.40it/s]
+Calculating vectors for news:  11%|��         | 82/744 [00:04<00:34, 19.29it/s]
+Calculating vectors for news:  11%|����        | 84/744 [00:04<00:34, 19.33it/s]
+Calculating vectors for news:  12%|����        | 87/744 [00:04<00:32, 19.92it/s]
+Calculating vectors for news:  12%|����        | 89/744 [00:05<00:33, 19.75it/s]
+Calculating vectors for news:  12%|����        | 92/744 [00:05<00:32, 20.02it/s]
+Calculating vectors for news:  13%|����        | 95/744 [00:05<00:31, 20.35it/s]
+Calculating vectors for news:  13%|����        | 98/744 [00:05<00:30, 20.95it/s]
+Calculating vectors for news:  14%|����        | 101/744 [00:05<00:31, 20.68it/s]
+Calculating vectors for news:  14%|����        | 104/744 [00:05<00:30, 20.90it/s]
+Calculating vectors for news:  14%|����        | 107/744 [00:05<00:30, 21.07it/s]
+Calculating vectors for news:  15%|����        | 110/744 [00:05<00:29, 21.26it/s]
+Calculating vectors for news:  15%|����        | 113/744 [00:06<00:29, 21.11it/s]
+Calculating vectors for news:  16%|����        | 116/744 [00:06<00:30, 20.89it/s]
+Calculating vectors for news:  16%|����        | 119/744 [00:06<00:29, 20.98it/s]
+Calculating vectors for news:  16%|����        | 122/744 [00:06<00:28, 21.46it/s]
+Calculating vectors for news:  17%|����        | 125/744 [00:06<00:29, 21.26it/s]
+Calculating vectors for news:  17%|����        | 128/744 [00:06<00:28, 21.27it/s]
+Calculating vectors for news:  18%|����        | 131/744 [00:06<00:28, 21.45it/s]
+Calculating vectors for news:  18%|����        | 134/744 [00:07<00:28, 21.27it/s]
+Calculating vectors for news:  18%|����        | 137/744 [00:07<00:28, 21.58it/s]
+Calculating vectors for news:  19%|����        | 140/744 [00:07<00:28, 21.47it/s]
+Calculating vectors for news:  19%|����        | 143/744 [00:07<00:27, 21.52it/s]
+Calculating vectors for news:  20%|����        | 146/744 [00:07<00:27, 21.88it/s]
+Calculating vectors for news:  20%|����        | 149/744 [00:07<00:27, 21.45it/s]
+Calculating vectors for news:  20%|����        | 152/744 [00:07<00:27, 21.44it/s]
+Calculating vectors for news:  21%|����        | 155/744 [00:08<00:27, 21.52it/s]
+Calculating vectors for news:  21%|����        | 158/744 [00:08<00:27, 21.52it/s]
+Calculating vectors for news:  22%|������       | 161/744 [00:08<00:27, 21.36it/s]
+Calculating vectors for news:  22%|������       | 164/744 [00:08<00:26, 21.56it/s]
+Calculating vectors for news:  22%|������       | 167/744 [00:08<00:26, 21.39it/s]
+Calculating vectors for news:  23%|������       | 170/744 [00:08<00:26, 21.57it/s]
+Calculating vectors for news:  23%|������       | 173/744 [00:08<00:26, 21.68it/s]
+Calculating vectors for news:  24%|������       | 176/744 [00:09<00:26, 21.33it/s]
+Calculating vectors for news:  24%|������       | 179/744 [00:09<00:26, 21.40it/s]
+Calculating vectors for news:  24%|������       | 182/744 [00:09<00:25, 21.66it/s]
+Calculating vectors for news:  25%|������       | 185/744 [00:09<00:26, 21.36it/s]
+Calculating vectors for news:  25%|������       | 188/744 [00:09<00:25, 21.49it/s]
+Calculating vectors for news:  26%|������       | 191/744 [00:09<00:26, 21.24it/s]
+Calculating vectors for news:  26%|������       | 194/744 [00:09<00:25, 21.32it/s]
+Calculating vectors for news:  26%|������       | 197/744 [00:10<00:25, 21.46it/s]
+Calculating vectors for news:  27%|������       | 200/744 [00:10<00:25, 21.44it/s]
+Calculating vectors for news:  27%|������       | 203/744 [00:10<00:25, 21.49it/s]
+Calculating vectors for news:  28%|������       | 206/744 [00:10<00:25, 21.51it/s]
+Calculating vectors for news:  28%|������       | 209/744 [00:10<00:24, 21.43it/s]
+Calculating vectors for news:  28%|������       | 212/744 [00:10<00:24, 21.43it/s]
+Calculating vectors for news:  29%|������       | 215/744 [00:10<00:25, 21.06it/s]
+Calculating vectors for news:  29%|������       | 218/744 [00:11<00:25, 20.99it/s]
+Calculating vectors for news:  30%|������       | 221/744 [00:11<00:24, 21.05it/s]
+Calculating vectors for news:  30%|������       | 224/744 [00:11<00:25, 20.74it/s]
+Calculating vectors for news:  31%|������       | 227/744 [00:11<00:24, 20.99it/s]
+Calculating vectors for news:  31%|������       | 230/744 [00:11<00:24, 20.59it/s]
+Calculating vectors for news:  31%|��������      | 233/744 [00:11<00:24, 20.81it/s]
+Calculating vectors for news:  32%|��������      | 236/744 [00:11<00:24, 20.82it/s]
+Calculating vectors for news:  32%|��������      | 239/744 [00:12<00:24, 20.89it/s]
+Calculating vectors for news:  33%|��������      | 242/744 [00:12<00:24, 20.79it/s]
+Calculating vectors for news:  33%|��������      | 245/744 [00:12<00:23, 21.02it/s]
+Calculating vectors for news:  33%|��������      | 248/744 [00:12<00:23, 20.99it/s]
+Calculating vectors for news:  34%|��������      | 251/744 [00:12<00:22, 21.46it/s]
+Calculating vectors for news:  34%|��������      | 254/744 [00:12<00:23, 20.92it/s]
+Calculating vectors for news:  35%|��������      | 257/744 [00:12<00:23, 21.11it/s]
+Calculating vectors for news:  35%|��������      | 260/744 [00:13<00:23, 21.02it/s]
+Calculating vectors for news:  35%|��������      | 263/744 [00:13<00:22, 21.02it/s]
+Calculating vectors for news:  36%|��������      | 266/744 [00:13<00:22, 21.04it/s]
+Calculating vectors for news:  36%|��������      | 269/744 [00:13<00:22, 21.18it/s]
+Calculating vectors for news:  37%|��������      | 272/744 [00:13<00:22, 21.38it/s]
+Calculating vectors for news:  37%|��������      | 275/744 [00:13<00:21, 21.36it/s]
+Calculating vectors for news:  37%|��������      | 278/744 [00:13<00:21, 21.50it/s]
+Calculating vectors for news:  38%|��������      | 281/744 [00:14<00:21, 21.34it/s]
+Calculating vectors for news:  38%|��������      | 284/744 [00:14<00:21, 21.79it/s]
+Calculating vectors for news:  39%|��������      | 287/744 [00:14<00:21, 21.40it/s]
+Calculating vectors for news:  39%|��������      | 290/744 [00:14<00:21, 21.42it/s]
+Calculating vectors for news:  39%|��������      | 293/744 [00:14<00:21, 21.03it/s]
+Calculating vectors for news:  40%|��������      | 296/744 [00:14<00:21, 21.28it/s]
+Calculating vectors for news:  40%|��������      | 299/744 [00:14<00:21, 20.98it/s]
+Calculating vectors for news:  41%|��������      | 302/744 [00:15<00:21, 20.86it/s]
+Calculating vectors for news:  41%|��������      | 305/744 [00:15<00:20, 21.11it/s]
+Calculating vectors for news:  41%|����������     | 308/744 [00:15<00:20, 20.83it/s]
+Calculating vectors for news:  42%|����������     | 311/744 [00:15<00:20, 20.97it/s]
+Calculating vectors for news:  42%|����������     | 314/744 [00:15<00:20, 21.01it/s]
+Calculating vectors for news:  43%|����������     | 317/744 [00:15<00:19, 21.44it/s]
+Calculating vectors for news:  43%|����������     | 320/744 [00:15<00:20, 21.18it/s]
+Calculating vectors for news:  43%|����������     | 323/744 [00:16<00:20, 20.99it/s]
+Calculating vectors for news:  44%|����������     | 326/744 [00:16<00:19, 21.40it/s]
+Calculating vectors for news:  44%|����������     | 329/744 [00:16<00:19, 20.92it/s]
+Calculating vectors for news:  45%|����������     | 332/744 [00:16<00:19, 20.96it/s]
+Calculating vectors for news:  45%|����������     | 335/744 [00:16<00:19, 21.19it/s]
+Calculating vectors for news:  45%|����������     | 338/744 [00:16<00:19, 21.11it/s]
+Calculating vectors for news:  46%|����������     | 341/744 [00:16<00:19, 20.96it/s]
+Calculating vectors for news:  46%|����������     | 344/744 [00:17<00:19, 21.05it/s]
+Calculating vectors for news:  47%|����������     | 347/744 [00:17<00:18, 21.06it/s]
+Calculating vectors for news:  47%|����������     | 350/744 [00:17<00:18, 21.07it/s]
+Calculating vectors for news:  47%|����������     | 353/744 [00:17<00:18, 21.24it/s]
+Calculating vectors for news:  48%|����������     | 356/744 [00:17<00:18, 21.12it/s]
+Calculating vectors for news:  48%|����������     | 359/744 [00:17<00:18, 21.09it/s]
+Calculating vectors for news:  49%|����������     | 362/744 [00:17<00:18, 21.16it/s]
+Calculating vectors for news:  49%|����������     | 365/744 [00:18<00:17, 21.25it/s]
+Calculating vectors for news:  49%|����������     | 368/744 [00:18<00:17, 21.32it/s]
+Calculating vectors for news:  50%|����������     | 371/744 [00:18<00:17, 21.40it/s]
+Calculating vectors for news:  50%|����������     | 374/744 [00:18<00:17, 21.25it/s]
+Calculating vectors for news:  51%|����������     | 377/744 [00:18<00:17, 21.24it/s]
+Calculating vectors for news:  51%|����������     | 380/744 [00:18<00:17, 21.11it/s]
+Calculating vectors for news:  51%|������������    | 383/744 [00:18<00:17, 21.09it/s]
+Calculating vectors for news:  52%|������������    | 386/744 [00:19<00:17, 20.89it/s]
+Calculating vectors for news:  52%|������������    | 389/744 [00:19<00:16, 20.93it/s]
+Calculating vectors for news:  53%|������������    | 392/744 [00:19<00:16, 20.91it/s]
+Calculating vectors for news:  53%|������������    | 395/744 [00:19<00:16, 20.90it/s]
+Calculating vectors for news:  53%|������������    | 398/744 [00:19<00:16, 21.15it/s]
+Calculating vectors for news:  54%|������������    | 401/744 [00:19<00:16, 20.91it/s]
+Calculating vectors for news:  54%|������������    | 404/744 [00:19<00:16, 20.88it/s]
+Calculating vectors for news:  55%|������������    | 407/744 [00:20<00:15, 21.17it/s]
+Calculating vectors for news:  55%|������������    | 410/744 [00:20<00:16, 20.77it/s]
+Calculating vectors for news:  56%|������������    | 413/744 [00:20<00:15, 20.82it/s]
+Calculating vectors for news:  56%|������������    | 416/744 [00:20<00:15, 21.10it/s]
+Calculating vectors for news:  56%|������������    | 419/744 [00:20<00:15, 20.75it/s]
+Calculating vectors for news:  57%|������������    | 422/744 [00:20<00:15, 21.17it/s]
+Calculating vectors for news:  57%|������������    | 425/744 [00:20<00:15, 20.73it/s]
+Calculating vectors for news:  58%|������������    | 428/744 [00:21<00:14, 21.27it/s]
+Calculating vectors for news:  58%|������������    | 431/744 [00:21<00:14, 21.11it/s]
+Calculating vectors for news:  58%|������������    | 434/744 [00:21<00:14, 21.00it/s]
+Calculating vectors for news:  59%|������������    | 437/744 [00:21<00:14, 21.00it/s]
+Calculating vectors for news:  59%|������������    | 440/744 [00:21<00:14, 21.39it/s]
+Calculating vectors for news:  60%|������������    | 443/744 [00:21<00:14, 21.23it/s]
+Calculating vectors for news:  60%|������������    | 446/744 [00:21<00:14, 21.13it/s]
+Calculating vectors for news:  60%|������������    | 449/744 [00:21<00:13, 21.17it/s]
+Calculating vectors for news:  61%|������������    | 452/744 [00:22<00:13, 21.29it/s]
+Calculating vectors for news:  61%|������������    | 455/744 [00:22<00:13, 21.04it/s]
+Calculating vectors for news:  62%|��������������   | 458/744 [00:22<00:13, 21.32it/s]
+Calculating vectors for news:  62%|��������������   | 461/744 [00:22<00:13, 21.41it/s]
+Calculating vectors for news:  62%|��������������   | 464/744 [00:22<00:13, 21.12it/s]
+Calculating vectors for news:  63%|��������������   | 467/744 [00:22<00:13, 21.30it/s]
+Calculating vectors for news:  63%|��������������   | 470/744 [00:22<00:12, 21.45it/s]
+Calculating vectors for news:  64%|��������������   | 473/744 [00:23<00:12, 21.33it/s]
+Calculating vectors for news:  64%|��������������   | 476/744 [00:23<00:12, 21.37it/s]
+Calculating vectors for news:  64%|��������������   | 479/744 [00:23<00:12, 21.42it/s]
+Calculating vectors for news:  65%|��������������   | 482/744 [00:23<00:12, 21.41it/s]
+Calculating vectors for news:  65%|��������������   | 485/744 [00:23<00:11, 21.68it/s]
+Calculating vectors for news:  66%|��������������   | 488/744 [00:23<00:11, 21.60it/s]
+Calculating vectors for news:  66%|��������������   | 491/744 [00:23<00:11, 21.45it/s]
+Calculating vectors for news:  66%|��������������   | 494/744 [00:24<00:11, 21.48it/s]
+Calculating vectors for news:  67%|��������������   | 497/744 [00:24<00:11, 21.55it/s]
+Calculating vectors for news:  67%|��������������   | 500/744 [00:24<00:11, 21.60it/s]
+Calculating vectors for news:  68%|��������������   | 503/744 [00:24<00:11, 21.15it/s]
+Calculating vectors for news:  68%|��������������   | 506/744 [00:24<00:11, 21.35it/s]
+Calculating vectors for news:  68%|��������������   | 509/744 [00:24<00:11, 21.31it/s]
+Calculating vectors for news:  69%|��������������   | 512/744 [00:24<00:10, 21.27it/s]
+Calculating vectors for news:  69%|��������������   | 515/744 [00:25<00:10, 21.71it/s]
+Calculating vectors for news:  70%|��������������   | 518/744 [00:25<00:10, 21.50it/s]
+Calculating vectors for news:  70%|��������������   | 521/744 [00:25<00:10, 21.22it/s]
+Calculating vectors for news:  70%|��������������   | 524/744 [00:25<00:10, 21.53it/s]
+Calculating vectors for news:  71%|��������������   | 527/744 [00:25<00:10, 21.53it/s]
+Calculating vectors for news:  71%|��������������   | 530/744 [00:25<00:09, 21.41it/s]
+Calculating vectors for news:  72%|����������������  | 533/744 [00:25<00:09, 21.61it/s]
+Calculating vectors for news:  72%|����������������  | 536/744 [00:26<00:09, 21.52it/s]
+Calculating vectors for news:  72%|����������������  | 539/744 [00:26<00:09, 21.41it/s]
+Calculating vectors for news:  73%|����������������  | 542/744 [00:26<00:09, 21.53it/s]
+Calculating vectors for news:  73%|����������������  | 545/744 [00:26<00:09, 21.66it/s]
+Calculating vectors for news:  74%|����������������  | 548/744 [00:26<00:09, 21.26it/s]
+Calculating vectors for news:  74%|����������������  | 551/744 [00:26<00:09, 21.17it/s]
+Calculating vectors for news:  74%|����������������  | 554/744 [00:26<00:08, 21.13it/s]
+Calculating vectors for news:  75%|����������������  | 557/744 [00:27<00:08, 21.08it/s]
+Calculating vectors for news:  75%|����������������  | 560/744 [00:27<00:08, 21.68it/s]
+Calculating vectors for news:  76%|����������������  | 563/744 [00:27<00:08, 21.44it/s]
+Calculating vectors for news:  76%|����������������  | 566/744 [00:27<00:08, 21.17it/s]
+Calculating vectors for news:  76%|����������������  | 569/744 [00:27<00:08, 21.26it/s]
+Calculating vectors for news:  77%|����������������  | 572/744 [00:27<00:08, 21.17it/s]
+Calculating vectors for news:  77%|����������������  | 575/744 [00:27<00:07, 21.27it/s]
+Calculating vectors for news:  78%|����������������  | 578/744 [00:28<00:07, 21.33it/s]
+Calculating vectors for news:  78%|����������������  | 581/744 [00:28<00:07, 21.42it/s]
+Calculating vectors for news:  78%|����������������  | 584/744 [00:28<00:07, 21.49it/s]
+Calculating vectors for news:  79%|����������������  | 587/744 [00:28<00:07, 21.52it/s]
+Calculating vectors for news:  79%|����������������  | 590/744 [00:28<00:07, 21.49it/s]
+Calculating vectors for news:  80%|����������������  | 593/744 [00:28<00:07, 21.30it/s]
+Calculating vectors for news:  80%|����������������  | 596/744 [00:28<00:06, 21.53it/s]
+Calculating vectors for news:  81%|����������������  | 599/744 [00:29<00:06, 21.62it/s]
+Calculating vectors for news:  81%|����������������  | 602/744 [00:29<00:06, 21.29it/s]
+Calculating vectors for news:  81%|������������������ | 605/744 [00:29<00:06, 21.23it/s]
+Calculating vectors for news:  82%|������������������ | 608/744 [00:29<00:06, 21.54it/s]
+Calculating vectors for news:  82%|������������������ | 611/744 [00:29<00:06, 21.26it/s]
+Calculating vectors for news:  83%|������������������ | 614/744 [00:29<00:06, 21.16it/s]
+Calculating vectors for news:  83%|������������������ | 617/744 [00:29<00:06, 21.11it/s]
+Calculating vectors for news:  83%|������������������ | 620/744 [00:29<00:05, 21.40it/s]
+Calculating vectors for news:  84%|������������������ | 623/744 [00:30<00:05, 21.27it/s]
+Calculating vectors for news:  84%|������������������ | 626/744 [00:30<00:05, 21.23it/s]
+Calculating vectors for news:  85%|������������������ | 629/744 [00:30<00:05, 21.21it/s]
+Calculating vectors for news:  85%|������������������ | 632/744 [00:30<00:05, 21.22it/s]
+Calculating vectors for news:  85%|������������������ | 635/744 [00:30<00:05, 21.24it/s]
+Calculating vectors for news:  86%|������������������ | 638/744 [00:30<00:04, 21.44it/s]
+Calculating vectors for news:  86%|������������������ | 641/744 [00:30<00:04, 21.06it/s]
+Calculating vectors for news:  87%|������������������ | 644/744 [00:31<00:04, 21.50it/s]
+Calculating vectors for news:  87%|������������������ | 647/744 [00:31<00:04, 21.08it/s]
+Calculating vectors for news:  87%|������������������ | 650/744 [00:31<00:04, 21.25it/s]
+Calculating vectors for news:  88%|������������������ | 653/744 [00:31<00:04, 21.22it/s]
+Calculating vectors for news:  88%|������������������ | 656/744 [00:31<00:04, 21.21it/s]
+Calculating vectors for news:  89%|������������������ | 659/744 [00:31<00:04, 21.07it/s]
+Calculating vectors for news:  89%|������������������ | 662/744 [00:31<00:03, 21.07it/s]
+Calculating vectors for news:  89%|������������������ | 665/744 [00:32<00:03, 21.02it/s]
+Calculating vectors for news:  90%|������������������ | 668/744 [00:32<00:03, 21.56it/s]
+Calculating vectors for news:  90%|������������������ | 671/744 [00:32<00:03, 21.01it/s]
+Calculating vectors for news:  91%|������������������ | 674/744 [00:32<00:03, 21.18it/s]
+Calculating vectors for news:  91%|������������������ | 677/744 [00:32<00:03, 21.08it/s]
+Calculating vectors for news:  91%|��������������������| 680/744 [00:32<00:03, 21.29it/s]
+Calculating vectors for news:  92%|��������������������| 683/744 [00:32<00:02, 20.76it/s]
+Calculating vectors for news:  92%|��������������������| 686/744 [00:33<00:02, 20.96it/s]
+Calculating vectors for news:  93%|��������������������| 689/744 [00:33<00:02, 20.61it/s]
+Calculating vectors for news:  93%|��������������������| 692/744 [00:33<00:02, 20.71it/s]
+Calculating vectors for news:  93%|��������������������| 695/744 [00:33<00:02, 21.00it/s]
+Calculating vectors for news:  94%|��������������������| 698/744 [00:33<00:02, 21.08it/s]
+Calculating vectors for news:  94%|��������������������| 701/744 [00:33<00:02, 20.94it/s]
+Calculating vectors for news:  95%|��������������������| 704/744 [00:33<00:01, 20.98it/s]
+Calculating vectors for news:  95%|��������������������| 707/744 [00:34<00:01, 21.12it/s]
+Calculating vectors for news:  95%|��������������������| 710/744 [00:34<00:01, 21.00it/s]
+Calculating vectors for news:  96%|��������������������| 713/744 [00:34<00:01, 21.27it/s]
+Calculating vectors for news:  96%|��������������������| 716/744 [00:34<00:01, 21.24it/s]
+Calculating vectors for news:  97%|��������������������| 719/744 [00:34<00:01, 21.59it/s]
+Calculating vectors for news:  97%|��������������������| 722/744 [00:34<00:01, 21.13it/s]
+Calculating vectors for news:  97%|��������������������| 725/744 [00:34<00:00, 21.01it/s]
+Calculating vectors for news:  98%|��������������������| 728/744 [00:35<00:00, 21.11it/s]
+Calculating vectors for news:  98%|��������������������| 731/744 [00:35<00:00, 21.06it/s]
+Calculating vectors for news:  99%|��������������������| 734/744 [00:35<00:00, 21.34it/s]
+Calculating vectors for news:  99%|��������������������| 737/744 [00:35<00:00, 21.10it/s]
+Calculating vectors for news:  99%|��������������������| 740/744 [00:35<00:00, 21.05it/s]
+Calculating vectors for news: 100%|��������������������| 743/744 [00:35<00:00, 21.05it/s]
+Calculating vectors for news: 100%|��������������������| 744/744 [00:35<00:00, 20.75it/s]
+
+  0%|          | 0/11897 [00:00<?, ?it/s]
+  3%|��         | 415/11897 [00:00<00:02, 4017.14it/s]
+  7%|��         | 817/11897 [00:00<00:02, 3702.81it/s]
+ 10%|��         | 1202/11897 [00:00<00:02, 3755.15it/s]
+ 14%|����        | 1621/11897 [00:00<00:02, 3903.85it/s]
+ 18%|����        | 2083/11897 [00:00<00:02, 4148.98it/s]
+ 21%|����        | 2509/11897 [00:00<00:02, 4043.41it/s]
+ 25%|������       | 2974/11897 [00:00<00:02, 4196.32it/s]
+ 29%|������       | 3403/11897 [00:00<00:02, 4222.36it/s]
+ 32%|��������      | 3827/11897 [00:00<00:01, 4130.35it/s]
+ 36%|��������      | 4314/11897 [00:01<00:01, 4228.82it/s]
+ 41%|��������      | 4826/11897 [00:01<00:01, 4376.63it/s]
+ 44%|����������     | 5264/11897 [00:01<00:01, 4374.08it/s]
+ 48%|����������     | 5702/11897 [00:01<00:01, 4275.17it/s]
+ 52%|������������    | 6130/11897 [00:01<00:01, 3947.69it/s]
+ 55%|������������    | 6557/11897 [00:01<00:01, 4031.93it/s]
+ 59%|������������    | 7032/11897 [00:01<00:01, 4110.59it/s]
+ 63%|��������������   | 7500/11897 [00:01<00:01, 4260.17it/s]
+ 67%|��������������   | 7929/11897 [00:01<00:01, 3844.29it/s]
+ 70%|��������������   | 8322/11897 [00:02<00:00, 3828.12it/s]
+ 73%|����������������  | 8733/11897 [00:02<00:00, 3888.93it/s]
+ 77%|����������������  | 9127/11897 [00:02<00:00, 3714.39it/s]
+ 80%|����������������  | 9503/11897 [00:02<00:00, 3576.64it/s]
+ 83%|������������������ | 9890/11897 [00:02<00:00, 3655.48it/s]
+ 87%|������������������ | 10325/11897 [00:02<00:00, 3820.65it/s]
+ 90%|������������������ | 10710/11897 [00:02<00:00, 3773.12it/s]
+ 94%|��������������������| 11140/11897 [00:02<00:00, 3863.32it/s]
+ 97%|��������������������| 11534/11897 [00:02<00:00, 3836.36it/s]
+100%|��������������������| 11897/11897 [00:03<00:00, 3762.02it/s]
+
+Calculating vectors for news:   0%|          | 0/744 [00:00<?, ?it/s]
+Calculating vectors for news:   0%|          | 2/744 [00:00<00:42, 17.65it/s]
+Calculating vectors for news:   1%|          | 5/744 [00:00<00:38, 19.14it/s]
+Calculating vectors for news:   1%|          | 7/744 [00:00<00:38, 19.29it/s]
+Calculating vectors for news:   1%|��         | 10/744 [00:00<00:37, 19.79it/s]
+Calculating vectors for news:   2%|��         | 13/744 [00:00<00:36, 19.82it/s]
+Calculating vectors for news:   2%|��         | 16/744 [00:00<00:36, 20.04it/s]
+Calculating vectors for news:   2%|��         | 18/744 [00:00<00:36, 20.03it/s]
+Calculating vectors for news:   3%|��         | 21/744 [00:01<00:35, 20.14it/s]
+Calculating vectors for news:   3%|��         | 24/744 [00:01<00:35, 20.06it/s]
+Calculating vectors for news:   4%|��         | 27/744 [00:01<00:35, 20.16it/s]
+Calculating vectors for news:   4%|��         | 30/744 [00:01<00:35, 20.30it/s]
+Calculating vectors for news:   4%|��         | 33/744 [00:01<00:34, 20.34it/s]
+Calculating vectors for news:   5%|��         | 36/744 [00:01<00:35, 20.10it/s]
+Calculating vectors for news:   5%|��         | 39/744 [00:01<00:37, 18.84it/s]
+Calculating vectors for news:   6%|��         | 41/744 [00:02<00:38, 18.36it/s]
+Calculating vectors for news:   6%|��         | 43/744 [00:02<00:39, 17.79it/s]
+Calculating vectors for news:   6%|��         | 45/744 [00:02<00:40, 17.33it/s]
+Calculating vectors for news:   6%|��         | 47/744 [00:02<00:41, 16.85it/s]
+Calculating vectors for news:   7%|��         | 49/744 [00:02<00:42, 16.41it/s]
+Calculating vectors for news:   7%|��         | 51/744 [00:02<00:42, 16.22it/s]
+Calculating vectors for news:   7%|��         | 53/744 [00:02<00:43, 16.07it/s]
+Calculating vectors for news:   7%|��         | 55/744 [00:02<00:43, 15.82it/s]
+Calculating vectors for news:   8%|��         | 57/744 [00:03<00:43, 15.70it/s]
+Calculating vectors for news:   8%|��         | 59/744 [00:03<00:43, 15.67it/s]
+Calculating vectors for news:   8%|��         | 61/744 [00:03<00:44, 15.41it/s]
+Calculating vectors for news:   8%|��         | 63/744 [00:03<00:44, 15.36it/s]
+Calculating vectors for news:   9%|��         | 65/744 [00:03<00:44, 15.15it/s]
+Calculating vectors for news:   9%|��         | 67/744 [00:03<00:44, 15.24it/s]
+Calculating vectors for news:   9%|��         | 69/744 [00:03<00:44, 15.11it/s]
+Calculating vectors for news:  10%|��         | 71/744 [00:04<00:44, 15.17it/s]
+Calculating vectors for news:  10%|��         | 73/744 [00:04<00:44, 15.16it/s]
+Calculating vectors for news:  10%|��         | 75/744 [00:04<00:43, 15.25it/s]
+Calculating vectors for news:  10%|��         | 77/744 [00:04<00:43, 15.20it/s]
+Calculating vectors for news:  11%|��         | 79/744 [00:04<00:43, 15.12it/s]
+Calculating vectors for news:  11%|��         | 81/744 [00:04<00:43, 15.16it/s]
+Calculating vectors for news:  11%|��         | 83/744 [00:04<00:44, 14.89it/s]
+Calculating vectors for news:  11%|����        | 85/744 [00:04<00:44, 14.91it/s]
+Calculating vectors for news:  12%|����        | 87/744 [00:05<00:44, 14.86it/s]
+Calculating vectors for news:  12%|����        | 89/744 [00:05<00:43, 15.02it/s]
+Calculating vectors for news:  12%|����        | 91/744 [00:05<00:43, 15.05it/s]
+Calculating vectors for news:  12%|����        | 93/744 [00:05<00:43, 14.96it/s]
+Calculating vectors for news:  13%|����        | 95/744 [00:05<00:43, 15.00it/s]
+Calculating vectors for news:  13%|����        | 97/744 [00:05<00:43, 14.98it/s]
+Calculating vectors for news:  13%|����        | 99/744 [00:05<00:43, 14.94it/s]
+Calculating vectors for news:  14%|����        | 101/744 [00:06<00:42, 15.03it/s]
+Calculating vectors for news:  14%|����        | 103/744 [00:06<00:42, 15.06it/s]
+Calculating vectors for news:  14%|����        | 105/744 [00:06<00:42, 15.15it/s]
+Calculating vectors for news:  14%|����        | 107/744 [00:06<00:42, 15.10it/s]
+Calculating vectors for news:  15%|����        | 109/744 [00:06<00:41, 15.20it/s]
+Calculating vectors for news:  15%|����        | 111/744 [00:06<00:41, 15.17it/s]
+Calculating vectors for news:  15%|����        | 113/744 [00:06<00:41, 15.12it/s]
+Calculating vectors for news:  15%|����        | 115/744 [00:06<00:41, 15.23it/s]
+Calculating vectors for news:  16%|����        | 117/744 [00:07<00:41, 15.17it/s]
+Calculating vectors for news:  16%|����        | 119/744 [00:07<00:41, 15.11it/s]
+Calculating vectors for news:  16%|����        | 121/744 [00:07<00:41, 15.02it/s]
+Calculating vectors for news:  17%|����        | 123/744 [00:07<00:41, 15.04it/s]
+Calculating vectors for news:  17%|����        | 125/744 [00:07<00:41, 15.03it/s]
+Calculating vectors for news:  17%|����        | 127/744 [00:07<00:41, 14.87it/s]
+Calculating vectors for news:  17%|����        | 129/744 [00:07<00:41, 14.97it/s]
+Calculating vectors for news:  18%|����        | 131/744 [00:08<00:41, 14.90it/s]
+Calculating vectors for news:  18%|����        | 133/744 [00:08<00:40, 14.93it/s]
+Calculating vectors for news:  18%|����        | 135/744 [00:08<00:40, 15.01it/s]
+Calculating vectors for news:  18%|����        | 137/744 [00:08<00:40, 15.02it/s]
+Calculating vectors for news:  19%|����        | 139/744 [00:08<00:40, 15.05it/s]
+Calculating vectors for news:  19%|����        | 141/744 [00:08<00:39, 15.10it/s]
+Calculating vectors for news:  19%|����        | 143/744 [00:08<00:39, 15.04it/s]
+Calculating vectors for news:  19%|����        | 145/744 [00:08<00:39, 15.08it/s]
+Calculating vectors for news:  20%|����        | 147/744 [00:09<00:39, 15.11it/s]
+Calculating vectors for news:  20%|����        | 149/744 [00:09<00:39, 15.03it/s]
+Calculating vectors for news:  20%|����        | 151/744 [00:09<00:39, 15.09it/s]
+Calculating vectors for news:  21%|����        | 153/744 [00:09<00:39, 15.08it/s]
+Calculating vectors for news:  21%|����        | 155/744 [00:09<00:39, 15.08it/s]
+Calculating vectors for news:  21%|����        | 157/744 [00:09<00:38, 15.10it/s]
+Calculating vectors for news:  21%|������       | 159/744 [00:09<00:38, 15.10it/s]
+Calculating vectors for news:  22%|������       | 161/744 [00:10<00:38, 15.10it/s]
+Calculating vectors for news:  22%|������       | 163/744 [00:10<00:38, 15.14it/s]
+Calculating vectors for news:  22%|������       | 165/744 [00:10<00:38, 15.08it/s]
+Calculating vectors for news:  22%|������       | 167/744 [00:10<00:38, 15.09it/s]
+Calculating vectors for news:  23%|������       | 169/744 [00:10<00:38, 15.10it/s]
+Calculating vectors for news:  23%|������       | 171/744 [00:10<00:37, 15.22it/s]
+Calculating vectors for news:  23%|������       | 173/744 [00:10<00:37, 15.15it/s]
+Calculating vectors for news:  24%|������       | 175/744 [00:10<00:37, 15.14it/s]
+Calculating vectors for news:  24%|������       | 177/744 [00:11<00:37, 15.06it/s]
+Calculating vectors for news:  24%|������       | 179/744 [00:11<00:37, 15.10it/s]
+Calculating vectors for news:  24%|������       | 181/744 [00:11<00:37, 14.91it/s]
+Calculating vectors for news:  25%|������       | 183/744 [00:11<00:37, 15.00it/s]
+Calculating vectors for news:  25%|������       | 185/744 [00:11<00:37, 14.90it/s]
+Calculating vectors for news:  25%|������       | 187/744 [00:11<00:37, 14.97it/s]
+Calculating vectors for news:  25%|������       | 189/744 [00:11<00:37, 14.85it/s]
+Calculating vectors for news:  26%|������       | 191/744 [00:12<00:37, 14.93it/s]
+Calculating vectors for news:  26%|������       | 193/744 [00:12<00:36, 14.93it/s]
+Calculating vectors for news:  26%|������       | 195/744 [00:12<00:36, 14.86it/s]
+Calculating vectors for news:  26%|������       | 197/744 [00:12<00:36, 14.94it/s]
+Calculating vectors for news:  27%|������       | 199/744 [00:12<00:36, 14.89it/s]
+Calculating vectors for news:  27%|������       | 201/744 [00:12<00:36, 14.99it/s]
+Calculating vectors for news:  27%|������       | 203/744 [00:12<00:36, 14.95it/s]
+Calculating vectors for news:  28%|������       | 205/744 [00:12<00:35, 14.98it/s]
+Calculating vectors for news:  28%|������       | 207/744 [00:13<00:35, 14.96it/s]
+Calculating vectors for news:  28%|������       | 209/744 [00:13<00:35, 14.89it/s]
+Calculating vectors for news:  28%|������       | 211/744 [00:13<00:35, 14.93it/s]
+Calculating vectors for news:  29%|������       | 213/744 [00:13<00:35, 14.95it/s]
+Calculating vectors for news:  29%|������       | 215/744 [00:13<00:35, 14.99it/s]
+Calculating vectors for news:  29%|������       | 217/744 [00:13<00:35, 15.03it/s]
+Calculating vectors for news:  29%|������       | 219/744 [00:13<00:34, 15.02it/s]
+Calculating vectors for news:  30%|������       | 221/744 [00:14<00:34, 14.98it/s]
+Calculating vectors for news:  30%|������       | 223/744 [00:14<00:34, 15.09it/s]
+Calculating vectors for news:  30%|������       | 225/744 [00:14<00:34, 15.03it/s]
+Calculating vectors for news:  31%|������       | 227/744 [00:14<00:34, 14.99it/s]
+Calculating vectors for news:  31%|������       | 229/744 [00:14<00:34, 14.99it/s]
+Calculating vectors for news:  31%|������       | 231/744 [00:14<00:34, 15.00it/s]
+Calculating vectors for news:  31%|��������      | 233/744 [00:14<00:34, 15.02it/s]
+Calculating vectors for news:  32%|��������      | 235/744 [00:14<00:33, 15.02it/s]
+Calculating vectors for news:  32%|��������      | 237/744 [00:15<00:33, 14.91it/s]
+Calculating vectors for news:  32%|��������      | 239/744 [00:15<00:33, 15.01it/s]
+Calculating vectors for news:  32%|��������      | 241/744 [00:15<00:33, 15.11it/s]
+Calculating vectors for news:  33%|��������      | 243/744 [00:15<00:32, 15.19it/s]
+Calculating vectors for news:  33%|��������      | 245/744 [00:15<00:32, 15.15it/s]
+Calculating vectors for news:  33%|��������      | 247/744 [00:15<00:33, 15.03it/s]
+Calculating vectors for news:  33%|��������      | 249/744 [00:15<00:32, 15.24it/s]
+Calculating vectors for news:  34%|��������      | 251/744 [00:16<00:32, 15.16it/s]
+Calculating vectors for news:  34%|��������      | 253/744 [00:16<00:32, 15.23it/s]
+Calculating vectors for news:  34%|��������      | 255/744 [00:16<00:31, 15.30it/s]
+Calculating vectors for news:  35%|��������      | 257/744 [00:16<00:32, 15.21it/s]
+Calculating vectors for news:  35%|��������      | 259/744 [00:16<00:31, 15.21it/s]
+Calculating vectors for news:  35%|��������      | 261/744 [00:16<00:31, 15.32it/s]
+Calculating vectors for news:  35%|��������      | 263/744 [00:16<00:31, 15.23it/s]
+Calculating vectors for news:  36%|��������      | 265/744 [00:16<00:31, 15.10it/s]
+Calculating vectors for news:  36%|��������      | 267/744 [00:17<00:31, 14.99it/s]
+Calculating vectors for news:  36%|��������      | 269/744 [00:17<00:31, 14.95it/s]
+Calculating vectors for news:  36%|��������      | 271/744 [00:17<00:31, 14.85it/s]
+Calculating vectors for news:  37%|��������      | 273/744 [00:17<00:31, 14.93it/s]
+Calculating vectors for news:  37%|��������      | 275/744 [00:17<00:31, 14.80it/s]
+Calculating vectors for news:  37%|��������      | 277/744 [00:17<00:31, 14.86it/s]
+Calculating vectors for news:  38%|��������      | 279/744 [00:17<00:31, 14.91it/s]
+Calculating vectors for news:  38%|��������      | 281/744 [00:18<00:30, 14.95it/s]
+Calculating vectors for news:  38%|��������      | 283/744 [00:18<00:30, 15.01it/s]
+Calculating vectors for news:  38%|��������      | 285/744 [00:18<00:30, 15.01it/s]
+Calculating vectors for news:  39%|��������      | 287/744 [00:18<00:30, 14.94it/s]
+Calculating vectors for news:  39%|��������      | 289/744 [00:18<00:30, 15.07it/s]
+Calculating vectors for news:  39%|��������      | 291/744 [00:18<00:30, 15.00it/s]
+Calculating vectors for news:  39%|��������      | 293/744 [00:18<00:30, 14.93it/s]
+Calculating vectors for news:  40%|��������      | 295/744 [00:18<00:29, 14.99it/s]
+Calculating vectors for news:  40%|��������      | 297/744 [00:19<00:29, 14.90it/s]
+Calculating vectors for news:  40%|��������      | 299/744 [00:19<00:29, 14.92it/s]
+Calculating vectors for news:  40%|��������      | 301/744 [00:19<00:29, 14.89it/s]
+Calculating vectors for news:  41%|��������      | 303/744 [00:19<00:29, 14.95it/s]
+Calculating vectors for news:  41%|��������      | 305/744 [00:19<00:29, 14.96it/s]
+Calculating vectors for news:  41%|����������     | 307/744 [00:19<00:28, 15.08it/s]
+Calculating vectors for news:  42%|����������     | 309/744 [00:19<00:28, 15.08it/s]
+Calculating vectors for news:  42%|����������     | 311/744 [00:20<00:28, 15.13it/s]
+Calculating vectors for news:  42%|����������     | 313/744 [00:20<00:28, 15.04it/s]
+Calculating vectors for news:  42%|����������     | 315/744 [00:20<00:28, 15.04it/s]
+Calculating vectors for news:  43%|����������     | 317/744 [00:20<00:28, 15.03it/s]
+Calculating vectors for news:  43%|����������     | 319/744 [00:20<00:28, 15.02it/s]
+Calculating vectors for news:  43%|����������     | 321/744 [00:20<00:28, 15.07it/s]
+Calculating vectors for news:  43%|����������     | 323/744 [00:20<00:27, 15.13it/s]
+Calculating vectors for news:  44%|����������     | 325/744 [00:20<00:27, 15.15it/s]
+Calculating vectors for news:  44%|����������     | 327/744 [00:21<00:27, 15.12it/s]
+Calculating vectors for news:  44%|����������     | 329/744 [00:21<00:27, 15.12it/s]
+Calculating vectors for news:  44%|����������     | 331/744 [00:21<00:27, 15.13it/s]
+Calculating vectors for news:  45%|����������     | 333/744 [00:21<00:27, 15.13it/s]
+Calculating vectors for news:  45%|����������     | 335/744 [00:21<00:27, 15.04it/s]
+Calculating vectors for news:  45%|����������     | 337/744 [00:21<00:27, 15.05it/s]
+Calculating vectors for news:  46%|����������     | 339/744 [00:21<00:26, 15.06it/s]
+Calculating vectors for news:  46%|����������     | 341/744 [00:22<00:27, 14.86it/s]
+Calculating vectors for news:  46%|����������     | 343/744 [00:22<00:26, 14.93it/s]
+Calculating vectors for news:  46%|����������     | 345/744 [00:22<00:26, 14.99it/s]
+Calculating vectors for news:  47%|����������     | 347/744 [00:22<00:26, 14.94it/s]
+Calculating vectors for news:  47%|����������     | 349/744 [00:22<00:26, 15.00it/s]
+Calculating vectors for news:  47%|����������     | 351/744 [00:22<00:26, 14.95it/s]
+Calculating vectors for news:  47%|����������     | 353/744 [00:22<00:26, 14.99it/s]
+Calculating vectors for news:  48%|����������     | 355/744 [00:22<00:25, 15.02it/s]
+Calculating vectors for news:  48%|����������     | 357/744 [00:23<00:25, 14.99it/s]
+Calculating vectors for news:  48%|����������     | 359/744 [00:23<00:23, 16.07it/s]
+Calculating vectors for news:  49%|����������     | 361/744 [00:23<00:22, 16.70it/s]
+Calculating vectors for news:  49%|����������     | 363/744 [00:23<00:21, 17.53it/s]
+Calculating vectors for news:  49%|����������     | 365/744 [00:23<00:21, 17.31it/s]
+Calculating vectors for news:  49%|����������     | 367/744 [00:23<00:22, 17.00it/s]
+Calculating vectors for news:  50%|����������     | 369/744 [00:23<00:22, 16.39it/s]
+Calculating vectors for news:  50%|����������     | 371/744 [00:23<00:22, 16.22it/s]
+Calculating vectors for news:  50%|����������     | 374/744 [00:24<00:21, 17.53it/s]
+Calculating vectors for news:  51%|����������     | 376/744 [00:24<00:20, 17.75it/s]
+Calculating vectors for news:  51%|����������     | 378/744 [00:24<00:21, 16.94it/s]
+Calculating vectors for news:  51%|����������     | 380/744 [00:24<00:22, 16.41it/s]
+Calculating vectors for news:  51%|������������    | 382/744 [00:24<00:22, 15.85it/s]
+Calculating vectors for news:  52%|������������    | 384/744 [00:24<00:23, 15.37it/s]
+Calculating vectors for news:  52%|������������    | 386/744 [00:24<00:23, 15.16it/s]
+Calculating vectors for news:  52%|������������    | 388/744 [00:24<00:23, 15.04it/s]
+Calculating vectors for news:  52%|������������    | 390/744 [00:25<00:23, 14.96it/s]
+Calculating vectors for news:  53%|������������    | 392/744 [00:25<00:23, 14.90it/s]
+Calculating vectors for news:  53%|������������    | 394/744 [00:25<00:23, 14.81it/s]
+Calculating vectors for news:  53%|������������    | 396/744 [00:25<00:23, 14.80it/s]
+Calculating vectors for news:  53%|������������    | 398/744 [00:25<00:23, 14.76it/s]
+Calculating vectors for news:  54%|������������    | 400/744 [00:25<00:23, 14.81it/s]
+Calculating vectors for news:  54%|������������    | 402/744 [00:25<00:23, 14.79it/s]
+Calculating vectors for news:  54%|������������    | 404/744 [00:26<00:23, 14.75it/s]
+Calculating vectors for news:  55%|������������    | 406/744 [00:26<00:22, 14.78it/s]
+Calculating vectors for news:  55%|������������    | 408/744 [00:26<00:22, 14.72it/s]
+Calculating vectors for news:  55%|������������    | 410/744 [00:26<00:22, 14.71it/s]
+Calculating vectors for news:  55%|������������    | 412/744 [00:26<00:22, 14.79it/s]
+Calculating vectors for news:  56%|������������    | 414/744 [00:26<00:22, 14.79it/s]
+Calculating vectors for news:  56%|������������    | 416/744 [00:26<00:21, 14.95it/s]
+Calculating vectors for news:  56%|������������    | 418/744 [00:26<00:22, 14.70it/s]
+Calculating vectors for news:  56%|������������    | 420/744 [00:27<00:21, 14.80it/s]
+Calculating vectors for news:  57%|������������    | 422/744 [00:27<00:21, 14.81it/s]
+Calculating vectors for news:  57%|������������    | 424/744 [00:27<00:21, 14.80it/s]
+Calculating vectors for news:  57%|������������    | 426/744 [00:27<00:20, 15.61it/s]
+Calculating vectors for news:  58%|������������    | 428/744 [00:27<00:19, 16.38it/s]
+Calculating vectors for news:  58%|������������    | 430/744 [00:27<00:18, 17.06it/s]
+Calculating vectors for news:  58%|������������    | 432/744 [00:27<00:17, 17.71it/s]
+Calculating vectors for news:  58%|������������    | 434/744 [00:27<00:17, 18.06it/s]
+Calculating vectors for news:  59%|������������    | 437/744 [00:28<00:16, 18.70it/s]
+Calculating vectors for news:  59%|������������    | 440/744 [00:28<00:15, 19.38it/s]
+Calculating vectors for news:  60%|������������    | 443/744 [00:28<00:15, 19.82it/s]
+Calculating vectors for news:  60%|������������    | 446/744 [00:28<00:14, 19.87it/s]
+Calculating vectors for news:  60%|������������    | 449/744 [00:28<00:14, 20.34it/s]
+Calculating vectors for news:  61%|������������    | 452/744 [00:28<00:14, 20.34it/s]
+Calculating vectors for news:  61%|������������    | 455/744 [00:28<00:14, 20.37it/s]
+Calculating vectors for news:  62%|��������������   | 458/744 [00:29<00:14, 20.40it/s]
+Calculating vectors for news:  62%|��������������   | 461/744 [00:29<00:13, 20.44it/s]
+Calculating vectors for news:  62%|��������������   | 464/744 [00:29<00:13, 20.60it/s]
+Calculating vectors for news:  63%|��������������   | 467/744 [00:29<00:13, 20.68it/s]
+Calculating vectors for news:  63%|��������������   | 470/744 [00:29<00:13, 20.88it/s]
+Calculating vectors for news:  64%|��������������   | 473/744 [00:29<00:12, 21.08it/s]
+Calculating vectors for news:  64%|��������������   | 476/744 [00:29<00:12, 21.38it/s]
+Calculating vectors for news:  64%|��������������   | 479/744 [00:30<00:12, 20.89it/s]
+Calculating vectors for news:  65%|��������������   | 482/744 [00:30<00:12, 21.04it/s]
+Calculating vectors for news:  65%|��������������   | 485/744 [00:30<00:12, 20.95it/s]
+Calculating vectors for news:  66%|��������������   | 488/744 [00:30<00:12, 21.07it/s]
+Calculating vectors for news:  66%|��������������   | 491/744 [00:30<00:12, 20.82it/s]
+Calculating vectors for news:  66%|��������������   | 494/744 [00:30<00:11, 20.97it/s]
+Calculating vectors for news:  67%|��������������   | 497/744 [00:30<00:11, 21.14it/s]
+Calculating vectors for news:  67%|��������������   | 500/744 [00:31<00:11, 21.15it/s]
+Calculating vectors for news:  68%|��������������   | 503/744 [00:31<00:11, 21.00it/s]
+Calculating vectors for news:  68%|��������������   | 506/744 [00:31<00:11, 21.09it/s]
+Calculating vectors for news:  68%|��������������   | 509/744 [00:31<00:11, 20.83it/s]
+Calculating vectors for news:  69%|��������������   | 512/744 [00:31<00:11, 20.63it/s]
+Calculating vectors for news:  69%|��������������   | 515/744 [00:31<00:11, 20.64it/s]
+Calculating vectors for news:  70%|��������������   | 518/744 [00:31<00:10, 20.65it/s]
+Calculating vectors for news:  70%|��������������   | 521/744 [00:32<00:10, 20.84it/s]
+Calculating vectors for news:  70%|��������������   | 524/744 [00:32<00:10, 20.74it/s]
+Calculating vectors for news:  71%|��������������   | 527/744 [00:32<00:10, 20.75it/s]
+Calculating vectors for news:  71%|��������������   | 530/744 [00:32<00:10, 20.57it/s]
+Calculating vectors for news:  72%|����������������  | 533/744 [00:32<00:10, 20.70it/s]
+Calculating vectors for news:  72%|����������������  | 536/744 [00:32<00:09, 20.85it/s]
+Calculating vectors for news:  72%|����������������  | 539/744 [00:32<00:09, 20.75it/s]
+Calculating vectors for news:  73%|����������������  | 542/744 [00:33<00:09, 20.81it/s]
+Calculating vectors for news:  73%|����������������  | 545/744 [00:33<00:09, 21.04it/s]
+Calculating vectors for news:  74%|����������������  | 548/744 [00:33<00:09, 21.01it/s]
+Calculating vectors for news:  74%|����������������  | 551/744 [00:33<00:09, 20.61it/s]
+Calculating vectors for news:  74%|����������������  | 554/744 [00:33<00:09, 20.75it/s]
+Calculating vectors for news:  75%|����������������  | 557/744 [00:33<00:09, 20.76it/s]
+Calculating vectors for news:  75%|����������������  | 560/744 [00:33<00:08, 20.94it/s]
+Calculating vectors for news:  76%|����������������  | 563/744 [00:34<00:08, 20.67it/s]
+Calculating vectors for news:  76%|����������������  | 566/744 [00:34<00:08, 19.80it/s]
+Calculating vectors for news:  76%|����������������  | 568/744 [00:34<00:09, 19.04it/s]
+Calculating vectors for news:  77%|����������������  | 570/744 [00:34<00:09, 18.68it/s]
+Calculating vectors for news:  77%|����������������  | 572/744 [00:34<00:09, 18.77it/s]
+Calculating vectors for news:  77%|����������������  | 574/744 [00:34<00:09, 18.37it/s]
+Calculating vectors for news:  77%|����������������  | 576/744 [00:34<00:09, 17.74it/s]
+Calculating vectors for news:  78%|����������������  | 578/744 [00:35<00:09, 17.27it/s]
+Calculating vectors for news:  78%|����������������  | 580/744 [00:35<00:09, 16.93it/s]
+Calculating vectors for news:  78%|����������������  | 582/744 [00:35<00:09, 16.48it/s]
+Calculating vectors for news:  78%|����������������  | 584/744 [00:35<00:09, 16.05it/s]
+Calculating vectors for news:  79%|����������������  | 586/744 [00:35<00:09, 16.00it/s]
+Calculating vectors for news:  79%|����������������  | 588/744 [00:35<00:09, 15.63it/s]
+Calculating vectors for news:  79%|����������������  | 590/744 [00:35<00:10, 15.38it/s]
+Calculating vectors for news:  80%|����������������  | 592/744 [00:35<00:09, 15.33it/s]
+Calculating vectors for news:  80%|����������������  | 594/744 [00:36<00:09, 15.24it/s]
+Calculating vectors for news:  80%|����������������  | 596/744 [00:36<00:09, 15.17it/s]
+Calculating vectors for news:  80%|����������������  | 598/744 [00:36<00:09, 15.08it/s]
+Calculating vectors for news:  81%|����������������  | 600/744 [00:36<00:09, 15.05it/s]
+Calculating vectors for news:  81%|����������������  | 602/744 [00:36<00:09, 15.09it/s]
+Calculating vectors for news:  81%|����������������  | 604/744 [00:36<00:09, 15.08it/s]
+Calculating vectors for news:  81%|������������������ | 606/744 [00:36<00:09, 14.79it/s]
+Calculating vectors for news:  82%|������������������ | 608/744 [00:36<00:09, 14.91it/s]
+Calculating vectors for news:  82%|������������������ | 610/744 [00:37<00:08, 14.95it/s]
+Calculating vectors for news:  82%|������������������ | 612/744 [00:37<00:08, 15.08it/s]
+Calculating vectors for news:  83%|������������������ | 614/744 [00:37<00:08, 15.18it/s]
+Calculating vectors for news:  83%|������������������ | 616/744 [00:37<00:08, 15.05it/s]
+Calculating vectors for news:  83%|������������������ | 618/744 [00:37<00:08, 15.29it/s]
+Calculating vectors for news:  83%|������������������ | 620/744 [00:37<00:08, 15.47it/s]
+Calculating vectors for news:  84%|������������������ | 622/744 [00:37<00:07, 16.34it/s]
+Calculating vectors for news:  84%|������������������ | 624/744 [00:37<00:07, 16.95it/s]
+Calculating vectors for news:  84%|������������������ | 626/744 [00:38<00:06, 17.66it/s]
+Calculating vectors for news:  84%|������������������ | 628/744 [00:38<00:06, 18.10it/s]
+Calculating vectors for news:  85%|������������������ | 630/744 [00:38<00:06, 18.54it/s]
+Calculating vectors for news:  85%|������������������ | 632/744 [00:38<00:05, 18.94it/s]
+Calculating vectors for news:  85%|������������������ | 635/744 [00:38<00:05, 19.53it/s]
+Calculating vectors for news:  86%|������������������ | 638/744 [00:38<00:05, 19.81it/s]
+Calculating vectors for news:  86%|������������������ | 641/744 [00:38<00:05, 20.18it/s]
+Calculating vectors for news:  87%|������������������ | 644/744 [00:38<00:04, 20.48it/s]
+Calculating vectors for news:  87%|������������������ | 647/744 [00:39<00:04, 20.42it/s]
+Calculating vectors for news:  87%|������������������ | 650/744 [00:39<00:04, 20.53it/s]
+Calculating vectors for news:  88%|������������������ | 653/744 [00:39<00:04, 20.58it/s]
+Calculating vectors for news:  88%|������������������ | 656/744 [00:39<00:04, 20.90it/s]
+Calculating vectors for news:  89%|������������������ | 659/744 [00:39<00:04, 20.83it/s]
+Calculating vectors for news:  89%|������������������ | 662/744 [00:39<00:03, 21.13it/s]
+Calculating vectors for news:  89%|������������������ | 665/744 [00:39<00:03, 20.90it/s]
+Calculating vectors for news:  90%|������������������ | 668/744 [00:40<00:03, 21.16it/s]
+Calculating vectors for news:  90%|������������������ | 671/744 [00:40<00:03, 20.95it/s]
+Calculating vectors for news:  91%|������������������ | 674/744 [00:40<00:03, 21.25it/s]
+Calculating vectors for news:  91%|������������������ | 677/744 [00:40<00:03, 21.15it/s]
+Calculating vectors for news:  91%|��������������������| 680/744 [00:40<00:03, 20.99it/s]
+Calculating vectors for news:  92%|��������������������| 683/744 [00:40<00:02, 21.06it/s]
+Calculating vectors for news:  92%|��������������������| 686/744 [00:40<00:02, 21.18it/s]
+Calculating vectors for news:  93%|��������������������| 689/744 [00:41<00:02, 21.30it/s]
+Calculating vectors for news:  93%|��������������������| 692/744 [00:41<00:02, 20.90it/s]
+Calculating vectors for news:  93%|��������������������| 695/744 [00:41<00:02, 20.96it/s]
+Calculating vectors for news:  94%|��������������������| 698/744 [00:41<00:02, 20.93it/s]
+Calculating vectors for news:  94%|��������������������| 701/744 [00:41<00:02, 21.13it/s]
+Calculating vectors for news:  95%|��������������������| 704/744 [00:41<00:01, 21.29it/s]
+Calculating vectors for news:  95%|��������������������| 707/744 [00:41<00:01, 21.08it/s]
+Calculating vectors for news:  95%|��������������������| 710/744 [00:42<00:01, 21.11it/s]
+Calculating vectors for news:  96%|��������������������| 713/744 [00:42<00:01, 21.17it/s]
+Calculating vectors for news:  96%|��������������������| 716/744 [00:42<00:01, 21.62it/s]
+Calculating vectors for news:  97%|��������������������| 719/744 [00:42<00:01, 21.20it/s]
+Calculating vectors for news:  97%|��������������������| 722/744 [00:42<00:01, 21.13it/s]
+Calculating vectors for news:  97%|��������������������| 725/744 [00:42<00:00, 21.06it/s]
+Calculating vectors for news:  98%|��������������������| 728/744 [00:42<00:00, 21.03it/s]
+Calculating vectors for news:  98%|��������������������| 731/744 [00:43<00:00, 21.06it/s]
+Calculating vectors for news:  99%|��������������������| 734/744 [00:43<00:00, 20.98it/s]
+Calculating vectors for news:  99%|��������������������| 737/744 [00:43<00:00, 21.35it/s]
+Calculating vectors for news:  99%|��������������������| 740/744 [00:43<00:00, 20.97it/s]
+Calculating vectors for news: 100%|��������������������| 743/744 [00:43<00:00, 21.31it/s]
+Calculating vectors for news: 100%|��������������������| 744/744 [00:43<00:00, 17.03it/s]
+
+Calculating vectors for users:   0%|          | 0/302 [00:00<?, ?it/s]
+Calculating vectors for users:   5%|��         | 15/302 [00:00<00:01, 148.46it/s]
+Calculating vectors for users:  10%|��         | 30/302 [00:00<00:01, 145.18it/s]
+Calculating vectors for users:  15%|����        | 45/302 [00:00<00:01, 139.89it/s]
+Calculating vectors for users:  20%|����        | 60/302 [00:00<00:02, 120.71it/s]
+Calculating vectors for users:  25%|������       | 76/302 [00:00<00:01, 132.24it/s]
+Calculating vectors for users:  31%|������       | 94/302 [00:00<00:01, 145.37it/s]
+Calculating vectors for users:  39%|��������      | 118/302 [00:00<00:01, 171.44it/s]
+Calculating vectors for users:  45%|����������     | 137/302 [00:00<00:00, 174.82it/s]
+Calculating vectors for users:  51%|������������    | 155/302 [00:01<00:00, 156.71it/s]
+Calculating vectors for users:  57%|������������    | 172/302 [00:01<00:00, 152.29it/s]
+Calculating vectors for users:  65%|��������������   | 196/302 [00:01<00:00, 174.94it/s]
+Calculating vectors for users:  71%|��������������   | 215/302 [00:01<00:00, 178.55it/s]
+Calculating vectors for users:  78%|����������������  | 235/302 [00:01<00:00, 183.30it/s]
+Calculating vectors for users:  87%|������������������ | 263/302 [00:01<00:00, 205.99it/s]
+Calculating vectors for users:  95%|��������������������| 287/302 [00:01<00:00, 214.92it/s]
+Calculating vectors for users: 100%|��������������������| 302/302 [00:01<00:00, 175.37it/s]
+   impression_id  ...                                        impressions
+0           3168  ...  B00ISW8ZVS-1 B00279BKRY-0 B000OYJ9AO-0 B000OYJ...
+1          12619  ...  B00KWE08Q0-1 B001AZIY6Q-0 B00390DN34-0 B005G9L...
+2            452  ...  B00LG63DOM-1 B001CN3QKK-0 B007USPWS0-0 B00B840...
+3          11907  ...  B00IOZWC2M-1 B00GCQMSVA-0 B000GCR6S6-0 B0006PL...
+4          11922  ...  B00I2OR6YE-1 B000C1UFM0-0 B000C1W5LE-0 B006SMM...
+
+[5 rows x 5 columns]
+
+0it [00:00, ?it/s]
+4717it [00:00, 46699.63it/s]
+4820it [00:00, 46819.88it/s]
+
+new ratio: 0
+
+  0%|          | 0/302 [00:00<?, ?it/s][INFO 2026-06-16 01:24:42,442] Ed: 0, train_loss: inf, acc: inf
+
+  1%|��         | 4/302 [00:00<00:07, 39.43it/s]
+  5%|��         | 15/302 [00:00<00:03, 77.91it/s]
+  9%|��         | 28/302 [00:00<00:02, 97.96it/s]
+ 13%|����        | 39/302 [00:00<00:02, 98.55it/s]
+ 17%|����        | 51/302 [00:00<00:02, 102.55it/s]
+ 21%|����        | 62/302 [00:00<00:02, 101.19it/s]
+ 24%|������       | 73/302 [00:00<00:02, 102.20it/s]
+ 28%|������       | 84/302 [00:00<00:02, 96.78it/s] 
+ 31%|������       | 94/302 [00:01<00:02, 87.25it/s][INFO 2026-06-16 01:24:43,469] Ed: 1600, train_loss: 1.73352, acc: 0.59000
+
+ 34%|��������      | 104/302 [00:01<00:02, 90.53it/s]
+ 38%|��������      | 114/302 [00:01<00:02, 93.04it/s]
+ 41%|����������     | 125/302 [00:01<00:01, 96.25it/s]
+ 45%|����������     | 135/302 [00:01<00:01, 90.40it/s]
+ 48%|����������     | 145/302 [00:01<00:01, 84.13it/s]
+ 51%|����������     | 154/302 [00:01<00:01, 82.46it/s]
+ 54%|������������    | 164/302 [00:01<00:01, 86.01it/s]
+ 58%|������������    | 174/302 [00:01<00:01, 88.35it/s]
+ 61%|������������    | 183/302 [00:02<00:01, 87.68it/s]
+ 64%|��������������   | 193/302 [00:02<00:01, 89.19it/s][INFO 2026-06-16 01:24:44,592] Ed: 3200, train_loss: 1.52818, acc: 0.56687
+
+ 67%|��������������   | 203/302 [00:02<00:01, 90.36it/s]
+ 71%|��������������   | 213/302 [00:02<00:00, 90.90it/s]
+ 74%|����������������  | 223/302 [00:02<00:00, 89.37it/s]
+ 77%|����������������  | 232/302 [00:02<00:00, 78.18it/s]
+ 80%|����������������  | 241/302 [00:02<00:00, 77.66it/s]
+ 83%|������������������ | 251/302 [00:02<00:00, 82.72it/s]
+ 86%|������������������ | 260/302 [00:02<00:00, 84.65it/s]
+ 90%|������������������ | 271/302 [00:03<00:00, 89.56it/s]
+ 93%|��������������������| 282/302 [00:03<00:00, 92.58it/s]
+ 97%|��������������������| 293/302 [00:03<00:00, 94.31it/s][INFO 2026-06-16 01:24:45,732] Ed: 4800, train_loss: 1.41906, acc: 0.54854
+
+100%|��������������������| 302/302 [00:03<00:00, 89.90it/s]
+[INFO 2026-06-16 01:24:45,737] EPOCH[1] LOSS:1.4161696434020996
+[INFO 2026-06-16 01:24:45,737] Epoch: 1
+
+Calculating vectors for users:   0%|          | 0/110 [00:00<?, ?it/s]
+Calculating vectors for users:  21%|����        | 23/110 [00:00<00:00, 222.38it/s]
+Calculating vectors for users:  42%|����������     | 46/110 [00:00<00:00, 177.12it/s]
+Calculating vectors for users:  59%|������������    | 65/110 [00:00<00:00, 177.07it/s]
+Calculating vectors for users:  76%|����������������  | 84/110 [00:00<00:00, 171.49it/s]
+Calculating vectors for users:  93%|��������������������| 102/110 [00:00<00:00, 171.21it/s]
+Calculating vectors for users: 100%|��������������������| 110/110 [00:00<00:00, 175.58it/s]
+
+Calculating probabilities:   0%|          | 0/1750 [00:00<?, ?it/s]
+Calculating probabilities:  10%|��         | 178/1750 [00:00<00:00, 1747.02it/s]
+Calculating probabilities:  23%|������       | 402/1750 [00:00<00:00, 1988.90it/s]
+Calculating probabilities:  34%|��������      | 601/1750 [00:00<00:00, 1641.93it/s]
+Calculating probabilities:  46%|����������     | 805/1750 [00:00<00:00, 1779.40it/s]
+Calculating probabilities:  57%|������������    | 989/1750 [00:00<00:00, 1734.70it/s]
+Calculating probabilities:  70%|��������������   | 1224/1750 [00:00<00:00, 1863.74it/s]
+Calculating probabilities:  81%|����������������  | 1413/1750 [00:00<00:00, 1810.64it/s]
+Calculating probabilities:  91%|������������������ | 1596/1750 [00:00<00:00, 1689.52it/s]
+Calculating probabilities: 100%|��������������������| 1750/1750 [00:01<00:00, 1740.26it/s]
+[INFO 2026-06-16 01:24:47,385] 
+[INFO 2026-06-16 01:24:47,385] ************************************************************
+[INFO 2026-06-16 01:24:47,385] Test Ratio: 0
+[INFO 2026-06-16 01:24:47,385] Test Type: Human
+[INFO 2026-06-16 01:24:47,385] 
+[INFO 2026-06-16 01:24:47,385] MAP1: 29.542857142857144
+[INFO 2026-06-16 01:24:47,385] MAP3: 45.72380952380971
+[INFO 2026-06-16 01:24:47,385] MAP5: 52.97809523809587
+[INFO 2026-06-16 01:24:47,385] 
+[INFO 2026-06-16 01:24:47,385] nDCG1: 29.542857142857144
+[INFO 2026-06-16 01:24:47,385] nDCG3: 51.303604518163645
+[INFO 2026-06-16 01:24:47,385] nDCG5: 64.52836657434628
+[INFO 2026-06-16 01:24:47,385] ************************************************************
+[INFO 2026-06-16 01:24:47,386] 
+[INFO 2026-06-16 01:24:47,386] 
+[INFO 2026-06-16 01:24:47,386] ************************************************************
+[INFO 2026-06-16 01:24:47,386] Test Ratio: 0
+[INFO 2026-06-16 01:24:47,386] Test Type: LLM
+[INFO 2026-06-16 01:24:47,386] 
+[INFO 2026-06-16 01:24:47,386] MAP1: 29.428571428571427
+[INFO 2026-06-16 01:24:47,386] MAP3: 45.247619047619295
+[INFO 2026-06-16 01:24:47,386] MAP5: 52.68761904761969
+[INFO 2026-06-16 01:24:47,386] 
+[INFO 2026-06-16 01:24:47,386] nDCG1: 29.428571428571427
+[INFO 2026-06-16 01:24:47,386] nDCG3: 50.76893391449019
+[INFO 2026-06-16 01:24:47,386] nDCG5: 64.30153811073417
+[INFO 2026-06-16 01:24:47,386] ************************************************************
+[INFO 2026-06-16 01:24:47,386] 
+[INFO 2026-06-16 01:24:47,386] 
+[INFO 2026-06-16 01:24:47,386] ************************************************************
+[INFO 2026-06-16 01:24:47,386] Test Ratio: 0
+[INFO 2026-06-16 01:24:47,386] Test Type: Human Target
+[INFO 2026-06-16 01:24:47,386] 
+[INFO 2026-06-16 01:24:47,386] MAP1: 10.971428571428572
+[INFO 2026-06-16 01:24:47,386] MAP3: 22.19999999999996
+[INFO 2026-06-16 01:24:47,386] MAP5: 26.828571428571273
+[INFO 2026-06-16 01:24:47,386] 
+[INFO 2026-06-16 01:24:47,386] nDCG1: 10.971428571428572
+[INFO 2026-06-16 01:24:47,386] nDCG3: 26.05204606714337
+[INFO 2026-06-16 01:24:47,386] nDCG5: 34.424652486788574
+[INFO 2026-06-16 01:24:47,386] ************************************************************
+[INFO 2026-06-16 01:24:47,386] 
+[INFO 2026-06-16 01:24:47,386] 
+[INFO 2026-06-16 01:24:47,386] ************************************************************
+[INFO 2026-06-16 01:24:47,386] Test Ratio: 0
+[INFO 2026-06-16 01:24:47,386] Test Type: LLM Target
+[INFO 2026-06-16 01:24:47,386] 
+[INFO 2026-06-16 01:24:47,386] MAP1: 19.142857142857142
+[INFO 2026-06-16 01:24:47,386] MAP3: 28.514285714285638
+[INFO 2026-06-16 01:24:47,386] MAP5: 32.77999999999997
+[INFO 2026-06-16 01:24:47,386] 
+[INFO 2026-06-16 01:24:47,386] nDCG1: 19.142857142857142
+[INFO 2026-06-16 01:24:47,386] nDCG3: 31.79837309918408
+[INFO 2026-06-16 01:24:47,386] nDCG5: 39.51445181224923
+[INFO 2026-06-16 01:24:47,386] ************************************************************
+[INFO 2026-06-16 01:24:47,386] 
+[INFO 2026-06-16 01:24:47,386] llm ratio: 0.5468571428571428
+
+Calculating vectors for users:   0%|          | 0/302 [00:00<?, ?it/s]
+Calculating vectors for users:   3%|��         | 9/302 [00:00<00:03, 87.67it/s]
+Calculating vectors for users:   6%|��         | 19/302 [00:00<00:03, 89.66it/s]
+Calculating vectors for users:  10%|��         | 31/302 [00:00<00:02, 101.94it/s]
+Calculating vectors for users:  14%|����        | 43/302 [00:00<00:02, 108.69it/s]
+Calculating vectors for users:  18%|����        | 54/302 [00:00<00:02, 105.25it/s]
+Calculating vectors for users:  22%|������       | 65/302 [00:00<00:02, 95.56it/s] 
+Calculating vectors for users:  25%|������       | 75/302 [00:00<00:02, 89.63it/s]
+Calculating vectors for users:  28%|������       | 85/302 [00:00<00:02, 89.74it/s]
+Calculating vectors for users:  31%|��������      | 95/302 [00:01<00:02, 90.72it/s]
+Calculating vectors for users:  35%|��������      | 105/302 [00:01<00:02, 92.56it/s]
+Calculating vectors for users:  38%|��������      | 115/302 [00:01<00:01, 94.18it/s]
+Calculating vectors for users:  41%|����������     | 125/302 [00:01<00:01, 90.78it/s]
+Calculating vectors for users:  45%|����������     | 135/302 [00:01<00:01, 90.36it/s]
+Calculating vectors for users:  48%|����������     | 145/302 [00:01<00:01, 88.98it/s]
+Calculating vectors for users:  51%|����������     | 154/302 [00:01<00:01, 85.67it/s]
+Calculating vectors for users:  54%|������������    | 164/302 [00:01<00:01, 88.72it/s]
+Calculating vectors for users:  58%|������������    | 174/302 [00:01<00:01, 91.52it/s]
+Calculating vectors for users:  61%|������������    | 184/302 [00:01<00:01, 93.14it/s]
+Calculating vectors for users:  64%|��������������   | 194/302 [00:02<00:01, 93.00it/s]
+Calculating vectors for users:  68%|��������������   | 204/302 [00:02<00:01, 94.06it/s]
+Calculating vectors for users:  71%|��������������   | 214/302 [00:02<00:00, 95.73it/s]
+Calculating vectors for users:  74%|����������������  | 224/302 [00:02<00:00, 95.88it/s]
+Calculating vectors for users:  78%|����������������  | 235/302 [00:02<00:00, 98.88it/s]
+Calculating vectors for users:  81%|����������������  | 245/302 [00:02<00:00, 95.86it/s]
+Calculating vectors for users:  84%|������������������ | 255/302 [00:02<00:00, 94.68it/s]
+Calculating vectors for users:  88%|������������������ | 266/302 [00:02<00:00, 97.63it/s]
+Calculating vectors for users:  92%|��������������������| 277/302 [00:02<00:00, 100.94it/s]
+Calculating vectors for users:  96%|��������������������| 289/302 [00:03<00:00, 104.24it/s]
+Calculating vectors for users:  99%|��������������������| 300/302 [00:03<00:00, 98.43it/s] 
+Calculating vectors for users: 100%|��������������������| 302/302 [00:03<00:00, 94.95it/s]
+   impression_id  ...                                        impressions
+0          12854  ...  B0068Z7MT8-1 B008JWW7MK-0 B002CL6D56-0 B002CL6...
+1           1367  ...  B000TK99NU-1 B0000531NU-0 B001MS7HF0-0 B0009ET...
+2           8354  ...  B00150LT40-1 B0077S35WS-0 B0023AV31U-0 B00099Z...
+3           9379  ...  B003AT1CLE-1 B00166KXTU-0 B00B0LKBPW-0 B004T19...
+4           4738  ...  B009JVVRK8-1 B000WE1PP8-0 B005F4EACU-0 B006Z43...
+
+[5 rows x 5 columns]
+
+0it [00:00, ?it/s]
+904it [00:00, 9017.73it/s]
+1842it [00:00, 9182.34it/s]
+2815it [00:00, 9408.74it/s]
+3756it [00:00, 8459.77it/s]
+4702it [00:00, 8788.38it/s]
+4820it [00:00, 8825.08it/s]
+
+0it [00:00, ?it/s]
+4820it [00:00, 63651.50it/s]
+
+new ratio: 0.5323651452282158
+
+  0%|          | 0/302 [00:00<?, ?it/s][INFO 2026-06-16 01:24:51,357] Ed: 0, train_loss: inf, acc: inf
+
+  2%|��         | 5/302 [00:00<00:07, 42.08it/s]
+  3%|��         | 10/302 [00:00<00:06, 45.57it/s]
+  5%|��         | 15/302 [00:00<00:06, 45.66it/s]
+  7%|��         | 21/302 [00:00<00:05, 47.29it/s]
+  9%|��         | 26/302 [00:00<00:05, 46.76it/s]
+ 10%|��         | 31/302 [00:00<00:05, 45.94it/s]
+ 12%|����        | 36/302 [00:00<00:05, 46.75it/s]
+ 14%|����        | 41/302 [00:00<00:05, 46.31it/s]
+ 15%|����        | 46/302 [00:00<00:05, 46.84it/s]
+ 17%|����        | 51/302 [00:01<00:05, 46.00it/s]
+ 19%|����        | 56/302 [00:01<00:05, 46.60it/s]
+ 20%|����        | 61/302 [00:01<00:05, 45.40it/s]
+ 22%|������       | 66/302 [00:01<00:05, 46.26it/s]
+ 24%|������       | 71/302 [00:01<00:05, 44.99it/s]
+ 25%|������       | 77/302 [00:01<00:04, 48.51it/s]
+ 28%|������       | 84/302 [00:01<00:04, 52.24it/s]
+ 30%|������       | 92/302 [00:01<00:03, 56.68it/s][INFO 2026-06-16 01:24:53,319] Ed: 1600, train_loss: 1.75038, acc: 0.55687
+
+ 33%|��������      | 101/302 [00:01<00:03, 65.53it/s]
+ 36%|��������      | 109/302 [00:02<00:02, 68.31it/s]
+ 39%|��������      | 119/302 [00:02<00:02, 76.52it/s]
+ 43%|����������     | 129/302 [00:02<00:02, 80.17it/s]
+ 46%|����������     | 139/302 [00:02<00:01, 83.02it/s]
+ 49%|����������     | 148/302 [00:02<00:01, 81.82it/s]
+ 52%|������������    | 157/302 [00:02<00:01, 81.14it/s]
+ 56%|������������    | 168/302 [00:02<00:01, 86.40it/s]
+ 59%|������������    | 178/302 [00:02<00:01, 90.14it/s]
+ 62%|��������������   | 188/302 [00:02<00:01, 89.04it/s]
+ 66%|��������������   | 199/302 [00:03<00:01, 92.44it/s][INFO 2026-06-16 01:24:54,439] Ed: 3200, train_loss: 1.48604, acc: 0.55781
+
+ 69%|��������������   | 209/302 [00:03<00:01, 90.39it/s]
+ 73%|����������������  | 219/302 [00:03<00:00, 89.74it/s]
+ 76%|����������������  | 229/302 [00:03<00:00, 91.45it/s]
+ 79%|����������������  | 239/302 [00:03<00:00, 92.48it/s]
+ 82%|������������������ | 249/302 [00:03<00:00, 87.35it/s]
+ 85%|������������������ | 258/302 [00:03<00:00, 85.50it/s]
+ 89%|������������������ | 268/302 [00:03<00:00, 89.02it/s]
+ 93%|��������������������| 280/302 [00:03<00:00, 95.98it/s]
+ 96%|��������������������| 291/302 [00:04<00:00, 97.28it/s][INFO 2026-06-16 01:24:55,534] Ed: 4800, train_loss: 1.36253, acc: 0.55667
+
+100%|��������������������| 301/302 [00:04<00:00, 93.06it/s]
+100%|��������������������| 302/302 [00:04<00:00, 71.63it/s]
+[INFO 2026-06-16 01:24:55,545] EPOCH[1] LOSS:1.3592560291290283
+[INFO 2026-06-16 01:24:55,545] Epoch: 2
+
+Calculating vectors for users:   0%|          | 0/110 [00:00<?, ?it/s]
+Calculating vectors for users:  25%|������       | 27/110 [00:00<00:00, 246.95it/s]
+Calculating vectors for users:  47%|����������     | 52/110 [00:00<00:00, 235.99it/s]
+Calculating vectors for users:  69%|��������������   | 76/110 [00:00<00:00, 214.63it/s]
+Calculating vectors for users:  89%|������������������ | 98/110 [00:00<00:00, 211.27it/s]
+Calculating vectors for users: 100%|��������������������| 110/110 [00:00<00:00, 216.39it/s]
+
+Calculating probabilities:   0%|          | 0/1750 [00:00<?, ?it/s]
+Calculating probabilities:  10%|��         | 174/1750 [00:00<00:00, 1734.01it/s]
+Calculating probabilities:  20%|����        | 348/1750 [00:00<00:00, 1717.97it/s]
+Calculating probabilities:  33%|��������      | 574/1750 [00:00<00:00, 1952.80it/s]
+Calculating probabilities:  45%|����������     | 790/1750 [00:00<00:00, 2027.07it/s]
+Calculating probabilities:  57%|������������    | 993/1750 [00:00<00:00, 1963.92it/s]
+Calculating probabilities:  68%|��������������   | 1190/1750 [00:00<00:00, 1837.14it/s]
+Calculating probabilities:  79%|����������������  | 1376/1750 [00:00<00:00, 1609.57it/s]
+Calculating probabilities:  89%|������������������ | 1563/1750 [00:00<00:00, 1661.13it/s]
+Calculating probabilities:  99%|��������������������| 1740/1750 [00:00<00:00, 1676.39it/s]
+Calculating probabilities: 100%|��������������������| 1750/1750 [00:00<00:00, 1757.28it/s]
+[INFO 2026-06-16 01:24:57,067] 
+[INFO 2026-06-16 01:24:57,067] ************************************************************
+[INFO 2026-06-16 01:24:57,067] Test Ratio: 0.5323651452282158
+[INFO 2026-06-16 01:24:57,067] Test Type: Human
+[INFO 2026-06-16 01:24:57,067] 
+[INFO 2026-06-16 01:24:57,067] MAP1: 22.97142857142857
+[INFO 2026-06-16 01:24:57,067] MAP3: 40.48571428571442
+[INFO 2026-06-16 01:24:57,067] MAP5: 48.46857142857191
+[INFO 2026-06-16 01:24:57,067] 
+[INFO 2026-06-16 01:24:57,067] nDCG1: 22.97142857142857
+[INFO 2026-06-16 01:24:57,067] nDCG3: 46.650527777755585
+[INFO 2026-06-16 01:24:57,067] nDCG5: 61.130404374608936
+[INFO 2026-06-16 01:24:57,067] ************************************************************
+[INFO 2026-06-16 01:24:57,067] 
+[INFO 2026-06-16 01:24:57,067] 
+[INFO 2026-06-16 01:24:57,067] ************************************************************
+[INFO 2026-06-16 01:24:57,067] Test Ratio: 0.5323651452282158
+[INFO 2026-06-16 01:24:57,067] Test Type: LLM
+[INFO 2026-06-16 01:24:57,067] 
+[INFO 2026-06-16 01:24:57,067] MAP1: 18.8
+[INFO 2026-06-16 01:24:57,067] MAP3: 35.78095238095235
+[INFO 2026-06-16 01:24:57,067] MAP5: 44.998095238095544
+[INFO 2026-06-16 01:24:57,067] 
+[INFO 2026-06-16 01:24:57,067] nDCG1: 18.8
+[INFO 2026-06-16 01:24:57,067] nDCG3: 41.70631526265362
+[INFO 2026-06-16 01:24:57,067] nDCG5: 58.46482517073063
+[INFO 2026-06-16 01:24:57,067] ************************************************************
+[INFO 2026-06-16 01:24:57,067] 
+[INFO 2026-06-16 01:24:57,067] 
+[INFO 2026-06-16 01:24:57,067] ************************************************************
+[INFO 2026-06-16 01:24:57,067] Test Ratio: 0.5323651452282158
+[INFO 2026-06-16 01:24:57,067] Test Type: Human Target
+[INFO 2026-06-16 01:24:57,067] 
+[INFO 2026-06-16 01:24:57,067] MAP1: 8.114285714285714
+[INFO 2026-06-16 01:24:57,067] MAP3: 16.152380952380973
+[INFO 2026-06-16 01:24:57,067] MAP5: 20.692380952380848
+[INFO 2026-06-16 01:24:57,067] 
+[INFO 2026-06-16 01:24:57,067] nDCG1: 8.114285714285714
+[INFO 2026-06-16 01:24:57,067] nDCG3: 19.096394346530893
+[INFO 2026-06-16 01:24:57,067] nDCG5: 27.343014052375064
+[INFO 2026-06-16 01:24:57,067] ************************************************************
+[INFO 2026-06-16 01:24:57,067] 
+[INFO 2026-06-16 01:24:57,067] 
+[INFO 2026-06-16 01:24:57,067] ************************************************************
+[INFO 2026-06-16 01:24:57,067] Test Ratio: 0.5323651452282158
+[INFO 2026-06-16 01:24:57,067] Test Type: LLM Target
+[INFO 2026-06-16 01:24:57,067] 
+[INFO 2026-06-16 01:24:57,067] MAP1: 11.942857142857143
+[INFO 2026-06-16 01:24:57,067] MAP3: 21.819047619047605
+[INFO 2026-06-16 01:24:57,067] MAP5: 26.71333333333321
+[INFO 2026-06-16 01:24:57,067] 
+[INFO 2026-06-16 01:24:57,067] nDCG1: 11.942857142857143
+[INFO 2026-06-16 01:24:57,067] nDCG3: 25.280671801428987
+[INFO 2026-06-16 01:24:57,067] nDCG5: 34.152128536123065
+[INFO 2026-06-16 01:24:57,067] ************************************************************
+[INFO 2026-06-16 01:24:57,067] 
+[INFO 2026-06-16 01:24:57,067] llm ratio: 0.5331428571428571
+
+Calculating vectors for users:   0%|          | 0/302 [00:00<?, ?it/s]
+Calculating vectors for users:   6%|��         | 18/302 [00:00<00:01, 174.77it/s]
+Calculating vectors for users:  13%|����        | 39/302 [00:00<00:01, 188.81it/s]
+Calculating vectors for users:  20%|����        | 61/302 [00:00<00:01, 198.18it/s]
+Calculating vectors for users:  27%|������       | 81/302 [00:00<00:01, 170.97it/s]
+Calculating vectors for users:  33%|��������      | 100/302 [00:00<00:01, 169.04it/s]
+Calculating vectors for users:  39%|��������      | 118/302 [00:00<00:01, 161.93it/s]
+Calculating vectors for users:  45%|����������     | 137/302 [00:00<00:00, 167.70it/s]
+Calculating vectors for users:  51%|����������     | 154/302 [00:00<00:00, 149.34it/s]
+Calculating vectors for users:  58%|������������    | 176/302 [00:01<00:00, 167.04it/s]
+Calculating vectors for users:  66%|��������������   | 198/302 [00:01<00:00, 178.77it/s]
+Calculating vectors for users:  72%|����������������  | 217/302 [00:01<00:00, 178.13it/s]
+Calculating vectors for users:  78%|����������������  | 236/302 [00:01<00:00, 167.97it/s]
+Calculating vectors for users:  84%|������������������ | 254/302 [00:01<00:00, 154.11it/s]
+Calculating vectors for users:  89%|������������������ | 270/302 [00:01<00:00, 154.76it/s]
+Calculating vectors for users:  95%|��������������������| 286/302 [00:01<00:00, 154.34it/s]
+Calculating vectors for users: 100%|��������������������| 302/302 [00:01<00:00, 166.85it/s]
+   impression_id  ...                                        impressions
+0           3168  ...  B00ISW8ZVS-1 B00279BKRY-0 B000OYJ9AO-0 B000OYJ...
+1          12619  ...  B00KWE08Q0-1 B001AZIY6Q-0 B00390DN34-0 B005G9L...
+2            452  ...  B00LG63DOM-1 B001CN3QKK-0 B007USPWS0-0 B00B840...
+3          11907  ...  B00IOZWC2M-1 B00GCQMSVA-0 B000GCR6S6-0 B0006PL...
+4          11922  ...  B00I2OR6YE-1 B000C1UFM0-0 B000C1W5LE-0 B006SMM...
+
+[5 rows x 5 columns]
+
+0it [00:00, ?it/s]
+1573it [00:00, 15703.13it/s]
+3352it [00:00, 16443.05it/s]
+4820it [00:00, 16226.37it/s]
+
+0it [00:00, ?it/s]
+4820it [00:00, 113342.41it/s]
+
+new ratio: 0.5983402489626556
+
+  0%|          | 0/302 [00:00<?, ?it/s][INFO 2026-06-16 01:24:59,301] Ed: 0, train_loss: inf, acc: inf
+
+  3%|��         | 10/302 [00:00<00:03, 91.43it/s]
+  7%|��         | 21/302 [00:00<00:02, 98.51it/s]
+ 10%|��         | 31/302 [00:00<00:02, 92.16it/s]
+ 14%|����        | 41/302 [00:00<00:02, 92.02it/s]
+ 17%|����        | 51/302 [00:00<00:02, 90.93it/s]
+ 20%|����        | 61/302 [00:00<00:03, 78.05it/s]
+ 23%|������       | 70/302 [00:00<00:03, 62.98it/s]
+ 25%|������       | 77/302 [00:01<00:03, 64.44it/s]
+ 28%|������       | 85/302 [00:01<00:03, 67.14it/s]
+ 31%|������       | 93/302 [00:01<00:03, 65.51it/s]
+ 33%|��������      | 100/302 [00:01<00:03, 54.59it/s][INFO 2026-06-16 01:25:00,767] Ed: 1600, train_loss: 1.63011, acc: 0.58312
+
+ 35%|��������      | 106/302 [00:01<00:03, 52.38it/s]
+ 37%|��������      | 112/302 [00:01<00:03, 49.50it/s]
+ 39%|��������      | 118/302 [00:01<00:03, 48.02it/s]
+ 41%|��������      | 123/302 [00:01<00:03, 47.22it/s]
+ 42%|����������     | 128/302 [00:02<00:03, 46.56it/s]
+ 44%|����������     | 133/302 [00:02<00:03, 47.42it/s]
+ 46%|����������     | 138/302 [00:02<00:03, 46.51it/s]
+ 47%|����������     | 143/302 [00:02<00:03, 47.04it/s]
+ 49%|����������     | 148/302 [00:02<00:03, 45.79it/s]
+ 51%|����������     | 153/302 [00:02<00:03, 44.05it/s]
+ 52%|������������    | 158/302 [00:02<00:03, 44.63it/s]
+ 54%|������������    | 163/302 [00:02<00:03, 44.65it/s]
+ 56%|������������    | 168/302 [00:02<00:03, 43.30it/s]
+ 57%|������������    | 173/302 [00:03<00:02, 43.43it/s]
+ 59%|������������    | 178/302 [00:03<00:02, 45.02it/s]
+ 61%|������������    | 183/302 [00:03<00:02, 43.78it/s]
+ 62%|��������������   | 188/302 [00:03<00:02, 43.19it/s]
+ 64%|��������������   | 193/302 [00:03<00:02, 44.29it/s]
+ 66%|��������������   | 198/302 [00:03<00:02, 45.50it/s][INFO 2026-06-16 01:25:03,003] Ed: 3200, train_loss: 1.40941, acc: 0.57812
+
+ 67%|��������������   | 203/302 [00:03<00:02, 45.10it/s]
+ 69%|��������������   | 208/302 [00:03<00:02, 44.43it/s]
+ 71%|��������������   | 213/302 [00:03<00:02, 43.68it/s]
+ 72%|����������������  | 218/302 [00:04<00:02, 41.88it/s]
+ 74%|����������������  | 223/302 [00:04<00:01, 43.16it/s]
+ 75%|����������������  | 228/302 [00:04<00:01, 42.90it/s]
+ 77%|����������������  | 233/302 [00:04<00:01, 43.41it/s]
+ 79%|����������������  | 238/302 [00:04<00:01, 44.40it/s]
+ 81%|����������������  | 244/302 [00:04<00:01, 47.31it/s]
+ 82%|������������������ | 249/302 [00:04<00:01, 45.88it/s]
+ 84%|������������������ | 255/302 [00:04<00:01, 46.54it/s]
+ 86%|������������������ | 260/302 [00:05<00:00, 46.21it/s]
+ 88%|������������������ | 265/302 [00:05<00:00, 45.01it/s]
+ 89%|������������������ | 270/302 [00:05<00:00, 44.57it/s]
+ 91%|������������������ | 275/302 [00:05<00:00, 44.20it/s]
+ 93%|��������������������| 280/302 [00:05<00:00, 43.39it/s]
+ 94%|��������������������| 285/302 [00:05<00:00, 43.15it/s]
+ 96%|��������������������| 290/302 [00:05<00:00, 42.71it/s]
+ 98%|��������������������| 295/302 [00:05<00:00, 42.25it/s]
+ 99%|��������������������| 300/302 [00:05<00:00, 42.33it/s][INFO 2026-06-16 01:25:05,287] Ed: 4800, train_loss: 1.31555, acc: 0.56917
+
+100%|��������������������| 302/302 [00:06<00:00, 50.25it/s]
+[INFO 2026-06-16 01:25:05,303] EPOCH[1] LOSS:1.3119065761566162
+[INFO 2026-06-16 01:25:05,304] Epoch: 3
+
+Calculating vectors for users:   0%|          | 0/110 [00:00<?, ?it/s]
+Calculating vectors for users:   7%|��         | 8/110 [00:00<00:01, 78.51it/s]
+Calculating vectors for users:  17%|����        | 19/110 [00:00<00:00, 94.08it/s]
+Calculating vectors for users:  26%|������       | 29/110 [00:00<00:00, 90.15it/s]
+Calculating vectors for users:  35%|��������      | 39/110 [00:00<00:00, 90.91it/s]
+Calculating vectors for users:  45%|����������     | 49/110 [00:00<00:00, 86.72it/s]
+Calculating vectors for users:  53%|������������    | 58/110 [00:00<00:00, 84.04it/s]
+Calculating vectors for users:  63%|��������������   | 69/110 [00:00<00:00, 89.94it/s]
+Calculating vectors for users:  72%|����������������  | 79/110 [00:00<00:00, 90.88it/s]
+Calculating vectors for users:  81%|����������������  | 89/110 [00:00<00:00, 92.52it/s]
+Calculating vectors for users:  90%|������������������ | 99/110 [00:01<00:00, 90.65it/s]
+Calculating vectors for users: 100%|��������������������| 110/110 [00:01<00:00, 95.71it/s]
+Calculating vectors for users: 100%|��������������������| 110/110 [00:01<00:00, 91.14it/s]
+
+Calculating probabilities:   0%|          | 0/1750 [00:00<?, ?it/s]
+Calculating probabilities:   6%|��         | 106/1750 [00:00<00:01, 1050.04it/s]
+Calculating probabilities:  13%|����        | 229/1750 [00:00<00:01, 1155.13it/s]
+Calculating probabilities:  20%|����        | 345/1750 [00:00<00:01, 946.36it/s] 
+Calculating probabilities:  25%|������       | 444/1750 [00:00<00:01, 953.97it/s]
+Calculating probabilities:  31%|������       | 542/1750 [00:00<00:01, 936.03it/s]
+Calculating probabilities:  37%|��������      | 648/1750 [00:00<00:01, 972.37it/s]
+Calculating probabilities:  43%|����������     | 756/1750 [00:00<00:00, 1003.28it/s]
+Calculating probabilities:  49%|����������     | 858/1750 [00:00<00:00, 993.48it/s] 
+Calculating probabilities:  56%|������������    | 980/1750 [00:00<00:00, 1054.16it/s]
+Calculating probabilities:  62%|��������������   | 1087/1750 [00:01<00:00, 1037.29it/s]
+Calculating probabilities:  68%|��������������   | 1194/1750 [00:01<00:00, 1046.44it/s]
+Calculating probabilities:  74%|����������������  | 1299/1750 [00:01<00:00, 953.61it/s] 
+Calculating probabilities:  80%|����������������  | 1397/1750 [00:01<00:00, 898.17it/s]
+Calculating probabilities:  88%|������������������ | 1542/1750 [00:01<00:00, 1035.94it/s]
+Calculating probabilities: 100%|��������������������| 1750/1750 [00:01<00:00, 1068.39it/s]
+[INFO 2026-06-16 01:25:08,283] 
+[INFO 2026-06-16 01:25:08,283] ************************************************************
+[INFO 2026-06-16 01:25:08,283] Test Ratio: 0.5983402489626556
+[INFO 2026-06-16 01:25:08,283] Test Type: Human
+[INFO 2026-06-16 01:25:08,283] 
+[INFO 2026-06-16 01:25:08,283] MAP1: 28.57142857142857
+[INFO 2026-06-16 01:25:08,283] MAP3: 45.342857142857326
+[INFO 2026-06-16 01:25:08,283] MAP5: 52.54000000000059
+[INFO 2026-06-16 01:25:08,283] 
+[INFO 2026-06-16 01:25:08,283] nDCG1: 28.57142857142857
+[INFO 2026-06-16 01:25:08,283] nDCG3: 51.177066147959536
+[INFO 2026-06-16 01:25:08,283] nDCG5: 64.21876472645951
+[INFO 2026-06-16 01:25:08,283] ************************************************************
+[INFO 2026-06-16 01:25:08,283] 
+[INFO 2026-06-16 01:25:08,283] 
+[INFO 2026-06-16 01:25:08,283] ************************************************************
+[INFO 2026-06-16 01:25:08,283] Test Ratio: 0.5983402489626556
+[INFO 2026-06-16 01:25:08,283] Test Type: LLM
+[INFO 2026-06-16 01:25:08,283] 
+[INFO 2026-06-16 01:25:08,283] MAP1: 24.514285714285712
+[INFO 2026-06-16 01:25:08,283] MAP3: 41.304761904762024
+[INFO 2026-06-16 01:25:08,283] MAP5: 49.304761904762394
+[INFO 2026-06-16 01:25:08,283] 
+[INFO 2026-06-16 01:25:08,283] nDCG1: 24.514285714285712
+[INFO 2026-06-16 01:25:08,283] nDCG3: 47.20292683204123
+[INFO 2026-06-16 01:25:08,283] nDCG5: 61.7461847843546
+[INFO 2026-06-16 01:25:08,283] ************************************************************
+[INFO 2026-06-16 01:25:08,283] 
+[INFO 2026-06-16 01:25:08,283] 
+[INFO 2026-06-16 01:25:08,283] ************************************************************
+[INFO 2026-06-16 01:25:08,283] Test Ratio: 0.5983402489626556
+[INFO 2026-06-16 01:25:08,283] Test Type: Human Target
+[INFO 2026-06-16 01:25:08,283] 
+[INFO 2026-06-16 01:25:08,283] MAP1: 11.028571428571428
+[INFO 2026-06-16 01:25:08,283] MAP3: 19.29523809523808
+[INFO 2026-06-16 01:25:08,283] MAP5: 23.889523809523663
+[INFO 2026-06-16 01:25:08,283] 
+[INFO 2026-06-16 01:25:08,283] nDCG1: 11.028571428571428
+[INFO 2026-06-16 01:25:08,283] nDCG3: 22.31271311918399
+[INFO 2026-06-16 01:25:08,283] nDCG5: 30.619001914731967
+[INFO 2026-06-16 01:25:08,283] ************************************************************
+[INFO 2026-06-16 01:25:08,285] 
+[INFO 2026-06-16 01:25:08,285] 
+[INFO 2026-06-16 01:25:08,285] ************************************************************
+[INFO 2026-06-16 01:25:08,285] Test Ratio: 0.5983402489626556
+[INFO 2026-06-16 01:25:08,285] Test Type: LLM Target
+[INFO 2026-06-16 01:25:08,285] 
+[INFO 2026-06-16 01:25:08,285] MAP1: 12.914285714285715
+[INFO 2026-06-16 01:25:08,285] MAP3: 25.161904761904697
+[INFO 2026-06-16 01:25:08,285] MAP5: 30.11619047619033
+[INFO 2026-06-16 01:25:08,285] 
+[INFO 2026-06-16 01:25:08,285] nDCG1: 12.914285714285715
+[INFO 2026-06-16 01:25:08,285] nDCG3: 29.312550202041425
+[INFO 2026-06-16 01:25:08,285] nDCG5: 38.272862489835475
+[INFO 2026-06-16 01:25:08,285] ************************************************************
+[INFO 2026-06-16 01:25:08,285] 
+[INFO 2026-06-16 01:25:08,285] llm ratio: 0.5777142857142857
+
+Calculating vectors for users:   0%|          | 0/302 [00:00<?, ?it/s]
+Calculating vectors for users:   8%|��         | 23/302 [00:00<00:01, 217.23it/s]
+Calculating vectors for users:  15%|����        | 45/302 [00:00<00:01, 183.09it/s]
+Calculating vectors for users:  21%|����        | 64/302 [00:00<00:01, 180.89it/s]
+Calculating vectors for users:  30%|������       | 91/302 [00:00<00:01, 206.59it/s]
+Calculating vectors for users:  37%|��������      | 112/302 [00:00<00:00, 191.79it/s]
+Calculating vectors for users:  44%|����������     | 132/302 [00:00<00:00, 172.71it/s]
+Calculating vectors for users:  50%|����������     | 152/302 [00:00<00:00, 178.50it/s]
+Calculating vectors for users:  58%|������������    | 175/302 [00:00<00:00, 191.11it/s]
+Calculating vectors for users:  65%|��������������   | 195/302 [00:01<00:00, 184.80it/s]
+Calculating vectors for users:  72%|����������������  | 216/302 [00:01<00:00, 190.15it/s]
+Calculating vectors for users:  80%|����������������  | 241/302 [00:01<00:00, 205.24it/s]
+Calculating vectors for users:  88%|������������������ | 265/302 [00:01<00:00, 210.87it/s]
+Calculating vectors for users:  95%|��������������������| 287/302 [00:01<00:00, 209.55it/s]
+Calculating vectors for users: 100%|��������������������| 302/302 [00:01<00:00, 194.95it/s]
+   impression_id  ...                                        impressions
+0          12854  ...  B0068Z7MT8-1 B008JWW7MK-0 B002CL6D56-0 B002CL6...
+1           1367  ...  B000TK99NU-1 B0000531NU-0 B001MS7HF0-0 B0009ET...
+2           8354  ...  B00150LT40-1 B0077S35WS-0 B0023AV31U-0 B00099Z...
+3           9379  ...  B003AT1CLE-1 B00166KXTU-0 B00B0LKBPW-0 B004T19...
+4           4738  ...  B009JVVRK8-1 B000WE1PP8-0 B005F4EACU-0 B006Z43...
+
+[5 rows x 5 columns]
+
+0it [00:00, ?it/s]
+1327it [00:00, 13147.79it/s]
+2847it [00:00, 13811.81it/s]
+4246it [00:00, 13836.73it/s]
+4820it [00:00, 12538.79it/s]
+
+0it [00:00, ?it/s]
+4820it [00:00, 93652.78it/s]
+
+new ratio: 0.6609958506224066
+
+  0%|          | 0/302 [00:00<?, ?it/s][INFO 2026-06-16 01:25:10,368] Ed: 0, train_loss: inf, acc: inf
+
+  2%|��         | 5/302 [00:00<00:06, 48.57it/s]
+  4%|��         | 11/302 [00:00<00:05, 50.65it/s]
+  6%|��         | 17/302 [00:00<00:05, 52.50it/s]
+  8%|��         | 24/302 [00:00<00:04, 55.69it/s]
+ 11%|��         | 32/302 [00:00<00:04, 61.83it/s]
+ 13%|����        | 40/302 [00:00<00:03, 66.25it/s]
+ 16%|����        | 49/302 [00:00<00:03, 71.63it/s]
+ 19%|����        | 58/302 [00:00<00:03, 76.78it/s]
+ 22%|������       | 66/302 [00:01<00:03, 71.10it/s]
+ 25%|������       | 74/302 [00:01<00:03, 71.86it/s]
+ 27%|������       | 83/302 [00:01<00:03, 72.95it/s]
+ 30%|������       | 92/302 [00:01<00:02, 75.63it/s]
+ 33%|��������      | 100/302 [00:01<00:02, 74.90it/s][INFO 2026-06-16 01:25:11,808] Ed: 1600, train_loss: 1.78872, acc: 0.56813
+
+ 36%|��������      | 108/302 [00:01<00:02, 74.21it/s]
+ 38%|��������      | 116/302 [00:01<00:02, 75.44it/s]
+ 41%|����������     | 125/302 [00:01<00:02, 76.27it/s]
+ 44%|����������     | 133/302 [00:01<00:02, 75.51it/s]
+ 47%|����������     | 141/302 [00:01<00:02, 75.05it/s]
+ 49%|����������     | 149/302 [00:02<00:02, 73.40it/s]
+ 52%|������������    | 157/302 [00:02<00:01, 73.33it/s]
+ 55%|������������    | 165/302 [00:02<00:01, 72.57it/s]
+ 57%|������������    | 173/302 [00:02<00:01, 73.87it/s]
+ 60%|������������    | 181/302 [00:02<00:01, 73.55it/s]
+ 63%|��������������   | 190/302 [00:02<00:01, 74.10it/s]
+ 66%|��������������   | 198/302 [00:02<00:01, 74.78it/s][INFO 2026-06-16 01:25:13,163] Ed: 3200, train_loss: 1.51338, acc: 0.56281
+
+ 69%|��������������   | 207/302 [00:02<00:01, 77.41it/s]
+ 72%|����������������  | 217/302 [00:02<00:01, 83.19it/s]
+ 75%|����������������  | 226/302 [00:03<00:00, 78.54it/s]
+ 77%|����������������  | 234/302 [00:03<00:00, 74.45it/s]
+ 80%|����������������  | 242/302 [00:03<00:00, 74.33it/s]
+ 83%|������������������ | 250/302 [00:03<00:00, 72.75it/s]
+ 86%|������������������ | 259/302 [00:03<00:00, 76.66it/s]
+ 89%|������������������ | 268/302 [00:03<00:00, 76.85it/s]
+ 92%|��������������������| 277/302 [00:03<00:00, 77.29it/s]
+ 95%|��������������������| 286/302 [00:03<00:00, 79.67it/s]
+ 98%|��������������������| 295/302 [00:03<00:00, 81.67it/s][INFO 2026-06-16 01:25:14,441] Ed: 4800, train_loss: 1.34014, acc: 0.57375
+
+100%|��������������������| 302/302 [00:04<00:00, 73.64it/s]
+[INFO 2026-06-16 01:25:14,449] EPOCH[1] LOSS:1.3371100425720215
+[INFO 2026-06-16 01:25:14,449] Epoch: 4
+
+Calculating vectors for users:   0%|          | 0/110 [00:00<?, ?it/s]
+Calculating vectors for users:  18%|����        | 20/110 [00:00<00:00, 183.53it/s]
+Calculating vectors for users:  35%|��������      | 39/110 [00:00<00:00, 170.39it/s]
+Calculating vectors for users:  52%|������������    | 57/110 [00:00<00:00, 163.05it/s]
+Calculating vectors for users:  67%|��������������   | 74/110 [00:00<00:00, 165.46it/s]
+Calculating vectors for users:  84%|������������������ | 92/110 [00:00<00:00, 168.67it/s]
+Calculating vectors for users:  99%|��������������������| 109/110 [00:00<00:00, 164.27it/s]
+Calculating vectors for users: 100%|��������������������| 110/110 [00:00<00:00, 166.73it/s]
+
+Calculating probabilities:   0%|          | 0/1750 [00:00<?, ?it/s]
+Calculating probabilities:  10%|��         | 177/1750 [00:00<00:00, 1740.30it/s]
+Calculating probabilities:  20%|����        | 353/1750 [00:00<00:00, 1738.05it/s]
+Calculating probabilities:  30%|������       | 527/1750 [00:00<00:00, 1682.24it/s]
+Calculating probabilities:  42%|����������     | 736/1750 [00:00<00:00, 1803.47it/s]
+Calculating probabilities:  54%|������������    | 950/1750 [00:00<00:00, 1898.31it/s]
+Calculating probabilities:  65%|��������������   | 1140/1750 [00:00<00:00, 1588.24it/s]
+Calculating probabilities:  77%|����������������  | 1346/1750 [00:00<00:00, 1699.69it/s]
+Calculating probabilities:  89%|������������������ | 1551/1750 [00:00<00:00, 1798.80it/s]
+Calculating probabilities:  99%|��������������������| 1737/1750 [00:00<00:00, 1802.36it/s]
+Calculating probabilities: 100%|��������������������| 1750/1750 [00:00<00:00, 1762.68it/s]
+[INFO 2026-06-16 01:25:16,116] 
+[INFO 2026-06-16 01:25:16,116] ************************************************************
+[INFO 2026-06-16 01:25:16,116] Test Ratio: 0.6609958506224066
+[INFO 2026-06-16 01:25:16,116] Test Type: Human
+[INFO 2026-06-16 01:25:16,116] 
+[INFO 2026-06-16 01:25:16,116] MAP1: 22.857142857142858
+[INFO 2026-06-16 01:25:16,116] MAP3: 40.19047619047625
+[INFO 2026-06-16 01:25:16,116] MAP5: 48.32476190476236
+[INFO 2026-06-16 01:25:16,116] 
+[INFO 2026-06-16 01:25:16,116] nDCG1: 22.857142857142858
+[INFO 2026-06-16 01:25:16,116] nDCG3: 46.29883356244946
+[INFO 2026-06-16 01:25:16,116] nDCG5: 61.02023467526696
+[INFO 2026-06-16 01:25:16,116] ************************************************************
+[INFO 2026-06-16 01:25:16,116] 
+[INFO 2026-06-16 01:25:16,116] 
+[INFO 2026-06-16 01:25:16,116] ************************************************************
+[INFO 2026-06-16 01:25:16,116] Test Ratio: 0.6609958506224066
+[INFO 2026-06-16 01:25:16,116] Test Type: LLM
+[INFO 2026-06-16 01:25:16,116] 
+[INFO 2026-06-16 01:25:16,116] MAP1: 16.57142857142857
+[INFO 2026-06-16 01:25:16,116] MAP3: 32.038095238095174
+[INFO 2026-06-16 01:25:16,116] MAP5: 42.395238095238305
+[INFO 2026-06-16 01:25:16,116] 
+[INFO 2026-06-16 01:25:16,116] nDCG1: 16.57142857142857
+[INFO 2026-06-16 01:25:16,116] nDCG3: 37.62136012163318
+[INFO 2026-06-16 01:25:16,116] nDCG5: 56.44288507691392
+[INFO 2026-06-16 01:25:16,116] ************************************************************
+[INFO 2026-06-16 01:25:16,116] 
+[INFO 2026-06-16 01:25:16,116] 
+[INFO 2026-06-16 01:25:16,116] ************************************************************
+[INFO 2026-06-16 01:25:16,116] Test Ratio: 0.6609958506224066
+[INFO 2026-06-16 01:25:16,116] Test Type: Human Target
+[INFO 2026-06-16 01:25:16,116] 
+[INFO 2026-06-16 01:25:16,116] MAP1: 5.485714285714286
+[INFO 2026-06-16 01:25:16,116] MAP3: 12.40952380952384
+[INFO 2026-06-16 01:25:16,116] MAP5: 16.986666666666608
+[INFO 2026-06-16 01:25:16,116] 
+[INFO 2026-06-16 01:25:16,117] nDCG1: 5.485714285714286
+[INFO 2026-06-16 01:25:16,117] nDCG3: 14.966494698571612
+[INFO 2026-06-16 01:25:16,117] nDCG5: 23.306114277575805
+[INFO 2026-06-16 01:25:16,117] ************************************************************
+[INFO 2026-06-16 01:25:16,117] 
+[INFO 2026-06-16 01:25:16,117] 
+[INFO 2026-06-16 01:25:16,117] ************************************************************
+[INFO 2026-06-16 01:25:16,117] Test Ratio: 0.6609958506224066
+[INFO 2026-06-16 01:25:16,117] Test Type: LLM Target
+[INFO 2026-06-16 01:25:16,117] 
+[INFO 2026-06-16 01:25:16,117] MAP1: 12.0
+[INFO 2026-06-16 01:25:16,117] MAP3: 21.085714285714264
+[INFO 2026-06-16 01:25:16,117] MAP5: 25.89142857142845
+[INFO 2026-06-16 01:25:16,117] 
+[INFO 2026-06-16 01:25:16,117] nDCG1: 12.0
+[INFO 2026-06-16 01:25:16,117] nDCG3: 24.349416781224853
+[INFO 2026-06-16 01:25:16,117] nDCG5: 33.082797784753204
+[INFO 2026-06-16 01:25:16,117] ************************************************************
+[INFO 2026-06-16 01:25:16,117] 
+[INFO 2026-06-16 01:25:16,117] llm ratio: 0.6011428571428571
+
+Calculating vectors for users:   0%|          | 0/302 [00:00<?, ?it/s]
+Calculating vectors for users:   6%|��         | 19/302 [00:00<00:01, 181.50it/s]
+Calculating vectors for users:  13%|����        | 38/302 [00:00<00:01, 164.18it/s]
+Calculating vectors for users:  19%|����        | 56/302 [00:00<00:01, 166.16it/s]
+Calculating vectors for users:  24%|������       | 73/302 [00:00<00:01, 163.94it/s]
+Calculating vectors for users:  31%|��������      | 95/302 [00:00<00:01, 177.52it/s]
+Calculating vectors for users:  37%|��������      | 113/302 [00:00<00:01, 168.02it/s]
+Calculating vectors for users:  44%|����������     | 132/302 [00:00<00:00, 170.48it/s]
+Calculating vectors for users:  50%|����������     | 150/302 [00:00<00:00, 167.35it/s]
+Calculating vectors for users:  57%|������������    | 173/302 [00:00<00:00, 180.45it/s]
+Calculating vectors for users:  64%|��������������   | 194/302 [00:01<00:00, 186.97it/s]
+Calculating vectors for users:  71%|��������������   | 213/302 [00:01<00:00, 180.83it/s]
+Calculating vectors for users:  77%|����������������  | 232/302 [00:01<00:00, 170.83it/s]
+Calculating vectors for users:  83%|������������������ | 251/302 [00:01<00:00, 173.74it/s]
+Calculating vectors for users:  89%|������������������ | 269/302 [00:01<00:00, 173.84it/s]
+Calculating vectors for users:  95%|��������������������| 287/302 [00:01<00:00, 156.78it/s]
+Calculating vectors for users: 100%|��������������������| 302/302 [00:01<00:00, 168.35it/s]
+   impression_id  ...                                        impressions
+0           3168  ...  B00ISW8ZVS-1 B00279BKRY-0 B000OYJ9AO-0 B000OYJ...
+1          12619  ...  B00KWE08Q0-1 B001AZIY6Q-0 B00390DN34-0 B005G9L...
+2            452  ...  B00LG63DOM-1 B001CN3QKK-0 B007USPWS0-0 B00B840...
+3          11907  ...  B00IOZWC2M-1 B00GCQMSVA-0 B000GCR6S6-0 B0006PL...
+4          11922  ...  B00I2OR6YE-1 B000C1UFM0-0 B000C1W5LE-0 B006SMM...
+
+[5 rows x 5 columns]
+
+0it [00:00, ?it/s]
+1011it [00:00, 10067.14it/s]
+2334it [00:00, 11789.55it/s]
+3512it [00:00, 11096.87it/s]
+4820it [00:00, 11966.72it/s]
+
+0it [00:00, ?it/s]
+4820it [00:00, 118881.69it/s]
+
+new ratio: 0.6595435684647303
+
+  0%|          | 0/302 [00:00<?, ?it/s][INFO 2026-06-16 01:25:18,455] Ed: 0, train_loss: inf, acc: inf
+
+  3%|��         | 8/302 [00:00<00:04, 72.29it/s]
+  5%|��         | 16/302 [00:00<00:03, 73.84it/s]
+  8%|��         | 24/302 [00:00<00:03, 74.43it/s]
+ 11%|��         | 32/302 [00:00<00:03, 72.08it/s]
+ 13%|����        | 40/302 [00:00<00:03, 73.28it/s]
+ 16%|����        | 48/302 [00:00<00:03, 74.82it/s]
+ 19%|����        | 57/302 [00:00<00:03, 78.77it/s]
+ 22%|������       | 66/302 [00:00<00:02, 80.71it/s]
+ 25%|������       | 75/302 [00:00<00:02, 77.82it/s]
+ 27%|������       | 83/302 [00:01<00:02, 73.49it/s]
+ 30%|������       | 91/302 [00:01<00:03, 68.77it/s]
+ 32%|��������      | 98/302 [00:01<00:03, 67.59it/s][INFO 2026-06-16 01:25:19,815] Ed: 1600, train_loss: 1.64122, acc: 0.60562
+
+ 35%|��������      | 105/302 [00:01<00:02, 67.95it/s]
+ 37%|��������      | 112/302 [00:01<00:02, 67.42it/s]
+ 39%|��������      | 119/302 [00:01<00:02, 67.51it/s]
+ 42%|����������     | 126/302 [00:01<00:02, 67.86it/s]
+ 44%|����������     | 133/302 [00:01<00:02, 66.38it/s]
+ 47%|����������     | 141/302 [00:01<00:02, 68.41it/s]
+ 49%|����������     | 148/302 [00:02<00:02, 67.80it/s]
+ 52%|������������    | 156/302 [00:02<00:02, 69.33it/s]
+ 55%|������������    | 165/302 [00:02<00:01, 74.41it/s]
+ 57%|������������    | 173/302 [00:02<00:01, 71.18it/s]
+ 60%|������������    | 181/302 [00:02<00:01, 68.04it/s]
+ 62%|��������������   | 188/302 [00:02<00:01, 68.24it/s]
+ 65%|��������������   | 196/302 [00:02<00:01, 68.88it/s][INFO 2026-06-16 01:25:21,270] Ed: 3200, train_loss: 1.38048, acc: 0.58437
+
+ 68%|��������������   | 204/302 [00:02<00:01, 71.32it/s]
+ 70%|��������������   | 212/302 [00:02<00:01, 69.61it/s]
+ 73%|����������������  | 219/302 [00:03<00:01, 65.27it/s]
+ 75%|����������������  | 226/302 [00:03<00:01, 64.15it/s]
+ 77%|����������������  | 234/302 [00:03<00:01, 66.25it/s]
+ 80%|����������������  | 242/302 [00:03<00:00, 68.18it/s]
+ 83%|������������������ | 250/302 [00:03<00:00, 70.01it/s]
+ 86%|������������������ | 259/302 [00:03<00:00, 73.69it/s]
+ 89%|������������������ | 268/302 [00:03<00:00, 75.26it/s]
+ 92%|��������������������| 277/302 [00:03<00:00, 78.13it/s]
+ 94%|��������������������| 285/302 [00:03<00:00, 77.33it/s]
+ 97%|��������������������| 294/302 [00:04<00:00, 77.59it/s][INFO 2026-06-16 01:25:22,655] Ed: 4800, train_loss: 1.28712, acc: 0.57354
+
+100%|��������������������| 302/302 [00:04<00:00, 74.51it/s]
+100%|��������������������| 302/302 [00:04<00:00, 71.39it/s]
+[INFO 2026-06-16 01:25:22,666] EPOCH[1] LOSS:1.2833445072174072
+[INFO 2026-06-16 01:25:22,666] Epoch: 5
+
+Calculating vectors for users:   0%|          | 0/110 [00:00<?, ?it/s]
+Calculating vectors for users:  14%|����        | 15/110 [00:00<00:00, 147.09it/s]
+Calculating vectors for users:  27%|������       | 30/110 [00:00<00:00, 136.78it/s]
+Calculating vectors for users:  40%|��������      | 44/110 [00:00<00:00, 136.62it/s]
+Calculating vectors for users:  55%|������������    | 60/110 [00:00<00:00, 143.20it/s]
+Calculating vectors for users:  68%|��������������   | 75/110 [00:00<00:00, 140.15it/s]
+Calculating vectors for users:  82%|������������������ | 90/110 [00:00<00:00, 136.49it/s]
+Calculating vectors for users:  96%|��������������������| 106/110 [00:00<00:00, 142.79it/s]
+Calculating vectors for users: 100%|��������������������| 110/110 [00:00<00:00, 141.26it/s]
+
+Calculating probabilities:   0%|          | 0/1750 [00:00<?, ?it/s]
+Calculating probabilities:  10%|��         | 183/1750 [00:00<00:00, 1811.59it/s]
+Calculating probabilities:  21%|����        | 365/1750 [00:00<00:00, 1662.31it/s]
+Calculating probabilities:  31%|������       | 539/1750 [00:00<00:00, 1692.52it/s]
+Calculating probabilities:  41%|��������      | 709/1750 [00:00<00:00, 1572.00it/s]
+Calculating probabilities:  51%|������������    | 900/1750 [00:00<00:00, 1684.72it/s]
+Calculating probabilities:  62%|��������������   | 1084/1750 [00:00<00:00, 1708.31it/s]
+Calculating probabilities:  72%|����������������  | 1256/1750 [00:00<00:00, 1648.13it/s]
+Calculating probabilities:  81%|������������������ | 1422/1750 [00:00<00:00, 1635.85it/s]
+Calculating probabilities:  91%|������������������ | 1595/1750 [00:00<00:00, 1622.60it/s]
+Calculating probabilities: 100%|��������������������| 1750/1750 [00:01<00:00, 1669.34it/s]
+[INFO 2026-06-16 01:25:24,512] 
+[INFO 2026-06-16 01:25:24,512] ************************************************************
+[INFO 2026-06-16 01:25:24,512] Test Ratio: 0.6595435684647303
+[INFO 2026-06-16 01:25:24,512] Test Type: Human
+[INFO 2026-06-16 01:25:24,512] 
+[INFO 2026-06-16 01:25:24,512] MAP1: 25.142857142857146
+[INFO 2026-06-16 01:25:24,512] MAP3: 41.99047619047635
+[INFO 2026-06-16 01:25:24,512] MAP5: 49.77333333333389
+[INFO 2026-06-16 01:25:24,512] 
+[INFO 2026-06-16 01:25:24,512] nDCG1: 25.142857142857146
+[INFO 2026-06-16 01:25:24,512] nDCG3: 47.9580366308167
+[INFO 2026-06-16 01:25:24,512] nDCG5: 62.105460998576035
+[INFO 2026-06-16 01:25:24,512] ************************************************************
+[INFO 2026-06-16 01:25:24,512] 
+[INFO 2026-06-16 01:25:24,512] 
+[INFO 2026-06-16 01:25:24,512] ************************************************************
+[INFO 2026-06-16 01:25:24,512] Test Ratio: 0.6595435684647303
+[INFO 2026-06-16 01:25:24,512] Test Type: LLM
+[INFO 2026-06-16 01:25:24,512] 
+[INFO 2026-06-16 01:25:24,512] MAP1: 19.085714285714285
+[INFO 2026-06-16 01:25:24,512] MAP3: 35.4761904761905
+[INFO 2026-06-16 01:25:24,512] MAP5: 44.76190476190521
+[INFO 2026-06-16 01:25:24,512] 
+[INFO 2026-06-16 01:25:24,512] nDCG1: 19.085714285714285
+[INFO 2026-06-16 01:25:24,512] nDCG3: 41.310435685102526
+[INFO 2026-06-16 01:25:24,512] nDCG5: 58.262025928196834
+[INFO 2026-06-16 01:25:24,512] ************************************************************
+[INFO 2026-06-16 01:25:24,512] 
+[INFO 2026-06-16 01:25:24,512] 
+[INFO 2026-06-16 01:25:24,512] ************************************************************
+[INFO 2026-06-16 01:25:24,512] Test Ratio: 0.6595435684647303
+[INFO 2026-06-16 01:25:24,512] Test Type: Human Target
+[INFO 2026-06-16 01:25:24,512] 
+[INFO 2026-06-16 01:25:24,512] MAP1: 5.485714285714286
+[INFO 2026-06-16 01:25:24,512] MAP3: 13.333333333333371
+[INFO 2026-06-16 01:25:24,512] MAP5: 17.9761904761904
+[INFO 2026-06-16 01:25:24,512] 
+[INFO 2026-06-16 01:25:24,512] nDCG1: 5.485714285714286
+[INFO 2026-06-16 01:25:24,512] nDCG3: 16.18210863224514
+[INFO 2026-06-16 01:25:24,512] nDCG5: 24.65185924511043
+[INFO 2026-06-16 01:25:24,512] ************************************************************
+[INFO 2026-06-16 01:25:24,512] 
+[INFO 2026-06-16 01:25:24,512] 
+[INFO 2026-06-16 01:25:24,512] ************************************************************
+[INFO 2026-06-16 01:25:24,512] Test Ratio: 0.6595435684647303
+[INFO 2026-06-16 01:25:24,512] Test Type: LLM Target
+[INFO 2026-06-16 01:25:24,512] 
+[INFO 2026-06-16 01:25:24,512] MAP1: 13.942857142857143
+[INFO 2026-06-16 01:25:24,512] MAP3: 24.51428571428565
+[INFO 2026-06-16 01:25:24,512] MAP5: 28.834285714285546
+[INFO 2026-06-16 01:25:24,512] 
+[INFO 2026-06-16 01:25:24,512] nDCG1: 13.942857142857143
+[INFO 2026-06-16 01:25:24,512] nDCG3: 28.27590084571474
+[INFO 2026-06-16 01:25:24,512] nDCG5: 36.10000471794188
+[INFO 2026-06-16 01:25:24,512] ************************************************************
+[INFO 2026-06-16 01:25:24,512] 
+[INFO 2026-06-16 01:25:24,512] llm ratio: 0.6125714285714285
+
+Calculating vectors for users:   0%|          | 0/302 [00:00<?, ?it/s]
+Calculating vectors for users:   7%|��         | 20/302 [00:00<00:01, 188.53it/s]
+Calculating vectors for users:  13%|����        | 39/302 [00:00<00:01, 188.31it/s]
+Calculating vectors for users:  19%|����        | 58/302 [00:00<00:01, 180.20it/s]
+Calculating vectors for users:  25%|������       | 77/302 [00:00<00:01, 181.12it/s]
+Calculating vectors for users:  32%|��������      | 96/302 [00:00<00:01, 166.73it/s]
+Calculating vectors for users:  37%|��������      | 113/302 [00:00<00:01, 158.80it/s]
+Calculating vectors for users:  43%|����������     | 130/302 [00:00<00:01, 149.09it/s]
+Calculating vectors for users:  49%|����������     | 148/302 [00:00<00:01, 153.46it/s]
+Calculating vectors for users:  55%|������������    | 167/302 [00:01<00:00, 162.39it/s]
+Calculating vectors for users:  62%|��������������   | 187/302 [00:01<00:00, 171.48it/s]
+Calculating vectors for users:  68%|��������������   | 206/302 [00:01<00:00, 175.30it/s]
+Calculating vectors for users:  75%|����������������  | 228/302 [00:01<00:00, 187.08it/s]
+Calculating vectors for users:  82%|������������������ | 247/302 [00:01<00:00, 178.97it/s]
+Calculating vectors for users:  88%|������������������ | 266/302 [00:01<00:00, 178.28it/s]
+Calculating vectors for users:  94%|��������������������| 284/302 [00:01<00:00, 177.38it/s]
+Calculating vectors for users: 100%|��������������������| 302/302 [00:01<00:00, 173.27it/s]
+Calculating vectors for users: 100%|��������������������| 302/302 [00:01<00:00, 171.75it/s]
+   impression_id  ...                                        impressions
+0          12854  ...  B0068Z7MT8-1 B008JWW7MK-0 B002CL6D56-0 B002CL6...
+1           1367  ...  B000TK99NU-1 B0000531NU-0 B001MS7HF0-0 B0009ET...
+2           8354  ...  B00150LT40-1 B0077S35WS-0 B0023AV31U-0 B00099Z...
+3           9379  ...  B003AT1CLE-1 B00166KXTU-0 B00B0LKBPW-0 B004T19...
+4           4738  ...  B009JVVRK8-1 B000WE1PP8-0 B005F4EACU-0 B006Z43...
+
+[5 rows x 5 columns]
+
+0it [00:00, ?it/s]
+1685it [00:00, 16311.62it/s]
+3317it [00:00, 15882.32it/s]
+4820it [00:00, 13938.05it/s]
+
+0it [00:00, ?it/s]
+4820it [00:00, 133867.56it/s]
+
+new ratio: 0.7134854771784233
+
+  0%|          | 0/302 [00:00<?, ?it/s][INFO 2026-06-16 01:25:26,736] Ed: 0, train_loss: inf, acc: inf
+
+  2%|��         | 7/302 [00:00<00:04, 67.98it/s]
+  5%|��         | 15/302 [00:00<00:04, 70.87it/s]
+  8%|��         | 23/302 [00:00<00:04, 66.07it/s]
+ 10%|��         | 31/302 [00:00<00:03, 69.30it/s]
+ 13%|����        | 40/302 [00:00<00:03, 72.45it/s]
+ 16%|����        | 49/302 [00:00<00:03, 75.83it/s]
+ 19%|����        | 57/302 [00:00<00:03, 70.93it/s]
+ 22%|������       | 65/302 [00:00<00:03, 71.86it/s]
+ 24%|������       | 73/302 [00:01<00:03, 67.57it/s]
+ 27%|������       | 81/302 [00:01<00:03, 70.59it/s]
+ 29%|������       | 89/302 [00:01<00:02, 72.51it/s]
+ 32%|��������      | 97/302 [00:01<00:02, 69.55it/s][INFO 2026-06-16 01:25:28,161] Ed: 1600, train_loss: 1.85435, acc: 0.57063
+
+ 35%|��������      | 105/302 [00:01<00:02, 68.33it/s]
+ 37%|��������      | 113/302 [00:01<00:02, 71.33it/s]
+ 40%|��������      | 121/302 [00:01<00:02, 70.14it/s]
+ 43%|����������     | 129/302 [00:01<00:02, 71.15it/s]
+ 45%|����������     | 137/302 [00:01<00:02, 66.66it/s]
+ 48%|����������     | 146/302 [00:02<00:02, 71.26it/s]
+ 51%|����������     | 154/302 [00:02<00:02, 73.01it/s]
+ 54%|������������    | 162/302 [00:02<00:01, 74.42it/s]
+ 56%|������������    | 170/302 [00:02<00:01, 74.78it/s]
+ 59%|������������    | 178/302 [00:02<00:01, 73.67it/s]
+ 62%|��������������   | 186/302 [00:02<00:01, 74.97it/s]
+ 65%|��������������   | 196/302 [00:02<00:01, 81.22it/s][INFO 2026-06-16 01:25:29,502] Ed: 3200, train_loss: 1.50041, acc: 0.57437
+
+ 68%|��������������   | 205/302 [00:02<00:01, 76.64it/s]
+ 71%|��������������   | 213/302 [00:02<00:01, 76.12it/s]
+ 74%|����������������  | 222/302 [00:03<00:01, 79.17it/s]
+ 76%|����������������  | 231/302 [00:03<00:00, 81.86it/s]
+ 80%|����������������  | 241/302 [00:03<00:00, 85.19it/s]
+ 83%|������������������ | 250/302 [00:03<00:00, 79.73it/s]
+ 86%|������������������ | 260/302 [00:03<00:00, 83.70it/s]
+ 89%|������������������ | 269/302 [00:03<00:00, 83.16it/s]
+ 92%|��������������������| 278/302 [00:03<00:00, 80.10it/s]
+ 95%|��������������������| 287/302 [00:03<00:00, 79.38it/s]
+ 98%|��������������������| 295/302 [00:03<00:00, 77.39it/s][INFO 2026-06-16 01:25:30,755] Ed: 4800, train_loss: 1.32337, acc: 0.59375
+
+100%|��������������������| 302/302 [00:04<00:00, 74.84it/s]
+[INFO 2026-06-16 01:25:30,760] EPOCH[1] LOSS:1.3190209865570068
+[INFO 2026-06-16 01:25:30,760] Epoch: 6
+
+Calculating vectors for users:   0%|          | 0/110 [00:00<?, ?it/s]
+Calculating vectors for users:  18%|����        | 20/110 [00:00<00:00, 186.35it/s]
+Calculating vectors for users:  36%|��������      | 40/110 [00:00<00:00, 192.50it/s]
+Calculating vectors for users:  55%|������������    | 60/110 [00:00<00:00, 140.08it/s]
+Calculating vectors for users:  70%|��������������   | 77/110 [00:00<00:00, 148.97it/s]
+Calculating vectors for users:  85%|������������������ | 93/110 [00:00<00:00, 145.50it/s]
+Calculating vectors for users:  99%|��������������������| 109/110 [00:00<00:00, 126.44it/s]
+Calculating vectors for users: 100%|��������������������| 110/110 [00:00<00:00, 139.61it/s]
+
+Calculating probabilities:   0%|          | 0/1750 [00:00<?, ?it/s]
+Calculating probabilities:  10%|��         | 167/1750 [00:00<00:00, 1652.38it/s]
+Calculating probabilities:  21%|����        | 361/1750 [00:00<00:00, 1813.54it/s]
+Calculating probabilities:  31%|������       | 543/1750 [00:00<00:00, 1746.05it/s]
+Calculating probabilities:  41%|��������      | 721/1750 [00:00<00:00, 1749.65it/s]
+Calculating probabilities:  51%|������������    | 897/1750 [00:00<00:00, 1738.66it/s]
+Calculating probabilities:  61%|��������������   | 1075/1750 [00:00<00:00, 1751.20it/s]
+Calculating probabilities:  72%|����������������  | 1265/1750 [00:00<00:00, 1743.74it/s]
+Calculating probabilities:  84%|������������������ | 1464/1750 [00:00<00:00, 1807.55it/s]
+Calculating probabilities:  95%|��������������������| 1657/1750 [00:00<00:00, 1831.87it/s]
+Calculating probabilities: 100%|��������������������| 1750/1750 [00:00<00:00, 1808.67it/s]
+[INFO 2026-06-16 01:25:32,531] 
+[INFO 2026-06-16 01:25:32,531] ************************************************************
+[INFO 2026-06-16 01:25:32,531] Test Ratio: 0.7134854771784233
+[INFO 2026-06-16 01:25:32,531] Test Type: Human
+[INFO 2026-06-16 01:25:32,531] 
+[INFO 2026-06-16 01:25:32,531] MAP1: 20.457142857142856
+[INFO 2026-06-16 01:25:32,531] MAP3: 37.65714285714293
+[INFO 2026-06-16 01:25:32,531] MAP5: 46.36000000000045
+[INFO 2026-06-16 01:25:32,531] 
+[INFO 2026-06-16 01:25:32,531] nDCG1: 20.457142857142856
+[INFO 2026-06-16 01:25:32,531] nDCG3: 43.68522553428623
+[INFO 2026-06-16 01:25:32,531] nDCG5: 59.50941616772565
+[INFO 2026-06-16 01:25:32,531] ************************************************************
+[INFO 2026-06-16 01:25:32,531] 
+[INFO 2026-06-16 01:25:32,531] 
+[INFO 2026-06-16 01:25:32,531] ************************************************************
+[INFO 2026-06-16 01:25:32,531] Test Ratio: 0.7134854771784233
+[INFO 2026-06-16 01:25:32,531] Test Type: LLM
+[INFO 2026-06-16 01:25:32,531] 
+[INFO 2026-06-16 01:25:32,531] MAP1: 14.971428571428572
+[INFO 2026-06-16 01:25:32,531] MAP3: 30.323809523809388
+[INFO 2026-06-16 01:25:32,531] MAP5: 40.872380952381164
+[INFO 2026-06-16 01:25:32,531] 
+[INFO 2026-06-16 01:25:32,531] nDCG1: 14.971428571428572
+[INFO 2026-06-16 01:25:32,531] nDCG3: 36.01322788816376
+[INFO 2026-06-16 01:25:32,531] nDCG5: 55.268493585818426
+[INFO 2026-06-16 01:25:32,531] ************************************************************
+[INFO 2026-06-16 01:25:32,531] 
+[INFO 2026-06-16 01:25:32,531] 
+[INFO 2026-06-16 01:25:32,531] ************************************************************
+[INFO 2026-06-16 01:25:32,531] Test Ratio: 0.7134854771784233
+[INFO 2026-06-16 01:25:32,531] Test Type: Human Target
+[INFO 2026-06-16 01:25:32,531] 
+[INFO 2026-06-16 01:25:32,531] MAP1: 3.085714285714286
+[INFO 2026-06-16 01:25:32,531] MAP3: 9.285714285714288
+[INFO 2026-06-16 01:25:32,531] MAP5: 14.27428571428569
+[INFO 2026-06-16 01:25:32,531] 
+[INFO 2026-06-16 01:25:32,531] nDCG1: 3.085714285714286
+[INFO 2026-06-16 01:25:32,531] nDCG3: 11.60325266632669
+[INFO 2026-06-16 01:25:32,531] nDCG5: 20.66614963031192
+[INFO 2026-06-16 01:25:32,531] ************************************************************
+[INFO 2026-06-16 01:25:32,531] 
+[INFO 2026-06-16 01:25:32,531] 
+[INFO 2026-06-16 01:25:32,531] ************************************************************
+[INFO 2026-06-16 01:25:32,531] Test Ratio: 0.7134854771784233
+[INFO 2026-06-16 01:25:32,531] Test Type: LLM Target
+[INFO 2026-06-16 01:25:32,531] 
+[INFO 2026-06-16 01:25:32,531] MAP1: 12.571428571428573
+[INFO 2026-06-16 01:25:32,531] MAP3: 20.761904761904734
+[INFO 2026-06-16 01:25:32,531] MAP5: 25.68190476190463
+[INFO 2026-06-16 01:25:32,531] 
+[INFO 2026-06-16 01:25:32,531] nDCG1: 12.571428571428573
+[INFO 2026-06-16 01:25:32,531] nDCG3: 23.686852435102367
+[INFO 2026-06-16 01:25:32,531] nDCG5: 32.65338120298645
+[INFO 2026-06-16 01:25:32,531] ************************************************************
+[INFO 2026-06-16 01:25:32,531] 
+[INFO 2026-06-16 01:25:32,531] llm ratio: 0.6028571428571429
+
+Calculating vectors for users:   0%|          | 0/302 [00:00<?, ?it/s]
+Calculating vectors for users:   6%|��         | 17/302 [00:00<00:01, 168.75it/s]
+Calculating vectors for users:  11%|����        | 34/302 [00:00<00:01, 167.72it/s]
+Calculating vectors for users:  18%|����        | 55/302 [00:00<00:01, 179.22it/s]
+Calculating vectors for users:  24%|������       | 73/302 [00:00<00:01, 159.61it/s]
+Calculating vectors for users:  31%|������       | 93/302 [00:00<00:01, 169.55it/s]
+Calculating vectors for users:  37%|��������      | 113/302 [00:00<00:01, 175.73it/s]
+Calculating vectors for users:  43%|����������     | 131/302 [00:00<00:01, 166.91it/s]
+Calculating vectors for users:  50%|����������     | 151/302 [00:00<00:00, 169.89it/s]
+Calculating vectors for users:  56%|������������    | 169/302 [00:01<00:00, 161.23it/s]
+Calculating vectors for users:  63%|��������������   | 190/302 [00:01<00:00, 173.07it/s]
+Calculating vectors for users:  70%|��������������   | 212/302 [00:01<00:00, 184.79it/s]
+Calculating vectors for users:  76%|����������������  | 231/302 [00:01<00:00, 176.18it/s]
+Calculating vectors for users:  84%|������������������ | 254/302 [00:01<00:00, 188.39it/s]
+Calculating vectors for users:  92%|��������������������| 277/302 [00:01<00:00, 197.60it/s]
+Calculating vectors for users:  98%|��������������������| 297/302 [00:01<00:00, 179.70it/s]
+Calculating vectors for users: 100%|��������������������| 302/302 [00:01<00:00, 177.45it/s]
+   impression_id  ...                                        impressions
+0           3168  ...  B00ISW8ZVS-1 B00279BKRY-0 B000OYJ9AO-0 B000OYJ...
+1          12619  ...  B00KWE08Q0-1 B001AZIY6Q-0 B00390DN34-0 B005G9L...
+2            452  ...  B00LG63DOM-1 B001CN3QKK-0 B007USPWS0-0 B00B840...
+3          11907  ...  B00IOZWC2M-1 B00GCQMSVA-0 B000GCR6S6-0 B0006PL...
+4          11922  ...  B00I2OR6YE-1 B000C1UFM0-0 B000C1W5LE-0 B006SMM...
+
+[5 rows x 5 columns]
+
+0it [00:00, ?it/s]
+1572it [00:00, 15426.04it/s]
+3115it [00:00, 13586.08it/s]
+4487it [00:00, 13526.84it/s]
+4820it [00:00, 13870.66it/s]
+
+0it [00:00, ?it/s]
+4820it [00:00, 83316.00it/s]
+
+new ratio: 0.6759336099585063
+
+  0%|          | 0/302 [00:00<?, ?it/s][INFO 2026-06-16 01:25:34,749] Ed: 0, train_loss: inf, acc: inf
+
+  3%|��         | 8/302 [00:00<00:03, 76.05it/s]
+  6%|��         | 18/302 [00:00<00:03, 83.36it/s]
+  9%|��         | 27/302 [00:00<00:03, 81.45it/s]
+ 12%|����        | 36/302 [00:00<00:03, 76.92it/s]
+ 15%|����        | 44/302 [00:00<00:03, 73.87it/s]
+ 17%|����        | 52/302 [00:00<00:03, 75.36it/s]
+ 20%|����        | 60/302 [00:00<00:03, 70.92it/s]
+ 23%|������       | 68/302 [00:00<00:03, 68.88it/s]
+ 26%|������       | 78/302 [00:01<00:02, 74.70it/s]
+ 29%|������       | 87/302 [00:01<00:02, 78.62it/s]
+ 32%|��������      | 97/302 [00:01<00:02, 82.91it/s][INFO 2026-06-16 01:25:36,030] Ed: 1600, train_loss: 1.61577, acc: 0.58562
+
+ 35%|��������      | 107/302 [00:01<00:02, 87.49it/s]
+ 38%|��������      | 116/302 [00:01<00:02, 87.91it/s]
+ 42%|����������     | 126/302 [00:01<00:01, 90.41it/s]
+ 45%|����������     | 136/302 [00:01<00:01, 89.86it/s]
+ 48%|����������     | 146/302 [00:01<00:01, 87.10it/s]
+ 51%|������������    | 155/302 [00:01<00:01, 82.88it/s]
+ 55%|������������    | 165/302 [00:02<00:01, 85.51it/s]
+ 58%|������������    | 174/302 [00:02<00:01, 80.65it/s]
+ 61%|������������    | 183/302 [00:02<00:01, 82.14it/s]
+ 64%|��������������   | 192/302 [00:02<00:01, 82.10it/s][INFO 2026-06-16 01:25:37,204] Ed: 3200, train_loss: 1.39387, acc: 0.57156
+
+ 67%|��������������   | 201/302 [00:02<00:01, 83.86it/s]
+ 70%|��������������   | 210/302 [00:02<00:01, 82.82it/s]
+ 73%|����������������  | 220/302 [00:02<00:00, 86.57it/s]
+ 76%|����������������  | 230/302 [00:02<00:00, 90.35it/s]
+ 79%|����������������  | 240/302 [00:02<00:00, 84.68it/s]
+ 82%|������������������ | 249/302 [00:03<00:00, 81.40it/s]
+ 85%|������������������ | 258/302 [00:03<00:00, 80.22it/s]
+ 89%|������������������ | 269/302 [00:03<00:00, 86.01it/s]
+ 92%|��������������������| 279/302 [00:03<00:00, 87.50it/s]
+ 95%|��������������������| 288/302 [00:03<00:00, 87.59it/s]
+ 98%|��������������������| 297/302 [00:03<00:00, 85.39it/s][INFO 2026-06-16 01:25:38,372] Ed: 4800, train_loss: 1.27535, acc: 0.58292
+
+100%|��������������������| 302/302 [00:03<00:00, 82.84it/s]
+[INFO 2026-06-16 01:25:38,383] EPOCH[1] LOSS:1.2721256017684937
+[INFO 2026-06-16 01:25:38,383] Epoch: 7
+
+Calculating vectors for users:   0%|          | 0/110 [00:00<?, ?it/s]
+Calculating vectors for users:  20%|����        | 22/110 [00:00<00:00, 219.69it/s]
+Calculating vectors for users:  40%|��������      | 44/110 [00:00<00:00, 207.82it/s]
+Calculating vectors for users:  59%|������������    | 65/110 [00:00<00:00, 197.47it/s]
+Calculating vectors for users:  77%|����������������  | 85/110 [00:00<00:00, 197.57it/s]
+Calculating vectors for users:  95%|��������������������| 105/110 [00:00<00:00, 178.11it/s]
+Calculating vectors for users: 100%|��������������������| 110/110 [00:00<00:00, 189.60it/s]
+
+Calculating probabilities:   0%|          | 0/1750 [00:00<?, ?it/s]
+Calculating probabilities:  11%|��         | 185/1750 [00:00<00:00, 1805.60it/s]
+Calculating probabilities:  21%|����        | 366/1750 [00:00<00:00, 1597.27it/s]
+Calculating probabilities:  32%|��������      | 558/1750 [00:00<00:00, 1720.77it/s]
+Calculating probabilities:  42%|����������     | 732/1750 [00:00<00:00, 1711.50it/s]
+Calculating probabilities:  52%|������������    | 905/1750 [00:00<00:00, 1652.08it/s]
+Calculating probabilities:  62%|��������������   | 1087/1750 [00:00<00:00, 1691.34it/s]
+Calculating probabilities:  74%|����������������  | 1290/1750 [00:00<00:00, 1783.99it/s]
+Calculating probabilities:  85%|������������������ | 1484/1750 [00:00<00:00, 1819.95it/s]
+Calculating probabilities:  96%|��������������������| 1683/1750 [00:00<00:00, 1863.00it/s]
+Calculating probabilities: 100%|��������������������| 1750/1750 [00:00<00:00, 1784.21it/s]
+[INFO 2026-06-16 01:25:39,960] 
+[INFO 2026-06-16 01:25:39,960] ************************************************************
+[INFO 2026-06-16 01:25:39,960] Test Ratio: 0.6759336099585063
+[INFO 2026-06-16 01:25:39,960] Test Type: Human
+[INFO 2026-06-16 01:25:39,960] 
+[INFO 2026-06-16 01:25:39,960] MAP1: 27.6
+[INFO 2026-06-16 01:25:39,960] MAP3: 43.61904761904784
+[INFO 2026-06-16 01:25:39,960] MAP5: 51.267619047619675
+[INFO 2026-06-16 01:25:39,960] 
+[INFO 2026-06-16 01:25:39,960] nDCG1: 27.6
+[INFO 2026-06-16 01:25:39,960] nDCG3: 49.287990584490146
+[INFO 2026-06-16 01:25:39,960] nDCG5: 63.22100473965181
+[INFO 2026-06-16 01:25:39,960] ************************************************************
+[INFO 2026-06-16 01:25:39,960] 
+[INFO 2026-06-16 01:25:39,960] 
+[INFO 2026-06-16 01:25:39,960] ************************************************************
+[INFO 2026-06-16 01:25:39,960] Test Ratio: 0.6759336099585063
+[INFO 2026-06-16 01:25:39,960] Test Type: LLM
+[INFO 2026-06-16 01:25:39,960] 
+[INFO 2026-06-16 01:25:39,960] MAP1: 23.085714285714285
+[INFO 2026-06-16 01:25:39,960] MAP3: 39.09523809523818
+[INFO 2026-06-16 01:25:39,960] MAP5: 47.772380952381475
+[INFO 2026-06-16 01:25:39,960] 
+[INFO 2026-06-16 01:25:39,960] nDCG1: 23.085714285714285
+[INFO 2026-06-16 01:25:39,960] nDCG3: 44.71179105734736
+[INFO 2026-06-16 01:25:39,960] nDCG5: 60.54971081387767
+[INFO 2026-06-16 01:25:39,960] ************************************************************
+[INFO 2026-06-16 01:25:39,960] 
+[INFO 2026-06-16 01:25:39,960] 
+[INFO 2026-06-16 01:25:39,960] ************************************************************
+[INFO 2026-06-16 01:25:39,960] Test Ratio: 0.6759336099585063
+[INFO 2026-06-16 01:25:39,960] Test Type: Human Target
+[INFO 2026-06-16 01:25:39,960] 
+[INFO 2026-06-16 01:25:39,960] MAP1: 10.4
+[INFO 2026-06-16 01:25:39,960] MAP3: 18.419047619047603
+[INFO 2026-06-16 01:25:39,960] MAP5: 22.79619047619035
+[INFO 2026-06-16 01:25:39,960] 
+[INFO 2026-06-16 01:25:39,960] nDCG1: 10.4
+[INFO 2026-06-16 01:25:39,960] nDCG3: 21.28549706285744
+[INFO 2026-06-16 01:25:39,960] nDCG5: 29.183863256486763
+[INFO 2026-06-16 01:25:39,960] ************************************************************
+[INFO 2026-06-16 01:25:39,960] 
+[INFO 2026-06-16 01:25:39,960] 
+[INFO 2026-06-16 01:25:39,960] ************************************************************
+[INFO 2026-06-16 01:25:39,960] Test Ratio: 0.6759336099585063
+[INFO 2026-06-16 01:25:39,960] Test Type: LLM Target
+[INFO 2026-06-16 01:25:39,960] 
+[INFO 2026-06-16 01:25:39,960] MAP1: 14.22857142857143
+[INFO 2026-06-16 01:25:39,960] MAP3: 24.88571428571423
+[INFO 2026-06-16 01:25:39,960] MAP5: 29.40857142857127
+[INFO 2026-06-16 01:25:39,960] 
+[INFO 2026-06-16 01:25:39,960] nDCG1: 14.22857142857143
+[INFO 2026-06-16 01:25:39,960] nDCG3: 28.628950433265786
+[INFO 2026-06-16 01:25:39,960] nDCG5: 36.86054485310781
+[INFO 2026-06-16 01:25:39,960] ************************************************************
+[INFO 2026-06-16 01:25:39,960] 
+[INFO 2026-06-16 01:25:39,960] llm ratio: 0.5868571428571429
+
+Calculating vectors for users:   0%|          | 0/302 [00:00<?, ?it/s]
+Calculating vectors for users:   6%|��         | 19/302 [00:00<00:01, 189.95it/s]
+Calculating vectors for users:  13%|����        | 39/302 [00:00<00:01, 194.46it/s]
+Calculating vectors for users:  20%|����        | 59/302 [00:00<00:01, 158.83it/s]
+Calculating vectors for users:  25%|������       | 76/302 [00:00<00:01, 150.86it/s]
+Calculating vectors for users:  31%|������       | 94/302 [00:00<00:01, 158.90it/s]
+Calculating vectors for users:  38%|��������      | 115/302 [00:00<00:01, 173.56it/s]
+Calculating vectors for users:  45%|����������     | 136/302 [00:00<00:00, 183.95it/s]
+Calculating vectors for users:  52%|������������    | 158/302 [00:00<00:00, 193.60it/s]
+Calculating vectors for users:  59%|������������    | 179/302 [00:00<00:00, 197.81it/s]
+Calculating vectors for users:  66%|��������������   | 199/302 [00:01<00:00, 194.38it/s]
+Calculating vectors for users:  73%|����������������  | 219/302 [00:01<00:00, 195.78it/s]
+Calculating vectors for users:  79%|����������������  | 239/302 [00:01<00:00, 192.46it/s]
+Calculating vectors for users:  86%|������������������ | 259/302 [00:01<00:00, 188.05it/s]
+Calculating vectors for users:  92%|��������������������| 278/302 [00:01<00:00, 172.44it/s]
+Calculating vectors for users:  98%|��������������������| 296/302 [00:01<00:00, 173.52it/s]
+Calculating vectors for users: 100%|��������������������| 302/302 [00:01<00:00, 179.97it/s]
+   impression_id  ...                                        impressions
+0          12854  ...  B0068Z7MT8-1 B008JWW7MK-0 B002CL6D56-0 B002CL6...
+1           1367  ...  B000TK99NU-1 B0000531NU-0 B001MS7HF0-0 B0009ET...
+2           8354  ...  B00150LT40-1 B0077S35WS-0 B0023AV31U-0 B00099Z...
+3           9379  ...  B003AT1CLE-1 B00166KXTU-0 B00B0LKBPW-0 B004T19...
+4           4738  ...  B009JVVRK8-1 B000WE1PP8-0 B005F4EACU-0 B006Z43...
+
+[5 rows x 5 columns]
+
+0it [00:00, ?it/s]
+1454it [00:00, 14253.70it/s]
+2968it [00:00, 14655.33it/s]
+4540it [00:00, 14959.48it/s]
+4820it [00:00, 15246.26it/s]
+
+0it [00:00, ?it/s]
+4820it [00:00, 118594.37it/s]
+
+new ratio: 0.6736514522821577
+
+  0%|          | 0/302 [00:00<?, ?it/s][INFO 2026-06-16 01:25:42,080] Ed: 0, train_loss: inf, acc: inf
+
+  3%|��         | 9/302 [00:00<00:03, 84.76it/s]
+  6%|��         | 18/302 [00:00<00:03, 87.64it/s]
+  9%|��         | 27/302 [00:00<00:03, 81.12it/s]
+ 12%|����        | 36/302 [00:00<00:03, 78.76it/s]
+ 15%|����        | 46/302 [00:00<00:03, 83.28it/s]
+ 18%|����        | 55/302 [00:00<00:02, 83.39it/s]
+ 22%|������       | 65/302 [00:00<00:02, 85.33it/s]
+ 25%|������       | 74/302 [00:00<00:02, 83.71it/s]
+ 27%|������       | 83/302 [00:01<00:02, 77.26it/s]
+ 31%|������       | 94/302 [00:01<00:02, 82.76it/s][INFO 2026-06-16 01:25:43,287] Ed: 1600, train_loss: 1.82001, acc: 0.56813
+
+ 34%|��������      | 104/302 [00:01<00:02, 85.24it/s]
+ 37%|��������      | 113/302 [00:01<00:02, 86.35it/s]
+ 40%|��������      | 122/302 [00:01<00:02, 82.07it/s]
+ 44%|����������     | 132/302 [00:01<00:01, 86.94it/s]
+ 47%|����������     | 141/302 [00:01<00:01, 85.43it/s]
+ 50%|����������     | 150/302 [00:01<00:01, 83.93it/s]
+ 53%|������������    | 159/302 [00:01<00:01, 83.20it/s]
+ 56%|������������    | 169/302 [00:02<00:01, 87.52it/s]
+ 59%|������������    | 178/302 [00:02<00:01, 85.66it/s]
+ 63%|��������������   | 189/302 [00:02<00:01, 91.03it/s]
+ 66%|��������������   | 199/302 [00:02<00:01, 91.47it/s][INFO 2026-06-16 01:25:44,420] Ed: 3200, train_loss: 1.54657, acc: 0.56500
+
+ 69%|��������������   | 209/302 [00:02<00:01, 90.78it/s]
+ 73%|����������������  | 219/302 [00:02<00:00, 90.28it/s]
+ 76%|����������������  | 229/302 [00:02<00:00, 92.28it/s]
+ 79%|����������������  | 239/302 [00:02<00:00, 93.98it/s]
+ 82%|������������������ | 249/302 [00:02<00:00, 93.68it/s]
+ 86%|������������������ | 259/302 [00:02<00:00, 88.23it/s]
+ 89%|������������������ | 270/302 [00:03<00:00, 94.10it/s]
+ 93%|��������������������| 280/302 [00:03<00:00, 92.92it/s]
+ 96%|��������������������| 290/302 [00:03<00:00, 94.86it/s]
+ 99%|��������������������| 300/302 [00:03<00:00, 96.25it/s][INFO 2026-06-16 01:25:45,494] Ed: 4800, train_loss: 1.37147, acc: 0.58500
+
+100%|��������������������| 302/302 [00:03<00:00, 88.02it/s]
+[INFO 2026-06-16 01:25:45,500] EPOCH[1] LOSS:1.3669419288635254
+[INFO 2026-06-16 01:25:45,500] Epoch: 8
+
+Calculating vectors for users:   0%|          | 0/110 [00:00<?, ?it/s]
+Calculating vectors for users:  19%|����        | 21/110 [00:00<00:00, 204.94it/s]
+Calculating vectors for users:  38%|��������      | 42/110 [00:00<00:00, 195.36it/s]
+Calculating vectors for users:  56%|������������    | 62/110 [00:00<00:00, 195.39it/s]
+Calculating vectors for users:  75%|����������������  | 82/110 [00:00<00:00, 194.82it/s]
+Calculating vectors for users:  93%|��������������������| 102/110 [00:00<00:00, 190.51it/s]
+Calculating vectors for users: 100%|��������������������| 110/110 [00:00<00:00, 195.46it/s]
+
+Calculating probabilities:   0%|          | 0/1750 [00:00<?, ?it/s]
+Calculating probabilities:  13%|����        | 223/1750 [00:00<00:00, 2214.65it/s]
+Calculating probabilities:  25%|������       | 445/1750 [00:00<00:00, 2150.01it/s]
+Calculating probabilities:  38%|��������      | 661/1750 [00:00<00:00, 2031.85it/s]
+Calculating probabilities:  49%|����������     | 865/1750 [00:00<00:00, 1939.15it/s]
+Calculating probabilities:  61%|������������    | 1063/1750 [00:00<00:00, 1934.88it/s]
+Calculating probabilities:  74%|����������������  | 1289/1750 [00:00<00:00, 2023.35it/s]
+Calculating probabilities:  85%|������������������ | 1492/1750 [00:00<00:00, 2005.46it/s]
+Calculating probabilities:  97%|��������������������| 1699/1750 [00:00<00:00, 2022.45it/s]
+Calculating probabilities: 100%|��������������������| 1750/1750 [00:00<00:00, 2020.56it/s]
+[INFO 2026-06-16 01:25:46,942] 
+[INFO 2026-06-16 01:25:46,942] ************************************************************
+[INFO 2026-06-16 01:25:46,942] Test Ratio: 0.6736514522821577
+[INFO 2026-06-16 01:25:46,942] Test Type: Human
+[INFO 2026-06-16 01:25:46,942] 
+[INFO 2026-06-16 01:25:46,942] MAP1: 20.914285714285715
+[INFO 2026-06-16 01:25:46,942] MAP3: 37.838095238095285
+[INFO 2026-06-16 01:25:46,942] MAP5: 46.4752380952385
+[INFO 2026-06-16 01:25:46,942] 
+[INFO 2026-06-16 01:25:46,942] nDCG1: 20.914285714285715
+[INFO 2026-06-16 01:25:46,942] nDCG3: 43.911791057347386
+[INFO 2026-06-16 01:25:46,942] nDCG5: 59.593761639561336
+[INFO 2026-06-16 01:25:46,942] ************************************************************
+[INFO 2026-06-16 01:25:46,942] 
+[INFO 2026-06-16 01:25:46,942] 
+[INFO 2026-06-16 01:25:46,942] ************************************************************
+[INFO 2026-06-16 01:25:46,942] Test Ratio: 0.6736514522821577
+[INFO 2026-06-16 01:25:46,942] Test Type: LLM
+[INFO 2026-06-16 01:25:46,942] 
+[INFO 2026-06-16 01:25:46,942] MAP1: 15.142857142857144
+[INFO 2026-06-16 01:25:46,942] MAP3: 30.428571428571328
+[INFO 2026-06-16 01:25:46,942] MAP5: 41.03714285714304
+[INFO 2026-06-16 01:25:46,942] 
+[INFO 2026-06-16 01:25:46,942] nDCG1: 15.142857142857144
+[INFO 2026-06-16 01:25:46,942] nDCG3: 36.05063638918414
+[INFO 2026-06-16 01:25:46,942] nDCG5: 55.39475763993907
+[INFO 2026-06-16 01:25:46,942] ************************************************************
+[INFO 2026-06-16 01:25:46,942] 
+[INFO 2026-06-16 01:25:46,942] 
+[INFO 2026-06-16 01:25:46,942] ************************************************************
+[INFO 2026-06-16 01:25:46,942] Test Ratio: 0.6736514522821577
+[INFO 2026-06-16 01:25:46,942] Test Type: Human Target
+[INFO 2026-06-16 01:25:46,942] 
+[INFO 2026-06-16 01:25:46,942] MAP1: 3.1428571428571432
+[INFO 2026-06-16 01:25:46,942] MAP3: 8.980952380952377
+[INFO 2026-06-16 01:25:46,942] MAP5: 13.789523809523793
+[INFO 2026-06-16 01:25:46,942] 
+[INFO 2026-06-16 01:25:46,942] nDCG1: 3.1428571428571432
+[INFO 2026-06-16 01:25:46,942] nDCG3: 11.185578521428717
+[INFO 2026-06-16 01:25:46,942] nDCG5: 19.90937472192624
+[INFO 2026-06-16 01:25:46,942] ************************************************************
+[INFO 2026-06-16 01:25:46,942] 
+[INFO 2026-06-16 01:25:46,942] 
+[INFO 2026-06-16 01:25:46,942] ************************************************************
+[INFO 2026-06-16 01:25:46,942] Test Ratio: 0.6736514522821577
+[INFO 2026-06-16 01:25:46,942] Test Type: LLM Target
+[INFO 2026-06-16 01:25:46,942] 
+[INFO 2026-06-16 01:25:46,942] MAP1: 12.22857142857143
+[INFO 2026-06-16 01:25:46,942] MAP3: 21.36190476190472
+[INFO 2026-06-16 01:25:46,942] MAP5: 25.99619047619036
+[INFO 2026-06-16 01:25:46,942] 
+[INFO 2026-06-16 01:25:46,942] nDCG1: 12.22857142857143
+[INFO 2026-06-16 01:25:46,942] nDCG3: 24.520140513673876
+[INFO 2026-06-16 01:25:46,942] nDCG5: 32.94611143144448
+[INFO 2026-06-16 01:25:46,942] ************************************************************
+[INFO 2026-06-16 01:25:46,942] 
+[INFO 2026-06-16 01:25:46,942] llm ratio: 0.6354285714285715
+
+Calculating vectors for users:   0%|          | 0/302 [00:00<?, ?it/s]
+Calculating vectors for users:   8%|��         | 23/302 [00:00<00:01, 223.11it/s]
+Calculating vectors for users:  15%|����        | 46/302 [00:00<00:01, 212.10it/s]
+Calculating vectors for users:  23%|������       | 68/302 [00:00<00:01, 208.95it/s]
+Calculating vectors for users:  29%|������       | 89/302 [00:00<00:01, 209.32it/s]
+Calculating vectors for users:  36%|��������      | 110/302 [00:00<00:00, 195.65it/s]
+Calculating vectors for users:  44%|����������     | 134/302 [00:00<00:00, 207.74it/s]
+Calculating vectors for users:  51%|������������    | 155/302 [00:00<00:00, 200.54it/s]
+Calculating vectors for users:  59%|������������    | 178/302 [00:00<00:00, 207.98it/s]
+Calculating vectors for users:  66%|��������������   | 200/302 [00:00<00:00, 209.68it/s]
+Calculating vectors for users:  74%|����������������  | 222/302 [00:01<00:00, 210.59it/s]
+Calculating vectors for users:  81%|����������������  | 244/302 [00:01<00:00, 194.05it/s]
+Calculating vectors for users:  87%|������������������ | 264/302 [00:01<00:00, 189.25it/s]
+Calculating vectors for users:  95%|��������������������| 286/302 [00:01<00:00, 195.47it/s]
+Calculating vectors for users: 100%|��������������������| 302/302 [00:01<00:00, 200.09it/s]
+   impression_id  ...                                        impressions
+0           3168  ...  B00ISW8ZVS-1 B00279BKRY-0 B000OYJ9AO-0 B000OYJ...
+1          12619  ...  B00KWE08Q0-1 B001AZIY6Q-0 B00390DN34-0 B005G9L...
+2            452  ...  B00LG63DOM-1 B001CN3QKK-0 B007USPWS0-0 B00B840...
+3          11907  ...  B00IOZWC2M-1 B00GCQMSVA-0 B000GCR6S6-0 B0006PL...
+4          11922  ...  B00I2OR6YE-1 B000C1UFM0-0 B000C1W5LE-0 B006SMM...
+
+[5 rows x 5 columns]
+
+0it [00:00, ?it/s]
+1003it [00:00, 9972.85it/s]
+2605it [00:00, 13315.34it/s]
+4339it [00:00, 14996.60it/s]
+4820it [00:00, 14349.77it/s]
+
+0it [00:00, ?it/s]
+4820it [00:00, 152296.10it/s]
+
+new ratio: 0.6815352697095436
+
+  0%|          | 0/302 [00:00<?, ?it/s][INFO 2026-06-16 01:25:48,917] Ed: 0, train_loss: inf, acc: inf
+
+  3%|��         | 8/302 [00:00<00:03, 77.98it/s]
+  7%|��         | 20/302 [00:00<00:02, 100.84it/s]
+ 11%|��         | 32/302 [00:00<00:02, 108.39it/s]
+ 14%|����        | 43/302 [00:00<00:02, 96.86it/s] 
+ 18%|����        | 54/302 [00:00<00:02, 99.39it/s]
+ 22%|������       | 65/302 [00:00<00:02, 99.54it/s]
+ 25%|������       | 76/302 [00:00<00:02, 92.73it/s]
+ 28%|������       | 86/302 [00:00<00:02, 94.61it/s]
+ 32%|��������      | 96/302 [00:01<00:02, 92.56it/s][INFO 2026-06-16 01:25:49,952] Ed: 1600, train_loss: 1.62542, acc: 0.60938
+
+ 35%|��������      | 106/302 [00:01<00:02, 91.65it/s]
+ 39%|��������      | 117/302 [00:01<00:01, 95.70it/s]
+ 42%|����������     | 127/302 [00:01<00:01, 91.33it/s]
+ 45%|����������     | 137/302 [00:01<00:01, 83.32it/s]
+ 48%|����������     | 146/302 [00:01<00:01, 79.48it/s]
+ 51%|������������    | 155/302 [00:01<00:01, 77.57it/s]
+ 55%|������������    | 165/302 [00:01<00:01, 80.43it/s]
+ 58%|������������    | 174/302 [00:01<00:01, 82.28it/s]
+ 61%|������������    | 184/302 [00:02<00:01, 85.07it/s]
+ 64%|��������������   | 193/302 [00:02<00:01, 86.15it/s][INFO 2026-06-16 01:25:51,142] Ed: 3200, train_loss: 1.41800, acc: 0.58094
+
+ 67%|��������������   | 203/302 [00:02<00:01, 89.73it/s]
+ 71%|��������������   | 213/302 [00:02<00:00, 92.37it/s]
+ 74%|����������������  | 224/302 [00:02<00:00, 97.40it/s]
+ 77%|����������������  | 234/302 [00:02<00:00, 96.87it/s]
+ 81%|����������������  | 244/302 [00:02<00:00, 94.06it/s]
+ 84%|������������������ | 254/302 [00:02<00:00, 89.69it/s]
+ 87%|������������������ | 264/302 [00:02<00:00, 89.09it/s]
+ 90%|������������������ | 273/302 [00:03<00:00, 86.12it/s]
+ 93%|��������������������| 282/302 [00:03<00:00, 86.57it/s]
+ 96%|��������������������| 291/302 [00:03<00:00, 84.67it/s][INFO 2026-06-16 01:25:52,253] Ed: 4800, train_loss: 1.30296, acc: 0.58542
+
+100%|��������������������| 301/302 [00:03<00:00, 87.86it/s]
+100%|��������������������| 302/302 [00:03<00:00, 89.72it/s]
+[INFO 2026-06-16 01:25:52,263] EPOCH[1] LOSS:1.2989908456802368
+[INFO 2026-06-16 01:25:52,263] Epoch: 9
+
+Calculating vectors for users:   0%|          | 0/110 [00:00<?, ?it/s]
+Calculating vectors for users:  15%|����        | 17/110 [00:00<00:00, 164.58it/s]
+Calculating vectors for users:  31%|������       | 34/110 [00:00<00:00, 156.77it/s]
+Calculating vectors for users:  47%|����������     | 52/110 [00:00<00:00, 164.38it/s]
+Calculating vectors for users:  66%|��������������   | 73/110 [00:00<00:00, 179.34it/s]
+Calculating vectors for users:  89%|������������������ | 98/110 [00:00<00:00, 201.02it/s]
+Calculating vectors for users: 100%|��������������������| 110/110 [00:00<00:00, 187.10it/s]
+
+Calculating probabilities:   0%|          | 0/1750 [00:00<?, ?it/s]
+Calculating probabilities:  11%|����        | 198/1750 [00:00<00:00, 1919.60it/s]
+Calculating probabilities:  22%|������       | 390/1750 [00:00<00:00, 1787.98it/s]
+Calculating probabilities:  33%|��������      | 580/1750 [00:00<00:00, 1834.89it/s]
+Calculating probabilities:  44%|����������     | 764/1750 [00:00<00:00, 1609.07it/s]
+Calculating probabilities:  54%|������������    | 939/1750 [00:00<00:00, 1637.61it/s]
+Calculating probabilities:  68%|��������������   | 1183/1750 [00:00<00:00, 1823.66it/s]
+Calculating probabilities:  80%|����������������  | 1399/1750 [00:00<00:00, 1909.67it/s]
+Calculating probabilities:  92%|��������������������| 1617/1750 [00:00<00:00, 1990.16it/s]
+Calculating probabilities: 100%|��������������������| 1750/1750 [00:00<00:00, 1862.25it/s]
+[INFO 2026-06-16 01:25:53,811] 
+[INFO 2026-06-16 01:25:53,811] ************************************************************
+[INFO 2026-06-16 01:25:53,811] Test Ratio: 0.6815352697095436
+[INFO 2026-06-16 01:25:53,811] Test Type: Human
+[INFO 2026-06-16 01:25:53,811] 
+[INFO 2026-06-16 01:25:53,811] MAP1: 26.285714285714285
+[INFO 2026-06-16 01:25:53,811] MAP3: 42.780952380952556
+[INFO 2026-06-16 01:25:53,811] MAP5: 50.4438095238101
+[INFO 2026-06-16 01:25:53,811] 
+[INFO 2026-06-16 01:25:53,811] nDCG1: 26.285714285714285
+[INFO 2026-06-16 01:25:53,811] nDCG3: 48.701598612653434
+[INFO 2026-06-16 01:25:53,811] nDCG5: 62.61086678738982
+[INFO 2026-06-16 01:25:53,811] ************************************************************
+[INFO 2026-06-16 01:25:53,811] 
+[INFO 2026-06-16 01:25:53,811] 
+[INFO 2026-06-16 01:25:53,811] ************************************************************
+[INFO 2026-06-16 01:25:53,811] Test Ratio: 0.6815352697095436
+[INFO 2026-06-16 01:25:53,811] Test Type: LLM
+[INFO 2026-06-16 01:25:53,811] 
+[INFO 2026-06-16 01:25:53,811] MAP1: 20.057142857142857
+[INFO 2026-06-16 01:25:53,811] MAP3: 36.03809523809524
+[INFO 2026-06-16 01:25:53,811] MAP5: 45.263809523809854
+[INFO 2026-06-16 01:25:53,811] 
+[INFO 2026-06-16 01:25:53,811] nDCG1: 20.057142857142857
+[INFO 2026-06-16 01:25:53,811] nDCG3: 41.83767889428617
+[INFO 2026-06-16 01:25:53,811] nDCG5: 58.63996849745776
+[INFO 2026-06-16 01:25:53,811] ************************************************************
+[INFO 2026-06-16 01:25:53,811] 
+[INFO 2026-06-16 01:25:53,811] 
+[INFO 2026-06-16 01:25:53,811] ************************************************************
+[INFO 2026-06-16 01:25:53,811] Test Ratio: 0.6815352697095436
+[INFO 2026-06-16 01:25:53,811] Test Type: Human Target
+[INFO 2026-06-16 01:25:53,811] 
+[INFO 2026-06-16 01:25:53,811] MAP1: 8.057142857142857
+[INFO 2026-06-16 01:25:53,811] MAP3: 16.561904761904756
+[INFO 2026-06-16 01:25:53,811] MAP5: 21.07047619047607
+[INFO 2026-06-16 01:25:53,811] 
+[INFO 2026-06-16 01:25:53,811] nDCG1: 8.057142857142857
+[INFO 2026-06-16 01:25:53,811] nDCG3: 19.48750296836769
+[INFO 2026-06-16 01:25:53,811] nDCG5: 27.670309264448196
+[INFO 2026-06-16 01:25:53,811] ************************************************************
+[INFO 2026-06-16 01:25:53,811] 
+[INFO 2026-06-16 01:25:53,811] 
+[INFO 2026-06-16 01:25:53,811] ************************************************************
+[INFO 2026-06-16 01:25:53,811] Test Ratio: 0.6815352697095436
+[INFO 2026-06-16 01:25:53,811] Test Type: LLM Target
+[INFO 2026-06-16 01:25:53,811] 
+[INFO 2026-06-16 01:25:53,811] MAP1: 13.600000000000001
+[INFO 2026-06-16 01:25:53,811] MAP3: 23.019047619047573
+[INFO 2026-06-16 01:25:53,811] MAP5: 27.636190476190315
+[INFO 2026-06-16 01:25:53,811] 
+[INFO 2026-06-16 01:25:53,811] nDCG1: 13.600000000000001
+[INFO 2026-06-16 01:25:53,811] nDCG3: 26.388180654490178
+[INFO 2026-06-16 01:25:53,811] nDCG5: 34.823304320987916
+[INFO 2026-06-16 01:25:53,811] ************************************************************
+[INFO 2026-06-16 01:25:53,811] 
+[INFO 2026-06-16 01:25:53,811] llm ratio: 0.5617142857142857
+
+Calculating vectors for users:   0%|          | 0/302 [00:00<?, ?it/s]
+Calculating vectors for users:   7%|��         | 22/302 [00:00<00:01, 183.15it/s]
+Calculating vectors for users:  14%|����        | 41/302 [00:00<00:01, 183.31it/s]
+Calculating vectors for users:  21%|����        | 63/302 [00:00<00:01, 190.43it/s]
+Calculating vectors for users:  27%|������       | 83/302 [00:00<00:01, 186.45it/s]
+Calculating vectors for users:  34%|��������      | 102/302 [00:00<00:01, 173.73it/s]
+Calculating vectors for users:  41%|����������     | 125/302 [00:00<00:00, 188.93it/s]
+Calculating vectors for users:  49%|����������     | 149/302 [00:00<00:00, 202.74it/s]
+Calculating vectors for users:  57%|������������    | 171/302 [00:00<00:00, 205.87it/s]
+Calculating vectors for users:  64%|��������������   | 192/302 [00:01<00:00, 193.56it/s]
+Calculating vectors for users:  70%|��������������   | 212/302 [00:01<00:00, 188.09it/s]
+Calculating vectors for users:  77%|����������������  | 233/302 [00:01<00:00, 192.33it/s]
+Calculating vectors for users:  84%|������������������ | 253/302 [00:01<00:00, 188.33it/s]
+Calculating vectors for users:  92%|��������������������| 277/302 [00:01<00:00, 201.24it/s]
+Calculating vectors for users:  99%|��������������������| 298/302 [00:01<00:00, 196.19it/s]
+Calculating vectors for users: 100%|��������������������| 302/302 [00:01<00:00, 192.60it/s]
+   impression_id  ...                                        impressions
+0          12854  ...  B0068Z7MT8-1 B008JWW7MK-0 B002CL6D56-0 B002CL6...
+1           1367  ...  B000TK99NU-1 B0000531NU-0 B001MS7HF0-0 B0009ET...
+2           8354  ...  B00150LT40-1 B0077S35WS-0 B0023AV31U-0 B00099Z...
+3           9379  ...  B003AT1CLE-1 B00166KXTU-0 B00B0LKBPW-0 B004T19...
+4           4738  ...  B009JVVRK8-1 B000WE1PP8-0 B005F4EACU-0 B006Z43...
+
+[5 rows x 5 columns]
+
+0it [00:00, ?it/s]
+1704it [00:00, 16740.24it/s]
+3379it [00:00, 16537.93it/s]
+4820it [00:00, 16846.07it/s]
+
+0it [00:00, ?it/s]
+4820it [00:00, 159010.11it/s]
+
+new ratio: 0.6815352697095436
+
+  0%|          | 0/302 [00:00<?, ?it/s][INFO 2026-06-16 01:25:55,891] Ed: 0, train_loss: inf, acc: inf
+
+  2%|��         | 6/302 [00:00<00:05, 58.37it/s]
+  4%|��         | 13/302 [00:00<00:04, 63.36it/s]
+  7%|��         | 20/302 [00:00<00:04, 65.79it/s]
+ 10%|��         | 31/302 [00:00<00:03, 80.76it/s]
+ 14%|����        | 42/302 [00:00<00:02, 87.83it/s]
+ 17%|����        | 52/302 [00:00<00:02, 85.91it/s]
+ 21%|����        | 62/302 [00:00<00:02, 88.81it/s]
+ 24%|������       | 73/302 [00:00<00:02, 92.04it/s]
+ 27%|������       | 83/302 [00:00<00:02, 91.07it/s]
+ 31%|������       | 94/302 [00:01<00:02, 95.33it/s][INFO 2026-06-16 01:25:57,029] Ed: 1600, train_loss: 1.76246, acc: 0.56687
+
+ 34%|��������      | 104/302 [00:01<00:02, 92.73it/s]
+ 38%|��������      | 114/302 [00:01<00:01, 94.37it/s]
+ 41%|����������     | 125/302 [00:01<00:01, 98.29it/s]
+ 45%|����������     | 135/302 [00:01<00:01, 90.24it/s]
+ 48%|����������     | 145/302 [00:01<00:02, 76.50it/s]
+ 51%|������������    | 155/302 [00:01<00:01, 79.84it/s]
+ 55%|������������    | 165/302 [00:01<00:01, 83.96it/s]
+ 58%|������������    | 176/302 [00:02<00:01, 90.78it/s]
+ 62%|��������������   | 186/302 [00:02<00:01, 90.89it/s]
+ 65%|��������������   | 196/302 [00:02<00:01, 92.57it/s][INFO 2026-06-16 01:25:58,146] Ed: 3200, train_loss: 1.51091, acc: 0.56875
+
+ 69%|��������������   | 207/302 [00:02<00:00, 96.84it/s]
+ 72%|����������������  | 217/302 [00:02<00:00, 97.23it/s]
+ 75%|����������������  | 227/302 [00:02<00:00, 94.75it/s]
+ 78%|����������������  | 237/302 [00:02<00:00, 93.28it/s]
+ 82%|������������������ | 248/302 [00:02<00:00, 95.56it/s]
+ 85%|������������������ | 258/302 [00:02<00:00, 95.64it/s]
+ 89%|������������������ | 269/302 [00:02<00:00, 96.59it/s]
+ 92%|��������������������| 279/302 [00:03<00:00, 88.90it/s]
+ 96%|��������������������| 289/302 [00:03<00:00, 88.79it/s]
+ 99%|��������������������| 298/302 [00:03<00:00, 88.52it/s][INFO 2026-06-16 01:25:59,242] Ed: 4800, train_loss: 1.33337, acc: 0.59250
+
+100%|��������������������| 302/302 [00:03<00:00, 89.27it/s]
+[INFO 2026-06-16 01:25:59,248] EPOCH[1] LOSS:1.3289748430252075
+[INFO 2026-06-16 01:25:59,248] Epoch: 10
+
+Calculating vectors for users:   0%|          | 0/110 [00:00<?, ?it/s]
+Calculating vectors for users:  19%|����        | 21/110 [00:00<00:00, 202.66it/s]
+Calculating vectors for users:  38%|��������      | 42/110 [00:00<00:00, 182.97it/s]
+Calculating vectors for users:  55%|������������    | 61/110 [00:00<00:00, 184.45it/s]
+Calculating vectors for users:  76%|����������������  | 84/110 [00:00<00:00, 199.80it/s]
+Calculating vectors for users:  98%|��������������������| 108/110 [00:00<00:00, 210.70it/s]
+Calculating vectors for users: 100%|��������������������| 110/110 [00:00<00:00, 203.02it/s]
+
+Calculating probabilities:   0%|          | 0/1750 [00:00<?, ?it/s]
+Calculating probabilities:  10%|��         | 179/1750 [00:00<00:00, 1736.98it/s]
+Calculating probabilities:  20%|����        | 353/1750 [00:00<00:00, 1619.19it/s]
+Calculating probabilities:  32%|��������      | 561/1750 [00:00<00:00, 1804.69it/s]
+Calculating probabilities:  44%|����������     | 773/1750 [00:00<00:00, 1897.41it/s]
+Calculating probabilities:  55%|������������    | 968/1750 [00:00<00:00, 1905.41it/s]
+Calculating probabilities:  67%|��������������   | 1181/1750 [00:00<00:00, 1967.76it/s]
+Calculating probabilities:  79%|����������������  | 1379/1750 [00:00<00:00, 1953.75it/s]
+Calculating probabilities:  90%|������������������ | 1575/1750 [00:00<00:00, 1932.51it/s]
+Calculating probabilities: 100%|��������������������| 1750/1750 [00:00<00:00, 1755.22it/s]
+[INFO 2026-06-16 01:26:00,796] 
+[INFO 2026-06-16 01:26:00,796] ************************************************************
+[INFO 2026-06-16 01:26:00,796] Test Ratio: 0.6815352697095436
+[INFO 2026-06-16 01:26:00,796] Test Type: Human
+[INFO 2026-06-16 01:26:00,796] 
+[INFO 2026-06-16 01:26:00,796] MAP1: 19.54285714285714
+[INFO 2026-06-16 01:26:00,796] MAP3: 36.5809523809524
+[INFO 2026-06-16 01:26:00,796] MAP5: 45.36095238095278
+[INFO 2026-06-16 01:26:00,796] 
+[INFO 2026-06-16 01:26:00,796] nDCG1: 19.54285714285714
+[INFO 2026-06-16 01:26:00,796] nDCG3: 42.79343922632698
+[INFO 2026-06-16 01:26:00,796] nDCG5: 58.74568873359753
+[INFO 2026-06-16 01:26:00,796] ************************************************************
+[INFO 2026-06-16 01:26:00,796] 
+[INFO 2026-06-16 01:26:00,796] 
+[INFO 2026-06-16 01:26:00,796] ************************************************************
+[INFO 2026-06-16 01:26:00,796] Test Ratio: 0.6815352697095436
+[INFO 2026-06-16 01:26:00,796] Test Type: LLM
+[INFO 2026-06-16 01:26:00,796] 
+[INFO 2026-06-16 01:26:00,796] MAP1: 15.657142857142858
+[INFO 2026-06-16 01:26:00,796] MAP3: 31.21904761904755
+[INFO 2026-06-16 01:26:00,796] MAP5: 41.590476190476394
+[INFO 2026-06-16 01:26:00,796] 
+[INFO 2026-06-16 01:26:00,796] nDCG1: 15.657142857142858
+[INFO 2026-06-16 01:26:00,796] nDCG3: 36.836323522041326
+[INFO 2026-06-16 01:26:00,796] nDCG5: 55.81543775736457
+[INFO 2026-06-16 01:26:00,796] ************************************************************
+[INFO 2026-06-16 01:26:00,796] 
+[INFO 2026-06-16 01:26:00,796] 
+[INFO 2026-06-16 01:26:00,796] ************************************************************
+[INFO 2026-06-16 01:26:00,796] Test Ratio: 0.6815352697095436
+[INFO 2026-06-16 01:26:00,796] Test Type: Human Target
+[INFO 2026-06-16 01:26:00,796] 
+[INFO 2026-06-16 01:26:00,796] MAP1: 3.5999999999999996
+[INFO 2026-06-16 01:26:00,796] MAP3: 9.066666666666666
+[INFO 2026-06-16 01:26:00,796] MAP5: 13.700952380952348
+[INFO 2026-06-16 01:26:00,796] 
+[INFO 2026-06-16 01:26:00,796] nDCG1: 3.5999999999999996
+[INFO 2026-06-16 01:26:00,796] nDCG3: 11.078774507347083
+[INFO 2026-06-16 01:26:00,796] nDCG5: 19.5289234598468
+[INFO 2026-06-16 01:26:00,796] ************************************************************
+[INFO 2026-06-16 01:26:00,796] 
+[INFO 2026-06-16 01:26:00,796] 
+[INFO 2026-06-16 01:26:00,796] ************************************************************
+[INFO 2026-06-16 01:26:00,796] Test Ratio: 0.6815352697095436
+[INFO 2026-06-16 01:26:00,796] Test Type: LLM Target
+[INFO 2026-06-16 01:26:00,796] 
+[INFO 2026-06-16 01:26:00,796] MAP1: 12.685714285714287
+[INFO 2026-06-16 01:26:00,796] MAP3: 21.70476190476187
+[INFO 2026-06-16 01:26:00,796] MAP5: 26.381904761904657
+[INFO 2026-06-16 01:26:00,796] 
+[INFO 2026-06-16 01:26:00,796] nDCG1: 12.685714285714287
+[INFO 2026-06-16 01:26:00,796] nDCG3: 24.846678883877953
+[INFO 2026-06-16 01:26:00,796] nDCG5: 33.32230203401781
+[INFO 2026-06-16 01:26:00,796] ************************************************************
+[INFO 2026-06-16 01:26:00,796] 
+[INFO 2026-06-16 01:26:00,796] llm ratio: 0.652

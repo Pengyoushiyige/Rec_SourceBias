@@ -1,0 +1,3 @@
+loop_epoch,test_ratio,llm_ratio,human_MAP5,llm_MAP5,llm_minus_human_MAP5,human_target_MAP5,llm_target_MAP5,llm_target_minus_human_target_MAP5,human_nDCG5,llm_nDCG5,llm_minus_human_nDCG5
+1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2.0,0.3333333333333333,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

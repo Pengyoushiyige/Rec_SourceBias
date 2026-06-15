@@ -1,0 +1,106 @@
+# started_at: 2026-06-16T01:17:40
+# cwd: E:\Lab\Rec_SourceBias
+# command: E:\Lab\Rec_SourceBias\.venv\Scripts\python.exe src/run.py --mode loop --dataset Amazon_Beauty_sample --behaviors_file1 behaviors1.tsv --behaviors_file2 behaviors2.tsv --test_behaviors_file behaviors.tsv --human_news_file news_parsed_bert-base-uncased.tsv --llm_news_file news_llama_parsed_bert-base-uncased.tsv --loop_epochs 10 --epochs 1 --batch_size 4 --gpu 0 --num_workers 0
+
+2026-06-16 01:17:42.904959: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From E:\Lab\Rec_SourceBias\.venv\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+[INFO 2026-06-16 01:17:48,814] Namespace(mode='loop', dataset='Amazon_Beauty_sample', model_type='BERT4Rec', batch_size=4, shuffle_buffer_size=10000, num_workers=0, log_steps=100, epochs=1, lr=0.001, weight_decay=1e-05, news_attributes=['abstract'], num_words_abstract=100, user_log_length=10, word_embedding_dim=768, user_log_mask=True, drop_rate=0.2, save_steps=100000, max_steps_per_epoch=1000000, load_ckpt_name='epoch-3.pt', gpu='0', plm_model='bert-base-uncased', llm_model='llama', negative_sampling_ratio=1, behaviors_file='dataset\\Amazon_Beauty_sample\\train\\behaviors.tsv', behaviors_file1='dataset\\Amazon_Beauty_sample\\train\\behaviors1.tsv', behaviors_file2='dataset\\Amazon_Beauty_sample\\train\\behaviors2.tsv', test_behaviors_file='dataset\\Amazon_Beauty_sample\\dev\\behaviors.tsv', human_news_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', HGC_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', llm_news_file='dataset\\Amazon_Beauty_sample\\text\\news_llama_parsed_bert-base-uncased.tsv', llm_rewirte_news_file='dataset\\Amazon_Beauty_sample\\text\\news_llama_rewrite_bert-base-uncased.tsv', seed=2023, debias=False, debias_type='emb_entropy', disturb_ratio=0.5, eta=-1, loop_epochs=10, user_loss=0.01, news_loss=1, test_epoch=3, text_source='', text_parsed_target='', ckpt_dir='')
+[INFO 2026-06-16 01:17:48,816] args: Namespace(mode='loop', dataset='Amazon_Beauty_sample', model_type='BERT4Rec', batch_size=4, shuffle_buffer_size=10000, num_workers=0, log_steps=100, epochs=1, lr=0.001, weight_decay=1e-05, news_attributes=['abstract'], num_words_abstract=100, user_log_length=10, word_embedding_dim=768, user_log_mask=True, drop_rate=0.2, save_steps=100000, max_steps_per_epoch=1000000, load_ckpt_name='epoch-3.pt', gpu='0', plm_model='bert-base-uncased', llm_model='llama', negative_sampling_ratio=1, behaviors_file='dataset\\Amazon_Beauty_sample\\train\\behaviors.tsv', behaviors_file1='dataset\\Amazon_Beauty_sample\\train\\behaviors1.tsv', behaviors_file2='dataset\\Amazon_Beauty_sample\\train\\behaviors2.tsv', test_behaviors_file='dataset\\Amazon_Beauty_sample\\dev\\behaviors.tsv', human_news_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', HGC_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', llm_news_file='dataset\\Amazon_Beauty_sample\\text\\news_llama_parsed_bert-base-uncased.tsv', llm_rewirte_news_file='dataset\\Amazon_Beauty_sample\\text\\news_llama_rewrite_bert-base-uncased.tsv', seed=2023, debias=False, debias_type='emb_entropy', disturb_ratio=0.5, eta=-1, loop_epochs=10, user_loss=0.01, news_loss=1, test_epoch=3, text_source='', text_parsed_target='', ckpt_dir='')
+[INFO 2026-06-16 01:17:50,343] Training...
+
+  0%|          | 0/637 [00:00<?, ?it/s]
+ 60%|������������    | 384/637 [00:00<00:00, 3834.26it/s]
+100%|��������������������| 637/637 [00:00<00:00, 3986.99it/s]
+
+Calculating vectors for news:   0%|          | 0/160 [00:00<?, ?it/s]
+Calculating vectors for news:   1%|          | 1/160 [00:00<00:16,  9.73it/s]
+Calculating vectors for news:   5%|��         | 8/160 [00:00<00:03, 40.90it/s]
+Calculating vectors for news:   9%|��         | 15/160 [00:00<00:02, 51.22it/s]
+Calculating vectors for news:  13%|����        | 21/160 [00:00<00:02, 53.39it/s]
+Calculating vectors for news:  17%|����        | 27/160 [00:00<00:02, 52.68it/s]
+Calculating vectors for news:  21%|����        | 33/160 [00:00<00:02, 49.31it/s]
+Calculating vectors for news:  24%|������       | 38/160 [00:00<00:02, 48.40it/s]
+Calculating vectors for news:  27%|������       | 43/160 [00:00<00:02, 48.65it/s]
+Calculating vectors for news:  31%|������       | 49/160 [00:01<00:02, 50.59it/s]
+Calculating vectors for news:  34%|��������      | 55/160 [00:01<00:02, 51.64it/s]
+Calculating vectors for news:  38%|��������      | 61/160 [00:01<00:01, 51.97it/s]
+Calculating vectors for news:  42%|����������     | 67/160 [00:01<00:01, 52.53it/s]
+Calculating vectors for news:  46%|����������     | 73/160 [00:01<00:01, 53.48it/s]
+Calculating vectors for news:  49%|����������     | 79/160 [00:01<00:01, 55.06it/s]
+Calculating vectors for news:  54%|������������    | 86/160 [00:01<00:01, 57.80it/s]
+Calculating vectors for news:  58%|������������    | 93/160 [00:01<00:01, 59.76it/s]
+Calculating vectors for news:  62%|��������������   | 100/160 [00:01<00:00, 61.28it/s]
+Calculating vectors for news:  67%|��������������   | 107/160 [00:01<00:00, 63.11it/s]
+Calculating vectors for news:  71%|����������������  | 114/160 [00:02<00:00, 63.42it/s]
+Calculating vectors for news:  76%|����������������  | 121/160 [00:02<00:00, 64.59it/s]
+Calculating vectors for news:  80%|����������������  | 128/160 [00:02<00:00, 65.40it/s]
+Calculating vectors for news:  84%|������������������ | 135/160 [00:02<00:00, 65.04it/s]
+Calculating vectors for news:  89%|������������������ | 142/160 [00:02<00:00, 65.13it/s]
+Calculating vectors for news:  93%|��������������������| 149/160 [00:02<00:00, 65.34it/s]
+Calculating vectors for news:  98%|��������������������| 156/160 [00:02<00:00, 65.91it/s]
+Calculating vectors for news: 100%|��������������������| 160/160 [00:02<00:00, 57.35it/s]
+
+  0%|          | 0/637 [00:00<?, ?it/s]
+ 65%|��������������   | 414/637 [00:00<00:00, 4122.10it/s]
+100%|��������������������| 637/637 [00:00<00:00, 3978.09it/s]
+
+Calculating vectors for news:   0%|          | 0/160 [00:00<?, ?it/s]
+Calculating vectors for news:   4%|��         | 7/160 [00:00<00:02, 68.00it/s]
+Calculating vectors for news:   9%|��         | 14/160 [00:00<00:02, 59.80it/s]
+Calculating vectors for news:  13%|����        | 21/160 [00:00<00:02, 59.73it/s]
+Calculating vectors for news:  18%|����        | 28/160 [00:00<00:02, 59.92it/s]
+Calculating vectors for news:  22%|������       | 35/160 [00:00<00:02, 61.05it/s]
+Calculating vectors for news:  26%|������       | 42/160 [00:00<00:01, 62.57it/s]
+Calculating vectors for news:  31%|������       | 49/160 [00:00<00:01, 63.57it/s]
+Calculating vectors for news:  35%|��������      | 56/160 [00:00<00:01, 63.73it/s]
+Calculating vectors for news:  39%|��������      | 63/160 [00:01<00:01, 62.61it/s]
+Calculating vectors for news:  44%|����������     | 70/160 [00:01<00:01, 61.70it/s]
+Calculating vectors for news:  48%|����������     | 77/160 [00:01<00:01, 60.57it/s]
+Calculating vectors for news:  52%|������������    | 84/160 [00:01<00:01, 59.71it/s]
+Calculating vectors for news:  56%|������������    | 90/160 [00:01<00:01, 59.30it/s]
+Calculating vectors for news:  60%|������������    | 96/160 [00:01<00:01, 59.11it/s]
+Calculating vectors for news:  64%|��������������   | 102/160 [00:01<00:00, 59.04it/s]
+Calculating vectors for news:  68%|��������������   | 109/160 [00:01<00:00, 60.01it/s]
+Calculating vectors for news:  72%|����������������  | 116/160 [00:01<00:00, 61.50it/s]
+Calculating vectors for news:  77%|����������������  | 123/160 [00:02<00:00, 62.57it/s]
+Calculating vectors for news:  81%|������������������ | 130/160 [00:02<00:00, 60.79it/s]
+Calculating vectors for news:  86%|������������������ | 137/160 [00:02<00:00, 60.60it/s]
+Calculating vectors for news:  90%|������������������ | 144/160 [00:02<00:00, 60.36it/s]
+Calculating vectors for news:  94%|��������������������| 151/160 [00:02<00:00, 59.33it/s]
+Calculating vectors for news:  98%|��������������������| 157/160 [00:02<00:00, 59.41it/s]
+Calculating vectors for news: 100%|��������������������| 160/160 [00:02<00:00, 60.83it/s]
+
+Calculating vectors for users:   0%|          | 0/4 [00:00<?, ?it/s]fatal   : Memory allocation failure
+
+Calculating vectors for users:   0%|          | 0/4 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "E:\Lab\Rec_SourceBias\src\run.py", line 33, in <module>
+    trainer.run()
+  File "E:\Lab\Rec_SourceBias\src\train_loop.py", line 277, in run
+    user2vector = self.get_user2vector(self.human_text2vector, self.llm_text2vector, self.args.behaviors_file1, ratio=self.last_ratio)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\utils\_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\src\train_loop.py", line 243, in get_user2vector
+    user_vector = self.model.get_user_vector(log_ids, log_mask)
+  File "E:\Lab\Rec_SourceBias\src\model\BERT4Rec.py", line 230, in get_user_vector
+    user_vector = self.user_encoder(log_vec, log_mask)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\src\model\BERT4Rec.py", line 194, in forward
+    vec = self.encoder(log_vec, item_seq_len)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\src\model\BERT4Rec.py", line 77, in forward
+    extended_attention_mask = self.get_attention_mask(mask, bidirectional=True)
+  File "E:\Lab\Rec_SourceBias\src\model\BERT4Rec.py", line 96, in get_attention_mask
+    attention_mask = item_seq != 0
+RuntimeError: CUDA error: unknown error
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

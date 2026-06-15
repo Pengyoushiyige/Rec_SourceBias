@@ -43,6 +43,7 @@ class Trainer:
 
         self.optimizer = optim.Adam(self.model.parameters(), lr=self.args.lr, weight_decay=self.args.weight_decay)
         self.last_ratio = 0
+        self.news2vector_cache = {}
 
     def save_model(self, path):
         if os.path.dirname(path):
@@ -150,6 +151,11 @@ class Trainer:
 
     @torch.no_grad()
     def get_news2vector(self, news_file):
+        cache_key = os.path.abspath(news_file)
+        if cache_key in self.news2vector_cache:
+            logging.info(f"Reusing cached news vectors for {news_file}")
+            return self.news2vector_cache[cache_key]
+
         news2vector = {}
         news_dataset = NewsDataset(self.args, news_file)
         news_dataloader = news_dataset.get_dataloader(batch_size=self.args.batch_size, \
@@ -162,6 +168,7 @@ class Trainer:
                     if id not in news2vector:
                         news2vector[id] = vector.detach().to('cpu')
         news2vector['PADDED_NEWS'] = torch.zeros(self.args.word_embedding_dim)
+        self.news2vector_cache[cache_key] = news2vector
         return news2vector
 
 
@@ -216,7 +223,9 @@ class Trainer:
         llm_metrics.print_result()
         human_target_metrics.print_result()
         llm_target_metrics.print_result()
-        logging.info(f"llm ratio: {llm_cnt/(human_cnt + llm_cnt)}")
+        source_choice_total = human_cnt + llm_cnt
+        llm_ratio = 0.0 if source_choice_total == 0 else llm_cnt / source_choice_total
+        logging.info(f"llm ratio: {llm_ratio}")
 
 
     @torch.no_grad()

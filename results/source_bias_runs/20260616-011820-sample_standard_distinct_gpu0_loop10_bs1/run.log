@@ -1,0 +1,29 @@
+# started_at: 2026-06-16T01:18:20
+# cwd: E:\Lab\Rec_SourceBias
+# command: E:\Lab\Rec_SourceBias\.venv\Scripts\python.exe src/run.py --mode loop --dataset Amazon_Beauty_sample --behaviors_file1 behaviors1.tsv --behaviors_file2 behaviors2.tsv --test_behaviors_file behaviors.tsv --human_news_file news_parsed_bert-base-uncased.tsv --llm_news_file news_llama_parsed_bert-base-uncased.tsv --loop_epochs 10 --epochs 1 --batch_size 1 --gpu 0 --num_workers 0
+
+2026-06-16 01:18:22.760629: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From E:\Lab\Rec_SourceBias\.venv\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+[INFO 2026-06-16 01:18:30,774] Namespace(mode='loop', dataset='Amazon_Beauty_sample', model_type='BERT4Rec', batch_size=1, shuffle_buffer_size=10000, num_workers=0, log_steps=100, epochs=1, lr=0.001, weight_decay=1e-05, news_attributes=['abstract'], num_words_abstract=100, user_log_length=10, word_embedding_dim=768, user_log_mask=True, drop_rate=0.2, save_steps=100000, max_steps_per_epoch=1000000, load_ckpt_name='epoch-3.pt', gpu='0', plm_model='bert-base-uncased', llm_model='llama', negative_sampling_ratio=1, behaviors_file='dataset\\Amazon_Beauty_sample\\train\\behaviors.tsv', behaviors_file1='dataset\\Amazon_Beauty_sample\\train\\behaviors1.tsv', behaviors_file2='dataset\\Amazon_Beauty_sample\\train\\behaviors2.tsv', test_behaviors_file='dataset\\Amazon_Beauty_sample\\dev\\behaviors.tsv', human_news_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', HGC_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', llm_news_file='dataset\\Amazon_Beauty_sample\\text\\news_llama_parsed_bert-base-uncased.tsv', llm_rewirte_news_file='dataset\\Amazon_Beauty_sample\\text\\news_llama_rewrite_bert-base-uncased.tsv', seed=2023, debias=False, debias_type='emb_entropy', disturb_ratio=0.5, eta=-1, loop_epochs=10, user_loss=0.01, news_loss=1, test_epoch=3, text_source='', text_parsed_target='', ckpt_dir='')
+[INFO 2026-06-16 01:18:30,774] args: Namespace(mode='loop', dataset='Amazon_Beauty_sample', model_type='BERT4Rec', batch_size=1, shuffle_buffer_size=10000, num_workers=0, log_steps=100, epochs=1, lr=0.001, weight_decay=1e-05, news_attributes=['abstract'], num_words_abstract=100, user_log_length=10, word_embedding_dim=768, user_log_mask=True, drop_rate=0.2, save_steps=100000, max_steps_per_epoch=1000000, load_ckpt_name='epoch-3.pt', gpu='0', plm_model='bert-base-uncased', llm_model='llama', negative_sampling_ratio=1, behaviors_file='dataset\\Amazon_Beauty_sample\\train\\behaviors.tsv', behaviors_file1='dataset\\Amazon_Beauty_sample\\train\\behaviors1.tsv', behaviors_file2='dataset\\Amazon_Beauty_sample\\train\\behaviors2.tsv', test_behaviors_file='dataset\\Amazon_Beauty_sample\\dev\\behaviors.tsv', human_news_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', HGC_file='dataset\\Amazon_Beauty_sample\\text\\news_parsed_bert-base-uncased.tsv', llm_news_file='dataset\\Amazon_Beauty_sample\\text\\news_llama_parsed_bert-base-uncased.tsv', llm_rewirte_news_file='dataset\\Amazon_Beauty_sample\\text\\news_llama_rewrite_bert-base-uncased.tsv', seed=2023, debias=False, debias_type='emb_entropy', disturb_ratio=0.5, eta=-1, loop_epochs=10, user_loss=0.01, news_loss=1, test_epoch=3, text_source='', text_parsed_target='', ckpt_dir='')
+[INFO 2026-06-16 01:18:32,349] Training...
+Traceback (most recent call last):
+  File "E:\Lab\Rec_SourceBias\src\run.py", line 33, in <module>
+    trainer.run()
+  File "E:\Lab\Rec_SourceBias\src\train_loop.py", line 252, in run
+    self.model = self.model.to(self.device)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1160, in to
+    return self._apply(convert)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 810, in _apply
+    module._apply(fn)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 810, in _apply
+    module._apply(fn)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 810, in _apply
+    module._apply(fn)
+  [Previous line repeated 6 more times]
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 833, in _apply
+    param_applied = fn(param)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1158, in convert
+    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacty of 8.00 GiB of which 6.63 GiB is free. Of the allocated memory 290.30 MiB is allocated by PyTorch, and 21.70 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
