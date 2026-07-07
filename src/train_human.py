@@ -81,6 +81,7 @@ class Trainer_main:
                         accuary / cnt))
         return loss / cnt
 
+    #@torch.no_grad() #省显存
     def get_news2vector(self, news_file):
         news2vector = {}
         news_dataset = NewsDataset(self.args, news_file)

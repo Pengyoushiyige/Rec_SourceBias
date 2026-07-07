@@ -21,6 +21,7 @@ class Tester:
         model = utils.get_model(args.model_type)
         self.model = model(args, bert_model)
 
+    #@torch.no_grad()#省显存
     def get_news2vector(self, news_file):
         news2vector = {}
         news_dataset = NewsDataset(self.args, news_file)
@@ -36,6 +37,7 @@ class Tester:
         news2vector['PADDED_NEWS'] = torch.zeros(self.args.word_embedding_dim)
         return news2vector
 
+    #@torch.no_grad() #省显存
     def get_user2vector(self, human_newsvector, llm_newsvector, ratio):
         user2vector = {}
         user_dataset = UserDataset(self.args, self.args.test_behaviors_file, human_newsvector, llm_newsvector, ratio)
@@ -61,7 +63,7 @@ class Tester:
             blended_dict[key] = blended_value
         return blended_dict
 
-    @torch.no_grad()
+    #@torch.no_grad() #省显存
     def evaluates(self):
         checkpoint = torch.load(self.args.load_ckpt_name)
         self.model.load_state_dict(checkpoint['model_state_dict'], strict=False)
