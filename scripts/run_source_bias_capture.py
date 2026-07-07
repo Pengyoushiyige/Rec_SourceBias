@@ -90,15 +90,17 @@ def write_csv(path: Path, rows: list[dict[str, object]], fields: list[str]) -> N
         writer.writerows(rows)
 
 
-def default_command(args: argparse.Namespace) -> list[str]:
+def default_command(args: argparse.Namespace, ckpt_dir: str) -> list[str]:
     python_exe = args.python or sys.executable
     command = [
         python_exe,
         "src/run.py",
         "--mode",
-        "loop",
+        args.mode,
         "--dataset",
         args.dataset,
+        "--behaviors_file",
+        args.behaviors_file,
         "--behaviors_file1",
         args.behaviors_file1,
         "--behaviors_file2",
@@ -119,7 +121,13 @@ def default_command(args: argparse.Namespace) -> list[str]:
         args.gpu,
         "--num_workers",
         str(args.num_workers),
+        "--model_type",
+        args.model_type,
+        "--load_ckpt_name",
+        args.load_ckpt_name,
     ]
+    if ckpt_dir:
+        command.extend(["--ckpt_dir", ckpt_dir])
     if args.debias:
         command.extend(
             [
@@ -143,6 +151,11 @@ def main() -> int:
     parser.add_argument("--run-name", default="source_bias_loop")
     parser.add_argument("--output-root", default="results/source_bias_runs")
     parser.add_argument("--python", default=None, help="Python executable. Defaults to the current interpreter.")
+    parser.add_argument("--mode", default="loop", choices=["loop", "train", "test"], help="Running mode.")
+    parser.add_argument("--load_ckpt_name", default="epoch-5.pt")
+    parser.add_argument("--ckpt_dir", default="")
+    parser.add_argument("--behaviors_file", default="behaviors.tsv")
+    parser.add_argument("--model_type", default="BERT4Rec")
     parser.add_argument("--dataset", default="Amazon_Beauty_sample")
     parser.add_argument("--behaviors_file1", default="behaviors1.tsv")
     parser.add_argument("--behaviors_file2", default="behaviors2.tsv")
@@ -160,14 +173,21 @@ def main() -> int:
     parser.add_argument("command", nargs=argparse.REMAINDER, help="Optional explicit command after --.")
     args = parser.parse_args()
 
-    run_id = datetime.now().strftime("%Y%m%d-%H%M%S") + "-" + args.run_name
+    run_name = args.run_name
+    if run_name == "source_bias_loop" and args.mode != "loop":
+        run_name = f"source_bias_{args.mode}"
+
+    run_id = datetime.now().strftime("%Y%m%d-%H%M%S") + "-" + run_name
     output_dir = Path(args.output_root) / run_id
     output_dir.mkdir(parents=True, exist_ok=True)
     log_path = output_dir / "run.log"
     command = args.command[1:] if args.command[:1] == ["--"] else args.command
     default_command_used = not command
     if not command:
-        command = default_command(args)
+        ckpt_dir = args.ckpt_dir
+        if not ckpt_dir and args.mode == "train":
+            ckpt_dir = str(output_dir)
+        command = default_command(args, ckpt_dir)
 
     env = os.environ.copy()
     env.setdefault("PYTHONUNBUFFERED", "1")

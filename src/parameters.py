@@ -13,6 +13,7 @@ def parse_args():
     
     parser.add_argument("--model_type", type=str, default="BERT4Rec")
     parser.add_argument("--batch_size", type=int, default=128)
+    parser.add_argument("--news_batch_size", type=int, default=16)
     parser.add_argument("--shuffle_buffer_size", type=int, default=10000)
     parser.add_argument("--num_workers", type=int, default=0)
     parser.add_argument("--log_steps", type=int, default=100)

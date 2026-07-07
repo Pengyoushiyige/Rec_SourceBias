@@ -149,7 +149,7 @@ class Trainer:
                             accuary / cnt))
             return loss / cnt
 
-    #@torch.no_grad() #0616提交的真的能省显存吗
+    @torch.no_grad() #0616提交的真的能省显存吗
     def get_news2vector(self, news_file):
         cache_key = os.path.abspath(news_file)
         if cache_key in self.news2vector_cache:
@@ -172,7 +172,7 @@ class Trainer:
         return news2vector
 
 
-    #@torch.no_grad() #0616提交的真的能省显存吗
+    @torch.no_grad() #0616提交的真的能省显存吗
     def evaluates(self, test_epoch, ratio):
         self.model = self.model.eval()
         self.model = self.model.to(self.device)
@@ -228,7 +228,7 @@ class Trainer:
         logging.info(f"llm ratio: {llm_ratio}")
 
 
-    #@torch.no_grad() #0616提交的真的能省显存吗
+    @torch.no_grad() #0616提交的真的能省显存吗
     def get_user2vector(self, human_newsvector, llm_newsvector, behaviors_file, ratio):
         user2vector = {}
         user_dataset = UserDataset(self.args, behaviors_file, human_newsvector, llm_newsvector, ratio)

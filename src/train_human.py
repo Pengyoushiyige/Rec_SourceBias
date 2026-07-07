@@ -81,12 +81,12 @@ class Trainer_main:
                         accuary / cnt))
         return loss / cnt
 
-    #@torch.no_grad() #省显存
+    @torch.no_grad() #省显存
     def get_news2vector(self, news_file):
         news2vector = {}
         news_dataset = NewsDataset(self.args, news_file)
-        news_dataloader = news_dataset.get_dataloader(batch_size=self.args.batch_size, \
-            shuffle=False, num_workers=self.args.num_workers)
+        news_dataloader = news_dataset.get_dataloader(batch_size=self.args.news_batch_size, \
+            shuffle=False, num_workers=self.args.num_workers)#为了省显存batch_size调小
         for batch in tqdm(news_dataloader, desc="Calculating vectors for news"):
             news_ids =  batch["id"] # batch, 1
             if any(id not in news2vector for id in news_ids):
@@ -116,7 +116,13 @@ class Trainer_main:
             self.text2vector[k+'-human'] = v
 
         self.text2vector['PADDED_NEWS'] = self.human_text2vector['PADDED_NEWS']
-
+        #--显存优化：彻底从 GPU 卸载带 BERT 的旧模型并清空显卡缓存
+        self.model = self.model.cpu()
+        del self.model
+        import gc
+        gc.collect()
+        torch.cuda.empty_cache()
+        # ------------------------显存优化------------------------
         self.model = self.get_new_model()
         self.model.train()
         self.model = self.model.to(self.device)
