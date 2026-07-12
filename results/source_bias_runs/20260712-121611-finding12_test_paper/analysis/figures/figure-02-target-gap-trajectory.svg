@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520">
+<rect width="100%" height="100%" fill="white"/>
+<text x="460.0" y="26" text-anchor="middle" font-family="Arial" font-size="18" font-weight="600">LLM Target minus Human Target</text>
+<line x1="82" y1="436" x2="884" y2="436" stroke="#222" stroke-width="1.2"/>
+<line x1="82" y1="52" x2="82" y2="436" stroke="#222" stroke-width="1.2"/>
+<line x1="82" y1="52.00" x2="884" y2="52.00" stroke="#ddd" stroke-width="1"/>
+<text x="72" y="56.00" text-anchor="end" font-family="Arial" font-size="12">6.21</text>
+<line x1="82" y1="148.00" x2="884" y2="148.00" stroke="#ddd" stroke-width="1"/>
+<text x="72" y="152.00" text-anchor="end" font-family="Arial" font-size="12">4.32</text>
+<line x1="82" y1="244.00" x2="884" y2="244.00" stroke="#ddd" stroke-width="1"/>
+<text x="72" y="248.00" text-anchor="end" font-family="Arial" font-size="12">2.44</text>
+<line x1="82" y1="340.00" x2="884" y2="340.00" stroke="#ddd" stroke-width="1"/>
+<text x="72" y="344.00" text-anchor="end" font-family="Arial" font-size="12">0.56</text>
+<line x1="82" y1="436.00" x2="884" y2="436.00" stroke="#ddd" stroke-width="1"/>
+<text x="72" y="440.00" text-anchor="end" font-family="Arial" font-size="12">-1.33</text>
+<line x1="82" y1="368.42" x2="884" y2="368.42" stroke="#777" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="82.00" y1="436" x2="82.00" y2="441" stroke="#222"/>
+<text x="82.00" y="458" text-anchor="middle" font-family="Arial" font-size="12">0</text>
+<line x1="162.20" y1="436" x2="162.20" y2="441" stroke="#222"/>
+<text x="162.20" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.1</text>
+<line x1="242.40" y1="436" x2="242.40" y2="441" stroke="#222"/>
+<text x="242.40" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.2</text>
+<line x1="322.60" y1="436" x2="322.60" y2="441" stroke="#222"/>
+<text x="322.60" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.3</text>
+<line x1="402.80" y1="436" x2="402.80" y2="441" stroke="#222"/>
+<text x="402.80" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.4</text>
+<line x1="483.00" y1="436" x2="483.00" y2="441" stroke="#222"/>
+<text x="483.00" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.5</text>
+<line x1="563.20" y1="436" x2="563.20" y2="441" stroke="#222"/>
+<text x="563.20" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.6</text>
+<line x1="643.40" y1="436" x2="643.40" y2="441" stroke="#222"/>
+<text x="643.40" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.7</text>
+<line x1="723.60" y1="436" x2="723.60" y2="441" stroke="#222"/>
+<text x="723.60" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.8</text>
+<line x1="803.80" y1="436" x2="803.80" y2="441" stroke="#222"/>
+<text x="803.80" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.9</text>
+<line x1="884.00" y1="436" x2="884.00" y2="441" stroke="#222"/>
+<text x="884.00" y="458" text-anchor="middle" font-family="Arial" font-size="12">1</text>
+<polyline fill="none" stroke="#009E73" stroke-width="2.4" points="82.00,380.75 162.20,409.52 242.40,371.31 322.60,328.99 402.80,280.58 483.00,357.15 563.20,251.96 643.40,260.64 723.60,120.75 803.80,129.73 884.00,87.10"/>
+<circle cx="82.00" cy="380.75" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="162.20" cy="409.52" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="242.40" cy="371.31" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="322.60" cy="328.99" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="402.80" cy="280.58" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="483.00" cy="357.15" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="563.20" cy="251.96" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="643.40" cy="260.64" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="723.60" cy="120.75" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="803.80" cy="129.73" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="884.00" cy="87.10" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<line x1="92" y1="62" x2="116" y2="62" stroke="#009E73" stroke-width="2.4"/>
+<text x="124" y="66" font-family="Arial" font-size="13">MAP@5 target gap</text>
+<polyline fill="none" stroke="#CC79A7" stroke-width="2.4" points="82.00,358.35 162.20,394.70 242.40,343.91 322.60,337.85 402.80,283.49 483.00,347.71 563.20,233.40 643.40,231.74 723.60,104.33 803.80,132.40 884.00,78.48"/>
+<circle cx="82.00" cy="358.35" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="162.20" cy="394.70" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="242.40" cy="343.91" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="322.60" cy="337.85" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="402.80" cy="283.49" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="483.00" cy="347.71" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="563.20" cy="233.40" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="643.40" cy="231.74" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="723.60" cy="104.33" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="803.80" cy="132.40" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="884.00" cy="78.48" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<line x1="92" y1="84" x2="116" y2="84" stroke="#CC79A7" stroke-width="2.4"/>
+<text x="124" y="88" font-family="Arial" font-size="13">nDCG@5 target gap</text>
+<text x="483.0" y="490" text-anchor="middle" font-family="Arial" font-size="14">Test Ratio</text>
+<text transform="translate(22 244.0) rotate(-90)" text-anchor="middle" font-family="Arial" font-size="14">Metric gap</text>
+</svg>

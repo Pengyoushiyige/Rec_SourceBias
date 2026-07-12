@@ -12,6 +12,7 @@ from pathlib import Path
 METRIC_RE = re.compile(r"^(MAP[135]|nDCG[135]):\s*([-+0-9.eE]+)")
 LOSS_RE = re.compile(r"^EPOCH\[(\d+)\]\s+LOSS:([-+0-9.eE]+)")
 LLM_RATIO_RE = re.compile(r"^llm ratio:\s*([-+0-9.eE]+)")
+NEW_RATIO_RE = re.compile(r"^new ratio:\s*([-+0-9.eE]+)")
 
 
 def strip_log_prefix(line: str) -> str:
@@ -20,13 +21,23 @@ def strip_log_prefix(line: str) -> str:
     return match.group(1) if match else line
 
 
+def read_log_text(log_path: Path) -> str:
+    data = log_path.read_bytes()
+    for encoding in ("utf-8-sig", "utf-16", "utf-16le", "gbk"):
+        try:
+            return data.decode(encoding)
+        except UnicodeDecodeError:
+            continue
+    return data.decode("utf-8", errors="replace")
+
+
 def parse_log(log_path: Path) -> tuple[list[dict[str, object]], list[dict[str, object]]]:
     metrics: list[dict[str, object]] = []
     events: list[dict[str, object]] = []
     current: dict[str, object] = {}
     loop_epoch = None
 
-    for raw_line in log_path.read_text(encoding="utf-8", errors="replace").splitlines():
+    for raw_line in read_log_text(log_path).splitlines():
         line = strip_log_prefix(raw_line).strip()
         if not line:
             continue
@@ -58,6 +69,17 @@ def parse_log(log_path: Path) -> tuple[list[dict[str, object]], list[dict[str, o
                     "event": "llm_ratio",
                     "loop_epoch": loop_epoch,
                     "llm_ratio": float(llm_ratio_match.group(1)),
+                }
+            )
+            continue
+
+        new_ratio_match = NEW_RATIO_RE.match(line)
+        if new_ratio_match:
+            events.append(
+                {
+                    "event": "new_ratio",
+                    "loop_epoch": loop_epoch,
+                    "new_ratio": float(new_ratio_match.group(1)),
                 }
             )
             continue
@@ -117,6 +139,8 @@ def default_command(args: argparse.Namespace, ckpt_dir: str) -> list[str]:
         str(args.epochs),
         "--batch_size",
         str(args.batch_size),
+        "--news_batch_size",
+        str(args.news_batch_size),
         "--gpu",
         args.gpu,
         "--num_workers",
@@ -125,6 +149,8 @@ def default_command(args: argparse.Namespace, ckpt_dir: str) -> list[str]:
         args.model_type,
         "--load_ckpt_name",
         args.load_ckpt_name,
+        "--seed",
+        str(args.seed),
     ]
     if ckpt_dir:
         command.extend(["--ckpt_dir", ckpt_dir])
@@ -166,8 +192,12 @@ def main() -> int:
     parser.add_argument("--loop_epochs", type=int, default=10)
     parser.add_argument("--epochs", type=int, default=1)
     parser.add_argument("--batch_size", type=int, default=1)
+    parser.add_argument("--news_batch_size", type=int, default=16)
     parser.add_argument("--gpu", default="0")
     parser.add_argument("--num_workers", type=int, default=0)
+    parser.add_argument("--seed", type=int, default=2023)
+    parser.add_argument("--dry-run", action="store_true", help="Print and save the command without executing it.")
+    parser.add_argument("--no-analysis", action="store_true", help="Skip automatic paper-style analysis after capture.")
     parser.add_argument("--debias", action="store_true")
     parser.add_argument("--debias_type", default="emb_entropy")
     parser.add_argument("command", nargs=argparse.REMAINDER, help="Optional explicit command after --.")
@@ -201,22 +231,26 @@ def main() -> int:
         log_file.write(f"# command: {' '.join(command)}\n\n")
         log_file.flush()
 
-        process = subprocess.Popen(
-            command,
-            cwd=Path.cwd(),
-            env=env,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
-            bufsize=1,
-        )
-        assert process.stdout is not None
-        for line in process.stdout:
-            print(line, end="")
-            log_file.write(line)
-        return_code = process.wait()
+        if args.dry_run:
+            log_file.write("# dry_run: true\n")
+            return_code = 0
+        else:
+            process = subprocess.Popen(
+                command,
+                cwd=Path.cwd(),
+                env=env,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                bufsize=1,
+            )
+            assert process.stdout is not None
+            for line in process.stdout:
+                print(line, end="")
+                log_file.write(line)
+            return_code = process.wait()
 
     metrics, events = parse_log(log_path)
     write_csv(
@@ -224,7 +258,7 @@ def main() -> int:
         metrics,
         ["loop_epoch", "test_ratio", "test_type", "MAP1", "MAP3", "MAP5", "nDCG1", "nDCG3", "nDCG5"],
     )
-    write_csv(output_dir / "events.csv", events, ["event", "loop_epoch", "epoch", "loss", "llm_ratio"])
+    write_csv(output_dir / "events.csv", events, ["event", "loop_epoch", "epoch", "loss", "llm_ratio", "new_ratio"])
     with (output_dir / "metrics.jsonl").open("w", encoding="utf-8") as handle:
         for row in metrics:
             handle.write(json.dumps(row, ensure_ascii=False) + "\n")
@@ -237,8 +271,21 @@ def main() -> int:
         "log_path": str(log_path),
         "metrics_rows": len(metrics),
         "events_rows": len(events),
+        "dry_run": args.dry_run,
     }
     (output_dir / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    if not args.no_analysis:
+        try:
+            from compute_paper_style_metrics import analyze_run
+
+            analysis = analyze_run(output_dir)
+            summary["analysis"] = analysis
+            (output_dir / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+            print(f"Saved analysis: {analysis['out_dir']}")
+        except Exception as exc:
+            summary["analysis_error"] = repr(exc)
+            (output_dir / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+            print(f"Analysis failed: {exc}", file=sys.stderr)
     print(f"\nSaved raw log: {log_path}")
     print(f"Saved metrics: {output_dir / 'metrics.csv'}")
     print(f"Saved events: {output_dir / 'events.csv'}")

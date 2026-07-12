@@ -26,7 +26,7 @@ class Trainer_main:
         self.args = args
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         self.tokenizer = AutoTokenizer.from_pretrained(args.plm_model)
-        self.config = AutoConfig.from_pretrained(args.plm_model, output_hidden_states=True)
+        self.config = AutoConfig.from_pretrained(args.plm_model)
         args.word_embedding_dim = self.config.hidden_size
         bert_model = AutoModel.from_pretrained(args.plm_model, config=self.config)
 

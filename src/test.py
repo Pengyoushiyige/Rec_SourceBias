@@ -14,7 +14,7 @@ class Tester:
     def __init__(self, args):
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         self.tokenizer = AutoTokenizer.from_pretrained(args.plm_model)
-        self.config = AutoConfig.from_pretrained(args.plm_model, output_hidden_states=True)
+        self.config = AutoConfig.from_pretrained(args.plm_model)
         args.word_embedding_dim = self.config.hidden_size
         self.args = args
         bert_model = AutoModel.from_pretrained(args.plm_model, config=self.config)
@@ -25,7 +25,7 @@ class Tester:
     def get_news2vector(self, news_file):
         news2vector = {}
         news_dataset = NewsDataset(self.args, news_file)
-        news_dataloader = news_dataset.get_dataloader(batch_size=self.args.batch_size, \
+        news_dataloader = news_dataset.get_dataloader(batch_size=self.args.news_batch_size, \
             shuffle=False, num_workers=self.args.num_workers)
         for batch in tqdm(news_dataloader, desc="Calculating vectors for news"):
             news_ids =  batch["id"] # batch, 1

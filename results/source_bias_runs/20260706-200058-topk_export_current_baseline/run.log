@@ -1,0 +1,221 @@
+# started_at: 2026-07-06T20:00:58
+# cwd: E:\Lab\Rec_SourceBias
+# command: E:\Lab\Rec_SourceBias\.venv\Scripts\python.exe src/run.py --mode loop --dataset Amazon_Beauty --behaviors_file1 behaviors1.tsv --behaviors_file2 behaviors2.tsv --test_behaviors_file behaviors.tsv --human_news_file news_parsed_bert-base-uncased.tsv --llm_news_file news_llama_parsed_bert-base-uncased.tsv --loop_epochs 20 --epochs 5 --batch_size 128 --gpu 0 --num_workers 0 --eta -1 --num_words_abstract 100 --negative_sampling_ratio 1 --test_epoch 3 --load_ckpt_name epoch-3.pt --topk_export_path results\source_bias_runs\20260706-200058-topk_export_current_baseline\topk_source_exposure.csv --export_run_id 20260706-200058-topk_export_current_baseline
+
+2026-07-06 20:01:00.970101: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From E:\Lab\Rec_SourceBias\.venv\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+[INFO 2026-07-06 20:01:06,139] Namespace(mode='loop', dataset='Amazon_Beauty', model_type='BERT4Rec', batch_size=128, shuffle_buffer_size=10000, num_workers=0, log_steps=100, epochs=5, lr=0.001, weight_decay=1e-05, news_attributes=['abstract'], num_words_abstract=100, user_log_length=10, word_embedding_dim=768, user_log_mask=True, drop_rate=0.2, save_steps=100000, max_steps_per_epoch=1000000, load_ckpt_name='epoch-3.pt', gpu='0', plm_model='bert-base-uncased', llm_model='llama', negative_sampling_ratio=1, behaviors_file='dataset\\Amazon_Beauty\\train\\behaviors.tsv', behaviors_file1='dataset\\Amazon_Beauty\\train\\behaviors1.tsv', behaviors_file2='dataset\\Amazon_Beauty\\train\\behaviors2.tsv', test_behaviors_file='dataset\\Amazon_Beauty\\dev\\behaviors.tsv', human_news_file='dataset\\Amazon_Beauty\\text\\news_parsed_bert-base-uncased.tsv', HGC_file='dataset\\Amazon_Beauty\\text\\news_parsed_bert-base-uncased.tsv', llm_news_file='dataset\\Amazon_Beauty\\text\\news_llama_parsed_bert-base-uncased.tsv', llm_rewirte_news_file='dataset\\Amazon_Beauty\\text\\news_llama_rewrite_bert-base-uncased.tsv', seed=2023, debias=False, debias_type='emb_entropy', disturb_ratio=0.5, eta=-1.0, loop_epochs=20, user_loss=0.01, news_loss=1, test_epoch=3, text_source='', text_parsed_target='', ckpt_dir='', topk_export_path='results\\source_bias_runs\\20260706-200058-topk_export_current_baseline\\topk_source_exposure.csv', export_run_id='20260706-200058-topk_export_current_baseline')
+[INFO 2026-07-06 20:01:06,151] args: Namespace(mode='loop', dataset='Amazon_Beauty', model_type='BERT4Rec', batch_size=128, shuffle_buffer_size=10000, num_workers=0, log_steps=100, epochs=5, lr=0.001, weight_decay=1e-05, news_attributes=['abstract'], num_words_abstract=100, user_log_length=10, word_embedding_dim=768, user_log_mask=True, drop_rate=0.2, save_steps=100000, max_steps_per_epoch=1000000, load_ckpt_name='epoch-3.pt', gpu='0', plm_model='bert-base-uncased', llm_model='llama', negative_sampling_ratio=1, behaviors_file='dataset\\Amazon_Beauty\\train\\behaviors.tsv', behaviors_file1='dataset\\Amazon_Beauty\\train\\behaviors1.tsv', behaviors_file2='dataset\\Amazon_Beauty\\train\\behaviors2.tsv', test_behaviors_file='dataset\\Amazon_Beauty\\dev\\behaviors.tsv', human_news_file='dataset\\Amazon_Beauty\\text\\news_parsed_bert-base-uncased.tsv', HGC_file='dataset\\Amazon_Beauty\\text\\news_parsed_bert-base-uncased.tsv', llm_news_file='dataset\\Amazon_Beauty\\text\\news_llama_parsed_bert-base-uncased.tsv', llm_rewirte_news_file='dataset\\Amazon_Beauty\\text\\news_llama_rewrite_bert-base-uncased.tsv', seed=2023, debias=False, debias_type='emb_entropy', disturb_ratio=0.5, eta=-1.0, loop_epochs=20, user_loss=0.01, news_loss=1, test_epoch=3, text_source='', text_parsed_target='', ckpt_dir='', topk_export_path='results\\source_bias_runs\\20260706-200058-topk_export_current_baseline\\topk_source_exposure.csv', export_run_id='20260706-200058-topk_export_current_baseline')
+E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+[INFO 2026-07-06 20:01:09,770] Training...
+E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py:1158: UserWarning: expandable_segments not supported on this platform (Triggered internally at ..\c10\cuda\CUDACachingAllocator.cpp:803.)
+  return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+
+  0%|          | 0/11897 [00:00<?, ?it/s]
+  1%|          | 80/11897 [00:00<00:14, 797.31it/s]
+  1%|��         | 177/11897 [00:00<00:13, 884.10it/s]
+  2%|��         | 275/11897 [00:00<00:12, 916.51it/s]
+  3%|��         | 374/11897 [00:00<00:12, 940.82it/s]
+  4%|��         | 471/11897 [00:00<00:12, 949.14it/s]
+  5%|��         | 572/11897 [00:00<00:11, 951.47it/s]
+  6%|��         | 673/11897 [00:00<00:11, 960.22it/s]
+  6%|��         | 772/11897 [00:00<00:11, 960.97it/s]
+  7%|��         | 873/11897 [00:00<00:11, 962.56it/s]
+  8%|��         | 970/11897 [00:01<00:11, 929.96it/s]
+  9%|��         | 1067/11897 [00:01<00:11, 941.20it/s]
+ 10%|��         | 1166/11897 [00:01<00:11, 953.07it/s]
+ 11%|��         | 1262/11897 [00:01<00:11, 946.61it/s]
+ 11%|����        | 1357/11897 [00:01<00:11, 939.30it/s]
+ 12%|����        | 1451/11897 [00:01<00:11, 930.21it/s]
+ 13%|����        | 1547/11897 [00:01<00:11, 936.94it/s]
+ 14%|����        | 1644/11897 [00:01<00:10, 939.24it/s]
+ 15%|����        | 1738/11897 [00:01<00:10, 929.35it/s]
+ 15%|����        | 1831/11897 [00:01<00:11, 911.94it/s]
+ 16%|����        | 1932/11897 [00:02<00:10, 938.21it/s]
+ 17%|����        | 2034/11897 [00:02<00:10, 953.21it/s]
+ 18%|����        | 2139/11897 [00:02<00:10, 972.82it/s]
+ 19%|����        | 2245/11897 [00:02<00:09, 983.89it/s]
+ 20%|����        | 2355/11897 [00:02<00:09, 996.00it/s]
+ 21%|����        | 2459/11897 [00:02<00:09, 1007.47it/s]
+ 22%|������       | 2560/11897 [00:02<00:09, 1007.47it/s]
+ 22%|������       | 2666/11897 [00:02<00:09, 1015.03it/s]
+ 23%|������       | 2771/11897 [00:02<00:08, 1015.34it/s]
+ 24%|������       | 2873/11897 [00:02<00:08, 1011.49it/s]
+ 25%|������       | 2977/11897 [00:03<00:08, 999.38it/s] 
+ 26%|������       | 3077/11897 [00:03<00:09, 975.75it/s]
+ 27%|������       | 3175/11897 [00:03<00:08, 970.33it/s]
+ 28%|������       | 3276/11897 [00:03<00:08, 970.27it/s]
+ 28%|������       | 3374/11897 [00:03<00:08, 971.07it/s]
+ 29%|������       | 3472/11897 [00:03<00:08, 958.92it/s]
+ 30%|������       | 3571/11897 [00:03<00:08, 965.49it/s]
+ 31%|������       | 3676/11897 [00:03<00:08, 985.75it/s]
+ 32%|��������      | 3775/11897 [00:03<00:08, 956.90it/s]
+ 33%|��������      | 3871/11897 [00:04<00:08, 947.37it/s]
+ 33%|��������      | 3966/11897 [00:04<00:08, 917.67it/s]
+ 34%|��������      | 4070/11897 [00:04<00:08, 940.95it/s]
+ 35%|��������      | 4172/11897 [00:04<00:08, 953.15it/s]
+ 36%|��������      | 4277/11897 [00:04<00:07, 975.25it/s]
+ 37%|��������      | 4378/11897 [00:04<00:07, 985.35it/s]
+ 38%|��������      | 4477/11897 [00:04<00:07, 975.23it/s]
+ 38%|��������      | 4575/11897 [00:04<00:07, 975.03it/s]
+ 39%|��������      | 4676/11897 [00:04<00:07, 981.09it/s]
+ 40%|��������      | 4775/11897 [00:04<00:07, 980.70it/s]
+ 41%|��������      | 4876/11897 [00:05<00:07, 975.09it/s]
+ 42%|����������     | 4982/11897 [00:05<00:06, 990.85it/s]
+ 43%|����������     | 5091/11897 [00:05<00:06, 1011.07it/s]
+ 44%|����������     | 5197/11897 [00:05<00:06, 1016.32it/s]
+ 45%|����������     | 5301/11897 [00:05<00:06, 1014.96it/s]
+ 45%|����������     | 5403/11897 [00:05<00:06, 1015.11it/s]
+ 46%|����������     | 5510/11897 [00:05<00:06, 1002.70it/s]
+ 47%|����������     | 5613/11897 [00:05<00:06, 1006.30it/s]
+ 48%|����������     | 5714/11897 [00:05<00:06, 1005.62it/s]
+ 49%|����������     | 5815/11897 [00:06<00:06, 980.83it/s] 
+ 50%|����������     | 5914/11897 [00:06<00:06, 938.47it/s]
+ 51%|����������     | 6015/11897 [00:06<00:06, 953.95it/s]
+ 51%|������������    | 6122/11897 [00:06<00:05, 978.94it/s]
+ 52%|������������    | 6224/11897 [00:06<00:05, 988.05it/s]
+ 53%|������������    | 6328/11897 [00:06<00:05, 1001.31it/s]
+ 54%|������������    | 6432/11897 [00:06<00:05, 1010.10it/s]
+ 55%|������������    | 6534/11897 [00:06<00:05, 1002.27it/s]
+ 56%|������������    | 6635/11897 [00:06<00:05, 1002.49it/s]
+ 57%|������������    | 6736/11897 [00:06<00:05, 989.28it/s] 
+ 57%|������������    | 6836/11897 [00:07<00:05, 976.81it/s]
+ 58%|������������    | 6934/11897 [00:07<00:05, 942.92it/s]
+ 59%|������������    | 7033/11897 [00:07<00:05, 945.45it/s]
+ 60%|������������    | 7128/11897 [00:07<00:05, 944.22it/s]
+ 61%|������������    | 7224/11897 [00:07<00:04, 946.42it/s]
+ 62%|��������������   | 7325/11897 [00:07<00:04, 964.07it/s]
+ 62%|��������������   | 7429/11897 [00:07<00:04, 963.47it/s]
+ 63%|��������������   | 7535/11897 [00:07<00:04, 980.66it/s]
+ 64%|��������������   | 7636/11897 [00:07<00:04, 989.22it/s]
+ 65%|��������������   | 7738/11897 [00:07<00:04, 992.18it/s]
+ 66%|��������������   | 7838/11897 [00:08<00:04, 991.91it/s]
+ 67%|��������������   | 7938/11897 [00:08<00:04, 975.55it/s]
+ 68%|��������������   | 8045/11897 [00:08<00:03, 987.06it/s]
+ 68%|��������������   | 8145/11897 [00:08<00:03, 989.41it/s]
+ 69%|��������������   | 8247/11897 [00:08<00:03, 982.34it/s]
+ 70%|��������������   | 8346/11897 [00:08<00:03, 976.12it/s]
+ 71%|��������������   | 8445/11897 [00:08<00:03, 977.35it/s]
+ 72%|����������������  | 8543/11897 [00:08<00:03, 978.04it/s]
+ 73%|����������������  | 8641/11897 [00:08<00:03, 970.95it/s]
+ 73%|����������������  | 8740/11897 [00:09<00:03, 970.04it/s]
+ 74%|����������������  | 8838/11897 [00:09<00:03, 970.05it/s]
+ 75%|����������������  | 8936/11897 [00:09<00:03, 966.52it/s]
+ 76%|����������������  | 9033/11897 [00:09<00:02, 966.98it/s]
+ 77%|����������������  | 9130/11897 [00:09<00:02, 950.86it/s]
+ 78%|����������������  | 9226/11897 [00:09<00:02, 922.06it/s]
+ 78%|����������������  | 9323/11897 [00:09<00:02, 931.87it/s]
+ 79%|����������������  | 9418/11897 [00:09<00:02, 935.15it/s]
+ 80%|����������������  | 9515/11897 [00:09<00:02, 942.43it/s]
+ 81%|����������������  | 9614/11897 [00:09<00:02, 954.90it/s]
+ 82%|������������������ | 9710/11897 [00:10<00:02, 941.33it/s]
+ 82%|������������������ | 9805/11897 [00:10<00:02, 919.50it/s]
+ 83%|������������������ | 9898/11897 [00:10<00:02, 906.37it/s]
+ 84%|������������������ | 9990/11897 [00:10<00:02, 901.32it/s]
+ 85%|������������������ | 10085/11897 [00:10<00:02, 901.50it/s]
+ 86%|������������������ | 10177/11897 [00:10<00:01, 904.17it/s]
+ 86%|������������������ | 10268/11897 [00:10<00:01, 904.89it/s]
+ 87%|������������������ | 10362/11897 [00:10<00:01, 910.93it/s]
+ 88%|������������������ | 10454/11897 [00:10<00:01, 901.31it/s]
+ 89%|������������������ | 10545/11897 [00:10<00:01, 895.43it/s]
+ 89%|������������������ | 10635/11897 [00:11<00:01, 885.47it/s]
+ 90%|������������������ | 10728/11897 [00:11<00:01, 897.91it/s]
+ 91%|������������������ | 10818/11897 [00:11<00:01, 891.42it/s]
+ 92%|��������������������| 10914/11897 [00:11<00:01, 903.65it/s]
+ 93%|��������������������| 11009/11897 [00:11<00:00, 909.27it/s]
+ 93%|��������������������| 11109/11897 [00:11<00:00, 927.67it/s]
+ 94%|��������������������| 11206/11897 [00:11<00:00, 938.98it/s]
+ 95%|��������������������| 11300/11897 [00:11<00:00, 933.48it/s]
+ 96%|��������������������| 11394/11897 [00:11<00:00, 915.32it/s]
+ 97%|��������������������| 11491/11897 [00:11<00:00, 928.93it/s]
+ 97%|��������������������| 11594/11897 [00:12<00:00, 955.93it/s]
+ 98%|��������������������| 11694/11897 [00:12<00:00, 968.05it/s]
+ 99%|��������������������| 11798/11897 [00:12<00:00, 978.66it/s]
+100%|��������������������| 11897/11897 [00:12<00:00, 959.69it/s]
+
+Calculating vectors for news:   0%|          | 0/93 [00:00<?, ?it/s]C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [96,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [97,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [98,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [99,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [100,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [101,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [102,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [103,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [104,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [105,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [106,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [107,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [108,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [109,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [110,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [111,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [112,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [113,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [114,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [115,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [116,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [117,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [118,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [119,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [120,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [121,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [122,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [123,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [124,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [125,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [126,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cuda\Indexing.cu:1292: block: [0,0,0], thread: [127,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
+
+Calculating vectors for news:   0%|          | 0/93 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "E:\Lab\Rec_SourceBias\src\run.py", line 33, in <module>
+    trainer.run()
+  File "E:\Lab\Rec_SourceBias\src\train_loop.py", line 348, in run
+    self.human_text2vector = self.get_news2vector(self.args.human_news_file)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\utils\_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\src\train_loop.py", line 242, in get_news2vector
+    news_vector = self.model.get_news_vector(batch["news"].to(self.device))
+  File "E:\Lab\Rec_SourceBias\src\model\BERT4Rec.py", line 223, in get_news_vector
+    news_vec = self.news_encoder(input_ids)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\src\model\BERT4Rec.py", line 162, in forward
+    text_vectors = [
+  File "E:\Lab\Rec_SourceBias\src\model\BERT4Rec.py", line 163, in <listcomp>
+    self.text_encoders[name](
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\src\model\BERT4Rec.py", line 125, in forward
+    hidden_states = self.bert_model(text_ids, token_type_ids=text_type, attention_mask=text_attmask)['hidden_states']
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\transformers\models\bert\modeling_bert.py", line 1006, in forward
+    embedding_output = self.embeddings(
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\transformers\models\bert\modeling_bert.py", line 239, in forward
+    embeddings = self.LayerNorm(embeddings)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\normalization.py", line 196, in forward
+    return F.layer_norm(
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\functional.py", line 2543, in layer_norm
+    return torch.layer_norm(input, normalized_shape, weight, bias, eps, torch.backends.cudnn.enabled)
+RuntimeError: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

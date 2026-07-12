@@ -1,0 +1,189 @@
+# started_at: 2026-07-12T17:54:43
+# cwd: E:\Lab\Rec_SourceBias
+# command: .\.venv\Scripts\python.exe src/run.py --mode train --dataset Amazon_Beauty --epochs 5 --batch_size 128 --gpu 0 --seed 2024 --num_words_abstract 512
+
+2026-07-12 17:54:45.526801: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From E:\Lab\Rec_SourceBias\.venv\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+[INFO 2026-07-12 17:54:51,123] Namespace(mode='train', dataset='Amazon_Beauty', model_type='BERT4Rec', batch_size=128, news_batch_size=64, shuffle_buffer_size=10000, num_workers=0, log_steps=100, epochs=5, lr=0.001, weight_decay=1e-05, news_attributes=['abstract'], num_words_abstract=512, user_log_length=10, word_embedding_dim=768, user_log_mask=True, drop_rate=0.2, save_steps=100000, max_steps_per_epoch=1000000, load_ckpt_name='epoch-5.pt', gpu='0', plm_model='bert-base-uncased', llm_model='llama', negative_sampling_ratio=4, behaviors_file='dataset\\Amazon_Beauty\\train\\behaviors.tsv', behaviors_file1='dataset\\Amazon_Beauty\\train\\behaviors1.tsv', behaviors_file2='dataset\\Amazon_Beauty\\train\\behaviors2.tsv', test_behaviors_file='dataset\\Amazon_Beauty\\dev\\behaviors.tsv', human_news_file='dataset\\Amazon_Beauty\\text\\news_parsed_bert-base-uncased.tsv', HGC_file='dataset\\Amazon_Beauty\\text\\news_parsed_bert-base-uncased.tsv', llm_news_file='dataset\\Amazon_Beauty\\text\\news_llama_parsed_bert-base-uncased.tsv', llm_rewirte_news_file='dataset\\Amazon_Beauty\\text\\news_llama_rewrite_bert-base-uncased.tsv', seed=2024, debias=False, debias_type='emb_entropy', disturb_ratio=0.5, eta=-1, loop_epochs=20, user_loss=0.01, news_loss=1, test_epoch=5, text_source='', text_parsed_target='', ckpt_dir='')
+[INFO 2026-07-12 17:54:51,124] args: Namespace(mode='train', dataset='Amazon_Beauty', model_type='BERT4Rec', batch_size=128, news_batch_size=64, shuffle_buffer_size=10000, num_workers=0, log_steps=100, epochs=5, lr=0.001, weight_decay=1e-05, news_attributes=['abstract'], num_words_abstract=512, user_log_length=10, word_embedding_dim=768, user_log_mask=True, drop_rate=0.2, save_steps=100000, max_steps_per_epoch=1000000, load_ckpt_name='epoch-5.pt', gpu='0', plm_model='bert-base-uncased', llm_model='llama', negative_sampling_ratio=4, behaviors_file='dataset\\Amazon_Beauty\\train\\behaviors.tsv', behaviors_file1='dataset\\Amazon_Beauty\\train\\behaviors1.tsv', behaviors_file2='dataset\\Amazon_Beauty\\train\\behaviors2.tsv', test_behaviors_file='dataset\\Amazon_Beauty\\dev\\behaviors.tsv', human_news_file='dataset\\Amazon_Beauty\\text\\news_parsed_bert-base-uncased.tsv', HGC_file='dataset\\Amazon_Beauty\\text\\news_parsed_bert-base-uncased.tsv', llm_news_file='dataset\\Amazon_Beauty\\text\\news_llama_parsed_bert-base-uncased.tsv', llm_rewirte_news_file='dataset\\Amazon_Beauty\\text\\news_llama_rewrite_bert-base-uncased.tsv', seed=2024, debias=False, debias_type='emb_entropy', disturb_ratio=0.5, eta=-1, loop_epochs=20, user_loss=0.01, news_loss=1, test_epoch=5, text_source='', text_parsed_target='', ckpt_dir='')
+[INFO 2026-07-12 17:54:52,331] Training...
+
+  0%|          | 0/11897 [00:00<?, ?it/s]
+  1%|          | 96/11897 [00:00<00:12, 957.50it/s]
+  2%|��         | 192/11897 [00:00<00:12, 933.86it/s]
+  2%|��         | 286/11897 [00:00<00:12, 927.89it/s]
+  3%|��         | 379/11897 [00:00<00:12, 909.71it/s]
+  4%|��         | 477/11897 [00:00<00:12, 933.62it/s]
+  5%|��         | 578/11897 [00:00<00:11, 952.74it/s]
+  6%|��         | 679/11897 [00:00<00:11, 964.36it/s]
+  7%|��         | 781/11897 [00:00<00:11, 973.15it/s]
+  7%|��         | 890/11897 [00:00<00:11, 980.38it/s]
+  8%|��         | 989/11897 [00:01<00:11, 983.21it/s]
+  9%|��         | 1096/11897 [00:01<00:10, 987.81it/s]
+ 10%|��         | 1202/11897 [00:01<00:10, 992.59it/s]
+ 11%|��         | 1302/11897 [00:01<00:10, 982.44it/s]
+ 12%|����        | 1407/11897 [00:01<00:10, 979.73it/s]
+ 13%|����        | 1505/11897 [00:01<00:10, 979.57it/s]
+ 13%|����        | 1603/11897 [00:01<00:10, 968.92it/s]
+ 14%|����        | 1700/11897 [00:01<00:10, 968.99it/s]
+ 15%|����        | 1801/11897 [00:01<00:10, 974.05it/s]
+ 16%|����        | 1900/11897 [00:01<00:10, 976.14it/s]
+ 17%|����        | 1999/11897 [00:02<00:10, 979.01it/s]
+ 18%|����        | 2109/11897 [00:02<00:09, 984.82it/s]
+ 19%|����        | 2211/11897 [00:02<00:09, 989.70it/s]
+ 19%|����        | 2311/11897 [00:02<00:09, 980.86it/s]
+ 20%|����        | 2411/11897 [00:02<00:09, 986.30it/s]
+ 21%|����        | 2514/11897 [00:02<00:09, 987.61it/s]
+ 22%|������       | 2623/11897 [00:02<00:09, 986.28it/s]
+ 23%|������       | 2724/11897 [00:02<00:09, 991.99it/s]
+ 24%|������       | 2825/11897 [00:02<00:09, 989.25it/s]
+ 25%|������       | 2936/11897 [00:03<00:09, 991.18it/s]
+ 26%|������       | 3050/11897 [00:03<00:08, 997.60it/s]
+ 27%|������       | 3153/11897 [00:03<00:08, 996.99it/s]
+ 27%|������       | 3258/11897 [00:03<00:08, 1003.01it/s]
+ 28%|������       | 3359/11897 [00:03<00:08, 999.32it/s] 
+ 29%|������       | 3459/11897 [00:03<00:08, 997.09it/s]
+ 30%|������       | 3559/11897 [00:03<00:08, 983.59it/s]
+ 31%|������       | 3665/11897 [00:03<00:08, 990.55it/s]
+ 32%|��������      | 3766/11897 [00:03<00:08, 992.87it/s]
+ 33%|��������      | 3869/11897 [00:03<00:08, 994.74it/s]
+ 33%|��������      | 3969/11897 [00:04<00:07, 994.85it/s]
+ 34%|��������      | 4085/11897 [00:04<00:07, 997.48it/s]
+ 35%|��������      | 4186/11897 [00:04<00:07, 992.90it/s]
+ 36%|��������      | 4286/11897 [00:04<00:07, 994.80it/s]
+ 37%|��������      | 4386/11897 [00:04<00:07, 987.28it/s]
+ 38%|��������      | 4485/11897 [00:04<00:07, 978.89it/s]
+ 39%|��������      | 4583/11897 [00:04<00:07, 956.99it/s]
+ 39%|��������      | 4679/11897 [00:04<00:07, 950.24it/s]
+ 40%|��������      | 4775/11897 [00:04<00:07, 946.12it/s]
+ 41%|��������      | 4878/11897 [00:04<00:07, 953.71it/s]
+ 42%|����������     | 4978/11897 [00:05<00:07, 947.38it/s]
+ 43%|����������     | 5074/11897 [00:05<00:07, 950.42it/s]
+ 43%|����������     | 5171/11897 [00:05<00:07, 953.52it/s]
+ 44%|����������     | 5279/11897 [00:05<00:06, 958.63it/s]
+ 45%|����������     | 5380/11897 [00:05<00:06, 972.69it/s]
+ 46%|����������     | 5488/11897 [00:05<00:06, 980.27it/s]
+ 47%|����������     | 5595/11897 [00:05<00:06, 982.40it/s]
+ 48%|����������     | 5694/11897 [00:05<00:06, 979.92it/s]
+ 49%|����������     | 5792/11897 [00:05<00:06, 968.75it/s]
+ 50%|����������     | 5891/11897 [00:06<00:06, 972.46it/s]
+ 50%|����������     | 5990/11897 [00:06<00:06, 968.76it/s]
+ 51%|����������     | 6090/11897 [00:06<00:05, 969.34it/s]
+ 52%|������������    | 6192/11897 [00:06<00:05, 967.82it/s]
+ 53%|������������    | 6291/11897 [00:06<00:05, 972.66it/s]
+ 54%|������������    | 6398/11897 [00:06<00:05, 981.31it/s]
+ 55%|������������    | 6503/11897 [00:06<00:05, 979.83it/s]
+ 56%|������������    | 6604/11897 [00:06<00:05, 986.06it/s]
+ 56%|������������    | 6706/11897 [00:06<00:05, 986.78it/s]
+ 57%|������������    | 6808/11897 [00:06<00:05, 988.22it/s]
+ 58%|������������    | 6907/11897 [00:07<00:05, 988.53it/s]
+ 59%|������������    | 7006/11897 [00:07<00:04, 988.71it/s]
+ 60%|������������    | 7105/11897 [00:07<00:04, 988.33it/s]
+ 61%|������������    | 7204/11897 [00:07<00:04, 982.96it/s]
+ 61%|��������������   | 7303/11897 [00:07<00:04, 975.48it/s]
+ 62%|��������������   | 7407/11897 [00:07<00:04, 980.23it/s]
+ 63%|��������������   | 7519/11897 [00:07<00:04, 976.17it/s]
+ 64%|��������������   | 7630/11897 [00:07<00:04, 974.59it/s]
+ 65%|��������������   | 7729/11897 [00:07<00:04, 977.02it/s]
+ 66%|��������������   | 7844/11897 [00:08<00:04, 993.34it/s]
+ 67%|��������������   | 7944/11897 [00:08<00:03, 993.84it/s]
+ 68%|��������������   | 8049/11897 [00:08<00:03, 1001.72it/s]
+ 69%|��������������   | 8150/11897 [00:08<00:03, 995.57it/s] 
+ 69%|��������������   | 8250/11897 [00:08<00:03, 977.35it/s]
+ 70%|��������������   | 8350/11897 [00:08<00:03, 981.52it/s]
+ 71%|��������������   | 8450/11897 [00:08<00:03, 985.75it/s]
+ 72%|����������������  | 8560/11897 [00:08<00:03, 989.71it/s]
+ 73%|����������������  | 8663/11897 [00:08<00:03, 993.15it/s]
+ 74%|����������������  | 8766/11897 [00:08<00:03, 994.45it/s]
+ 75%|����������������  | 8869/11897 [00:09<00:03, 991.43it/s]
+ 75%|����������������  | 8970/11897 [00:09<00:02, 992.52it/s]
+ 76%|����������������  | 9071/11897 [00:09<00:02, 990.04it/s]
+ 77%|����������������  | 9171/11897 [00:09<00:02, 984.46it/s]
+ 78%|����������������  | 9270/11897 [00:09<00:02, 977.33it/s]
+ 79%|����������������  | 9368/11897 [00:09<00:02, 968.02it/s]
+ 80%|����������������  | 9465/11897 [00:09<00:02, 961.24it/s]
+ 80%|����������������  | 9562/11897 [00:09<00:02, 955.61it/s]
+ 81%|����������������  | 9659/11897 [00:09<00:02, 958.47it/s]
+ 82%|������������������ | 9755/11897 [00:09<00:02, 952.74it/s]
+ 83%|������������������ | 9854/11897 [00:10<00:02, 961.58it/s]
+ 84%|������������������ | 9953/11897 [00:10<00:02, 969.96it/s]
+ 84%|������������������ | 10051/11897 [00:10<00:01, 963.28it/s]
+ 85%|������������������ | 10148/11897 [00:10<00:01, 956.75it/s]
+ 86%|������������������ | 10244/11897 [00:10<00:01, 956.38it/s]
+ 87%|������������������ | 10344/11897 [00:10<00:01, 967.01it/s]
+ 88%|������������������ | 10441/11897 [00:10<00:01, 967.72it/s]
+ 89%|������������������ | 10545/11897 [00:10<00:01, 974.39it/s]
+ 90%|������������������ | 10649/11897 [00:10<00:01, 975.16it/s]
+ 90%|������������������ | 10756/11897 [00:11<00:01, 980.41it/s]
+ 91%|��������������������| 10864/11897 [00:11<00:01, 983.13it/s]
+ 92%|��������������������| 10968/11897 [00:11<00:00, 989.76it/s]
+ 93%|��������������������| 11067/11897 [00:11<00:00, 983.03it/s]
+ 94%|��������������������| 11168/11897 [00:11<00:00, 980.28it/s]
+ 95%|��������������������| 11267/11897 [00:11<00:00, 978.67it/s]
+ 96%|��������������������| 11366/11897 [00:11<00:00, 970.69it/s]
+ 96%|��������������������| 11468/11897 [00:11<00:00, 977.19it/s]
+ 97%|��������������������| 11570/11897 [00:11<00:00, 980.27it/s]
+ 98%|��������������������| 11674/11897 [00:11<00:00, 988.59it/s]
+ 99%|��������������������| 11780/11897 [00:12<00:00, 983.98it/s]
+100%|��������������������| 11883/11897 [00:12<00:00, 987.83it/s]
+100%|��������������������| 11897/11897 [00:12<00:00, 979.17it/s]
+
+Calculating vectors for news:   0%|          | 0/186 [00:00<?, ?it/s]
+Calculating vectors for news:   0%|          | 0/186 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "E:\Lab\Rec_SourceBias\src\run.py", line 39, in <module>
+    tester.run()
+  File "E:\Lab\Rec_SourceBias\src\train_human.py", line 112, in run
+    self.human_text2vector = self.get_news2vector(self.args.human_news_file)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\utils\_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\src\train_human.py", line 93, in get_news2vector
+    news_vector = self.model.get_news_vector(batch["news"].to(self.device))
+  File "E:\Lab\Rec_SourceBias\src\model\BERT4Rec.py", line 223, in get_news_vector
+    news_vec = self.news_encoder(input_ids)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\src\model\BERT4Rec.py", line 162, in forward
+    text_vectors = [
+  File "E:\Lab\Rec_SourceBias\src\model\BERT4Rec.py", line 163, in <listcomp>
+    self.text_encoders[name](
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\src\model\BERT4Rec.py", line 125, in forward
+    hidden_states = self.bert_model(text_ids, token_type_ids=text_type, attention_mask=text_attmask)['hidden_states']
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\transformers\models\bert\modeling_bert.py", line 1013, in forward
+    encoder_outputs = self.encoder(
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\transformers\models\bert\modeling_bert.py", line 607, in forward
+    layer_outputs = layer_module(
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\transformers\models\bert\modeling_bert.py", line 497, in forward
+    self_attention_outputs = self.attention(
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\transformers\models\bert\modeling_bert.py", line 427, in forward
+    self_outputs = self.self(
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "E:\Lab\Rec_SourceBias\.venv\lib\site-packages\transformers\models\bert\modeling_bert.py", line 349, in forward
+    attention_scores = attention_scores / math.sqrt(self.attention_head_size)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 768.00 MiB. GPU 0 has a total capacty of 8.00 GiB of which 5.23 GiB is free. Of the allocated memory 1.55 GiB is allocated by PyTorch, and 130.20 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF

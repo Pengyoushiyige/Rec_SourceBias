@@ -1,0 +1,3 @@
+run_id,metric,points,start_relative_delta,end_relative_delta,min_relative_delta,max_relative_delta,mean_relative_delta,start_llm_minus_human,end_llm_minus_human,min_llm_minus_human,max_llm_minus_human
+20260712-121611-finding12_test_paper,MAP5,11,0.827333,-17.524893,-17.524893,2.770936,-6.174966,-0.241935,5.519713,-0.806452,5.519713
+20260712-121611-finding12_test_paper,nDCG5,11,-0.543705,-14.73125,-14.73125,1.422362,-5.669856,0.197555,5.68886,-0.515655,5.68886

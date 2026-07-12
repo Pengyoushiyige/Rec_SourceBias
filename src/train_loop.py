@@ -158,7 +158,7 @@ class Trainer:
 
         news2vector = {}
         news_dataset = NewsDataset(self.args, news_file)
-        news_dataloader = news_dataset.get_dataloader(batch_size=self.args.batch_size, \
+        news_dataloader = news_dataset.get_dataloader(batch_size=self.args.news_batch_size, \
             shuffle=False, num_workers=self.args.num_workers)
         for batch in tqdm(news_dataloader, desc="Calculating vectors for news"):
             news_ids =  batch["id"] # batch, 1

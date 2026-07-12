@@ -1,0 +1,52 @@
+{
+  "run_id": "20260712-121611-finding12_test_paper",
+  "started_at": "2026-07-12T12:16:11",
+  "finished_at": "2026-07-12T12:45:33",
+  "return_code": 0,
+  "command": [
+    ".\\.venv\\Scripts\\python.exe",
+    "src\\run.py",
+    "--mode",
+    "test",
+    "--dataset",
+    "Amazon_Beauty",
+    "--model_type",
+    "BERT4Rec",
+    "--test_behaviors_file",
+    "behaviors.tsv",
+    "--human_news_file",
+    "news_parsed_bert-base-uncased.tsv",
+    "--llm_news_file",
+    "news_llama_parsed_bert-base-uncased.tsv",
+    "--load_ckpt_name",
+    "results\\source_bias_runs\\finding12_paper_ckpt\\epoch-5.pt",
+    "--test_epoch",
+    "5",
+    "--num_words_abstract",
+    "512",
+    "--batch_size",
+    "128",
+    "--negative_sampling_ratio",
+    "4",
+    "--gpu",
+    "0",
+    "--num_workers",
+    "0",
+    "--seed",
+    "2023"
+  ],
+  "log_path": "results\\source_bias_runs\\20260712-121611-finding12_test_paper\\run.log",
+  "metrics_rows": 44,
+  "events_rows": 0,
+  "dry_run": false,
+  "analysis": {
+    "out_dir": "results\\source_bias_runs\\20260712-121611-finding12_test_paper\\analysis",
+    "metric_points": 11,
+    "long_rows": 66,
+    "train_loss_rows": 0,
+    "figures": [
+      "figures/figure-01-paper-style-relative-delta.svg",
+      "figures/figure-02-target-gap-trajectory.svg"
+    ]
+  }
+}

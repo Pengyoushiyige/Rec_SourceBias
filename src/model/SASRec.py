@@ -116,8 +116,8 @@ class TextEncoder(torch.nn.Module):
         text_ids = torch.narrow(text, 1, 0, num_words)
         text_type = torch.narrow(text, 1, num_words, num_words)
         text_attmask = torch.narrow(text, 1, num_words*2, num_words)
-        hidden_states = self.bert_model(text_ids, token_type_ids=text_type, attention_mask=text_attmask)['hidden_states']
-        word_emb = torch.mean(hidden_states[-1], dim=1)
+        outputs = self.bert_model(text_ids, token_type_ids=text_type, attention_mask=text_attmask)
+        word_emb = torch.mean(outputs.last_hidden_state, dim=1)
         return word_emb
 
 class NewsEncoder(torch.nn.Module):
