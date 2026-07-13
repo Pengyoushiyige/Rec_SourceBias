@@ -1,0 +1,3 @@
+run_id,metric,points,start_relative_delta,end_relative_delta,min_relative_delta,max_relative_delta,mean_relative_delta,start_llm_minus_human,end_llm_minus_human,min_llm_minus_human,max_llm_minus_human
+20260712-185558-finding12_test_epoch1,MAP5,11,-24.056229,-34.257316,-34.286987,-24.056229,-29.56418,6.338112,9.265233,6.338112,9.265233
+20260712-185558-finding12_test_epoch1,nDCG5,11,-20.450205,-28.611395,-28.826098,-20.450205,-24.609885,6.838269,9.748228,6.838269,9.748228

@@ -34,6 +34,16 @@ def write_csv(path: Path, rows: list[dict[str, object]], fields: list[str]) -> N
         writer.writerows(rows)
 
 
+def write_csv_if_rows(path: Path, rows: list[dict[str, object]], fields: list[str]) -> bool:
+    """Write a meaningful table and remove a stale header-only copy."""
+    if not rows:
+        if path.exists():
+            path.unlink()
+        return False
+    write_csv(path, rows, fields)
+    return True
+
+
 def as_float(value: object) -> float | None:
     if value in (None, ""):
         return None
@@ -67,6 +77,21 @@ def load_summary(run_dir: Path) -> dict[str, object]:
     if not path.exists():
         return {"run_id": run_dir.name, "run_dir": str(run_dir)}
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def summary_mode(summary: dict[str, object]) -> str:
+    mode = summary.get("mode")
+    if mode in {"train", "test", "loop"}:
+        return str(mode)
+    command = summary.get("command")
+    if isinstance(command, list):
+        try:
+            candidate = command[command.index("--mode") + 1]
+        except (ValueError, IndexError):
+            candidate = None
+        if candidate in {"train", "test", "loop"}:
+            return str(candidate)
+    return "unknown"
 
 
 def x_key(row: dict[str, str]) -> tuple[str, str]:
@@ -230,7 +255,7 @@ def svg_line_chart(
     y_min: float | None = None,
     y_max: float | None = None,
     zero_line: bool = False,
-) -> None:
+) -> bool:
     path.parent.mkdir(parents=True, exist_ok=True)
     cleaned = []
     for item in series:
@@ -242,8 +267,9 @@ def svg_line_chart(
         if pairs:
             cleaned.append({**item, "pairs": pairs})
     if not cleaned:
-        path.write_text('<svg xmlns="http://www.w3.org/2000/svg"></svg>\n', encoding="utf-8")
-        return
+        if path.exists():
+            path.unlink()
+        return False
 
     all_x = [x for item in cleaned for x, _ in item["pairs"]]
     all_y = [y for item in cleaned for _, y in item["pairs"]]
@@ -294,15 +320,21 @@ def svg_line_chart(
     elems.append(f'<text transform="translate(22 {top + plot_h/2}) rotate(-90)" text-anchor="middle" font-family="Arial" font-size="14">{y_label}</text>')
     elems.append("</svg>")
     path.write_text("\n".join(elems), encoding="utf-8")
+    return True
 
 
-def save_figures(out_dir: Path, wide_rows: list[dict[str, object]], train_loss: list[dict[str, object]]) -> list[str]:
+def save_figures(
+    out_dir: Path,
+    wide_rows: list[dict[str, object]],
+    train_loss: list[dict[str, object]],
+    mode: str,
+) -> list[str]:
     figures_dir = out_dir / "figures"
     figures: list[str] = []
     x_values = [as_float(row.get("axis_value")) for row in wide_rows]
     if wide_rows and any(x is not None for x in x_values):
         x_label = "Loop epoch" if wide_rows[0].get("axis") == "loop_epoch" else "Test Ratio"
-        svg_line_chart(
+        if svg_line_chart(
             figures_dir / "figure-01-paper-style-relative-delta.svg",
             "Paper-style Relative Delta",
             x_values,
@@ -313,23 +345,10 @@ def save_figures(out_dir: Path, wide_rows: list[dict[str, object]], train_loss: 
             "Relative Delta (%)",
             x_label,
             zero_line=True,
-        )
-        figures.append("figures/figure-01-paper-style-relative-delta.svg")
-        svg_line_chart(
-            figures_dir / "figure-02-target-gap-trajectory.svg",
-            "LLM Target minus Human Target",
-            x_values,
-            [
-                {"label": "MAP@5 target gap", "y": [as_float(row.get("MAP5_target_llm_minus_human")) for row in wide_rows], "color": OKABE_ITO["green"]},
-                {"label": "nDCG@5 target gap", "y": [as_float(row.get("nDCG5_target_llm_minus_human")) for row in wide_rows], "color": OKABE_ITO["purple"]},
-            ],
-            "Metric gap",
-            x_label,
-            zero_line=True,
-        )
-        figures.append("figures/figure-02-target-gap-trajectory.svg")
-        if any(as_float(row.get("llm_ratio")) is not None for row in wide_rows):
-            svg_line_chart(
+        ):
+            figures.append("figures/figure-01-paper-style-relative-delta.svg")
+        if mode == "loop" and any(as_float(row.get("llm_ratio")) is not None for row in wide_rows):
+            if svg_line_chart(
                 figures_dir / "figure-03-ratios.svg",
                 "llm_ratio and source-composition proxy",
                 x_values,
@@ -342,9 +361,9 @@ def save_figures(out_dir: Path, wide_rows: list[dict[str, object]], train_loss: 
                 x_label,
                 y_min=0,
                 y_max=1,
-            )
-            figures.append("figures/figure-03-ratios.svg")
-    if train_loss:
+            ):
+                figures.append("figures/figure-03-ratios.svg")
+    if train_loss and mode in {"train", "unknown"}:
         loss_x = []
         loss_y = []
         for index, row in enumerate(train_loss):
@@ -352,15 +371,15 @@ def save_figures(out_dir: Path, wide_rows: list[dict[str, object]], train_loss: 
             epoch = as_float(row.get("epoch"))
             loss_x.append(loop_epoch if loop_epoch is not None else epoch if epoch is not None else float(index))
             loss_y.append(as_float(row.get("loss")))
-        svg_line_chart(
+        if svg_line_chart(
             figures_dir / "figure-04-training-loss.svg",
             "Training loss",
             loss_x,
             [{"label": "Training loss", "y": loss_y, "color": OKABE_ITO["blue"]}],
             "Loss",
             "Loop epoch / train epoch",
-        )
-        figures.append("figures/figure-04-training-loss.svg")
+        ):
+            figures.append("figures/figure-04-training-loss.svg")
     return figures
 
 
@@ -405,6 +424,7 @@ def analyze_run(run_dir: Path, out_dir: Path | None = None) -> dict[str, object]
     metrics = read_csv(run_dir / "metrics.csv")
     events = read_csv(run_dir / "events.csv")
     summary = load_summary(run_dir)
+    mode = summary_mode(summary)
     tables = derive_metric_tables(metrics, events)
     wide_rows = tables["wide"]
     long_rows = tables["long"]
@@ -426,8 +446,10 @@ def analyze_run(run_dir: Path, out_dir: Path | None = None) -> dict[str, object]
                 f"{metric}_diagnostic_direct_llm_minus_human",
             ]
         )
-    write_csv(out_dir / "paper_style_metrics_wide.csv", wide_rows, wide_fields)
-    write_csv(
+    generated_tables: list[str] = []
+    if write_csv_if_rows(out_dir / "paper_style_metrics_wide.csv", wide_rows, wide_fields):
+        generated_tables.append("paper_style_metrics_wide.csv")
+    if write_csv_if_rows(
         out_dir / "paper_style_metrics_long.csv",
         long_rows,
         [
@@ -448,11 +470,14 @@ def analyze_run(run_dir: Path, out_dir: Path | None = None) -> dict[str, object]
             "diagnostic_direct_relative_delta_pct",
             "diagnostic_direct_llm_minus_human",
         ],
-    )
-    write_csv(out_dir / "train_loss.csv", train_loss, ["loop_epoch", "epoch", "loss"])
-    write_csv(
+    ):
+        generated_tables.append("paper_style_metrics_long.csv")
+    if write_csv_if_rows(out_dir / "train_loss.csv", train_loss, ["loop_epoch", "epoch", "loss"]):
+        generated_tables.append("train_loss.csv")
+    summary_rows = summarize(wide_rows, summary)
+    if write_csv_if_rows(
         out_dir / "paper_style_summary.csv",
-        summarize(wide_rows, summary),
+        summary_rows,
         [
             "run_id",
             "metric",
@@ -467,15 +492,23 @@ def analyze_run(run_dir: Path, out_dir: Path | None = None) -> dict[str, object]
             "min_llm_minus_human",
             "max_llm_minus_human",
         ],
-    )
-    (out_dir / "run_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
-    figures = save_figures(out_dir, wide_rows, train_loss)
+    ):
+        generated_tables.append("paper_style_summary.csv")
+    stale_run_summary = out_dir / "run_summary.json"
+    if stale_run_summary.exists():
+        stale_run_summary.unlink()
+    stale_gap_figure = out_dir / "figures" / "figure-02-target-gap-trajectory.svg"
+    if stale_gap_figure.exists():
+        stale_gap_figure.unlink()
+    figures = save_figures(out_dir, wide_rows, train_loss, mode)
     write_markdown_summary(out_dir, run_dir, summary, wide_rows, train_loss, figures)
     return {
         "out_dir": str(out_dir),
         "metric_points": len(wide_rows),
         "long_rows": len(long_rows),
         "train_loss_rows": len(train_loss),
+        "mode": mode,
+        "tables": generated_tables,
         "figures": figures,
     }
 

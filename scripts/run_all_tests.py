@@ -9,7 +9,7 @@ def main():
 
     epochs = [1, 2, 3, 4, 5]
     for epoch in epochs:
-        ckpt_path = f"results\\source_bias_runs\\finding12_paper_ckpt\\epoch-{epoch}.pt"
+        ckpt_path = f"results\\source_bias_runs\\20260712-184131-finding12_train_paper_seed2024\\epoch-{epoch}.pt"
         run_name = f"finding12_test_epoch{epoch}"
         print(f"\n==================================================")
         print(f"Starting test for Epoch {epoch}...")
@@ -34,7 +34,7 @@ def main():
             "--negative_sampling_ratio", "4",
             "--gpu", "0",
             "--num_workers", "0",
-            "--seed", "2023"
+            "--seed", "2024"
         ]
         
         print(f"Running command: {' '.join(cmd)}")

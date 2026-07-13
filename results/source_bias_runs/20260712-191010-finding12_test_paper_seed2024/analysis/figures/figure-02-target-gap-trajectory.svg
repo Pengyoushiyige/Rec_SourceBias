@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520">
+<rect width="100%" height="100%" fill="white"/>
+<text x="460.0" y="26" text-anchor="middle" font-family="Arial" font-size="18" font-weight="600">LLM Target minus Human Target</text>
+<line x1="82" y1="436" x2="884" y2="436" stroke="#222" stroke-width="1.2"/>
+<line x1="82" y1="52" x2="82" y2="436" stroke="#222" stroke-width="1.2"/>
+<line x1="82" y1="52.00" x2="884" y2="52.00" stroke="#ddd" stroke-width="1"/>
+<text x="72" y="56.00" text-anchor="end" font-family="Arial" font-size="12">13.15</text>
+<line x1="82" y1="148.00" x2="884" y2="148.00" stroke="#ddd" stroke-width="1"/>
+<text x="72" y="152.00" text-anchor="end" font-family="Arial" font-size="12">11.63</text>
+<line x1="82" y1="244.00" x2="884" y2="244.00" stroke="#ddd" stroke-width="1"/>
+<text x="72" y="248.00" text-anchor="end" font-family="Arial" font-size="12">10.11</text>
+<line x1="82" y1="340.00" x2="884" y2="340.00" stroke="#ddd" stroke-width="1"/>
+<text x="72" y="344.00" text-anchor="end" font-family="Arial" font-size="12">8.59</text>
+<line x1="82" y1="436.00" x2="884" y2="436.00" stroke="#ddd" stroke-width="1"/>
+<text x="72" y="440.00" text-anchor="end" font-family="Arial" font-size="12">7.08</text>
+<line x1="82.00" y1="436" x2="82.00" y2="441" stroke="#222"/>
+<text x="82.00" y="458" text-anchor="middle" font-family="Arial" font-size="12">0</text>
+<line x1="162.20" y1="436" x2="162.20" y2="441" stroke="#222"/>
+<text x="162.20" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.1</text>
+<line x1="242.40" y1="436" x2="242.40" y2="441" stroke="#222"/>
+<text x="242.40" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.2</text>
+<line x1="322.60" y1="436" x2="322.60" y2="441" stroke="#222"/>
+<text x="322.60" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.3</text>
+<line x1="402.80" y1="436" x2="402.80" y2="441" stroke="#222"/>
+<text x="402.80" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.4</text>
+<line x1="483.00" y1="436" x2="483.00" y2="441" stroke="#222"/>
+<text x="483.00" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.5</text>
+<line x1="563.20" y1="436" x2="563.20" y2="441" stroke="#222"/>
+<text x="563.20" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.6</text>
+<line x1="643.40" y1="436" x2="643.40" y2="441" stroke="#222"/>
+<text x="643.40" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.7</text>
+<line x1="723.60" y1="436" x2="723.60" y2="441" stroke="#222"/>
+<text x="723.60" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.8</text>
+<line x1="803.80" y1="436" x2="803.80" y2="441" stroke="#222"/>
+<text x="803.80" y="458" text-anchor="middle" font-family="Arial" font-size="12">0.9</text>
+<line x1="884.00" y1="436" x2="884.00" y2="441" stroke="#222"/>
+<text x="884.00" y="458" text-anchor="middle" font-family="Arial" font-size="12">1</text>
+<polyline fill="none" stroke="#009E73" stroke-width="2.4" points="82.00,400.45 162.20,403.29 242.40,409.52 322.60,375.34 402.80,374.77 483.00,325.29 563.20,308.48 643.40,312.07 723.60,241.06 803.80,147.21 884.00,153.06"/>
+<circle cx="82.00" cy="400.45" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="162.20" cy="403.29" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="242.40" cy="409.52" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="322.60" cy="375.34" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="402.80" cy="374.77" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="483.00" cy="325.29" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="563.20" cy="308.48" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="643.40" cy="312.07" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="723.60" cy="241.06" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="803.80" cy="147.21" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<circle cx="884.00" cy="153.06" r="3.5" fill="#009E73" stroke="white" stroke-width="1"/>
+<line x1="92" y1="62" x2="116" y2="62" stroke="#009E73" stroke-width="2.4"/>
+<text x="124" y="66" font-family="Arial" font-size="13">MAP@5 target gap</text>
+<polyline fill="none" stroke="#CC79A7" stroke-width="2.4" points="82.00,345.33 162.20,350.83 242.40,326.49 322.60,333.58 402.80,323.59 483.00,243.26 563.20,231.65 643.40,280.52 723.60,169.61 803.80,78.48 884.00,100.37"/>
+<circle cx="82.00" cy="345.33" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="162.20" cy="350.83" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="242.40" cy="326.49" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="322.60" cy="333.58" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="402.80" cy="323.59" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="483.00" cy="243.26" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="563.20" cy="231.65" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="643.40" cy="280.52" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="723.60" cy="169.61" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="803.80" cy="78.48" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<circle cx="884.00" cy="100.37" r="3.5" fill="#CC79A7" stroke="white" stroke-width="1"/>
+<line x1="92" y1="84" x2="116" y2="84" stroke="#CC79A7" stroke-width="2.4"/>
+<text x="124" y="88" font-family="Arial" font-size="13">nDCG@5 target gap</text>
+<text x="483.0" y="490" text-anchor="middle" font-family="Arial" font-size="14">Test Ratio</text>
+<text transform="translate(22 244.0) rotate(-90)" text-anchor="middle" font-family="Arial" font-size="14">Metric gap</text>
+</svg>

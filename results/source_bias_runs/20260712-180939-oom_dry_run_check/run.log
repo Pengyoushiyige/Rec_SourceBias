@@ -1,5 +1,0 @@
-# started_at: 2026-07-12T18:09:39
-# cwd: E:\Lab\Rec_SourceBias
-# command: E:\Lab\Rec_SourceBias\.venv\Scripts\python.exe src/run.py --mode train --dataset Amazon_Beauty --behaviors_file behaviors.tsv --behaviors_file1 behaviors1.tsv --behaviors_file2 behaviors2.tsv --test_behaviors_file behaviors.tsv --human_news_file news_parsed_bert-base-uncased.tsv --llm_news_file news_llama_parsed_bert-base-uncased.tsv --loop_epochs 10 --epochs 1 --batch_size 128 --news_batch_size 16 --gpu 0 --num_workers 0 --model_type BERT4Rec --load_ckpt_name epoch-5.pt --seed 2023 --ckpt_dir results\source_bias_runs\20260712-180939-oom_dry_run_check
-
-# dry_run: true

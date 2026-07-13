@@ -112,6 +112,15 @@ def write_csv(path: Path, rows: list[dict[str, object]], fields: list[str]) -> N
         writer.writerows(rows)
 
 
+def command_mode(command: list[str], fallback: str) -> str:
+    """Read --mode from an explicit wrapped command when present."""
+    try:
+        value = command[command.index("--mode") + 1]
+    except (ValueError, IndexError):
+        return fallback
+    return value if value in {"train", "test", "loop"} else fallback
+
+
 def default_command(args: argparse.Namespace, ckpt_dir: str) -> list[str]:
     python_exe = args.python or sys.executable
     command = [
@@ -203,21 +212,24 @@ def main() -> int:
     parser.add_argument("command", nargs=argparse.REMAINDER, help="Optional explicit command after --.")
     args = parser.parse_args()
 
+    explicit_command = args.command[1:] if args.command[:1] == ["--"] else args.command
+    requested_mode = command_mode(explicit_command, args.mode) if explicit_command else args.mode
     run_name = args.run_name
-    if run_name == "source_bias_loop" and args.mode != "loop":
-        run_name = f"source_bias_{args.mode}"
+    if run_name == "source_bias_loop" and requested_mode != "loop":
+        run_name = f"source_bias_{requested_mode}"
 
     run_id = datetime.now().strftime("%Y%m%d-%H%M%S") + "-" + run_name
     output_dir = Path(args.output_root) / run_id
     output_dir.mkdir(parents=True, exist_ok=True)
     log_path = output_dir / "run.log"
-    command = args.command[1:] if args.command[:1] == ["--"] else args.command
+    command = explicit_command
     default_command_used = not command
     if not command:
         ckpt_dir = args.ckpt_dir
         if not ckpt_dir and args.mode == "train":
             ckpt_dir = str(output_dir)
         command = default_command(args, ckpt_dir)
+    run_mode = command_mode(command, args.mode)
 
     env = os.environ.copy()
     env.setdefault("PYTHONUNBUFFERED", "1")
@@ -253,33 +265,45 @@ def main() -> int:
             return_code = process.wait()
 
     metrics, events = parse_log(log_path)
-    write_csv(
-        output_dir / "metrics.csv",
-        metrics,
-        ["loop_epoch", "test_ratio", "test_type", "MAP1", "MAP3", "MAP5", "nDCG1", "nDCG3", "nDCG5"],
-    )
-    write_csv(output_dir / "events.csv", events, ["event", "loop_epoch", "epoch", "loss", "llm_ratio", "new_ratio"])
-    with (output_dir / "metrics.jsonl").open("w", encoding="utf-8") as handle:
-        for row in metrics:
-            handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+    artifacts = ["run.log", "summary.json"]
+    if metrics:
+        write_csv(
+            output_dir / "metrics.csv",
+            metrics,
+            ["loop_epoch", "test_ratio", "test_type", "MAP1", "MAP3", "MAP5", "nDCG1", "nDCG3", "nDCG5"],
+        )
+        with (output_dir / "metrics.jsonl").open("w", encoding="utf-8") as handle:
+            for row in metrics:
+                handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+        artifacts.extend(["metrics.csv", "metrics.jsonl"])
+    if events:
+        write_csv(output_dir / "events.csv", events, ["event", "loop_epoch", "epoch", "loss", "llm_ratio", "new_ratio"])
+        artifacts.append("events.csv")
     summary = {
         "run_id": run_id,
         "started_at": started_at,
         "finished_at": datetime.now().isoformat(timespec="seconds"),
         "return_code": return_code,
+        "mode": run_mode,
         "command": command,
         "log_path": str(log_path),
         "metrics_rows": len(metrics),
         "events_rows": len(events),
         "dry_run": args.dry_run,
+        "artifacts": artifacts,
     }
     (output_dir / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
-    if not args.no_analysis:
+    if not args.no_analysis and not args.dry_run and (metrics or events):
         try:
             from compute_paper_style_metrics import analyze_run
 
             analysis = analyze_run(output_dir)
             summary["analysis"] = analysis
+            summary["artifacts"].extend(
+                ["analysis/analysis_summary.md"]
+                + [f"analysis/{name}" for name in analysis["tables"]]
+                + [f"analysis/{name}" for name in analysis["figures"]]
+            )
             (output_dir / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
             print(f"Saved analysis: {analysis['out_dir']}")
         except Exception as exc:
@@ -287,8 +311,10 @@ def main() -> int:
             (output_dir / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
             print(f"Analysis failed: {exc}", file=sys.stderr)
     print(f"\nSaved raw log: {log_path}")
-    print(f"Saved metrics: {output_dir / 'metrics.csv'}")
-    print(f"Saved events: {output_dir / 'events.csv'}")
+    if metrics:
+        print(f"Saved metrics: {output_dir / 'metrics.csv'}")
+    if events:
+        print(f"Saved events: {output_dir / 'events.csv'}")
     return return_code
 
 

@@ -23,6 +23,16 @@ class Tester:
 
     @torch.no_grad()#省显存
     def get_news2vector(self, news_file):
+        # 1. 为当前新闻数据和 BERT 模型生成一个唯一的缓存文件名
+        cache_name = os.path.basename(news_file).replace('.tsv', '') + f"_{self.args.plm_model.replace('/', '_')}_cache.pt"
+        cache_dir = os.path.join("save", "news_vectors_cache")
+        os.makedirs(cache_dir, exist_ok=True)
+        cache_path = os.path.join(cache_dir, cache_name)
+        # 2. 如果之前计算过，直接从硬盘读取缓存，瞬间完成！
+        if os.path.exists(cache_path):
+            logging.info(f"Reusing cached news vectors from {cache_path}")
+            return torch.load(cache_path)
+
         news2vector = {}
         news_dataset = NewsDataset(self.args, news_file)
         news_dataloader = news_dataset.get_dataloader(batch_size=self.args.news_batch_size, \
@@ -35,6 +45,9 @@ class Tester:
                     if id not in news2vector:
                         news2vector[id] = vector.detach().to('cpu')
         news2vector['PADDED_NEWS'] = torch.zeros(self.args.word_embedding_dim)
+        # 3. 如果是第一次运行，用 BERT 计算并保存到缓存中
+        logging.info(f"Saving calculated news vectors to cache: {cache_path}")
+        torch.save(news2vector, cache_path)
         return news2vector
 
     @torch.no_grad() #省显存

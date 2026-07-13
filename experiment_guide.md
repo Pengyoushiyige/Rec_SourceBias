@@ -178,10 +178,12 @@ Each run creates a timestamped folder under `results/source_bias_runs/<run_id>/`
 | File | Purpose |
 |---|---|
 | `run.log` | Complete raw stdout/stderr log, including progress bars, warnings, arguments, metrics, and errors if a run fails. |
-| `metrics.csv` | Parsed MAP/NDCG rows by `loop_epoch`, `test_ratio`, and `test_type` (`Human`, `LLM`, `Human Target`, `LLM Target`). |
-| `events.csv` | Parsed training loss and `llm_ratio` events across feedback-loop epochs. |
-| `metrics.jsonl` | JSON-lines version of the metric rows for downstream scripts. |
+| `metrics.csv` | Parsed MAP/NDCG rows by `loop_epoch`, `test_ratio`, and `test_type` (`Human`, `LLM`, `Human Target`, `LLM Target`). Created only when metric rows exist. |
+| `events.csv` | Parsed training loss and ratio events. Created only when event rows exist. |
+| `metrics.jsonl` | JSON-lines version of metric rows for downstream scripts. Created only when metric rows exist. |
 | `summary.json` | Command, return code, start/end time, and output paths. |
+
+Artifact generation is mode-aware: `train` keeps loss artifacts, `test` keeps evaluation metrics plus the primary Relative Delta figure, and `loop` additionally keeps ratio diagnostics. Header-only CSV files, empty JSONL files, empty SVG files, the duplicate `analysis/run_summary.json`, and the redundant absolute target-gap figure are not generated.
 
 ### B. Generate Clean Tables and SVG Charts
 After a run finishes, replace `<run_id>` with the created folder name:
