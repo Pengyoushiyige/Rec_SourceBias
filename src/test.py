@@ -11,15 +11,15 @@ from transformers import AutoTokenizer, AutoModel, AutoConfig
 from Dataset import NewsDataset, BehaviorsDataset, UserDataset
 
 class Tester:
-    def __init__(self, args):
+    def __init__(self, args): #加载PLM模型如BERT的骨架
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         self.tokenizer = AutoTokenizer.from_pretrained(args.plm_model)
         self.config = AutoConfig.from_pretrained(args.plm_model)
         args.word_embedding_dim = self.config.hidden_size
         self.args = args
         bert_model = AutoModel.from_pretrained(args.plm_model, config=self.config)
-        model = utils.get_model(args.model_type)
-        self.model = model(args, bert_model)
+        model = utils.get_model(args.model_type) #实例化基础推荐器架构
+        self.model = model(args, bert_model) #实例化具体的推荐模型
 
     @torch.no_grad()#省显存
     def get_news2vector(self, news_file):
@@ -51,7 +51,7 @@ class Tester:
         return news2vector
 
     @torch.no_grad() #省显存
-    def get_user2vector(self, human_newsvector, llm_newsvector, ratio):
+    def get_user2vector(self, human_newsvector, llm_newsvector, ratio): #给定的 ratio 批量计算所有用户的 user_vector
         user2vector = {}
         user_dataset = UserDataset(self.args, self.args.test_behaviors_file, human_newsvector, llm_newsvector, ratio)
         user_dataloader = user_dataset.get_dataloader(batch_size=self.args.batch_size, \
@@ -69,7 +69,7 @@ class Tester:
 
         return user2vector
 
-    def mix_news(self, human_news2vector, llm_news2vector, ratio):
+    def mix_news(self, human_news2vector, llm_news2vector, ratio): #对传入的两个新闻向量字典进行全局随机混合，生成一个新的字典 没有被调用，实际的ratio干预在collate_fn中独立抽样完成的
         blended_dict = {}
         for key in human_news2vector.keys():
             blended_value = human_news2vector[key] if np.random.rand() > ratio else llm_news2vector[key]
@@ -77,12 +77,12 @@ class Tester:
         return blended_dict
 
     @torch.no_grad() #省显存
-    def evaluates(self):
-        checkpoint = torch.load(self.args.load_ckpt_name)
-        self.model.load_state_dict(checkpoint['model_state_dict'], strict=False)
-
-        self.model = self.model.eval()
-        self.model = self.model.to(self.device)
+    def evaluates(self): #主要的核心流程函数：计算并在每个 ratio 上评估推荐效果
+        checkpoint = torch.load(self.args.load_ckpt_name) #加载train模式训练好的模型checkpoint权重
+        self.model.load_state_dict(checkpoint['model_state_dict'], strict=False) #加载权重
+        #提取出 Human 和 LLM 的两个纯净新闻向量字典
+        self.model = self.model.eval() #测试模式
+        self.model = self.model.to(self.device) #放到gpu上跑
 
         human_news2vector = self.get_news2vector(self.args.human_news_file)
         llm_news2vector = self.get_news2vector(self.args.llm_news_file)
@@ -91,25 +91,25 @@ class Tester:
             human_metrics, llm_metrics = utils.metrics('Human', ratio=ratio), utils.metrics('LLM', ratio=ratio)
             human_target_metrics, llm_target_metrics = utils.metrics('Human Target', ratio=ratio), utils.metrics('LLM Target', ratio=ratio)
 
-            self.user2vector = self.get_user2vector(human_news2vector, llm_news2vector, ratio)
-            behaviors_dataset = BehaviorsDataset(self.args, self.args.test_behaviors_file)
+            self.user2vector = self.get_user2vector(human_news2vector, llm_news2vector, ratio) #在每个 ratio 下，计算出对应的用户偏好向量字典
+            behaviors_dataset = BehaviorsDataset(self.args, self.args.test_behaviors_file) #实例化测试集Dataset
             behaviors_dataloader = behaviors_dataset.get_dataloader(batch_size=1, \
                 shuffle=False, num_workers=self.args.num_workers)
             for batch in tqdm(behaviors_dataloader,
-                                desc="Calculating probabilities"):
+                                desc="Calculating probabilities"): #遍历评估行为日志
                 candidate_news = batch["candidate_news"]
                 labels = np.array(batch["y_true"][0])
                 if np.all(labels == 0) or np.all(labels == 1):
                     continue
-                human_candidate_news_vector = torch.stack([human_news2vector[new] for new in candidate_news[0]]).numpy()
-                llm_candidate_news_vector = torch.stack([llm_news2vector[new] for new in candidate_news[0]]).numpy()
-                user_vector = [self.user2vector[clicked_news_string] for clicked_news_string in batch["clicked_news_string"]][0].numpy()
-                human_y_pred = np.dot(human_candidate_news_vector, user_vector)
-                llm_y_pred = np.dot(llm_candidate_news_vector, user_vector)
+                human_candidate_news_vector = torch.stack([human_news2vector[new] for new in candidate_news[0]]).numpy()#获取当前候选新闻的 Human 向量版本
+                llm_candidate_news_vector = torch.stack([llm_news2vector[new] for new in candidate_news[0]]).numpy()#获取当前候选新闻的 LLM 向量版本
+                user_vector = [self.user2vector[clicked_news_string] for clicked_news_string in batch["clicked_news_string"]][0].numpy()#获取当前用户的 User 向量版本
+                human_y_pred = np.dot(human_candidate_news_vector, user_vector)#计算 Human 分数序列（用户与候选新闻的内积匹配）
+                llm_y_pred = np.dot(llm_candidate_news_vector, user_vector)#计算 LLM 分数序列（用户与候选新闻的内积匹配）
                 if human_y_pred[0] == llm_y_pred[0]:
-                    continue
+                    continue #如果首个打分完全一致，则跳过此条 Impression
 
-                if np.random.choice([0, 1], p=[0.5, 0.5]) == 0:
+                if np.random.choice([0, 1], p=[0.5, 0.5]) == 0: #拼接打乱
                     y_pred_mix = np.concatenate((llm_y_pred, human_y_pred))
                     label_human_mix = np.concatenate((np.zeros_like(labels), labels))
                     label_lm_mix = np.concatenate((labels, np.zeros_like(labels)))
@@ -118,10 +118,10 @@ class Tester:
                     label_human_mix = np.concatenate((labels, np.zeros_like(labels)))
                     label_lm_mix = np.concatenate((np.zeros_like(labels), labels))
 
-                human_metrics.update(labels, human_y_pred)
-                llm_metrics.update(labels, llm_y_pred)
-                human_target_metrics.update(label_human_mix, y_pred_mix)
-                llm_target_metrics.update(label_lm_mix, y_pred_mix)
+                human_metrics.update(labels, human_y_pred) #在纯 Human 文本下的推荐列表排序质量
+                llm_metrics.update(labels, llm_y_pred) #在纯 LLM 文本下的推荐列表排序质量。
+                human_target_metrics.update(label_human_mix, y_pred_mix) #在混合候选列表中，Human 版本正样本被排在前面的能力。
+                llm_target_metrics.update(label_lm_mix, y_pred_mix) #在混合候选列表中，LLM 版本正样本被排在前面的能力。
 
             human_metrics.print_result()
             llm_metrics.print_result()

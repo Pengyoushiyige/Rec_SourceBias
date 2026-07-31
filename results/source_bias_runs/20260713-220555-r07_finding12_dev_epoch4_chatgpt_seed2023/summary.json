@@ -1,0 +1,73 @@
+{
+  "run_id": "20260713-220555-r07_finding12_dev_epoch4_chatgpt_seed2023",
+  "started_at": "2026-07-13T22:05:55",
+  "finished_at": "2026-07-13T22:06:27",
+  "return_code": 0,
+  "mode": "test",
+  "command": [
+    ".\\.venv\\Scripts\\python.exe",
+    "src\\run.py",
+    "--mode",
+    "test",
+    "--dataset",
+    "Amazon_Beauty",
+    "--model_type",
+    "BERT4Rec",
+    "--test_behaviors_file",
+    "behaviors.tsv",
+    "--human_news_file",
+    "news_parsed_bert-base-uncased.tsv",
+    "--llm_news_file",
+    "news_gpt-3.5-turbo-0613_parsed_bert-base-uncased.tsv",
+    "--load_ckpt_name",
+    "results\\source_bias_runs\\r07_finding12_chatgpt_seed2023_ckpt\\epoch-4.pt",
+    "--test_epoch",
+    "4",
+    "--num_words_abstract",
+    "512",
+    "--batch_size",
+    "128",
+    "--news_batch_size",
+    "64",
+    "--negative_sampling_ratio",
+    "4",
+    "--gpu",
+    "0",
+    "--num_workers",
+    "0",
+    "--seed",
+    "2023",
+    "--llm_model",
+    "gpt-3.5-turbo-0613"
+  ],
+  "log_path": "results\\source_bias_runs\\20260713-220555-r07_finding12_dev_epoch4_chatgpt_seed2023\\run.log",
+  "metrics_rows": 44,
+  "events_rows": 0,
+  "dry_run": false,
+  "artifacts": [
+    "run.log",
+    "summary.json",
+    "metrics.csv",
+    "metrics.jsonl",
+    "analysis/analysis_summary.md",
+    "analysis/paper_style_metrics_wide.csv",
+    "analysis/paper_style_metrics_long.csv",
+    "analysis/paper_style_summary.csv",
+    "analysis/figures/figure-01-paper-style-relative-delta.svg"
+  ],
+  "analysis": {
+    "out_dir": "results\\source_bias_runs\\20260713-220555-r07_finding12_dev_epoch4_chatgpt_seed2023\\analysis",
+    "metric_points": 11,
+    "long_rows": 66,
+    "train_loss_rows": 0,
+    "mode": "test",
+    "tables": [
+      "paper_style_metrics_wide.csv",
+      "paper_style_metrics_long.csv",
+      "paper_style_summary.csv"
+    ],
+    "figures": [
+      "figures/figure-01-paper-style-relative-delta.svg"
+    ]
+  }
+}

@@ -1,0 +1,3 @@
+run_id,metric,points,start_relative_delta,end_relative_delta,min_relative_delta,max_relative_delta,mean_relative_delta,start_llm_minus_human,end_llm_minus_human,min_llm_minus_human,max_llm_minus_human
+20260713-220627-r07_finding12_dev_epoch5_chatgpt_seed2023,MAP5,11,-21.249165,-34.653979,-34.653979,-21.249165,-27.697674,6.812381,10.820952,6.812381,10.820952
+20260713-220627-r07_finding12_dev_epoch5_chatgpt_seed2023,nDCG5,11,-16.703277,-27.273436,-27.273436,-16.703277,-21.737426,6.545099,10.466783,6.545099,10.466783

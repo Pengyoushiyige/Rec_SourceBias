@@ -1,5 +1,6 @@
 import os
 import utils
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:128" #在 import torch 之前设置显存分配限制
 import torch
 import logging
 import random
@@ -22,15 +23,15 @@ def seed_torch(seed=2023):
     torch.backends.cudnn.deterministic = True
     
 class Trainer_main:
-    def __init__(self, args):
+    def __init__(self, args): #PLM的加载和参数冻结
         self.args = args
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
-        self.tokenizer = AutoTokenizer.from_pretrained(args.plm_model)
-        self.config = AutoConfig.from_pretrained(args.plm_model, output_hidden_states=True)
+        self.tokenizer = AutoTokenizer.from_pretrained(args.plm_model) #加载分词器
+        self.config = AutoConfig.from_pretrained(args.plm_model, output_hidden_states=True) #加载配置文件
         args.word_embedding_dim = self.config.hidden_size
-        bert_model = AutoModel.from_pretrained(args.plm_model, config=self.config)
+        bert_model = AutoModel.from_pretrained(args.plm_model, config=self.config) #加载plm如BERT
 
-        for name,param in bert_model.named_parameters():
+        for name,param in bert_model.named_parameters(): #遍历bert参数让PLM充当静态文本向量提取器
             param.requires_grad = False
 
         model = utils.get_model(args.model_type)
@@ -55,7 +56,7 @@ class Trainer_main:
         logging.info(f"Model saved to {path}")
 
 
-    def train_epoch(self, dataloader):
+    def train_epoch(self, dataloader): #训练
         loss = 0.0
         accuary = 0.0  
         for cnt, batch  in enumerate(tqdm(dataloader)):
@@ -82,7 +83,7 @@ class Trainer_main:
         return loss / cnt
 
     @torch.no_grad() #省显存
-    def get_news2vector(self, news_file):
+    def get_news2vector(self, news_file): #实例化 Dataset.NewsDataset 获取新闻向量
         news2vector = {}
         news_dataset = NewsDataset(self.args, news_file)
         news_dataloader = news_dataset.get_dataloader(batch_size=self.args.news_batch_size, \
@@ -104,7 +105,7 @@ class Trainer_main:
         self.optimizer = optim.Adam(model.parameters(), lr=self.args.lr, weight_decay=self.args.weight_decay)
         return model
     
-    def run(self):
+    def run(self): #训练过程的入口函数
         logging.info('Training...')
 
         self.model.train()

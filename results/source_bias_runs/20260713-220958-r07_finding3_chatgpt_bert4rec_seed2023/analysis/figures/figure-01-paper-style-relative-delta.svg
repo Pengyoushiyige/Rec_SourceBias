@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520">
+<rect width="100%" height="100%" fill="white"/>
+<text x="460.0" y="26" text-anchor="middle" font-family="Arial" font-size="18" font-weight="600">Paper-style Relative Delta</text>
+<line x1="82" y1="436" x2="884" y2="436" stroke="#222" stroke-width="1.2"/>
+<line x1="82" y1="52" x2="82" y2="436" stroke="#222" stroke-width="1.2"/>
+<line x1="82" y1="52.00" x2="884" y2="52.00" stroke="#ddd" stroke-width="1"/>
+<text x="72" y="56.00" text-anchor="end" font-family="Arial" font-size="12">42.28</text>
+<line x1="82" y1="148.00" x2="884" y2="148.00" stroke="#ddd" stroke-width="1"/>
+<text x="72" y="152.00" text-anchor="end" font-family="Arial" font-size="12">-11.39</text>
+<line x1="82" y1="244.00" x2="884" y2="244.00" stroke="#ddd" stroke-width="1"/>
+<text x="72" y="248.00" text-anchor="end" font-family="Arial" font-size="12">-65.05</text>
+<line x1="82" y1="340.00" x2="884" y2="340.00" stroke="#ddd" stroke-width="1"/>
+<text x="72" y="344.00" text-anchor="end" font-family="Arial" font-size="12">-118.72</text>
+<line x1="82" y1="436.00" x2="884" y2="436.00" stroke="#ddd" stroke-width="1"/>
+<text x="72" y="440.00" text-anchor="end" font-family="Arial" font-size="12">-172.38</text>
+<line x1="82" y1="127.63" x2="884" y2="127.63" stroke="#777" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="82.00" y1="436" x2="82.00" y2="441" stroke="#222"/>
+<text x="82.00" y="458" text-anchor="middle" font-family="Arial" font-size="12">1</text>
+<line x1="884.00" y1="436" x2="884.00" y2="441" stroke="#222"/>
+<text x="884.00" y="458" text-anchor="middle" font-family="Arial" font-size="12">20</text>
+<polyline fill="none" stroke="#0072B2" stroke-width="2.4" points="82.00,78.48 124.21,154.87 166.42,186.55 208.63,230.18 250.84,273.43 293.05,312.67 335.26,345.35 377.47,378.19 419.68,385.64 461.89,395.82 504.11,399.63 546.32,402.13 588.53,403.05 630.74,403.49 672.95,409.52 715.16,397.88 757.37,391.90 799.58,404.64 841.79,397.55 884.00,404.77"/>
+<circle cx="82.00" cy="78.48" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="124.21" cy="154.87" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="166.42" cy="186.55" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="208.63" cy="230.18" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="250.84" cy="273.43" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="293.05" cy="312.67" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="335.26" cy="345.35" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="377.47" cy="378.19" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="419.68" cy="385.64" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="461.89" cy="395.82" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="504.11" cy="399.63" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="546.32" cy="402.13" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="588.53" cy="403.05" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="630.74" cy="403.49" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="672.95" cy="409.52" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="715.16" cy="397.88" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="757.37" cy="391.90" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="799.58" cy="404.64" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="841.79" cy="397.55" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="884.00" cy="404.77" r="3.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<line x1="92" y1="62" x2="116" y2="62" stroke="#0072B2" stroke-width="2.4"/>
+<text x="124" y="66" font-family="Arial" font-size="13">Target MAP@5 Relative Delta</text>
+<polyline fill="none" stroke="#E69F00" stroke-width="2.4" points="82.00,91.16 124.21,151.68 166.42,176.96 208.63,215.96 250.84,256.12 293.05,297.92 335.26,330.81 377.47,358.70 419.68,368.78 461.89,374.57 504.11,381.23 546.32,381.48 588.53,384.31 630.74,381.15 672.95,392.47 715.16,379.21 757.37,376.12 799.58,386.09 841.79,378.24 884.00,385.67"/>
+<circle cx="82.00" cy="91.16" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="124.21" cy="151.68" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="166.42" cy="176.96" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="208.63" cy="215.96" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="250.84" cy="256.12" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="293.05" cy="297.92" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="335.26" cy="330.81" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="377.47" cy="358.70" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="419.68" cy="368.78" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="461.89" cy="374.57" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="504.11" cy="381.23" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="546.32" cy="381.48" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="588.53" cy="384.31" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="630.74" cy="381.15" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="672.95" cy="392.47" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="715.16" cy="379.21" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="757.37" cy="376.12" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="799.58" cy="386.09" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="841.79" cy="378.24" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<circle cx="884.00" cy="385.67" r="3.5" fill="#E69F00" stroke="white" stroke-width="1"/>
+<line x1="92" y1="84" x2="116" y2="84" stroke="#E69F00" stroke-width="2.4"/>
+<text x="124" y="88" font-family="Arial" font-size="13">Target nDCG@5 Relative Delta</text>
+<text x="483.0" y="490" text-anchor="middle" font-family="Arial" font-size="14">Loop epoch</text>
+<text transform="translate(22 244.0) rotate(-90)" text-anchor="middle" font-family="Arial" font-size="14">Relative Delta (%)</text>
+</svg>

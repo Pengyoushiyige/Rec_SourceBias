@@ -37,7 +37,7 @@ def parse_args():
     parser.add_argument('--gpu', type=str, default='0')
 
     parser.add_argument("--plm_model", type=str, default="bert-base-uncased")
-    parser.add_argument("--llm_model", type=str, default="llama")
+    parser.add_argument("--llm_model", type=str, default="gpt-3.5-turbo-0613") #默认是llama为了和论文一样改成了chatGPT
     
     parser.add_argument("--negative_sampling_ratio", default=4, type=int)
 

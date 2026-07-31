@@ -32,7 +32,7 @@ def acc(y_true, y_hat):
     hit = torch.sum(y_true == y_hat)
     return hit.data.float() * 1.0 / tot
 
-def latest_checkpoint(directory):
+def latest_checkpoint(directory): #自动扫描保存目录下的所有文件名（形如 epoch-N.pt），解析出数字 N，并返回**最新（Epoch 最大）**的那个 checkpoint 路径，方便断点续训
     if not os.path.exists(directory):
         return None
     print(os.listdir(directory))

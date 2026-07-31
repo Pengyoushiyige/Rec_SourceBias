@@ -240,10 +240,10 @@ class UserDataset(Dataset):
 
     def get_dataloader(self, batch_size, shuffle, num_workers):
         
-        def collate_fn(batch):
-            candidate_news = [[c.split('-')[0] for c in i["impressions"] if c.split('-')[1] == '1'] for i in batch]
+        def collate_fn(batch): #一个由多条样本组成的List，打包转换成可以直接输入给模型的Tensor字典
+            candidate_news = [[c.split('-')[0] for c in i["impressions"] if c.split('-')[1] == '1'] for i in batch] #它从原始的印象数据里 过滤出有点击行为的候选新闻 ID；返回了新闻的原始 ID 字符串
             return {
-                "log_ids": torch.stack([torch.stack([self.human_news2vector[n] if np.random.choice([1,0], p=[self.ratio, 1-self.ratio]) == 0 else self.llm_news2vector[n] for n in i['clicked_news']]) for i in batch]),
+                "log_ids": torch.stack([torch.stack([self.human_news2vector[n] if np.random.choice([1,0], p=[self.ratio, 1-self.ratio]) == 0 else self.llm_news2vector[n] for n in i['clicked_news']]) for i in batch]), #以概率 self.ratio 抽中数字 1 以概率 1 - self.ratio 抽中数字 0 
                 "log_mask": torch.stack([torch.tensor(i["log_mask"]) for i in batch]),
                 "clicked_news_string": [i["clicked_news_string"] for i in batch],
                 "candidate_news": candidate_news,
