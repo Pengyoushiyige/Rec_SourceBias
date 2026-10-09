@@ -1,5 +1,13 @@
 import numpy as np
 
+def fast_recall_score(y_true, y_score, k=(3, 5)):
+    """Binary relevance recall over the complete supplied candidate labels."""
+    labels = np.asarray(y_true)
+    order = np.argsort(y_score)[::-1]
+    relevant = np.sum(labels == 1)
+    return [float(np.sum(labels[order[:cutoff]] == 1) / relevant) if relevant else 0.0
+            for cutoff in k]
+
 def fast_dcg_score(y_true, y_score, k=[10]):
     result = []
     order = np.argsort(y_score)[::-1]

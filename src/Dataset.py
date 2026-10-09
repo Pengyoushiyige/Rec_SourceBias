@@ -1,4 +1,6 @@
 import torch
+from pathlib import Path
+from click_models import ClickConfig, ClickPolicy
 import random
 from tqdm import tqdm
 from torch.utils.data import Dataset
@@ -36,9 +38,11 @@ def get_click_index(score, label, eta=-1):
     return select_index
 
 class BaseDataset(Dataset):
-    def __init__(self, args, behaviors_path, human_news2vector, llm_news2vector, user2vector, epoch, ratio=None):
+    def __init__(self, args, behaviors_path, human_news2vector, llm_news2vector, user2vector, epoch, ratio=None,
+                 click_policy=None, training_epoch=0, observation_sink=None):
         super(BaseDataset, self).__init__()
         self.args = args
+        click_policy = click_policy or ClickPolicy(ClickConfig.from_args(args), getattr(args, 'seed', 2023))
         behaviors = pd.read_table(
             behaviors_path,
             header=None,
@@ -60,26 +64,25 @@ class BaseDataset(Dataset):
                     llm_news = [llm_news2vector[id] for id in impression_id]
                     if np.random.choice([1, 0], p=[0.5, 0.5]):
                         news = torch.stack(human_news + llm_news).numpy()
-                        score = np.dot(news, user_vector)
-                        select_pos_index = get_click_index(score, candidate_label, eta=args.eta)
-                        index_list = list(range(len(score)))
-                        if len(index_list) > args.negative_sampling_ratio:
-                            select_neg_indexs = random.sample(index_list[:select_pos_index] + index_list[select_pos_index+1:], args.negative_sampling_ratio)
-                        else:
-                            select_neg_indexs = random.choices(index_list[:select_pos_index] + index_list[select_pos_index+1:], k=args.negative_sampling_ratio)
-                        pos_news_id = impression_id[select_pos_index%len(impression_id)] + ('-human' if select_pos_index < len(impression_id) else '-llm')
-                        neg_news_ids = [impression_id[select_neg_index%len(impression_id)] + ('-human' if select_neg_index < len(impression_id) else '-llm') for select_neg_index in select_neg_indexs]
+                        candidate_ids = [i + '-human' for i in impression_id] + [i + '-llm' for i in impression_id]
                     else:
                         news = torch.stack(llm_news + human_news).numpy()
-                        score = np.dot(news, user_vector)
-                        select_pos_index = get_click_index(score, candidate_label, eta=args.eta)
-                        index_list = list(range(len(score)))
-                        if len(index_list) > args.negative_sampling_ratio:
-                            select_neg_indexs = random.sample(index_list[:select_pos_index] + index_list[select_pos_index+1:], args.negative_sampling_ratio)
-                        else:
-                            select_neg_indexs = random.choices(index_list[:select_pos_index] + index_list[select_pos_index+1:], k=args.negative_sampling_ratio)
-                        pos_news_id = impression_id[select_pos_index%len(impression_id)] + ('-llm' if select_pos_index < len(impression_id) else '-human')
-                        neg_news_ids = [impression_id[select_neg_index%len(impression_id)] + ('-llm' if select_neg_index < len(impression_id) else '-human') for select_neg_index in select_neg_indexs]
+                        candidate_ids = [i + '-llm' for i in impression_id] + [i + '-human' for i in impression_id]
+                    score = np.dot(news, user_vector)
+                    event_key = (epoch, training_epoch, str(Path(behaviors_path).resolve()),
+                                 row.Index, str(row.impression_id), str(row.user))
+                    select_pos_index, _, diagnostics = click_policy.select(
+                        score, candidate_label, candidate_ids, row.user, event_key)
+                    index_list = list(range(len(score)))
+                    if len(index_list) > args.negative_sampling_ratio:
+                        select_neg_indexs = random.sample(index_list[:select_pos_index] + index_list[select_pos_index+1:], args.negative_sampling_ratio)
+                    else:
+                        select_neg_indexs = random.choices(index_list[:select_pos_index] + index_list[select_pos_index+1:], k=args.negative_sampling_ratio)
+                    pos_news_id = candidate_ids[select_pos_index]
+                    neg_news_ids = [candidate_ids[i] for i in select_neg_indexs]
+                    if observation_sink is not None:
+                        observation_sink.record(diagnostics, select_neg_indexs, round_number=epoch + 1,
+                                                training_epoch=training_epoch + 1, event_key=event_key)
 
                     if 'llm' in pos_news_id:
                         llm_cnt += 1
@@ -105,6 +108,10 @@ class BaseDataset(Dataset):
                     neg_news_ids = [impression_id[select_neg_index] + '-human' for select_neg_index in select_neg_indexs]
                     behaviors.at[row.Index, 'candidate_news'] = " ".join([pos_news_id] + neg_news_ids)
                     behaviors.at[row.Index, 'clicked_news'] = " ".join([x + '-human' for x in row.clicked_news.split()])
+                    if observation_sink is not None:
+                        observation_sink.record_initial([pos_news_id] + neg_news_ids, row.user,
+                                                        row.impression_id, round_number=epoch + 1,
+                                                        training_epoch=training_epoch + 1)
                 new_llm_ratio, neg_llm_ratio = 0, 0
             self.new_ratio = new_llm_ratio
             print(f"\nnew ratio: {new_llm_ratio}")
@@ -315,4 +322,3 @@ class BehaviorsDataset(Dataset):
         
 if __name__ == '__main__':
     pass
-    

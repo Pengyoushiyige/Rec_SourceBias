@@ -58,6 +58,17 @@ def parse_args():
     
     parser.add_argument("--disturb_ratio", type=float, default=0.5)
     parser.add_argument("--eta", type=float, default=-1)
+    parser.add_argument('--click_model', choices=['rank', 'pbm_probability', 'sacm_static'], default='rank')
+    parser.add_argument('--sacm_alpha_mode', choices=['user_beta', 'global'], default='user_beta')
+    parser.add_argument('--sacm_alpha_value', type=float, default=0.0)
+    parser.add_argument('--sacm_alpha_a', type=float, default=2.0)
+    parser.add_argument('--sacm_alpha_b', type=float, default=5.0)
+    parser.add_argument('--sacm_cue_mode', choices=['beta', 'disabled', 'binary'], default='beta')
+    parser.add_argument('--sacm_hgc_cue_a', type=float, default=2.0)
+    parser.add_argument('--sacm_hgc_cue_b', type=float, default=5.0)
+    parser.add_argument('--sacm_aigc_cue_a', type=float, default=5.0)
+    parser.add_argument('--sacm_aigc_cue_b', type=float, default=2.0)
+    parser.add_argument('--click_diagnostics_dir', type=str, default=None)
     parser.add_argument("--loop_epochs", type=int, default=20)
 
     parser.add_argument("--user_loss", type=float, default=0.01)
@@ -70,6 +81,11 @@ def parse_args():
     parser.add_argument("--ckpt_dir", type=str, default="")
     
     args = parser.parse_args()
+    from click_models import ClickConfig
+    try:
+        ClickConfig.from_args(args)
+    except ValueError as error:
+        parser.error(str(error))
 
     if args.human_news_file is None and args.HGC_file is not None:
         args.human_news_file = args.HGC_file

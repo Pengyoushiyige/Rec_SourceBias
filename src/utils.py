@@ -4,7 +4,7 @@ import sys
 import torch
 import numpy as np
 import re
-from metrics import fast_ndcg_score, fast_map_score
+from metrics import fast_ndcg_score, fast_map_score, fast_recall_score
 
 from model.BERT4Rec import BERT4Rec
 from model.GRU4Rec import GRU4Rec
@@ -84,9 +84,14 @@ class metrics:
         self.MAP1_eval = ScalarMovingAverage('MAP1')
         self.MAP3_eval = ScalarMovingAverage('MAP3')
         self.MAP5_eval = ScalarMovingAverage('MAP5')
+        self.Recall3_eval = ScalarMovingAverage('Recall3')
+        self.Recall5_eval = ScalarMovingAverage('Recall5')
         
     
     def update(self, label, score):
+        recall3, recall5 = fast_recall_score(label, score, k=(3, 5))
+        self.Recall3_eval.add(recall3, 1)
+        self.Recall5_eval.add(recall5, 1)
         ndcg_results = fast_ndcg_score(label, score, k=[1,3,5])
         map_results = fast_map_score(label, score, k=[1,3,5])
         ndcg1 = ndcg_results[0]
@@ -115,6 +120,8 @@ class metrics:
         logging.info(f"MAP1: {self.MAP1_eval.get_avg_weight()*100}")
         logging.info(f"MAP3: {self.MAP3_eval.get_avg_weight()*100}")
         logging.info(f"MAP5: {self.MAP5_eval.get_avg_weight()*100}")
+        logging.info(f"Recall3: {self.Recall3_eval.get_avg_weight()*100}")
+        logging.info(f"Recall5: {self.Recall5_eval.get_avg_weight()*100}")
         logging.info("")
         logging.info(f"nDCG1: {self.NDCG1_eval.get_avg_weight()*100}")
         logging.info(f"nDCG3: {self.NDCG3_eval.get_avg_weight()*100}")    

@@ -4,11 +4,14 @@ import torch
 import logging
 import random
 import numpy as np
+import json
 import torch.nn.functional as F
 import torch.optim as optim
 from tqdm import tqdm
 from Dataset import NewsDataset, BehaviorsDataset, UserDataset, BaseDataset
 from transformers import AutoTokenizer, AutoModel, AutoConfig
+from click_models import ClickConfig, ClickPolicy
+from click_observations import ClickObservations
 
 def seed_torch(seed=2023):
     random.seed(seed)
@@ -44,6 +47,7 @@ class Trainer:
         self.optimizer = optim.Adam(self.model.parameters(), lr=self.args.lr, weight_decay=self.args.weight_decay)
         self.last_ratio = 0
         self.news2vector_cache = {}
+        self.click_policy = ClickPolicy(ClickConfig.from_args(args), args.seed)
 
     def save_model(self, path):
         if os.path.dirname(path):
@@ -247,6 +251,14 @@ class Trainer:
         return user2vector
 
     def run(self):
+        directory = getattr(self.args, 'click_diagnostics_dir', None)
+        if directory:
+            with ClickObservations(directory, self.click_policy.config.click_model) as observations:
+                self._run(observations)
+        else:
+            self._run(None)
+
+    def _run(self, observations=None):
         logging.info('Training...')
         self.model.train()
         self.model = self.model.to(self.device)
@@ -283,17 +295,21 @@ class Trainer:
 
             for ep in range(self.args.epochs):
                 self.model.train()
+                if observations is not None:
+                    observations.start_epoch(lep + 1, ep + 1)
                 if lep % 2 == 0:
-                    dataset = BaseDataset(self.args, self.args.behaviors_file1, self.human_text2vector, self.llm_text2vector, user2vector, epoch=lep)
+                    dataset = BaseDataset(self.args, self.args.behaviors_file1, self.human_text2vector, self.llm_text2vector, user2vector, epoch=lep, click_policy=self.click_policy, training_epoch=ep, observation_sink=observations)
                     dataloader = dataset.get_dataloader(batch_size=self.args.batch_size, shuffle=False, num_workers=self.args.num_workers)
                 else:
-                    dataset = BaseDataset(self.args, self.args.behaviors_file2, self.human_text2vector, self.llm_text2vector, user2vector, epoch=lep)
+                    dataset = BaseDataset(self.args, self.args.behaviors_file2, self.human_text2vector, self.llm_text2vector, user2vector, epoch=lep, click_policy=self.click_policy, training_epoch=ep, observation_sink=observations)
                     dataloader = dataset.get_dataloader(batch_size=self.args.batch_size, shuffle=False, num_workers=self.args.num_workers)
                 if self.args.debias is True:
                     loss = self.train_debias_double_align_epoch(dataloader)
                 else:
                     loss = self.train_epoch(dataloader)
                 logging.info(f"EPOCH[{ep + 1}] LOSS:{loss}")
+                if observations is not None:
+                    logging.info('CLICK_SUMMARY: %s', json.dumps(observations.finish_epoch(), allow_nan=False))
 
             self.last_ratio = dataset.new_ratio
             self.evaluates(lep+1, self.last_ratio)
