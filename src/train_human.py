@@ -58,7 +58,8 @@ class Trainer_main:
 
     def train_epoch(self, dataloader): #训练
         loss = 0.0
-        accuary = 0.0  
+        accuary = 0.0
+        batch_count = 0
         for cnt, batch  in enumerate(tqdm(dataloader)):
             candidate_news_id, clicked_news_id, targets, log_mask = batch["candidate_news_id"], batch["clicked_news_id"], batch["targets"].to(self.device), batch["log_mask"].to(self.device)
             candidate_news = torch.stack([torch.stack([self.text2vector[new].to(self.device) for new in bs]) for bs in batch["candidate_news_id"]]).to(self.device)
@@ -74,13 +75,16 @@ class Trainer_main:
             bz_loss.backward()
             loss += bz_loss.cpu().detach().data.float()
             self.optimizer.step()
+            batch_count += 1
             
             if cnt % self.args.log_steps == 0:
                 logging.info(
                     'Ed: {}, train_loss: {:.5f}, acc: {:.5f}'.format(
-                         cnt * self.args.batch_size, loss.data / cnt,
-                        accuary / cnt))
-        return loss / cnt
+                         cnt * self.args.batch_size, loss.data / batch_count,
+                        accuary / batch_count))
+        if batch_count == 0:
+            raise ValueError('Cannot train an epoch with an empty dataloader')
+        return loss / batch_count
 
     @torch.no_grad() #省显存
     def get_news2vector(self, news_file): #实例化 Dataset.NewsDataset 获取新闻向量

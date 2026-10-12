@@ -1,0 +1,23 @@
+{
+  "schema_version": 2,
+  "stage": "pilot",
+  "phase": "core",
+  "condition": "pbm",
+  "seed": 2023,
+  "status": "failed",
+  "started_at": "2026-10-12T16:23:39.851271+00:00",
+  "output_dir": "E:\\Lab\\Rec_SourceBias\\results\\sacm_pilot_20261013-012339\\20261012T162339Z-pilot-pbm-2023-337ff4f4",
+  "execute": true,
+  "memory_before_probe": {
+    "available": true,
+    "observed_at": "2026-10-12T16:23:39.857758+00:00",
+    "commit_used_bytes": 43198238720,
+    "commit_limit_bytes": 45802156032,
+    "commit_available_bytes": 2603917312,
+    "physical_available_bytes": 4585984000,
+    "process_count": 438
+  },
+  "minimum_commit_headroom_bytes": 4294967296,
+  "error": "RuntimeError('Insufficient Windows system commit headroom: 2.43 GiB available; at least 4 GiB is required before the environment probe. Close unused applications and check Task Manager > Performance > Memory > Committed, then start a new pilot cohort. Free GPU VRAM is a separate resource. No training was started; batch_size=128 and news_batch_size=64 remain unchanged. This is a conservative launch threshold, not a guarantee that training will fit.')",
+  "finished_at": "2026-10-12T16:23:39.857758+00:00"
+}
