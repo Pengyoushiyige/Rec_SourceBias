@@ -12,6 +12,7 @@ from Dataset import NewsDataset, BehaviorsDataset, UserDataset, BaseDataset
 from transformers import AutoTokenizer, AutoModel, AutoConfig
 from click_models import ClickConfig, ClickPolicy
 from click_observations import ClickObservations
+from round_observations import RoundObservations
 
 def seed_torch(seed=2023):
     random.seed(seed)
@@ -191,6 +192,11 @@ class Trainer:
 
         logging.info(f"Epoch: {test_epoch}")
         human_cnt, llm_cnt = 0, 0
+        native_diagnostics = {"total_impressions": 0, "skipped_homogeneous_labels": 0,
+                              "skipped_first_pair_equal": 0, "evaluated_impressions": 0,
+                              "positive_pair_ties": 0, "positive_pair_human_wins": 0,
+                              "positive_pair_llm_wins": 0, "first_score_pairs_human_wins": 0,
+                              "first_score_pairs_llm_wins": 0, "first_score_pairs_ties": 0}
         human_metrics, llm_metrics = utils.metrics('Human', ratio=ratio), utils.metrics('LLM', ratio=ratio)
         human_target_metrics, llm_target_metrics = utils.metrics('Human Target', ratio=ratio), utils.metrics('LLM Target', ratio=ratio)
 
@@ -203,7 +209,9 @@ class Trainer:
                             desc="Calculating probabilities"):
             candidate_news = batch["candidate_news"]
             labels = np.array(batch["y_true"][0])
+            native_diagnostics["total_impressions"] += 1
             if np.all(labels == 0) or np.all(labels == 1):
+                native_diagnostics["skipped_homogeneous_labels"] += 1
                 continue
             human_candidate_news_vector = torch.stack([self.human_text2vector[new] for new in candidate_news[0]]).numpy()
             llm_candidate_news_vector = torch.stack([self.llm_text2vector[new] for new in candidate_news[0]]).numpy()
@@ -211,8 +219,17 @@ class Trainer:
             human_y_pred = np.dot(human_candidate_news_vector, user_vector)
             llm_y_pred = np.dot(llm_candidate_news_vector, user_vector)
 
+            delta = human_y_pred - llm_y_pred
+            native_diagnostics["positive_pair_ties"] += int(np.sum(delta[labels == 1] == 0))
+            native_diagnostics["positive_pair_human_wins"] += int(np.sum(delta[labels == 1] > 0))
+            native_diagnostics["positive_pair_llm_wins"] += int(np.sum(delta[labels == 1] < 0))
+            native_diagnostics["first_score_pairs_human_wins"] += int(delta[0] > 0)
+            native_diagnostics["first_score_pairs_llm_wins"] += int(delta[0] < 0)
+            native_diagnostics["first_score_pairs_ties"] += int(delta[0] == 0)
             if human_y_pred[0] == llm_y_pred[0]:
+                native_diagnostics["skipped_first_pair_equal"] += 1
                 continue
+            native_diagnostics["evaluated_impressions"] += 1
             
             human_cnt += np.sum((human_y_pred - llm_y_pred)[labels == 1] > 0)
             llm_cnt += np.sum((human_y_pred - llm_y_pred)[labels == 1] < 0)
@@ -238,6 +255,9 @@ class Trainer:
         source_choice_total = human_cnt + llm_cnt
         llm_ratio = 0.0 if source_choice_total == 0 else llm_cnt / source_choice_total
         logging.info(f"llm ratio: {llm_ratio}")
+        self.native_eval_diagnostics = native_diagnostics
+        if getattr(self.args, "round_artifacts_dir", None):
+            logging.info("NATIVE_EVAL_DIAGNOSTICS: %s", json.dumps(native_diagnostics))
 
 
     @torch.no_grad() #0616提交的真的能省显存吗
@@ -273,6 +293,10 @@ class Trainer:
 
         self.human_text2vector = self.get_news2vector(self.args.human_news_file)
         self.llm_text2vector = self.get_news2vector(self.args.llm_news_file)
+        artifact_directory = getattr(self.args, "round_artifacts_dir", None)
+        round_observations = (RoundObservations(artifact_directory, self.args,
+                              self.human_text2vector, self.llm_text2vector)
+                              if artifact_directory else None)
 
         self.text2vector = {}
         for k, v in self.human_text2vector.items():
@@ -321,3 +345,6 @@ class Trainer:
 
             self.last_ratio = dataset.new_ratio
             self.evaluates(lep+1, self.last_ratio)
+            if round_observations is not None:
+                round_observations.save_round(lep + 1, self.model.user_encoder, self.last_ratio,
+                                              self.native_eval_diagnostics)

@@ -72,6 +72,56 @@ class ClickContractTests(unittest.TestCase):
         self.assertEqual(self.ids[a], shuffled[b])
         np.testing.assert_array_equal(q, p[perm])
 
+    def test_cross_source_ties_have_no_fixed_human_priority(self):
+        policy = self.policy('pbm_probability')
+        first_human = 0
+        for event in range(200):
+            _, _, diagnostic = policy.select([1, 1], [1, 1], self.ids[:2], 'U1', event)
+            first_human += diagnostic['ranks'][0] == 1
+        self.assertGreater(first_human, 60)
+        self.assertLess(first_human, 140)
+        pbm = self.policy('pbm_probability')
+        zero = self.policy(sacm_alpha_mode='global', sacm_alpha_value=0)
+        for event in range(20):
+            a, p, _ = pbm.select([1, 1], [1, 1], self.ids[:2], 'U1', event)
+            b, q, _ = zero.select([1, 1], [1, 1], self.ids[:2], 'U1', event)
+            self.assertEqual(a, b)
+            np.testing.assert_array_equal(p, q)
+
+    def test_tie_resolution_does_not_consume_global_random_state(self):
+        random.seed(71)
+        np.random.seed(71)
+        py_state, np_state = random.getstate(), np.random.get_state()
+        self.policy('pbm_probability').select([1, 1], [1, 1], self.ids[:2], 'U1', 'tie-rng')
+        self.assertEqual(random.getstate(), py_state)
+        after = np.random.get_state()
+        np.testing.assert_array_equal(np_state[1], after[1])
+        self.assertEqual(np_state[2:], after[2:])
+
+    def test_continuous_alpha_and_cue_not_binary_source_penalty(self):
+        ids = self.ids[:2]
+        previous = None
+        for alpha in (0, .2, .4, .6):
+            policy = self.policy(sacm_alpha_mode='global', sacm_alpha_value=alpha)
+            policy.cues.update({ids[0]: .9, ids[1]: .1})
+            _, probabilities, _ = policy.select([2, 1], [1, 1], ids, 'U1', 'continuous')
+            expected = np.array([1, .5]) * (1 - alpha * np.array([.9, .1]))
+            np.testing.assert_allclose(probabilities, expected / expected.sum(), atol=1e-12)
+            if previous is not None:
+                self.assertLess(probabilities[0], previous[0])
+            previous = probabilities
+        # Holding rank/alpha/cue fixed, changing source names cannot change weights.
+        renamed = ['N1-llm', 'N1-human']
+        other = self.policy(sacm_alpha_mode='global', sacm_alpha_value=.6)
+        other.cues.update({renamed[0]: .9, renamed[1]: .1})
+        _, probabilities, _ = other.select([2, 1], [1, 1], renamed, 'U1', 'continuous')
+        np.testing.assert_allclose(probabilities, previous, atol=1e-12)
+        for cue in (.1, .3, .5):
+            equal = self.policy(sacm_alpha_mode='global', sacm_alpha_value=.6)
+            equal.cues.update({ids[0]: cue, ids[1]: cue})
+            _, probabilities, _ = equal.select([2, 1], [1, 1], ids, 'U1', 'same-cue')
+            np.testing.assert_allclose(probabilities, [2/3, 1/3], atol=1e-12)
+
     def test_errors_identify_impression(self):
         for scores, labels, ids in [([float("nan"), 2], [1, 1], self.ids[:2]),
                                      ([1, 2], [0, 0], self.ids[:2]),

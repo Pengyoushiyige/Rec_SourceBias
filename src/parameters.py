@@ -69,6 +69,7 @@ def parse_args():
     parser.add_argument('--sacm_aigc_cue_a', type=float, default=5.0)
     parser.add_argument('--sacm_aigc_cue_b', type=float, default=2.0)
     parser.add_argument('--click_diagnostics_dir', type=str, default=None)
+    parser.add_argument('--round_artifacts_dir', type=str, default=None)
     parser.add_argument("--loop_epochs", type=int, default=20)
 
     parser.add_argument("--user_loss", type=float, default=0.01)

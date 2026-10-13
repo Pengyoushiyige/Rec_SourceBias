@@ -1,0 +1,9 @@
+{
+  "run": "E:\\Lab\\Rec_SourceBias\\results\\sacm_full_staged_20261013-153814\\runs\\20261013T063850Z-full-pbm-2023-c905985c",
+  "measured_seconds_including_setup": 1179.411246,
+  "measured_bytes": 1276590715,
+  "remaining_core_runs": 14,
+  "rough_remaining_core_hours": 4.58659929,
+  "rough_remaining_core_bytes": 17872270010,
+  "limits": "Single PBM timing/size projection; SACM, resource pressure and analysis may differ."
+}

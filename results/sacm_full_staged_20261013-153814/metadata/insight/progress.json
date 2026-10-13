@@ -1,0 +1,31 @@
+{
+  "status": "completed-exploratory-step",
+  "step": "all",
+  "started_at": "2026-10-13T07:38:26.969017+00:00",
+  "reports": [
+    {
+      "kind": "native-2023",
+      "raw": "E:\\Lab\\Rec_SourceBias\\results\\sacm_full_staged_20261013-153814\\analysis\\native-2023-20261013T080309Z-3e8567",
+      "knowledge_base": "E:\\Lab\\Research Playground\\Research\\claude-scholar\\Results\\Analysis\\2026-10-13--sacm-insight-native-2023-20261013T080310Z-baea8d"
+    },
+    {
+      "kind": "controlled-2023",
+      "raw": "E:\\Lab\\Rec_SourceBias\\results\\sacm_full_staged_20261013-153814\\analysis\\controlled-2023-20261013T080621Z-d8460f",
+      "knowledge_base": "E:\\Lab\\Research Playground\\Research\\claude-scholar\\Results\\Analysis\\2026-10-13--sacm-insight-controlled-2023-20261013T080621Z-ed26b2"
+    },
+    {
+      "kind": "native-2023-2024",
+      "raw": "E:\\Lab\\Rec_SourceBias\\results\\sacm_full_staged_20261013-153814\\analysis\\native-2023-2024-20261013T085354Z-c1dbcb",
+      "knowledge_base": "E:\\Lab\\Research Playground\\Research\\claude-scholar\\Results\\Analysis\\2026-10-13--sacm-insight-native-2023-2024-20261013T085355Z-3eab3c"
+    },
+    {
+      "kind": "controlled-2023-2024",
+      "raw": "E:\\Lab\\Rec_SourceBias\\results\\sacm_full_staged_20261013-153814\\analysis\\controlled-2023-2024-20261013T085544Z-a423a5",
+      "knowledge_base": "E:\\Lab\\Research Playground\\Research\\claude-scholar\\Results\\Analysis\\2026-10-13--sacm-insight-controlled-2023-2024-20261013T085545Z-0d88c2"
+    }
+  ],
+  "formal_matrix_complete": false,
+  "updated_at": "2026-10-13T08:55:45.523999+00:00",
+  "current_action": "heterogeneous / 2024",
+  "finished_at": "2026-10-13T08:55:45.523999+00:00"
+}

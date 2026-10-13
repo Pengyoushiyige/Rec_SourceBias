@@ -1,0 +1,105 @@
+{
+  "schema": "sacm-staged-full-v1",
+  "created_at": "2026-10-13T06:38:47.933535+00:00",
+  "signature": {
+    "source_sha256": {
+      "src\\click_models.py": "24db041fd133140bb642f936d4c8cbebf99f848651a0e163314c1f4d23911318",
+      "src\\click_observations.py": "8e39989d9262840eee48d5545a21e53c5418ce843f165113acafd8a499a6298f",
+      "src\\Dataset.py": "1ea8496d9b6908217a97334365dd627fe72d94b563288d69c2c8d7e7374554eb",
+      "src\\data_preprocess.py": "a2612335364b2f7dd0640e74f2d7acaef649c719483b299415937bec99d954b1",
+      "src\\metrics.py": "f3316fcaa185f045fc4b614cb037e01a0b832bae15da39e25f2900b410b72984",
+      "src\\parameters.py": "c7802cbb0a68c2398177ab901ae172c635c31187600bfcd5d17a5be7099acb7c",
+      "src\\round_observations.py": "981bdbd63283cd0770a6522b3af9a0080ff3e24c6873fdb44c5a22f0d550b21b",
+      "src\\run.py": "64de0c00871d2597d7e6ac22faba4c461fb13bec938e41c1d46589a9fb9bd8b2",
+      "src\\test.py": "a6a307faf629ed4bb367a38af1769ee05358035a3d01f745ab4846f8fc3c2884",
+      "src\\train_human.py": "18d82322ded50e902a3ae4a25cb0b3cd6fd8c477a4dc64cfa0777e65d966ec2a",
+      "src\\train_loop.py": "d96f710d13ec5c712c6753f07d93257d3147d3969c15bd5fe43a12c6730a8518",
+      "src\\utils.py": "551a073b8edeedfbc851ebdc6a037806caf248e425d258b78a80d3d2658f619f",
+      "src\\model\\BERT4Rec.py": "faddc12b6daf181abd0af14adf91f8d8ec1314603d296b22052f5d818b6281cc",
+      "src\\model\\GRU4Rec.py": "2b659105fecd0a394298d3e2a69f8d152cbc88c68466e37df16bb7c88b3994dc",
+      "src\\model\\LRURec.py": "667e01e707d46140a2ceee7ff46523a8cbd69dd7db0d21723b580eba7f9dbe36",
+      "src\\model\\SASRec.py": "ad5920d9cee870f2022f20811979f2dc44a50f0b4ca37117c0833c5b16479a5c",
+      "src\\model\\click_model\\ncm.py": "931ece4478991e0ae7b694213bf28a845a8c7fa9f9e8ec2afb77f9e81d8df8b0",
+      "scripts\\analyze_sacm_experiments.py": "b7ff911193b8219bccc5f1cf9027280142bf923bde640e5832ab824b69906e82",
+      "scripts\\analyze_saved_cohort.py": "1563d0fed34a27326322b5b219fd8de76b26f492270628fd24b91aeb0b0fcbed",
+      "scripts\\audit_click_ties.py": "60f6ed04005156ca67ece730cfed490a1bf890f13dc5171c0df163f0811dc513",
+      "scripts\\check_token_length.py": "aeff2344c413746e34e041291b236531c71f980eabc7d1be7d270b4f9001476b",
+      "scripts\\compute_paper_style_metrics.py": "f60e6b4e2f5b240c48d5151cf2fddba3029ff1e2b0a73ae5e72131916ca64e74",
+      "scripts\\evaluate_saved_rounds.py": "55496728b26f7fee02feab2db08b6856ff689d1cd9c9e1851b1561b28a9048cf",
+      "scripts\\plot_source_bias_run.py": "0cef24a17e8ab1d70003debf19a9335bafc9bb2845e032ee421b6ed608d01f1f",
+      "scripts\\report_sacm_full.py": "f6a86423373ed7199f64afe77485e833c2f969c58be5c742da7caff56916ced4",
+      "scripts\\run_all_tests.py": "bf44cf0600e9cf5eaedcbc6cb88ff0e26ca5a8232990503bbc9572a854a9b35d",
+      "scripts\\run_sacm_experiment.py": "d923f6cd7aaf7d359ecb3511f5af8083672f61539c7ec6c243e8b3c78ace6623",
+      "scripts\\run_sacm_workflow.py": "d769709ddc419e339a3fa1c4c014a25c504c1fb83f4a618c911cbcf861771585",
+      "scripts\\run_source_bias_capture.py": "ffbc506d9553e58b84c4e6dbee08a28d54f435d464ed40341fa13b6b4af3959d",
+      "scripts\\validate_round_artifacts.py": "40d35f79c7fa62fc955f010fe41cacd7eb4872b8df84f5baade73e5235219e1d",
+      "scripts\\verify_sacm_contract.py": "f5b4716127fef965122a6d2d9cdf63c6a637e8e2461adad1c7ea8d63e5c054c0",
+      "scripts\\__pycache__\\scratch_bert_gpu.py": "296e7ab377a1ffbf6d14f9337198b619064264674e57adc32891e45301effb1c"
+    },
+    "data_sha256": {
+      "dataset\\Amazon_Beauty\\text\\news.tsv": "6ee4cb547f86066b7b71f8974c53f0d2f251600557d8ad4116bdc457342357f0",
+      "dataset\\Amazon_Beauty\\text\\news_gemini-pro.tsv": "7d47dba816a33bc189e9579707ce26aace18b429031d169c40b693f249100a63",
+      "dataset\\Amazon_Beauty\\text\\news_gpt-3.5-turbo-0613-rewrite.tsv": "79525dfa170cc12eb4fa4ed79e8068cd4232c5239249c16e6e3a09f964fc763b",
+      "dataset\\Amazon_Beauty\\text\\news_gpt-3.5-turbo-0613-rewrite_parsed_bert-base-uncased.tsv": "c7ed0462f1f6608abe2735efdeec819650612fc58ad321c5e6ae23180b1aaee5",
+      "dataset\\Amazon_Beauty\\text\\news_gpt-3.5-turbo-0613.tsv": "ed73d39b5648aae0266f3c18ce8371b843cd295b77836ddd917b9427dd802d8a",
+      "dataset\\Amazon_Beauty\\text\\news_gpt-3.5-turbo-0613_parsed_bert-base-uncased.tsv": "b56d2885cbdbcbb1ac5ce13b9793ed057516a1b06991b1776fd25ddea5c40218",
+      "dataset\\Amazon_Beauty\\text\\news_llama.tsv": "7e29662af688129e42ca0845c91dcb256087d3c2c08775a271e0be51f6ae88b5",
+      "dataset\\Amazon_Beauty\\text\\news_llama_parsed_bert-base-uncased.tsv": "1a36d1eefc134f7e2232de7720dc79732e8f91e26a7b4be9a29e14df00dc5d83",
+      "dataset\\Amazon_Beauty\\text\\news_Mistral-7B-Instruct-v0.2.tsv": "dcd78840b00a135036c1a966b83dd44c0967c6056e9f2f56dc17183fb082a2ae",
+      "dataset\\Amazon_Beauty\\text\\news_parsed_bert-base-uncased.tsv": "92d0c4984a80fc4f6ed105a05e73a8e6c63e8f827a256d17095c92939766a5e8",
+      "dataset\\Amazon_Beauty\\train\\behaviors.tsv": "0fda6eda6250bbdee53f5445daa2e5199d9c7fff60a6643c91939dab900d9161",
+      "dataset\\Amazon_Beauty\\train\\behaviors1.tsv": "3a31a31f99c5d55542e0646b58660f4bdb28e4b458892c8d5adfe90090115934",
+      "dataset\\Amazon_Beauty\\train\\behaviors2.tsv": "6a6794234e9ed2463a91730b5badcc2f149bcb919ca91f0afcecf83bc426b7d6",
+      "dataset\\Amazon_Beauty\\dev\\behaviors.tsv": "98155503635a8ff52859914f85809f7b19e7977c514cc6deaf11bd2027d39404"
+    },
+    "git_head": "5679d26d954624f13cad23120edf42aa4e24019e",
+    "versions": {
+      "python": "3.10.19 (main, Feb 12 2026, 00:37:08) [MSC v.1944 64 bit (AMD64)]",
+      "torch": "2.1.2+cu118",
+      "transformers": "4.39.3",
+      "cuda": "11.8",
+      "cuda_available": true,
+      "offline_config_tokenizer": true
+    },
+    "platform": "Windows-10-10.0.26200-SP0",
+    "baseline_provenance": {
+      "text_encoding_mode": "train",
+      "text_encoder_parameters": "frozen; train-mode dropout retained",
+      "news_batch_size": 64,
+      "news_vector_cache": "process-local CPU vectors keyed by absolute text-file path; reused across rounds",
+      "pretrained_cache": "Hugging Face local offline model/config/tokenizer cache",
+      "cache_environment": {},
+      "model_update": "reset recommendation model and optimizer each round",
+      "history_feedback": "global last-epoch click ratio replaces original history sources",
+      "probability_ties": "event-keyed uniform permutation within exact cross-source ties; legacy rank unchanged",
+      "round_observations": "shared frozen text vectors once; user encoder checkpoint and native evaluation counters every round"
+    },
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0",
+      "PYTORCH_CUDA_ALLOC_CONF": "max_split_size_mb:128",
+      "HF_HUB_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1"
+    }
+  },
+  "gate": "E:\\Lab\\Rec_SourceBias\\results\\sacm_full_staged_20261013-153814\\metadata\\gates\\20261013T063815Z-2a6b98",
+  "seeds": [
+    2023,
+    2024,
+    2025,
+    2026,
+    2027
+  ],
+  "rounds": 20,
+  "epochs": 5,
+  "core_conditions": [
+    "pbm",
+    "zero",
+    "heterogeneous"
+  ],
+  "extended_conditions": [
+    "global",
+    "low",
+    "high",
+    "weak_cue"
+  ]
+}

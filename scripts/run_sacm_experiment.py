@@ -44,7 +44,8 @@ def build_command(args: argparse.Namespace, out: Path) -> list[str]:
                '--llm_news_file', str(data / 'text' / list(EXPECTED)[1]),
                '--test_behaviors_file', str(data / 'dev/behaviors.tsv'),
                '--click_model', 'pbm_probability' if args.condition == 'pbm' else 'sacm_static',
-               '--click_diagnostics_dir', str(out)]
+               '--click_diagnostics_dir', str(out),
+               '--round_artifacts_dir', str(out / 'round_artifacts')]
     for filename, option in (('behaviors', '--behaviors_file'),
                              ('behaviors1', '--behaviors_file1'),
                              ('behaviors2', '--behaviors_file2')):
@@ -74,7 +75,57 @@ def baseline_provenance(env: dict) -> dict:
         'cache_environment': {k: env[k] for k in ('HF_HOME', 'HF_HUB_CACHE', 'HUGGINGFACE_HUB_CACHE', 'TRANSFORMERS_CACHE') if k in env},
         'model_update': 'reset recommendation model and optimizer each round',
         'history_feedback': 'global last-epoch click ratio replaces original history sources',
+        'probability_ties': 'event-keyed uniform permutation within exact cross-source ties; legacy rank unchanged',
+        'round_observations': 'shared frozen text vectors once; user encoder checkpoint and native evaluation counters every round',
     }
+
+
+AUXILIARY_REPAIR_FILES = frozenset({
+    'scripts/validate_round_artifacts.py', 'scripts/run_sacm_experiment.py',
+    'scripts/run_sacm_workflow.py', 'scripts/analyze_sacm_experiments.py',
+})
+
+
+def source_signature(manifest: dict) -> dict:
+    """Retain raw actual hashes, allow only explicitly recorded auxiliary repairs."""
+    source = dict(manifest.get('source_sha256') or {})
+    aliases = {path.replace('\\', '/'): path for path in source}
+    for repair in manifest.get('auxiliary_source_repairs', []):
+        name = repair['path']
+        if name not in AUXILIARY_REPAIR_FILES or name not in aliases:
+            raise ValueError('Unapproved auxiliary repair path: ' + name)
+        before, after = repair['old_sha256'], repair['new_sha256']
+        if any(not isinstance(digest, str) or len(digest) != 64 or
+               any(c not in '0123456789abcdef' for c in digest) for digest in (before, after)):
+            raise ValueError('Invalid auxiliary repair hash')
+        key = aliases[name]
+        if source[key] not in (before, after):
+            raise ValueError('Auxiliary source changed beyond recorded repair: ' + name)
+        source[key] = before
+    return source
+
+
+def load_frozen_signature(path: Path) -> dict:
+    frozen = json.loads(path.read_text(encoding='utf-8'))
+    if frozen.get('auxiliary_source_repairs'):
+        original = Path(frozen['original_cohort_file'])
+        if sha256(original) != frozen['original_cohort_sha256']:
+            raise ValueError('Original cohort record changed after repair')
+        if json.loads(original.read_text(encoding='utf-8'))['signature'] != frozen['signature']:
+            raise ValueError('Repair must preserve original frozen signature')
+    return frozen
+
+
+def cohort_signature(manifest: dict) -> dict:
+    """Seed-independent identity used to freeze a paired cohort before training."""
+    signature = {key: manifest.get(key) for key in
+                 ('source_sha256', 'data_sha256', 'git_head', 'versions', 'platform', 'baseline_provenance')}
+    signature['environment'] = {key: value for key, value in manifest.get('environment', {}).items()
+                                if key != 'PYTHONHASHSEED'}
+    signature['source_sha256'] = source_signature(manifest)
+    if not all(signature.values()):
+        raise ValueError('Missing frozen cohort signature fields')
+    return signature
 
 MINIMUM_COMMIT_HEADROOM = 4 * 1024 ** 3
 
@@ -138,6 +189,8 @@ def main(argv=None):
     parser.add_argument('--output-root', default=None)
     parser.add_argument('--python', default=str(ROOT / '.venv/Scripts/python.exe'))
     parser.add_argument('--execute', action='store_true')
+    parser.add_argument('--expected-signature', type=Path,
+                        help='Frozen cohort JSON; reject source/data/environment drift before training')
     args = parser.parse_args(argv)
     if args.stage == 'pilot':
         args.phase = 'core'
@@ -199,6 +252,13 @@ def main(argv=None):
         if args.execute and not manifest['versions']['cuda_available']:
             raise RuntimeError('CUDA unavailable; execution cannot fall back to CPU')
         manifest['platform'] = platform.platform()
+        if args.expected_signature:
+            frozen = load_frozen_signature(args.expected_signature)
+            manifest['auxiliary_source_repairs'] = frozen.get('auxiliary_source_repairs', [])
+            manifest['expected_signature_file'] = str(args.expected_signature.resolve())
+            expected = frozen['signature']
+            if cohort_signature(manifest) != expected:
+                raise RuntimeError('Frozen cohort signature mismatch; no training was started')
         command = build_command(args, out)
         manifest['command'] = command
         manifest['status'] = 'running' if args.execute else 'prepared'

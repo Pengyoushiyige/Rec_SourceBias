@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "workflow_first_exit_code": 0,
+  "training_launch_calls": 0,
+  "raw_files_unchanged": true,
+  "original_cohort_sha256": "4adb244738a78eb70345fa5b3735ae9e4fb23568c79c7a195b7761012f73b781",
+  "repair_file": "E:\\Lab\\Rec_SourceBias\\results\\sacm_full_staged_20261013-153814\\cohort-repair.json",
+  "completed_cell": [
+    "pbm",
+    2023
+  ],
+  "remaining_core_cells": 14,
+  "GPU_training_started": false
+}

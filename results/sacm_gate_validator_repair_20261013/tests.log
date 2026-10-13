@@ -1,0 +1,101 @@
+{"passed": true, "issues": [], "report": "C:\\Users\\Ash\\AppData\\Local\\Temp\\tmp4t_w4e3y\\reports\\pass.json"}
+{"passed": false, "issues": ["round-002.pt: feedback ratio differs from final epoch"], "report": "C:\\Users\\Ash\\AppData\\Local\\Temp\\tmp4t_w4e3y\\failure.json"}
+test_original_and_repaired_runs_pair_without_hiding_raw_hash (test_auxiliary_repair.RepairTests) ... ok
+test_repair_sidecar_preserves_original_and_detects_tampering (test_auxiliary_repair.RepairTests) ... ok
+test_unknown_auxiliary_or_training_change_still_rejected (test_auxiliary_repair.RepairTests) ... ok
+test_continuous_alpha_and_cue_not_binary_source_penalty (test_click_contract.ClickContractTests) ... ok
+test_cross_source_ties_have_no_fixed_human_priority (test_click_contract.ClickContractTests) ... ok
+test_degeneracy_is_exact_for_each_event (test_click_contract.ClickContractTests) ... ok
+test_errors_identify_impression (test_click_contract.ClickContractTests) ... ok
+test_higher_cue_lowers_probability_at_equal_base_weight (test_click_contract.ClickContractTests) ... ok
+test_legacy_selector_matches_original_golden_rng (test_click_contract.ClickContractTests) ... ok
+test_no_global_rng_consumption (test_click_contract.ClickContractTests) ... ok
+test_probability_by_manual_rank_not_raw_score (test_click_contract.ClickContractTests) ... ok
+test_sacm_formula_independently_computed (test_click_contract.ClickContractTests) ... ok
+test_static_state_is_order_independent (test_click_contract.ClickContractTests) ... ok
+test_tie_resolution_does_not_consume_global_random_state (test_click_contract.ClickContractTests) ... ok
+test_ties_canonical_and_permutation_equivariant (test_click_contract.ClickContractTests) ... ok
+test_zero_mass_fails_with_context (test_click_contract.ClickContractTests) ... ok
+test_cli_preserves_input_hash_and_refuses_output_overwrite (test_click_tie_audit.TieAuditTests) ... ok
+test_duplicate_positions_are_not_deduplicated (test_click_tie_audit.TieAuditTests) ... ok
+test_invalid_initialization_event_and_round_are_rejected (test_click_tie_audit.TieAuditTests) ... ok
+test_invalid_pairs_scores_and_partial_scoring_fail (test_click_tie_audit.TieAuditTests) ... ok
+test_paired_and_different_item_cross_source_ties_have_distinct_denominators (test_click_tie_audit.TieAuditTests) ... ok
+test_unscored_initialization_is_not_in_simulated_denominator (test_click_tie_audit.TieAuditTests) ... ok
+test_actual_trainer_run_bridge_two_rounds (test_dataset_sacm.DatasetSACMTests) ... 2026-10-13 16:13:12.202825: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From E:\Lab\Rec_SourceBias\.venv\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+<frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+<frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+ok
+test_paired_zero_alpha_identical_dataset_and_rng_state (test_dataset_sacm.DatasetSACMTests) ... ok
+test_recall_denominator_is_all_positives (test_dataset_sacm.DatasetSACMTests) ... ok
+test_telemetry_counts_repeated_negative_samples (test_dataset_sacm.DatasetSACMTests) ... ok
+test_two_round_data_reaches_optimizer_and_streaming_counts (test_dataset_sacm.DatasetSACMTests) ... ok
+test_cli_exit_codes_report_and_no_overwrite (test_round_artifact_validation.ArtifactValidationTests) ... E:\Lab\Rec_SourceBias\.venv\lib\site-packages\torch\_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+ok
+test_manifest_vectors_behavior_and_missing_round_failures (test_round_artifact_validation.ArtifactValidationTests) ... ok
+test_missing_final_epoch_is_not_accepted_as_last_epoch (test_round_artifact_validation.ArtifactValidationTests) ... ok
+test_outer_launcher_provenance_links_and_command (test_round_artifact_validation.ArtifactValidationTests) ... ok
+test_snapshot_contract_failures (test_round_artifact_validation.ArtifactValidationTests) ... ok
+test_valid_last_epoch_and_cpu_rng_preservation (test_round_artifact_validation.ArtifactValidationTests) ... ok
+test_common_assignments_stateless_nested (test_round_observations.RoundTests) ... ok
+test_evaluation_cpu_duplicates_and_skip_counts (test_round_observations.RoundTests) ... ok
+test_real_bert4rec_offline_cli_without_plm (test_round_observations.RoundTests) ... ok
+test_save_once_nooverwrite_and_rng_unchanged (test_round_observations.RoundTests) ... ok
+test_asymmetric_repeated_candidates_are_still_rejected (test_sacm_analysis.SACMAnalysisTests) ... ok
+test_clicked_negative_or_zero_probability_is_rejected (test_sacm_analysis.SACMAnalysisTests) ... ok
+test_command_preserves_r07_resource_protocol (test_sacm_analysis.SACMAnalysisTests) ... ok
+test_complete_pilot_paired_results_and_relative_delta (test_sacm_analysis.SACMAnalysisTests) ... ok
+test_dev_ratio_must_match_last_epoch_feedback (test_sacm_analysis.SACMAnalysisTests) ... ok
+test_full_core_complete_five_seed_summary (test_sacm_analysis.SACMAnalysisTests) ... ok
+test_full_phases_have_frozen_run_requirements (test_sacm_analysis.SACMAnalysisTests) ... ok
+test_header_only_is_incomplete_and_suppresses_aggregate (test_sacm_analysis.SACMAnalysisTests) ... ok
+test_log_capture_keeps_four_types_at_each_round (test_sacm_analysis.SACMAnalysisTests) ... ok
+test_missing_metric_type_excludes_run (test_sacm_analysis.SACMAnalysisTests) ... ok
+test_primary_averages_last_epoch_exposure_across_noninitial_rounds (test_sacm_analysis.SACMAnalysisTests) ... ok
+test_repeated_candidate_positions_preserve_baseline_multiplicity (test_sacm_analysis.SACMAnalysisTests) ... ok
+test_repeated_negative_sampling_is_counted_by_multiplicity (test_sacm_analysis.SACMAnalysisTests) ... ok
+test_summary_distinguishes_event_weight_and_last_epoch_feedback (test_sacm_analysis.SACMAnalysisTests) ... ok
+test_zero_probability_tolerance_and_utility_normalization (test_sacm_analysis.SACMAnalysisTests) ... ok
+test_ai_can_win_despite_worse_rank_when_discount_dominates (test_sacm_fairness_invariants.FairnessInvariants) ... ok
+test_ai_low_cue_beats_human_high_cue_at_equal_base_weight (test_sacm_fairness_invariants.FairnessInvariants) ... ok
+test_all_input_permutations_share_paired_ranks_probabilities_and_click (test_sacm_fairness_invariants.FairnessInvariants) ... ok
+test_duplicate_occurrences_preserve_probability_mass_and_selected_identity (test_sacm_fairness_invariants.FairnessInvariants) ... ok
+test_namespaces_and_global_random_states_are_independent (test_sacm_fairness_invariants.FairnessInvariants) ... ok
+test_tie_priority_varies_across_seeds_without_fixed_source_winner (test_sacm_fairness_invariants.FairnessInvariants) ... ok
+test_commit_gate_uses_commit_not_free_ram_or_vram (test_sacm_launch.SACMLaunchTests) ... ok
+test_frozen_command_and_provenance (test_sacm_launch.SACMLaunchTests) ... ok
+test_generated_commands_are_accepted_by_actual_baseline_parser (test_sacm_launch.SACMLaunchTests) ... ok
+test_invalid_phase_has_no_output_side_effect (test_sacm_launch.SACMLaunchTests) ... ok
+test_low_commit_records_failure_without_probe_or_training (test_sacm_launch.SACMLaunchTests) ... ok
+test_original_misspelled_options_reproduce_exit_two (test_sacm_launch.SACMLaunchTests) ... ok
+test_phase_counts_and_pilot_invariance (test_sacm_launch.SACMLaunchTests) ... ok
+test_windows_memory_snapshot_reads_real_counters (test_sacm_launch.SACMLaunchTests) ... ok
+test_bad_previously_completed_cell_is_not_silently_replaced (test_sacm_workflow.WorkflowTests) ... ok
+test_between_cell_runner_drift_failure_stops_queue (test_sacm_workflow.WorkflowTests) ... ok
+test_changed_source_stops_before_training (test_sacm_workflow.WorkflowTests) ... ok
+test_default_does_not_write_probe_or_launch (test_sacm_workflow.WorkflowTests) ... ok
+test_existing_core_is_revalidated_and_not_retrained (test_sacm_workflow.WorkflowTests) ... ok
+test_failed_attempt_retained_and_duplicate_completed_rejected (test_sacm_workflow.WorkflowTests) ... ok
+test_failed_zero_control_blocks_heterogeneous_launch (test_sacm_workflow.WorkflowTests) ... ok
+test_first_launches_exactly_one_cell (test_sacm_workflow.WorkflowTests) ... ok
+test_first_reuses_only_after_audit_and_never_enters_core (test_sacm_workflow.WorkflowTests) ... ok
+test_missing_first_cell_refuses_continuation (test_sacm_workflow.WorkflowTests) ... ok
+test_selected_cells_acceptance_cannot_claim_full_matrix (test_sacm_workflow.WorkflowTests) ... ok
+test_signature_excludes_seed_but_includes_source_data_cache_and_environment (test_sacm_workflow.WorkflowTests) ... ok
+test_chinese_report_requires_both_gates_and_exports_seed_plot (test_saved_cohort_analysis.ControlledCohortTests) ... ok
+test_corruption_and_pairing_failure_scenarios (test_saved_cohort_analysis.ControlledCohortTests) ... ok
+test_full_population_and_seed_level_summary (test_saved_cohort_analysis.ControlledCohortTests) ... ok
+test_missing_or_duplicate_cells_no_aggregate (test_saved_cohort_analysis.ControlledCohortTests) ... ok
+test_one_and_two_batches_mean_and_optimization (test_training_loss_stats.CPULossTests) ... ok
+test_empty_epoch_is_explicit_failure (test_training_loss_stats.EmptyLoaderTests) ... ok
+test_three_round_two_epoch_feedback_uses_last_epoch (test_training_loss_stats.FeedbackBridgeTests) ... ok
+test_means_first_batch_logs_and_step_counts (test_training_loss_stats.StatsControlFlowTests) ... ok
+
+----------------------------------------------------------------------
+Ran 86 tests in 27.243s
+
+OK
+sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute

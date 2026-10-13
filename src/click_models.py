@@ -94,6 +94,23 @@ class ClickPolicy:
         except (ValueError, TypeError, IndexError) as error:
             raise ValueError(f'Click impression {event_key!r}: {error}') from error
 
+    def _probability_order(self, scores: np.ndarray, ids: list[str], event_key: Any) -> np.ndarray:
+        """Preserve non-ties; uniformly resolve cross-source exact ties by event."""
+        order = np.lexsort((np.asarray(ids), -scores))
+        start = 0
+        while start < len(order):
+            stop = start + 1
+            while stop < len(order) and scores[order[stop]] == scores[order[start]]:
+                stop += 1
+            group = order[start:stop].copy()
+            if len({self.source(ids[int(i)]) for i in group}) > 1:
+                # Canonical members make the draw independent of source-block input order.
+                # The permutation is uniform: no source suffix gets lexical priority.
+                key = [event_key, [ids[int(i)] for i in group]]
+                order[start:stop] = self._rng('tie', key).permutation(group)
+            start = stop
+        return order
+
     def _select(self, scores: Sequence[float], labels: Sequence[int],
                 candidate_ids: Sequence[str], user_id: Any,
                 event_key: Any) -> tuple[int, np.ndarray, Mapping[str, Any]]:
@@ -109,7 +126,7 @@ class ClickPolicy:
             raise ValueError('No positive candidate')
         c = self.config
         order = (np.argsort(scores)[::-1] if c.click_model == 'rank'
-                 else np.lexsort((np.asarray(ids), -scores)))
+                 else self._probability_order(scores, ids, event_key))
         ranks = np.empty(len(scores), dtype=int)
         ranks[order] = np.arange(1, len(scores) + 1)
         alpha = self.alpha(user_id) if c.click_model == 'sacm_static' else 0.0
@@ -132,7 +149,7 @@ class ClickPolicy:
             if not np.isfinite(total) or total <= 0:
                 raise ValueError('Total click weight is zero or non-finite')
             probabilities = weights / total
-            # Canonical ranking also makes tied candidates independent of source ordering.
+            # Cross-source ties use an independent event-keyed uniform permutation.
             draw = self._rng('click', event_key).random()
             supported = order[probabilities[order] > 0]
             position = min(int(np.searchsorted(np.cumsum(probabilities[supported]), draw, side='right')), len(supported) - 1)

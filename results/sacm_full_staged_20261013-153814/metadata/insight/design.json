@@ -1,0 +1,37 @@
+{
+  "schema": "sacm-professor-insight-v1",
+  "conditions": [
+    "pbm",
+    "heterogeneous"
+  ],
+  "seeds": [
+    2023,
+    2024
+  ],
+  "rounds": 20,
+  "epochs": 5,
+  "controlled_ratios": [
+    "native",
+    "0.5"
+  ],
+  "controlled_device": "cpu",
+  "new_training_queue": [
+    [
+      "heterogeneous",
+      2023
+    ],
+    [
+      "pbm",
+      2024
+    ],
+    [
+      "heterogeneous",
+      2024
+    ]
+  ],
+  "analysis_source_sha256": {
+    "run_insight.py": "08aea3d56b61409322ad02f66a38dd15b3157d0ff104c21a36a7e1f51a7618ca",
+    "insight_analysis.py": "d2c1ae57cafe16017a86a46118562bc85d1a406001a69cf3b1c80d1b52f65667"
+  },
+  "formal_five_seed_matrix_complete": false
+}

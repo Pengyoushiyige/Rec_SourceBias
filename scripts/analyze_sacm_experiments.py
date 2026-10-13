@@ -8,7 +8,7 @@ import hashlib
 from collections import Counter
 from itertools import zip_longest
 from pathlib import Path
-from run_sacm_experiment import CONDITIONS
+from run_sacm_experiment import CONDITIONS, source_signature
 
 RATIOS = {
     'click_ratio': ('click_llm', 'clicks'),
@@ -167,15 +167,20 @@ def compare_zero_candidates(left: Path, right: Path) -> list[str]:
     return []
 
 
-def analyze(root: Path, stage: str, phase: str = 'all') -> dict:
+def analyze(root: Path, stage: str, phase: str = 'all', *, run_paths=None, required_cells=None) -> dict:
     if stage not in ('pilot', 'full') or phase not in ('core', 'extended', 'all'):
         raise ValueError('unsupported stage/phase')
     conditions = ('pbm', 'zero', 'heterogeneous') if stage == 'pilot' or phase == 'core' else (
         ('pbm', 'global', 'low', 'high', 'weak_cue') if phase == 'extended' else CONDITIONS)
     seeds = (2023,) if stage == 'pilot' else tuple(range(2023, 2028))
     expected_rounds = 3 if stage == 'pilot' else 20
+    full_cells = {(condition, seed) for condition in conditions for seed in seeds}
+    required = full_cells if required_cells is None else set(required_cells)
+    if not required or not required.issubset(full_cells):
+        raise ValueError('Invalid required acceptance cells')
     runs, issues, utility, seen, cohort, candidates = {}, [], {}, set(), None, {}
-    for path in sorted(root.glob('*/manifest.json')):
+    paths = root.glob('*/manifest.json') if run_paths is None else (Path(p) / 'manifest.json' for p in run_paths)
+    for path in sorted(paths):
         try:
             m = json.loads(path.read_text(encoding='utf-8'))
             if not all(name in m for name in ('stage', 'condition', 'seed', 'status')):
@@ -186,6 +191,8 @@ def analyze(root: Path, stage: str, phase: str = 'all') -> dict:
         if m['stage'] != stage or m['condition'] not in conditions or m['seed'] not in seeds:
             continue
         key = (m['condition'], m['seed'])
+        if key not in required:
+            continue
         if m['status'] != 'completed':
             issues.append(f'{path.parent.name}: status={m["status"]}')
             continue
@@ -193,7 +200,8 @@ def analyze(root: Path, stage: str, phase: str = 'all') -> dict:
             raise ValueError(f'Duplicate completed run for {key}; select a single cohort directory')
         seen.add(key)
         before = len(issues)
-        signature = {k: m.get(k) for k in ('source_sha256', 'data_sha256', 'git_head', 'versions', 'platform')}
+        signature = {k: m.get(k) for k in ('source_sha256', 'data_sha256', 'git_head', 'versions', 'platform', 'baseline_provenance')}
+        signature['source_sha256'] = source_signature(m)
         signature['environment'] = {k: v for k, v in m.get('environment', {}).items() if k != 'PYTHONHASHSEED'}
         if not all(signature.get(k) for k in ('source_sha256', 'data_sha256', 'git_head', 'versions', 'environment')):
             issues.append(f'{key}: missing reproducibility signature')
@@ -285,10 +293,9 @@ def analyze(root: Path, stage: str, phase: str = 'all') -> dict:
                         issues.append(f'seed={seed}: PBM/zero utility {name} differs beyond 1e-6 in normalized units')
                 if r['test_ratio'] != base['test_ratio']:
                     issues.append(f'seed={seed}: PBM/zero evaluation feedback ratio differs')
-    for condition in conditions:
-        for seed in seeds:
-            if (condition, seed) not in runs:
-                issues.append(f'Missing completed run: {condition}, seed={seed}')
+    for condition, seed in sorted(required):
+        if (condition, seed) not in runs:
+            issues.append(f'Missing completed run: {condition}, seed={seed}')
     paired = []
     for condition in conditions:
         if condition == 'pbm':
@@ -359,18 +366,21 @@ def analyze(root: Path, stage: str, phase: str = 'all') -> dict:
             else:
                 issues.append(f'seed={seed}: missing primary exposure outside initial round')
     primary_summary = None
-    if not issues and phase != 'extended' and len(primary_values) == len(seeds):
+    if not issues and required == full_cells and phase != 'extended' and len(primary_values) == len(seeds):
         values = [r['paired_delta'] for r in primary_values]
         primary_summary = {'independent_seeds': len(values), 'mean_paired_delta': statistics.mean(values),
                            'sample_sd': statistics.stdev(values) if len(values) > 1 else None}
     round_rows = [{'condition': key[0], 'seed': key[1], **row} for key, group in runs.items() for row in group]
     if issues:
         final, utility_final = [], []
-    return {'stage': stage, 'phase': phase, 'expected_runs': len(conditions) * len(seeds),
+    return {'stage': stage, 'phase': phase, 'expected_runs': len(required),
+            'acceptance_scope': 'full-matrix' if required == full_cells else 'selected-cells-only',
             'complete': not issues, 'issues': issues, 'round_summary': round_rows,
             'primary_endpoint_by_seed': primary_values, 'primary_endpoint_seed_summary': primary_summary,
             'final_round_seed_summary': final,
             'utility_final_round_seed_summary': utility_final, 'utility_paired_deltas': utility_pairs,
+            'utility_raw': [{'condition': key[0], 'seed': key[1], **row}
+                            for key, metrics in utility.items() for row in metrics],
             'relative_delta': relative_deltas,
             'paired_round_trajectories': paired,
             'limitations': ['Ratios describe conditional simulator impressions; exposure is within its candidate set.',
@@ -384,12 +394,17 @@ def main():
     p.add_argument('--stage', choices=('pilot', 'full'), default='pilot')
     p.add_argument('--phase', choices=('core', 'extended', 'all'), default='all')
     p.add_argument('--output', type=Path, required=True, help='New analysis directory; never overwrite raw outputs')
+    p.add_argument('--selected-runs', type=Path,
+                   help='JSON list of validated run directories; full stage/phase completeness remains required')
     args = p.parse_args()
-    result = analyze(args.root, args.stage, args.phase)
+    selected = json.loads(args.selected_runs.read_text(encoding='utf-8')) if args.selected_runs else None
+    if selected is not None and (not isinstance(selected, list) or not all(isinstance(p, str) for p in selected)):
+        p.error('--selected-runs must contain a JSON list of paths')
+    result = analyze(args.root, args.stage, args.phase, run_paths=selected)
     args.output.mkdir(parents=True, exist_ok=False)
     (args.output / 'analysis.json').write_text(json.dumps(result, indent=2), encoding='utf-8')
     rows = result['paired_round_trajectories']
-    for name in ('relative_delta', 'utility_paired_deltas', 'utility_final_round_seed_summary', 'round_summary', 'primary_endpoint_by_seed'):
+    for name in ('relative_delta', 'utility_raw', 'utility_paired_deltas', 'utility_final_round_seed_summary', 'round_summary', 'primary_endpoint_by_seed'):
         table = result[name]
         if table:
             with (args.output / (name + '.csv')).open('x', newline='', encoding='utf-8') as f:
