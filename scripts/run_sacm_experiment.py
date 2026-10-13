@@ -45,8 +45,10 @@ def build_command(args: argparse.Namespace, out: Path) -> list[str]:
                '--test_behaviors_file', str(data / 'dev/behaviors.tsv'),
                '--click_model', 'pbm_probability' if args.condition == 'pbm' else 'sacm_static',
                '--click_diagnostics_dir', str(out)]
-    for name in ('behaviors', 'behaviors1', 'behaviors2'):
-        command.extend(['--' + name + '_file', str(data / 'train' / (name + '.tsv'))])
+    for filename, option in (('behaviors', '--behaviors_file'),
+                             ('behaviors1', '--behaviors_file1'),
+                             ('behaviors2', '--behaviors_file2')):
+        command.extend([option, str(data / 'train' / (filename + '.tsv'))])
     command.extend(condition_options(args.condition))
     return command
 

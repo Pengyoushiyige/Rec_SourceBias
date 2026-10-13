@@ -122,6 +122,33 @@ class SACMAnalysisTests(unittest.TestCase):
             writer.writeheader()
             writer.writerows(rows)
 
+    def test_repeated_candidate_positions_preserve_baseline_multiplicity(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            folders = self.cohort(root)
+            def repeat_pair(rows):
+                for row in rows:
+                    if int(row['round']) > 1:
+                        row['candidate_id'] = row['candidate_id'].replace('item2-', 'item1-')
+            for folder in folders.values():
+                self.edit_candidates(folder, repeat_pair)
+            result = analysis.analyze(root, 'pilot')
+        self.assertTrue(result['complete'], result['issues'])
+        self.assertEqual(result['primary_endpoint_seed_summary']['independent_seeds'], 1)
+
+    def test_asymmetric_repeated_candidates_are_still_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            folders = self.cohort(root)
+            def unmatched_repeat(rows):
+                for row in rows:
+                    if int(row['round']) > 1 and row['source'] == 'human':
+                        row['candidate_id'] = row['candidate_id'].replace('item2-', 'item1-')
+            self.edit_candidates(folders['heterogeneous'], unmatched_repeat)
+            result = analysis.analyze(root, 'pilot')
+        self.assertFalse(result['complete'])
+        self.assertTrue(any('pairs or relevance labels misaligned' in issue for issue in result['issues']))
+
     def test_header_only_is_incomplete_and_suppresses_aggregate(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

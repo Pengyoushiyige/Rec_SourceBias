@@ -5,6 +5,7 @@ import json
 import math
 import statistics
 import hashlib
+from collections import Counter
 from itertools import zip_longest
 from pathlib import Path
 from run_sacm_experiment import CONDITIONS
@@ -71,17 +72,17 @@ def audit_candidates(path: Path, records: list[dict]) -> list[str]:
         c['impressions'] += 1
         c['simulated_impressions'] += int(not initial)
         if not initial:
-            if len({r['candidate_id'] for r in event}) != len(event):
-                raise ValueError('duplicate simulated candidate IDs')
             if sorted(r['rank'] for r in event) != list(range(1, len(event) + 1)):
                 raise ValueError('candidate ranks must be a permutation')
             ranked = sorted(event, key=lambda r: r['rank'])
             if any(x['score'] < y['score'] for x, y in zip(ranked, ranked[1:])):
                 raise ValueError('candidate score order differs from ranking')
-            paired = {}
-            for r in event:
-                paired.setdefault(r['candidate_id'].rsplit('-', 1)[0], {})[r['source']] = r['label']
-            if any(set(labels) != {'human', 'llm'} or labels['human'] != labels['llm'] for labels in paired.values()):
+            # Baseline impressions can repeat item IDs. Audit candidate positions,
+            # preserving both multiplicity and labels rather than deduplicating IDs.
+            paired = {source: Counter((r['candidate_id'].rsplit('-', 1)[0], r['label'])
+                                      for r in event if r['source'] == source)
+                      for source in ('human', 'llm')}
+            if not paired['human'] or paired['human'] != paired['llm']:
                 raise ValueError('candidate HGC/AIGC pairs or relevance labels misaligned')
             if abs(sum(r['probability'] for r in event) - 1) > 1e-12:
                 raise ValueError('candidate probabilities do not sum to one')

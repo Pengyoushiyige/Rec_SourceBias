@@ -1,0 +1,2868 @@
+{
+  "stage": "pilot",
+  "phase": "core",
+  "expected_runs": 3,
+  "complete": true,
+  "issues": [],
+  "round_summary": [
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 1,
+      "click_ratio": 0.0,
+      "training_ratio": 0.0,
+      "training_positive_ratio": 0.0,
+      "exposure_ratio_at3": null,
+      "exposure_ratio_at5": null,
+      "last_training_epoch": 1,
+      "feedback_ratio": 0.0,
+      "last_epoch_exposure_ratio_at3": null,
+      "last_epoch_exposure_ratio_at5": null
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 2,
+      "click_ratio": 0.48609958506224066,
+      "training_ratio": 0.4947302904564315,
+      "training_positive_ratio": 0.48609958506224066,
+      "exposure_ratio_at3": 0.483402489626556,
+      "exposure_ratio_at5": 0.4942738589211618,
+      "last_training_epoch": 1,
+      "feedback_ratio": 0.48609958506224066,
+      "last_epoch_exposure_ratio_at3": 0.483402489626556,
+      "last_epoch_exposure_ratio_at5": 0.4942738589211618
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 3,
+      "click_ratio": 0.4931535269709544,
+      "training_ratio": 0.49576763485477177,
+      "training_positive_ratio": 0.4931535269709544,
+      "exposure_ratio_at3": 0.4963347164591978,
+      "exposure_ratio_at5": 0.49771784232365146,
+      "last_training_epoch": 1,
+      "feedback_ratio": 0.4931535269709544,
+      "last_epoch_exposure_ratio_at3": 0.4963347164591978,
+      "last_epoch_exposure_ratio_at5": 0.49771784232365146
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "click_ratio": 0.0,
+      "training_ratio": 0.0,
+      "training_positive_ratio": 0.0,
+      "exposure_ratio_at3": null,
+      "exposure_ratio_at5": null,
+      "last_training_epoch": 1,
+      "feedback_ratio": 0.0,
+      "last_epoch_exposure_ratio_at3": null,
+      "last_epoch_exposure_ratio_at5": null
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "click_ratio": 0.48609958506224066,
+      "training_ratio": 0.4947302904564315,
+      "training_positive_ratio": 0.48609958506224066,
+      "exposure_ratio_at3": 0.483402489626556,
+      "exposure_ratio_at5": 0.4942738589211618,
+      "last_training_epoch": 1,
+      "feedback_ratio": 0.48609958506224066,
+      "last_epoch_exposure_ratio_at3": 0.483402489626556,
+      "last_epoch_exposure_ratio_at5": 0.4942738589211618
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "click_ratio": 0.4931535269709544,
+      "training_ratio": 0.49576763485477177,
+      "training_positive_ratio": 0.4931535269709544,
+      "exposure_ratio_at3": 0.4963347164591978,
+      "exposure_ratio_at5": 0.49771784232365146,
+      "last_training_epoch": 1,
+      "feedback_ratio": 0.4931535269709544,
+      "last_epoch_exposure_ratio_at3": 0.4963347164591978,
+      "last_epoch_exposure_ratio_at5": 0.49771784232365146
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "click_ratio": 0.0,
+      "training_ratio": 0.0,
+      "training_positive_ratio": 0.0,
+      "exposure_ratio_at3": null,
+      "exposure_ratio_at5": null,
+      "last_training_epoch": 1,
+      "feedback_ratio": 0.0,
+      "last_epoch_exposure_ratio_at3": null,
+      "last_epoch_exposure_ratio_at5": null
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "click_ratio": 0.4574688796680498,
+      "training_ratio": 0.49174273858921164,
+      "training_positive_ratio": 0.4574688796680498,
+      "exposure_ratio_at3": 0.483402489626556,
+      "exposure_ratio_at5": 0.4942738589211618,
+      "last_training_epoch": 1,
+      "feedback_ratio": 0.4574688796680498,
+      "last_epoch_exposure_ratio_at3": 0.483402489626556,
+      "last_epoch_exposure_ratio_at5": 0.4942738589211618
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "click_ratio": 0.4576763485477178,
+      "training_ratio": 0.4919502074688797,
+      "training_positive_ratio": 0.4576763485477178,
+      "exposure_ratio_at3": 0.48201936376210236,
+      "exposure_ratio_at5": 0.48966804979253115,
+      "last_training_epoch": 1,
+      "feedback_ratio": 0.4576763485477178,
+      "last_epoch_exposure_ratio_at3": 0.48201936376210236,
+      "last_epoch_exposure_ratio_at5": 0.48966804979253115
+    }
+  ],
+  "primary_endpoint_by_seed": [
+    {
+      "seed": 2023,
+      "first_round": 2,
+      "last_round": 3,
+      "pbm_mean_exposure_at5": 0.49599585062240664,
+      "heterogeneous_mean_exposure_at5": 0.49197095435684646,
+      "paired_delta": -0.004024896265560185
+    }
+  ],
+  "primary_endpoint_seed_summary": {
+    "independent_seeds": 1,
+    "mean_paired_delta": -0.004024896265560185,
+    "sample_sd": null
+  },
+  "final_round_seed_summary": [
+    {
+      "condition": "zero",
+      "metric": "click_ratio",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "training_ratio",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "training_positive_ratio",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "exposure_ratio_at3",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "exposure_ratio_at5",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "feedback_ratio",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "last_epoch_exposure_ratio_at3",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "last_epoch_exposure_ratio_at5",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "click_ratio",
+      "independent_seeds": 1,
+      "mean_paired_delta": -0.035477178423236555,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "training_ratio",
+      "independent_seeds": 1,
+      "mean_paired_delta": -0.0038174273858920804,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "training_positive_ratio",
+      "independent_seeds": 1,
+      "mean_paired_delta": -0.035477178423236555,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "exposure_ratio_at3",
+      "independent_seeds": 1,
+      "mean_paired_delta": -0.01431535269709544,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "exposure_ratio_at5",
+      "independent_seeds": 1,
+      "mean_paired_delta": -0.008049792531120314,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "feedback_ratio",
+      "independent_seeds": 1,
+      "mean_paired_delta": -0.035477178423236555,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "last_epoch_exposure_ratio_at3",
+      "independent_seeds": 1,
+      "mean_paired_delta": -0.01431535269709544,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "last_epoch_exposure_ratio_at5",
+      "independent_seeds": 1,
+      "mean_paired_delta": -0.008049792531120314,
+      "sample_sd": null
+    }
+  ],
+  "utility_final_round_seed_summary": [
+    {
+      "condition": "heterogeneous",
+      "metric": "MAP3",
+      "test_type": "Human",
+      "independent_seeds": 1,
+      "mean_paired_delta": 2.3047619047618966,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "MAP3",
+      "test_type": "Human Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 5.961904761904705,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "MAP3",
+      "test_type": "LLM",
+      "independent_seeds": 1,
+      "mean_paired_delta": 1.2476190476191036,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "MAP3",
+      "test_type": "LLM Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": -4.085714285714264,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "MAP5",
+      "test_type": "Human",
+      "independent_seeds": 1,
+      "mean_paired_delta": 2.0304761904761577,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "MAP5",
+      "test_type": "Human Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 5.773333333333433,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "MAP5",
+      "test_type": "LLM",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.5504761904762248,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "MAP5",
+      "test_type": "LLM Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": -3.4800000000000004,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "Recall3",
+      "test_type": "Human",
+      "independent_seeds": 1,
+      "mean_paired_delta": 1.4285714285714306,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "Recall3",
+      "test_type": "Human Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 5.199999999999996,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "Recall3",
+      "test_type": "LLM",
+      "independent_seeds": 1,
+      "mean_paired_delta": 3.142857142857153,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "Recall3",
+      "test_type": "LLM Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": -4.228571428571428,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "Recall5",
+      "test_type": "Human",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "Recall5",
+      "test_type": "Human Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 4.51428571428572,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "Recall5",
+      "test_type": "LLM",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "Recall5",
+      "test_type": "LLM Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": -1.828571428571422,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "nDCG3",
+      "test_type": "Human",
+      "independent_seeds": 1,
+      "mean_paired_delta": 2.089780402448966,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "nDCG3",
+      "test_type": "Human Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 5.770073199183649,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "nDCG3",
+      "test_type": "LLM",
+      "independent_seeds": 1,
+      "mean_paired_delta": 1.7231227867346774,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "nDCG3",
+      "test_type": "LLM Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": -4.113635181020399,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "nDCG5",
+      "test_type": "Human",
+      "independent_seeds": 1,
+      "mean_paired_delta": 1.547150392305781,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "nDCG5",
+      "test_type": "Human Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 5.459726844788456,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "nDCG5",
+      "test_type": "LLM",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.44719853427581313,
+      "sample_sd": null
+    },
+    {
+      "condition": "heterogeneous",
+      "metric": "nDCG5",
+      "test_type": "LLM Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": -3.075003012976836,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "MAP3",
+      "test_type": "Human",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "MAP3",
+      "test_type": "Human Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "MAP3",
+      "test_type": "LLM",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "MAP3",
+      "test_type": "LLM Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "MAP5",
+      "test_type": "Human",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "MAP5",
+      "test_type": "Human Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "MAP5",
+      "test_type": "LLM",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "MAP5",
+      "test_type": "LLM Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "Recall3",
+      "test_type": "Human",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "Recall3",
+      "test_type": "Human Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "Recall3",
+      "test_type": "LLM",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "Recall3",
+      "test_type": "LLM Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "Recall5",
+      "test_type": "Human",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "Recall5",
+      "test_type": "Human Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "Recall5",
+      "test_type": "LLM",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "Recall5",
+      "test_type": "LLM Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "nDCG3",
+      "test_type": "Human",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "nDCG3",
+      "test_type": "Human Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "nDCG3",
+      "test_type": "LLM",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "nDCG3",
+      "test_type": "LLM Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "nDCG5",
+      "test_type": "Human",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "nDCG5",
+      "test_type": "Human Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "nDCG5",
+      "test_type": "LLM",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    },
+    {
+      "condition": "zero",
+      "metric": "nDCG5",
+      "test_type": "LLM Target",
+      "independent_seeds": 1,
+      "mean_paired_delta": 0.0,
+      "sample_sd": null
+    }
+  ],
+  "utility_paired_deltas": [
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human",
+      "metric": "MAP3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human",
+      "metric": "MAP5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human",
+      "metric": "nDCG3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human",
+      "metric": "nDCG5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human",
+      "metric": "Recall3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM",
+      "metric": "MAP3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM",
+      "metric": "MAP5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM",
+      "metric": "nDCG3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM",
+      "metric": "nDCG5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM",
+      "metric": "Recall3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "MAP3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "MAP5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "nDCG3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "nDCG5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "Recall3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM Target",
+      "metric": "MAP3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM Target",
+      "metric": "MAP5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM Target",
+      "metric": "nDCG3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM Target",
+      "metric": "nDCG5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM Target",
+      "metric": "Recall3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM Target",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human",
+      "metric": "MAP3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human",
+      "metric": "MAP5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human",
+      "metric": "nDCG3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human",
+      "metric": "nDCG5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human",
+      "metric": "Recall3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM",
+      "metric": "MAP3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM",
+      "metric": "MAP5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM",
+      "metric": "nDCG3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM",
+      "metric": "nDCG5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM",
+      "metric": "Recall3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "MAP3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "MAP5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "nDCG3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "nDCG5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "Recall3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM Target",
+      "metric": "MAP3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM Target",
+      "metric": "MAP5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM Target",
+      "metric": "nDCG3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM Target",
+      "metric": "nDCG5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM Target",
+      "metric": "Recall3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM Target",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human",
+      "metric": "MAP3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human",
+      "metric": "MAP5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human",
+      "metric": "nDCG3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human",
+      "metric": "nDCG5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human",
+      "metric": "Recall3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM",
+      "metric": "MAP3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM",
+      "metric": "MAP5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM",
+      "metric": "nDCG3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM",
+      "metric": "nDCG5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM",
+      "metric": "Recall3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "MAP3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "MAP5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "nDCG3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "nDCG5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "Recall3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM Target",
+      "metric": "MAP3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM Target",
+      "metric": "MAP5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM Target",
+      "metric": "nDCG3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM Target",
+      "metric": "nDCG5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM Target",
+      "metric": "Recall3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM Target",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human",
+      "metric": "MAP3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human",
+      "metric": "MAP5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human",
+      "metric": "nDCG3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human",
+      "metric": "nDCG5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human",
+      "metric": "Recall3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM",
+      "metric": "MAP3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM",
+      "metric": "MAP5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM",
+      "metric": "nDCG3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM",
+      "metric": "nDCG5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM",
+      "metric": "Recall3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "MAP3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "MAP5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "nDCG3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "nDCG5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "Recall3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM Target",
+      "metric": "MAP3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM Target",
+      "metric": "MAP5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM Target",
+      "metric": "nDCG3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM Target",
+      "metric": "nDCG5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM Target",
+      "metric": "Recall3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "baseline_test_ratio": 0.0,
+      "test_type": "LLM Target",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human",
+      "metric": "MAP3",
+      "paired_delta": -0.25714285714280294
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human",
+      "metric": "MAP5",
+      "paired_delta": -0.365714285714283
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human",
+      "metric": "nDCG3",
+      "paired_delta": -0.061913812857085304
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human",
+      "metric": "nDCG5",
+      "paired_delta": -0.2658751138164277
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human",
+      "metric": "Recall3",
+      "paired_delta": 0.5142857142857196
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM",
+      "metric": "MAP3",
+      "paired_delta": -0.40952380952384715
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM",
+      "metric": "MAP5",
+      "paired_delta": -0.12380952380955534
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM",
+      "metric": "nDCG3",
+      "paired_delta": -0.5856871328571458
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM",
+      "metric": "nDCG5",
+      "paired_delta": -0.10557436956636224
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM",
+      "metric": "Recall3",
+      "paired_delta": -1.085714285714289
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "MAP3",
+      "paired_delta": 0.1809523809523732
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "MAP5",
+      "paired_delta": 0.3895238095238014
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "nDCG3",
+      "paired_delta": 0.21154781693880054
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "nDCG5",
+      "paired_delta": 0.5756907237629392
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "Recall3",
+      "paired_delta": 0.2857142857142847
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "Recall5",
+      "paired_delta": 1.1428571428571317
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM Target",
+      "metric": "MAP3",
+      "paired_delta": -0.6095238095237896
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM Target",
+      "metric": "MAP5",
+      "paired_delta": -0.80095238095236
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM Target",
+      "metric": "nDCG3",
+      "paired_delta": -0.6312821730612406
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM Target",
+      "metric": "nDCG5",
+      "paired_delta": -0.9562217591544702
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM Target",
+      "metric": "Recall3",
+      "paired_delta": -0.6857142857142833
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "baseline_test_ratio": 0.48609958506224066,
+      "test_type": "LLM Target",
+      "metric": "Recall5",
+      "paired_delta": -1.4285714285714235
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human",
+      "metric": "MAP3",
+      "paired_delta": 2.3047619047618966
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human",
+      "metric": "MAP5",
+      "paired_delta": 2.0304761904761577
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human",
+      "metric": "nDCG3",
+      "paired_delta": 2.089780402448966
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human",
+      "metric": "nDCG5",
+      "paired_delta": 1.547150392305781
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human",
+      "metric": "Recall3",
+      "paired_delta": 1.4285714285714306
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM",
+      "metric": "MAP3",
+      "paired_delta": 1.2476190476191036
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM",
+      "metric": "MAP5",
+      "paired_delta": 0.5504761904762248
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM",
+      "metric": "nDCG3",
+      "paired_delta": 1.7231227867346774
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM",
+      "metric": "nDCG5",
+      "paired_delta": 0.44719853427581313
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM",
+      "metric": "Recall3",
+      "paired_delta": 3.142857142857153
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM",
+      "metric": "Recall5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "MAP3",
+      "paired_delta": 5.961904761904705
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "MAP5",
+      "paired_delta": 5.773333333333433
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "nDCG3",
+      "paired_delta": 5.770073199183649
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "nDCG5",
+      "paired_delta": 5.459726844788456
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "Recall3",
+      "paired_delta": 5.199999999999996
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "Recall5",
+      "paired_delta": 4.51428571428572
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM Target",
+      "metric": "MAP3",
+      "paired_delta": -4.085714285714264
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM Target",
+      "metric": "MAP5",
+      "paired_delta": -3.4800000000000004
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM Target",
+      "metric": "nDCG3",
+      "paired_delta": -4.113635181020399
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM Target",
+      "metric": "nDCG5",
+      "paired_delta": -3.075003012976836
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM Target",
+      "metric": "Recall3",
+      "paired_delta": -4.228571428571428
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "baseline_test_ratio": 0.4931535269709544,
+      "test_type": "LLM Target",
+      "metric": "Recall5",
+      "paired_delta": -1.828571428571422
+    }
+  ],
+  "relative_delta": [
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "MAP3",
+      "relative_delta": 39.75026014568178
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "MAP5",
+      "relative_delta": 32.67407206719134
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "nDCG3",
+      "relative_delta": 37.178218890688974
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "nDCG5",
+      "relative_delta": 27.126845953859966
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "Recall3",
+      "relative_delta": 32.12576896787422
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "Recall5",
+      "relative_delta": 17.819905213270136
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "MAP3",
+      "relative_delta": 10.708866247561081
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "MAP5",
+      "relative_delta": 8.57117230244851
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "nDCG3",
+      "relative_delta": 10.646467428951826
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "nDCG5",
+      "relative_delta": 7.474046424281907
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "Recall3",
+      "relative_delta": 10.59602649006623
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "Recall5",
+      "relative_delta": 5.726184279021348
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "MAP3",
+      "relative_delta": -12.76761385753204
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "MAP5",
+      "relative_delta": -9.555647496896988
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "nDCG3",
+      "relative_delta": -9.835970937830561
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "nDCG5",
+      "relative_delta": -6.0975219351738
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "Recall3",
+      "relative_delta": -4.464285714285716
+    },
+    {
+      "condition": "pbm",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "Recall5",
+      "relative_delta": -0.9920634920634885
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "MAP3",
+      "relative_delta": 39.75026014568178
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "MAP5",
+      "relative_delta": 32.67407206719134
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "nDCG3",
+      "relative_delta": 37.178218890688974
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "nDCG5",
+      "relative_delta": 27.126845953859966
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "Recall3",
+      "relative_delta": 32.12576896787422
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "Recall5",
+      "relative_delta": 17.819905213270136
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "MAP3",
+      "relative_delta": 10.708866247561081
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "MAP5",
+      "relative_delta": 8.57117230244851
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "nDCG3",
+      "relative_delta": 10.646467428951826
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "nDCG5",
+      "relative_delta": 7.474046424281907
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "Recall3",
+      "relative_delta": 10.59602649006623
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.48609958506224066,
+      "test_type": "Human Target",
+      "metric": "Recall5",
+      "relative_delta": 5.726184279021348
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "MAP3",
+      "relative_delta": -12.76761385753204
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "MAP5",
+      "relative_delta": -9.555647496896988
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "nDCG3",
+      "relative_delta": -9.835970937830561
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "nDCG5",
+      "relative_delta": -6.0975219351738
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "Recall3",
+      "relative_delta": -4.464285714285716
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4931535269709544,
+      "test_type": "Human Target",
+      "metric": "Recall5",
+      "relative_delta": -0.9920634920634885
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "MAP3",
+      "relative_delta": 39.75026014568178
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "MAP5",
+      "relative_delta": 32.67407206719134
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "nDCG3",
+      "relative_delta": 37.178218890688974
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "nDCG5",
+      "relative_delta": 27.126845953859966
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "Recall3",
+      "relative_delta": 32.12576896787422
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "test_ratio": 0.0,
+      "test_type": "Human Target",
+      "metric": "Recall5",
+      "relative_delta": 17.819905213270136
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "test_type": "Human Target",
+      "metric": "MAP3",
+      "relative_delta": 14.448336252188861
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "test_type": "Human Target",
+      "metric": "MAP5",
+      "relative_delta": 13.157847160703403
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "test_type": "Human Target",
+      "metric": "nDCG3",
+      "relative_delta": 14.112855520833463
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "test_type": "Human Target",
+      "metric": "nDCG5",
+      "relative_delta": 12.116911254611669
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "test_type": "Human Target",
+      "metric": "Recall3",
+      "relative_delta": 13.488759367193998
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "test_ratio": 0.4574688796680498,
+      "test_type": "Human Target",
+      "metric": "Recall5",
+      "relative_delta": 10.438413361169077
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "test_type": "Human Target",
+      "metric": "MAP3",
+      "relative_delta": 27.253983130271664
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "test_type": "Human Target",
+      "metric": "MAP5",
+      "relative_delta": 21.736985342097757
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "test_type": "Human Target",
+      "metric": "nDCG3",
+      "relative_delta": 24.70163719665697
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "test_type": "Human Target",
+      "metric": "nDCG5",
+      "relative_delta": 17.13174935185494
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "test_type": "Human Target",
+      "metric": "Recall3",
+      "relative_delta": 19.83835415135928
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "test_ratio": 0.4576763485477178,
+      "test_type": "Human Target",
+      "metric": "Recall5",
+      "relative_delta": 9.791565681047018
+    }
+  ],
+  "paired_round_trajectories": [
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "metric": "click_ratio",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "metric": "training_ratio",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "metric": "training_positive_ratio",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 1,
+      "metric": "feedback_ratio",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "metric": "click_ratio",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "metric": "training_ratio",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "metric": "training_positive_ratio",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "metric": "exposure_ratio_at3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "metric": "exposure_ratio_at5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "metric": "feedback_ratio",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "metric": "last_epoch_exposure_ratio_at3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 2,
+      "metric": "last_epoch_exposure_ratio_at5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "metric": "click_ratio",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "metric": "training_ratio",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "metric": "training_positive_ratio",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "metric": "exposure_ratio_at3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "metric": "exposure_ratio_at5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "metric": "feedback_ratio",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "metric": "last_epoch_exposure_ratio_at3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "zero",
+      "seed": 2023,
+      "round": 3,
+      "metric": "last_epoch_exposure_ratio_at5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "metric": "click_ratio",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "metric": "training_ratio",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "metric": "training_positive_ratio",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 1,
+      "metric": "feedback_ratio",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "metric": "click_ratio",
+      "paired_delta": -0.02863070539419088
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "metric": "training_ratio",
+      "paired_delta": -0.002987551867219884
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "metric": "training_positive_ratio",
+      "paired_delta": -0.02863070539419088
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "metric": "exposure_ratio_at3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "metric": "exposure_ratio_at5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "metric": "feedback_ratio",
+      "paired_delta": -0.02863070539419088
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "metric": "last_epoch_exposure_ratio_at3",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 2,
+      "metric": "last_epoch_exposure_ratio_at5",
+      "paired_delta": 0.0
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "metric": "click_ratio",
+      "paired_delta": -0.035477178423236555
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "metric": "training_ratio",
+      "paired_delta": -0.0038174273858920804
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "metric": "training_positive_ratio",
+      "paired_delta": -0.035477178423236555
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "metric": "exposure_ratio_at3",
+      "paired_delta": -0.01431535269709544
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "metric": "exposure_ratio_at5",
+      "paired_delta": -0.008049792531120314
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "metric": "feedback_ratio",
+      "paired_delta": -0.035477178423236555
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "metric": "last_epoch_exposure_ratio_at3",
+      "paired_delta": -0.01431535269709544
+    },
+    {
+      "condition": "heterogeneous",
+      "seed": 2023,
+      "round": 3,
+      "metric": "last_epoch_exposure_ratio_at5",
+      "paired_delta": -0.008049792531120314
+    }
+  ],
+  "limitations": [
+    "Ratios describe conditional simulator impressions; exposure is within its candidate set.",
+    "Round trajectories are repeated observations, not independent samples.",
+    "Relative Delta = 100*(Human Target - LLM Target)/their mean, same round and ratio.",
+    "Incomplete or mismatched runs are excluded from aggregates."
+  ]
+}

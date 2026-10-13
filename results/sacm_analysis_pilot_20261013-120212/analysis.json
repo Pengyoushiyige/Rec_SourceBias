@@ -1,0 +1,28 @@
+{
+  "stage": "pilot",
+  "phase": "core",
+  "expected_runs": 3,
+  "complete": false,
+  "issues": [
+    "('pbm', 2023): invalid candidate diagnostics: duplicate simulated candidate IDs",
+    "('zero', 2023): invalid candidate diagnostics: duplicate simulated candidate IDs",
+    "('heterogeneous', 2023): invalid candidate diagnostics: duplicate simulated candidate IDs",
+    "Missing completed run: pbm, seed=2023",
+    "Missing completed run: zero, seed=2023",
+    "Missing completed run: heterogeneous, seed=2023"
+  ],
+  "round_summary": [],
+  "primary_endpoint_by_seed": [],
+  "primary_endpoint_seed_summary": null,
+  "final_round_seed_summary": [],
+  "utility_final_round_seed_summary": [],
+  "utility_paired_deltas": [],
+  "relative_delta": [],
+  "paired_round_trajectories": [],
+  "limitations": [
+    "Ratios describe conditional simulator impressions; exposure is within its candidate set.",
+    "Round trajectories are repeated observations, not independent samples.",
+    "Relative Delta = 100*(Human Target - LLM Target)/their mean, same round and ratio.",
+    "Incomplete or mismatched runs are excluded from aggregates."
+  ]
+}

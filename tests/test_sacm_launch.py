@@ -1,7 +1,10 @@
 """Launch contract tests: no model loading or GPU execution."""
 import contextlib
+import argparse
+import ast
 import io
 import json
+import logging
 import shutil
 import subprocess
 import sys
@@ -17,6 +20,45 @@ import run_sacm_experiment as runner
 
 
 class SACMLaunchTests(unittest.TestCase):
+    def parse_baseline_command(self, command):
+        # Execute the real parser function without importing utils/model modules.
+        source = ROOT / 'src/parameters.py'
+        tree = ast.parse(source.read_text(encoding='utf-8'))
+        function = next(node for node in tree.body
+                        if isinstance(node, ast.FunctionDef) and node.name == 'parse_args')
+        namespace = {'argparse': argparse, 'logging': logging}
+        module = ast.Module(body=[function], type_ignores=[])
+        exec(compile(ast.fix_missing_locations(module), str(source), 'exec'), namespace)
+        with mock.patch.object(sys, 'argv', [command[1], *command[2:]]), \
+             mock.patch.object(sys, 'path', [str(ROOT / 'src'), *sys.path]):
+            return namespace['parse_args']()
+
+    def test_generated_commands_are_accepted_by_actual_baseline_parser(self):
+        for stage in ('pilot', 'full'):
+            for condition in runner.CONDITIONS:
+                with self.subTest(stage=stage, condition=condition):
+                    args = SimpleNamespace(python='python', stage=stage, condition=condition, seed=2023)
+                    command = runner.build_command(args, Path('fixture'))
+                    parsed = self.parse_baseline_command(command)
+                    data = ROOT / 'dataset/Amazon_Beauty/train'
+                    self.assertEqual(parsed.behaviors_file, str(data / 'behaviors.tsv'))
+                    self.assertEqual(parsed.behaviors_file1, str(data / 'behaviors1.tsv'))
+                    self.assertEqual(parsed.behaviors_file2, str(data / 'behaviors2.tsv'))
+                    self.assertEqual(parsed.batch_size, 128)
+                    self.assertEqual(parsed.news_batch_size, 64)
+                    self.assertEqual(parsed.eta, 1)
+                    self.assertEqual(parsed.click_model, 'pbm_probability' if condition == 'pbm' else 'sacm_static')
+
+    def test_original_misspelled_options_reproduce_exit_two(self):
+        args = SimpleNamespace(python='python', stage='pilot', condition='pbm', seed=2023)
+        command = runner.build_command(args, Path('fixture'))
+        invalid = [option.replace('--behaviors_file1', '--behaviors1_file')
+                   .replace('--behaviors_file2', '--behaviors2_file') for option in command]
+        with contextlib.redirect_stderr(io.StringIO()) as errors, self.assertRaises(SystemExit) as exit_error:
+            self.parse_baseline_command(invalid)
+        self.assertEqual(exit_error.exception.code, 2)
+        self.assertIn('unrecognized arguments: --behaviors1_file', errors.getvalue())
+
     def test_commit_gate_uses_commit_not_free_ram_or_vram(self):
         snapshot = {'available': True, 'commit_available_bytes': 2 * 1024 ** 3,
                     'physical_available_bytes': 8 * 1024 ** 3}

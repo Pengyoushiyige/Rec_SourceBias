@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="411">
+<rect width="100%" height="100%" fill="white"/>
+<text x="20" y="25" font-family="sans-serif" font-size="17">Final-round Human Target utility: paired mean across seeds</text>
+<text x="20" y="64" font-family="sans-serif">heterogeneous MAP3 (n=1)</text>
+<rect x="560.00" y="50" width="200.00" height="18" fill="#1f77b4"/>
+<text x="780" y="64" font-family="sans-serif">5.96190</text>
+<text x="20" y="92" font-family="sans-serif">heterogeneous MAP5 (n=1)</text>
+<rect x="560.00" y="78" width="193.67" height="18" fill="#1f77b4"/>
+<text x="780" y="92" font-family="sans-serif">5.77333</text>
+<text x="20" y="120" font-family="sans-serif">heterogeneous Recall3 (n=1)</text>
+<rect x="560.00" y="106" width="174.44" height="18" fill="#1f77b4"/>
+<text x="780" y="120" font-family="sans-serif">5.20000</text>
+<text x="20" y="148" font-family="sans-serif">heterogeneous Recall5 (n=1)</text>
+<rect x="560.00" y="134" width="151.44" height="18" fill="#1f77b4"/>
+<text x="780" y="148" font-family="sans-serif">4.51429</text>
+<text x="20" y="176" font-family="sans-serif">heterogeneous nDCG3 (n=1)</text>
+<rect x="560.00" y="162" width="193.56" height="18" fill="#1f77b4"/>
+<text x="780" y="176" font-family="sans-serif">5.77007</text>
+<text x="20" y="204" font-family="sans-serif">heterogeneous nDCG5 (n=1)</text>
+<rect x="560.00" y="190" width="183.15" height="18" fill="#1f77b4"/>
+<text x="780" y="204" font-family="sans-serif">5.45973</text>
+<text x="20" y="232" font-family="sans-serif">zero MAP3 (n=1)</text>
+<rect x="560.00" y="218" width="0.00" height="18" fill="#1f77b4"/>
+<text x="780" y="232" font-family="sans-serif">0.00000</text>
+<text x="20" y="260" font-family="sans-serif">zero MAP5 (n=1)</text>
+<rect x="560.00" y="246" width="0.00" height="18" fill="#1f77b4"/>
+<text x="780" y="260" font-family="sans-serif">0.00000</text>
+<text x="20" y="288" font-family="sans-serif">zero Recall3 (n=1)</text>
+<rect x="560.00" y="274" width="0.00" height="18" fill="#1f77b4"/>
+<text x="780" y="288" font-family="sans-serif">0.00000</text>
+<text x="20" y="316" font-family="sans-serif">zero Recall5 (n=1)</text>
+<rect x="560.00" y="302" width="0.00" height="18" fill="#1f77b4"/>
+<text x="780" y="316" font-family="sans-serif">0.00000</text>
+<text x="20" y="344" font-family="sans-serif">zero nDCG3 (n=1)</text>
+<rect x="560.00" y="330" width="0.00" height="18" fill="#1f77b4"/>
+<text x="780" y="344" font-family="sans-serif">0.00000</text>
+<text x="20" y="372" font-family="sans-serif">zero nDCG5 (n=1)</text>
+<rect x="560.00" y="358" width="0.00" height="18" fill="#1f77b4"/>
+<text x="780" y="372" font-family="sans-serif">0.00000</text>
+<path d="M560 45V401" stroke="black"/>
+</svg>
