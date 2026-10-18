@@ -18,7 +18,9 @@ def write_full_report(output: Path, native: dict, controlled: dict, native_outpu
              '## 数据与验收', '',
              ('核心三条件' if native['phase'] == 'core' else '核心三条件及四个预定附加条件') +
              '、seeds2023–2027、20轮×5epoch；Baseline比例反馈与每轮重置机制保留。',
-             '原生完整性与公共历史复评均通过；统计单位为seed，不把轮次/epoch/用户当独立重复。',
+             ('原生汇总一致性与公共历史复评通过；未导出候选明细，未完成候选重数、同分及逐事件概率/配对审计。'
+              if native.get('candidate_audit_complete') is False else '原生完整性与公共历史复评均通过；') +
+             '统计单位为seed，不把轮次/epoch/用户当独立重复。',
              '原生证据：[%s](%s)。' % ('analysis.json', (native_output / 'analysis.json').resolve().as_posix()),
              '受控证据：[%s](%s)。' % ('analysis.json', (controlled_output / 'analysis.json').resolve().as_posix()), '',
              '## 主要终点：第2–20轮末epoch平均AIGC exposure@5', '',

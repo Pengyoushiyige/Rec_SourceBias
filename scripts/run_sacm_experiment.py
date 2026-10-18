@@ -53,6 +53,8 @@ def build_command(args: argparse.Namespace, out: Path) -> list[str]:
                              ('behaviors2', '--behaviors_file2')):
         command.extend([option, str(data / 'train' / (filename + '.tsv'))])
     command.extend(condition_options(args.condition))
+    if getattr(args, 'candidate_export', 'none') == 'archive':
+        command.extend(['--candidate_export', 'archive'])
     return command
 
 def condition_options(condition: str) -> list[str]:
@@ -191,6 +193,8 @@ def main(argv=None):
     parser.add_argument('--output-root', default=None)
     parser.add_argument('--python', default=str(ROOT / '.venv/Scripts/python.exe'))
     parser.add_argument('--execute', action='store_true')
+    parser.add_argument('--candidate-export', choices=('none', 'archive'), default='none',
+                        help='Default: no candidate details; archive only for explicit diagnostic runs')
     parser.add_argument('--expected-signature', type=Path,
                         help='Frozen cohort JSON; reject source/data/environment drift before training')
     args = parser.parse_args(argv)
@@ -263,8 +267,11 @@ def main(argv=None):
                 raise RuntimeError('Frozen cohort signature mismatch; no training was started')
         command = build_command(args, out)
         manifest['command'] = command
-        manifest['candidate_evidence'] = {'file': ARCHIVE_NAME, 'schema': CANDIDATE_SCHEMA,
-                                          'storage': 'gzip normalized event JSONL', 'bytes': None}
+        manifest['candidate_evidence'] = (
+            {'mode': 'archive', 'file': ARCHIVE_NAME, 'schema': CANDIDATE_SCHEMA,
+             'storage': 'gzip normalized event JSONL', 'bytes': None}
+            if args.candidate_export == 'archive' else
+            {'mode': 'summary-only', 'file': None, 'schema': None, 'bytes': 0})
         manifest['status'] = 'running' if args.execute else 'prepared'
         save()
         print(json.dumps({'output_dir': str(out), 'command': command, 'status': manifest['status']}, indent=2))
@@ -304,8 +311,9 @@ def main(argv=None):
                     for row in rows:
                         handle.write(json.dumps(row) + '\n')
         manifest['metrics_rows'] = len(metrics)
-        manifest['candidate_evidence']['bytes'] = ((out / ARCHIVE_NAME).stat().st_size
-                                                 if (out / ARCHIVE_NAME).is_file() else None)
+        if args.candidate_export == 'archive':
+            manifest['candidate_evidence']['bytes'] = ((out / ARCHIVE_NAME).stat().st_size
+                                                     if (out / ARCHIVE_NAME).is_file() else None)
         manifest['status'] = 'completed' if code == 0 else 'failed'
         return code
     except BaseException as exc:

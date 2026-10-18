@@ -55,7 +55,7 @@ class CandidateArchiveTests(unittest.TestCase):
             _, _, diag = policy.select([np.nextafter(1., 2.), np.nextafter(1., 2.), 1., 1.],
                                        [1, 1, 1, 1], ['N-human', 'N-human', 'N-llm', 'N-llm'], '用户1', key)
             random_state, numpy_state = random.getstate(), np.random.get_state()
-            with ClickObservations(directory, 'sacm_static') as sink:
+            with ClickObservations(directory, 'sacm_static', export_candidates=True) as sink:
                 sink.record_initial(['N-human', 'N-human', 'M-human'], '用户1', 'I1', 1, 1)
                 sink.finish_epoch()
                 sink.record(diag, [1, 1, 3], round_number=2, training_epoch=1, event_key=key)
@@ -88,7 +88,7 @@ class CandidateArchiveTests(unittest.TestCase):
             directory = Path(temp)
             policy = ClickPolicy(ClickConfig(click_model='pbm_probability', eta=1), 2023)
             ids = [f'N{i//2}-' + ('human' if i % 2 == 0 else 'llm') for i in range(10)]
-            with ClickObservations(directory, 'pbm_probability') as sink:
+            with ClickObservations(directory, 'pbm_probability', export_candidates=True) as sink:
                 for i in range(400):
                     key = (1, 0, r'E:\Lab\Rec_SourceBias\dataset\Amazon_Beauty\train\behaviors2.tsv', i, 'I', 'U')
                     _, _, diag = policy.select(list(range(10, 0, -1)), [1]*10, ids, 'U', key)
@@ -134,7 +134,7 @@ class CandidateArchiveTests(unittest.TestCase):
     def test_corruption_truncation_and_schema_are_not_silently_accepted(self):
         with tempfile.TemporaryDirectory() as temp:
             directory = Path(temp)
-            with ClickObservations(directory, 'pbm_probability') as sink:
+            with ClickObservations(directory, 'pbm_probability', export_candidates=True) as sink:
                 sink.record_initial(['N-human'], 'U', 'I', 1, 1)
                 summary = sink.finish_epoch()
             path = directory/ARCHIVE_NAME

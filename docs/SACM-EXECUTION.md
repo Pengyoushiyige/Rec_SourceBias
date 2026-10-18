@@ -86,7 +86,7 @@ powershell -File scripts/run_sacm_matrix.ps1 -Stage full -Phase extended -Execut
 
 loss 日志按实际完成 batch 数计算均值，首 batch不除零，空loader明确失败；criterion/backward/optimizer.step及优化机制不变。这是 batch均值而非按样本数加权均值。
 
-每次运行保存 command/data/source SHA/Git状态/环境/Python-Torch-Transformers-CUDA版本；`run.log` 保存原始日志，`metrics.jsonl` 保存dev指标，`summaries.jsonl` 保存轻量模拟统计，`candidate_events.jsonl.gz` 保存去除重复字段的压缩候选事件。新运行不再生成 `candidates.csv`，历史 CSV 仍可读。完整验收核对实际事件与汇总计数、轮次、epoch、条件及seed完整性；日常查询默认只读轻量汇总。格式与查询见 [EXPERIMENT-ARTIFACTS.md](EXPERIMENT-ARTIFACTS.md)。
+每次运行保存 command/data/source SHA/Git状态/环境/Python-Torch-Transformers-CUDA版本；`run.log` 保存原始日志，`metrics.jsonl` 保存dev指标，`summaries.jsonl` 保存轻量模拟统计。默认不生成候选CSV或压缩候选归档；单次启动器仅在显式`--candidate-export archive`时保存明细。默认验收为汇总/评价遥测一致性，明确标记`candidate_audit_complete=false`，不能声称独立候选重数或逐事件zero配对已通过。严格候选审计须预先导出明细并使用`--require-candidates`。日常查询只读轻量汇总；历史CSV仍可读。格式及信息损失见 [EXPERIMENT-ARTIFACTS.md](EXPERIMENT-ARTIFACTS.md)。
 
 ## 终点和验收
 

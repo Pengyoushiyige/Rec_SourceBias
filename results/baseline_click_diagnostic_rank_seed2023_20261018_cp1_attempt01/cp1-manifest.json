@@ -1,0 +1,22 @@
+{
+  "status": "completed",
+  "condition": "rank",
+  "seed": 2023,
+  "return_code": 0,
+  "started_at": "2026-10-18T06:37:46.3893894Z",
+  "finished_at": "2026-10-18T06:57:24.0374844Z",
+  "script": "E:\\Lab\\Research Playground\\task_work\\2026-10-18-cp1-run\\run-rank.ps1",
+  "preflight": "E:\\Lab\\Research Playground\\task_work\\2026-10-18-cp1-run\\preflight.json",
+  "first_round_gate": "E:\\Lab\\Research Playground\\task_work\\2026-10-18-cp1-run\\first-round-gate.json",
+  "validation": "E:\\Lab\\Research Playground\\task_work\\2026-10-18-cp1-run\\validation.json",
+  "paired_pbm": "E:\\Lab\\Rec_SourceBias\\results\\sacm_full_staged_20261013-153814\\runs\\20261013T063850Z-full-pbm-2023-c905985c",
+  "observations": "compressed archive; observation-only change reviewed; no core mechanism changes",
+  "artifacts": [
+    "run.log",
+    "summaries.jsonl",
+    "metrics.jsonl",
+    "events.jsonl",
+    "candidate_events.jsonl.gz",
+    "round_artifacts"
+  ]
+}

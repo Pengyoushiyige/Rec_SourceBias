@@ -185,7 +185,7 @@ Each run creates a timestamped folder under `results/source_bias_runs/<run_id>/`
 
 Artifact generation is mode-aware: `train` keeps loss artifacts, `test` keeps evaluation metrics plus the primary Relative Delta figure, and `loop` additionally keeps ratio diagnostics. Header-only CSV files, empty JSONL files, empty SVG files, the duplicate `analysis/run_summary.json`, and the redundant absolute target-gap figure are not generated.
 
-Click diagnostics now write `candidate_events.jsonl.gz` instead of a full candidate-row CSV. This gzip JSONL archive stores user/item attributes once and retains ordered event evidence without derived source/Top-K columns. `summaries.jsonl` and `metrics.jsonl` remain the lightweight analysis entrypoints. Use `scripts/query_experiment.py RUN_DIRECTORY` for bounded JSON output; historical CSV evidence remains readable. See [the artifact contract](docs/EXPERIMENT-ARTIFACTS.md) for schema, filters and audit limits.
+Click diagnostics default to summaries only: neither `candidates.csv` nor `candidate_events.jsonl.gz` is generated. `summaries.jsonl` and `metrics.jsonl` retain existing aggregate counts and metrics; use `scripts/query_experiment.py RUN_DIRECTORY` for bounded JSON output. Candidate details are an explicit debugging opt-in (`src/run.py --candidate_export archive`, or the SACM runner's `--candidate-export archive`). Summary-only analysis is labeled accordingly and does not claim independent candidate auditing; strict checks use `--require-candidates`. Historical evidence remains readable. See [the artifact contract](docs/EXPERIMENT-ARTIFACTS.md) for information loss and audit limits.
 
 ### B. Generate Clean Tables and SVG Charts
 After a run finishes, replace `<run_id>` with the created folder name:

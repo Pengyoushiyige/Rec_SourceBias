@@ -71,7 +71,8 @@ def audit_cell(path: Path, frozen: dict) -> dict:
     if manifest.get('return_code') != 0:
         raise ValueError('Completed run must have return_code=0: %s' % path)
     key = (manifest['condition'], manifest['seed'])
-    args = argparse.Namespace(python=manifest['command'][0], stage='full', condition=key[0], seed=key[1])
+    args = argparse.Namespace(python=manifest['command'][0], stage='full', condition=key[0], seed=key[1],
+                              candidate_export='archive' if '--candidate_export' in manifest['command'] else 'none')
     if manifest['command'] != runner.build_command(args, path):
         raise ValueError('Frozen training command mismatch: %s' % path)
     local = analysis.analyze(path.parent, 'full', 'all', run_paths=[path], required_cells={key})
@@ -139,8 +140,10 @@ def matrix_acceptance(cohort: Path, python: str, phase: str, frozen: dict) -> Pa
     if not result['complete'] or result['acceptance_scope'] != 'full-matrix':
         raise ValueError('Full matrix acceptance failed')
     write_new(cohort / 'metadata' / ('accepted-' + phase + '-' + stamp() + '.json'),
-              {'phase': phase, 'analysis': str(output), 'selected_runs': str(selection)})
-    print('Full matrix accepted: %s' % output)
+              {'phase': phase, 'analysis': str(output), 'selected_runs': str(selection),
+               'validation_level': result.get('validation_level', 'candidate-audited'),
+               'candidate_audit_complete': result.get('candidate_audit_complete', True)})
+    print('Full matrix telemetry accepted (%s): %s' % (result.get('validation_level', 'candidate-audited'), output))
     return output
 
 

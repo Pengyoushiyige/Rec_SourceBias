@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any, Sequence
 
 import numpy as np
-from candidate_archive import CandidateArchive, FIELDS
+from candidate_archive import ARCHIVE_NAME, CandidateArchive, FIELDS
 
 
 class ClickObservations:
@@ -14,23 +14,25 @@ class ClickObservations:
 
     FIELDS = FIELDS
 
-    def __init__(self, directory: str | Path, click_model: str) -> None:
+    def __init__(self, directory: str | Path, click_model: str, *, export_candidates: bool = False) -> None:
         self.directory = Path(directory)
         self.directory.mkdir(parents=True, exist_ok=True)
         self.click_model = click_model
         # Existing data must never be mixed with a new run.
-        if (self.directory / 'candidates.csv').exists() or (self.directory / 'summaries.jsonl').exists():
+        if any((self.directory / name).exists() for name in ('candidates.csv', 'summaries.jsonl', ARCHIVE_NAME)):
             raise FileExistsError('Existing click evidence must not be mixed with a new run')
-        self._rows = CandidateArchive(self.directory, click_model)
+        self._rows = CandidateArchive(self.directory, click_model) if export_candidates else None
         try:
             self._summaries = (self.directory / "summaries.jsonl").open("x", encoding="utf-8")
         except BaseException:
-            self._rows.close()
+            if self._rows is not None:
+                self._rows.close()
             raise
         self._counts: dict[str, Any] = {}
 
     def start_epoch(self, round_number: int, training_epoch: int) -> None:
         self._counts = {"schema_version": 1, "click_model": self.click_model,
+                        "candidate_export": self._rows is not None,
                         "round": round_number, "training_epoch": training_epoch,
                         "impressions": 0, "clicks": 0, "click_llm": 0,
                         "training_candidates": 0, "training_llm": 0,
@@ -58,10 +60,11 @@ class ClickObservations:
                        impression: object, round_number: int, training_epoch: int) -> None:
         self._ensure_epoch(round_number, training_epoch)
         self._training([value.rsplit("-", 1)[1] for value in candidate_ids])
-        self._rows.record(round_number=round_number, training_epoch=training_epoch,
-                          event_key=json.dumps(["initial", str(impression), str(user_id)]),
-                          user_id=user_id, candidate_ids=candidate_ids, selected=0,
-                          training_counts=[1] * len(candidate_ids))
+        if self._rows is not None:
+            self._rows.record(round_number=round_number, training_epoch=training_epoch,
+                              event_key=json.dumps(["initial", str(impression), str(user_id)]),
+                              user_id=user_id, candidate_ids=candidate_ids, selected=0,
+                              training_counts=[1] * len(candidate_ids))
 
     def record(self, diagnostics: dict[str, Any], neg_indices: Sequence[int], *,
                round_number: int, training_epoch: int, event_key: object) -> None:
@@ -82,14 +85,15 @@ class ClickObservations:
             cue = float(d["cues"][i])
             self._counts[f"cue_{source}_sum"] += cue
             self._counts[f"cue_{source}_count"] += 1
-        training_counts = [0] * len(sources)
-        training_counts[selected] += 1
-        for index in neg_indices:
-            training_counts[int(index)] += 1
-        self._rows.record(round_number=round_number, training_epoch=training_epoch,
-                          event_key=json.dumps(event_key, ensure_ascii=False, separators=(',', ':')),
-                          user_id=d['user_id'], candidate_ids=d['candidate_ids'], selected=selected,
-                          training_counts=training_counts, diagnostics=d)
+        if self._rows is not None:
+            training_counts = [0] * len(sources)
+            training_counts[selected] += 1
+            for index in neg_indices:
+                training_counts[int(index)] += 1
+            self._rows.record(round_number=round_number, training_epoch=training_epoch,
+                              event_key=json.dumps(event_key, ensure_ascii=False, separators=(',', ':')),
+                              user_id=d['user_id'], candidate_ids=d['candidate_ids'], selected=selected,
+                              training_counts=training_counts, diagnostics=d)
 
     def finish_epoch(self) -> dict[str, Any]:
         if not self._counts:
@@ -107,12 +111,14 @@ class ClickObservations:
             c[f"exposure_ratio_at{k}"] = ratio(f"exposure_llm_at{k}", f"exposure_count_at{k}")
         self._summaries.write(json.dumps(c, ensure_ascii=False, allow_nan=False) + "\n")
         self._summaries.flush()
-        self._rows.flush()
+        if self._rows is not None:
+            self._rows.flush()
         self._counts = {}
         return c
 
     def close(self) -> None:
-        self._rows.close()
+        if self._rows is not None:
+            self._rows.close()
         self._summaries.close()
 
     def __enter__(self) -> ClickObservations:

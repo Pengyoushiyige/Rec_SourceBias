@@ -166,7 +166,8 @@ def compare_zero_candidates(left: Path, right: Path) -> list[str]:
     return []
 
 
-def analyze(root: Path, stage: str, phase: str = 'all', *, run_paths=None, required_cells=None) -> dict:
+def analyze(root: Path, stage: str, phase: str = 'all', *, run_paths=None, required_cells=None,
+            require_candidates: bool = False) -> dict:
     if stage not in ('pilot', 'full') or phase not in ('core', 'extended', 'all'):
         raise ValueError('unsupported stage/phase')
     conditions = ('pbm', 'zero', 'heterogeneous') if stage == 'pilot' or phase == 'core' else (
@@ -178,6 +179,7 @@ def analyze(root: Path, stage: str, phase: str = 'all', *, run_paths=None, requi
     if not required or not required.issubset(full_cells):
         raise ValueError('Invalid required acceptance cells')
     runs, issues, utility, seen, cohort, candidates = {}, [], {}, set(), None, {}
+    warnings = []
     paths = root.glob('*/manifest.json') if run_paths is None else (Path(p) / 'manifest.json' for p in run_paths)
     for path in sorted(paths):
         try:
@@ -239,11 +241,29 @@ def analyze(root: Path, stage: str, phase: str = 'all', *, run_paths=None, requi
                     issues.append(f'{key}: missing counts for {metric}')
                 elif r[num] is not None and r[den] is not None and not (0 <= r[num] <= r[den]):
                     issues.append(f'{key}: invalid counts for {metric}')
+                elif metric in r:
+                    expected_ratio = r[num] / r[den] if r[den] else None
+                    actual_ratio = r[metric]
+                    if ((actual_ratio is not None and (type(actual_ratio) not in (int, float)
+                                                        or not math.isfinite(actual_ratio)))
+                            or ((actual_ratio is None) != (expected_ratio is None))
+                            or (actual_ratio is not None and expected_ratio is not None
+                                and abs(actual_ratio - expected_ratio) > 1e-12)):
+                        issues.append(f'{key}: recorded {metric} differs from summary counts')
         rounds = summarize(records)
         if {r['round'] for r in rounds} != set(range(1, expected_rounds + 1)):
             issues.append(f'{key}: missing or unexpected rounds')
         candidate_path = find_candidates(path.parent)
-        if not candidate_path.is_file() or candidate_path.stat().st_size == 0:
+        evidence = m.get('candidate_evidence') or {}
+        summary_only = isinstance(evidence, dict) and evidence.get('mode') == 'summary-only'
+        if summary_only:
+            if candidate_path.exists() or any(r.get('candidate_export') is not False for r in records):
+                issues.append(f'{key}: summary-only declaration conflicts with candidate evidence/telemetry')
+            if require_candidates:
+                issues.append(f'{key}: candidate details required; summary-only run cannot pass candidate audit')
+            warnings.append(f'{key}: candidate details not recorded; no independent recount, tie audit or event-level checks')
+            candidate_path = None
+        elif not candidate_path.is_file() or candidate_path.stat().st_size == 0:
             issues.append(f'{key}: missing candidate diagnostics')
         else:
             issues.extend(f'{key}: {problem}' for problem in audit_candidates(candidate_path, records))
@@ -282,7 +302,10 @@ def analyze(root: Path, stage: str, phase: str = 'all', *, run_paths=None, requi
             candidates[key] = candidate_path
     for seed in seeds:
         if ('pbm', seed) in runs and ('zero', seed) in runs:
-            issues.extend(compare_zero_candidates(candidates[('pbm', seed)], candidates[('zero', seed)]))
+            if candidates[('pbm', seed)] is not None and candidates[('zero', seed)] is not None:
+                issues.extend(compare_zero_candidates(candidates[('pbm', seed)], candidates[('zero', seed)]))
+            else:
+                warnings.append(f'seed={seed}: PBM/zero comparison is aggregate-only; event identity/probability equality not checked')
             if runs[('pbm', seed)] != runs[('zero', seed)]:
                 issues.append(f'seed={seed}: PBM/zero click/feedback/exposure counts differ')
             left = {(r['loop_epoch'], r['test_type']): r for r in utility[('pbm', seed)]}
@@ -375,7 +398,12 @@ def analyze(root: Path, stage: str, phase: str = 'all', *, run_paths=None, requi
         final, utility_final = [], []
     return {'stage': stage, 'phase': phase, 'expected_runs': len(required),
             'acceptance_scope': 'full-matrix' if required == full_cells else 'selected-cells-only',
-            'complete': not issues, 'issues': issues, 'round_summary': round_rows,
+            'complete': not issues, 'issues': issues, 'warnings': warnings,
+            'candidate_audit_complete': not issues and len(candidates) == len(required)
+                                        and all(path is not None for path in candidates.values()),
+            'validation_level': 'incomplete' if issues else ('summary-only' if any(path is None for path in candidates.values())
+                                                            else 'candidate-audited'),
+            'round_summary': round_rows,
             'primary_endpoint_by_seed': primary_values, 'primary_endpoint_seed_summary': primary_summary,
             'final_round_seed_summary': final,
             'utility_final_round_seed_summary': utility_final, 'utility_paired_deltas': utility_pairs,
@@ -396,11 +424,13 @@ def main():
     p.add_argument('--output', type=Path, required=True, help='New analysis directory; never overwrite raw outputs')
     p.add_argument('--selected-runs', type=Path,
                    help='JSON list of validated run directories; full stage/phase completeness remains required')
+    p.add_argument('--require-candidates', action='store_true',
+                   help='Require independent candidate recount; reject explicitly summary-only runs')
     args = p.parse_args()
     selected = json.loads(args.selected_runs.read_text(encoding='utf-8')) if args.selected_runs else None
     if selected is not None and (not isinstance(selected, list) or not all(isinstance(p, str) for p in selected)):
         p.error('--selected-runs must contain a JSON list of paths')
-    result = analyze(args.root, args.stage, args.phase, run_paths=selected)
+    result = analyze(args.root, args.stage, args.phase, run_paths=selected, require_candidates=args.require_candidates)
     args.output.mkdir(parents=True, exist_ok=False)
     (args.output / 'analysis.json').write_text(json.dumps(result, indent=2), encoding='utf-8')
     rows = result['paired_round_trajectories']

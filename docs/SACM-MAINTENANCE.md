@@ -24,6 +24,8 @@ Set-Location E:\Lab\Rec_SourceBias
 
 audit_click_ties.py 流式读取新 candidate_events.jsonl.gz 或历史 candidates.csv，不修改实验结果；同一运行优先新格式且不重复计数。详见 [EXPERIMENT-ARTIFACTS.md](EXPERIMENT-ARTIFACTS.md)：
 
+当前默认summary-only，不保存候选，不能执行此逐事件审计；缺证据时审计会失败。汇总验收输出明确标记candidate_audit_complete=false，不能作为该门禁已通过的替代证据。需要同分/概率/逐事件配对证据时，应预先在专项运行开启候选归档。
+
 - 配对单位为 `(base item,label)` 下的两来源出现次数；不去重，不使用笛卡尔积。
 - 精确配对同分数 / 全部配对位置数，另报包含配对同分 impression 数 / 全部有分数的模拟 impression 数。
 - 跨来源任意 item 同分的 impression 数另列，不能混同同 item 配对。

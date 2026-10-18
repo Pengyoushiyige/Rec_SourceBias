@@ -281,7 +281,8 @@ class Trainer:
     def run(self):
         directory = getattr(self.args, 'click_diagnostics_dir', None)
         if directory:
-            with ClickObservations(directory, self.click_policy.config.click_model) as observations:
+            with ClickObservations(directory, self.click_policy.config.click_model,
+                                   export_candidates=getattr(self.args, 'candidate_export', 'none') == 'archive') as observations:
                 self._run(observations)
         else:
             self._run(None)

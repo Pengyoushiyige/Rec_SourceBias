@@ -43,7 +43,7 @@ class DatasetSACMTests(unittest.TestCase):
 
     def test_two_round_data_reaches_optimizer_and_streaming_counts(self):
         policy = ClickPolicy(ClickConfig(click_model="sacm_static", eta=1), 2023)
-        with ClickObservations(self.root / "obs", "sacm_static") as sink:
+        with ClickObservations(self.root / "obs", "sacm_static", export_candidates=True) as sink:
             initial = self.dataset(0, policy, sink)
             first = sink.finish_epoch()
             self.assertEqual(first["simulated_impressions"], 0)
@@ -116,7 +116,7 @@ class DatasetSACMTests(unittest.TestCase):
         _, _, diag = policy.select([4, 3, 2, 1], [1, 0, 0, 0],
                                    ["N1-human", "N1-llm", "N2-human", "N2-llm"],
                                    "U1", "duplicate-negatives")
-        with ClickObservations(self.root / "duplicates", "pbm_probability") as sink:
+        with ClickObservations(self.root / "duplicates", "pbm_probability", export_candidates=True) as sink:
             sink.record(diag, [1, 1, 3], round_number=2, training_epoch=1,
                         event_key="duplicate-negatives")
             summary = sink.finish_epoch()
@@ -165,6 +165,8 @@ class DatasetSACMTests(unittest.TestCase):
         self.assertEqual([(r["round"], r["training_epoch"]) for r in records], [(1,1),(1,2),(2,1),(2,2)])
         self.assertEqual([r["simulated_impressions"] for r in records], [0,0,2,2])
         self.assertEqual(trainer.last_ratio, records[-1]["click_ratio"])
+        self.assertTrue(all(r['candidate_export'] is False for r in records))
+        self.assertFalse((self.root/'bridge'/ARCHIVE_NAME).exists())
 
 
 if __name__ == "__main__":
