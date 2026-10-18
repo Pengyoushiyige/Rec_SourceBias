@@ -1,0 +1,90 @@
+{
+  "schema": "sacm-round-observations-v1",
+  "args": {
+    "mode": "loop",
+    "dataset": "Amazon_Beauty",
+    "model_type": "BERT4Rec",
+    "batch_size": 128,
+    "news_batch_size": 64,
+    "shuffle_buffer_size": 10000,
+    "num_workers": 0,
+    "log_steps": 100,
+    "epochs": 5,
+    "lr": 0.001,
+    "weight_decay": 1e-05,
+    "news_attributes": [
+      "abstract"
+    ],
+    "num_words_abstract": 512,
+    "user_log_length": 10,
+    "word_embedding_dim": 768,
+    "user_log_mask": true,
+    "drop_rate": 0.2,
+    "save_steps": 100000,
+    "max_steps_per_epoch": 1000000,
+    "load_ckpt_name": "epoch-5.pt",
+    "gpu": "0",
+    "plm_model": "bert-base-uncased",
+    "llm_model": "gpt-3.5-turbo-0613",
+    "negative_sampling_ratio": 4,
+    "behaviors_file": "E:\\Lab\\Rec_SourceBias\\dataset\\Amazon_Beauty\\train\\behaviors.tsv",
+    "behaviors_file1": "E:\\Lab\\Rec_SourceBias\\dataset\\Amazon_Beauty\\train\\behaviors1.tsv",
+    "behaviors_file2": "E:\\Lab\\Rec_SourceBias\\dataset\\Amazon_Beauty\\train\\behaviors2.tsv",
+    "test_behaviors_file": "E:\\Lab\\Rec_SourceBias\\dataset\\Amazon_Beauty\\dev\\behaviors.tsv",
+    "human_news_file": "E:\\Lab\\Rec_SourceBias\\dataset\\Amazon_Beauty\\text\\news_parsed_bert-base-uncased.tsv",
+    "HGC_file": "E:\\Lab\\Rec_SourceBias\\dataset\\Amazon_Beauty\\text\\news_parsed_bert-base-uncased.tsv",
+    "llm_news_file": "E:\\Lab\\Rec_SourceBias\\dataset\\Amazon_Beauty\\text\\news_gpt-3.5-turbo-0613_parsed_bert-base-uncased.tsv",
+    "llm_rewirte_news_file": "dataset\\Amazon_Beauty\\text\\news_llama_rewrite_bert-base-uncased.tsv",
+    "seed": 2023,
+    "debias": false,
+    "debias_type": "emb_entropy",
+    "disturb_ratio": 0.5,
+    "eta": 2.0,
+    "click_model": "pbm_probability",
+    "sacm_alpha_mode": "user_beta",
+    "sacm_alpha_value": 0.0,
+    "sacm_alpha_a": 2.0,
+    "sacm_alpha_b": 5.0,
+    "sacm_cue_mode": "beta",
+    "sacm_hgc_cue_a": 2.0,
+    "sacm_hgc_cue_b": 5.0,
+    "sacm_aigc_cue_a": 5.0,
+    "sacm_aigc_cue_b": 2.0,
+    "click_diagnostics_dir": "E:\\Lab\\Rec_SourceBias\\results\\pbm_eta2_seed2023_20261018_cp2_attempt02",
+    "candidate_export": "none",
+    "round_artifacts_dir": "E:\\Lab\\Rec_SourceBias\\results\\pbm_eta2_seed2023_20261018_cp2_attempt02\\round_artifacts",
+    "loop_epochs": 20,
+    "user_loss": 0.01,
+    "news_loss": 1,
+    "test_epoch": 5,
+    "text_source": "",
+    "text_parsed_target": "",
+    "ckpt_dir": ""
+  },
+  "provenance": {
+    "torch_version": "2.1.2+cu118",
+    "code_sha256": {
+      "train_loop.py": "36ce580ee9dd0447ad39608b54ff9debba2de12fe41f6265d6c2fd7023f34c70",
+      "round_observations.py": "981bdbd63283cd0770a6522b3af9a0080ff3e24c6873fdb44c5a22f0d550b21b",
+      "Dataset.py": "1ea8496d9b6908217a97334365dd627fe72d94b563288d69c2c8d7e7374554eb",
+      "click_models.py": "24db041fd133140bb642f936d4c8cbebf99f848651a0e163314c1f4d23911318"
+    },
+    "text_inputs": {
+      "human_news_file": {
+        "path": "E:\\Lab\\Rec_SourceBias\\dataset\\Amazon_Beauty\\text\\news_parsed_bert-base-uncased.tsv",
+        "sha256": "92d0c4984a80fc4f6ed105a05e73a8e6c63e8f827a256d17095c92939766a5e8"
+      },
+      "llm_news_file": {
+        "path": "E:\\Lab\\Rec_SourceBias\\dataset\\Amazon_Beauty\\text\\news_gpt-3.5-turbo-0613_parsed_bert-base-uncased.tsv",
+        "sha256": "b56d2885cbdbcbb1ac5ce13b9793ed057516a1b06991b1776fd25ddea5c40218"
+      }
+    },
+    "vector_cache_source": "Trainer.get_news2vector precomputed tensors; no re-encoding",
+    "news_batch_size": 64
+  },
+  "vectors_file": "text_vectors.pt",
+  "vectors_sha256": "4579aef4c28f9ae155a4833f65bdcb56b6895d941ccc474a3d78aa433f9fad8b",
+  "test_behaviors_file": "E:\\Lab\\Rec_SourceBias\\dataset\\Amazon_Beauty\\dev\\behaviors.tsv",
+  "test_behaviors_sha256": "98155503635a8ff52859914f85809f7b19e7977c514cc6deaf11bd2027d39404",
+  "notes": "Cached vectors exactly as used in training; encoder mode unchanged; no PLM checkpoint."
+}
