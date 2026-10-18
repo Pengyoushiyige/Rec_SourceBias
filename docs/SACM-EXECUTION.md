@@ -86,7 +86,7 @@ powershell -File scripts/run_sacm_matrix.ps1 -Stage full -Phase extended -Execut
 
 loss 日志按实际完成 batch 数计算均值，首 batch不除零，空loader明确失败；criterion/backward/optimizer.step及优化机制不变。这是 batch均值而非按样本数加权均值。
 
-每次运行保存 command/data/source SHA/Git状态/环境/Python-Torch-Transformers-CUDA版本；`run.log` 保存原始日志，`metrics.jsonl` 保存dev指标，`candidates.csv` 与 `summaries.jsonl` 保存候选事件及模拟统计。分析核对实际事件与汇总计数、轮次、epoch、条件及seed完整性，而非仅检查文件非空。
+每次运行保存 command/data/source SHA/Git状态/环境/Python-Torch-Transformers-CUDA版本；`run.log` 保存原始日志，`metrics.jsonl` 保存dev指标，`summaries.jsonl` 保存轻量模拟统计，`candidate_events.jsonl.gz` 保存去除重复字段的压缩候选事件。新运行不再生成 `candidates.csv`，历史 CSV 仍可读。完整验收核对实际事件与汇总计数、轮次、epoch、条件及seed完整性；日常查询默认只读轻量汇总。格式与查询见 [EXPERIMENT-ARTIFACTS.md](EXPERIMENT-ARTIFACTS.md)。
 
 ## 终点和验收
 

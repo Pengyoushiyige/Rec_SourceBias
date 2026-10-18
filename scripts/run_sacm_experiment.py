@@ -12,6 +12,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'src'))
+from candidate_archive import ARCHIVE_NAME, SCHEMA as CANDIDATE_SCHEMA
 CORE_CONDITIONS = ('pbm', 'zero', 'heterogeneous')
 EXTENDED_CONDITIONS = ('global', 'low', 'high', 'weak_cue')
 CONDITIONS = CORE_CONDITIONS + EXTENDED_CONDITIONS
@@ -261,6 +263,8 @@ def main(argv=None):
                 raise RuntimeError('Frozen cohort signature mismatch; no training was started')
         command = build_command(args, out)
         manifest['command'] = command
+        manifest['candidate_evidence'] = {'file': ARCHIVE_NAME, 'schema': CANDIDATE_SCHEMA,
+                                          'storage': 'gzip normalized event JSONL', 'bytes': None}
         manifest['status'] = 'running' if args.execute else 'prepared'
         save()
         print(json.dumps({'output_dir': str(out), 'command': command, 'status': manifest['status']}, indent=2))
@@ -300,6 +304,8 @@ def main(argv=None):
                     for row in rows:
                         handle.write(json.dumps(row) + '\n')
         manifest['metrics_rows'] = len(metrics)
+        manifest['candidate_evidence']['bytes'] = ((out / ARCHIVE_NAME).stat().st_size
+                                                 if (out / ARCHIVE_NAME).is_file() else None)
         manifest['status'] = 'completed' if code == 0 else 'failed'
         return code
     except BaseException as exc:

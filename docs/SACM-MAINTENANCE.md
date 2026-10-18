@@ -22,14 +22,14 @@ Set-Location E:\Lab\Rec_SourceBias
 
 ## 日志审计与分母
 
-audit_click_ties.py 流式读取既有 candidates.csv，不修改实验结果：
+audit_click_ties.py 流式读取新 candidate_events.jsonl.gz 或历史 candidates.csv，不修改实验结果；同一运行优先新格式且不重复计数。详见 [EXPERIMENT-ARTIFACTS.md](EXPERIMENT-ARTIFACTS.md)：
 
 - 配对单位为 `(base item,label)` 下的两来源出现次数；不去重，不使用笛卡尔积。
 - 精确配对同分数 / 全部配对位置数，另报包含配对同分 impression 数 / 全部有分数的模拟 impression 数。
 - 跨来源任意 item 同分的 impression 数另列，不能混同同 item 配对。
-- 重复副本按每来源 CSV 顺序配对；若同源同item出现不同分数则身份有歧义，拒绝并要求 occurrence ID。先排比例不是所有重复副本两两比较。
+- 重复副本按每来源候选出现顺序配对；若同源同item出现不同分数则身份有歧义，拒绝并要求 occurrence ID。先排比例不是所有重复副本两两比较。
 - 初始化 round1 无分数，不计入模拟分母；round2+空/部分空、非有限、来源错配、未配对多重性、非法rank或降序错误均拒绝。
-- 无 tie 时先排比例为 null，不写成50%或0%；CSV hash记录证据。审计不是完整实验矩阵验收，后者仍用 analyze_sacm_experiments.py。
+- 无 tie 时先排比例为 null，不写成50%或0%；实际读取证据文件的 hash 记录出处。审计不是完整实验矩阵验收，后者仍用 analyze_sacm_experiments.py。
 
 ## CPU 与 GPU 各自门禁
 

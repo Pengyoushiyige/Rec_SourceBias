@@ -5,10 +5,14 @@ import json
 import math
 import statistics
 import hashlib
+import sys
 from collections import Counter
 from itertools import zip_longest
 from pathlib import Path
 from run_sacm_experiment import CONDITIONS, source_signature
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+from candidate_archive import find_candidates, iter_candidate_rows
 
 RATIOS = {
     'click_ratio': ('click_llm', 'clicks'),
@@ -42,7 +46,7 @@ def relative_delta(human: float, llm: float) -> float | None:
     return 100 * (human - llm) / denominator if denominator else None
 
 def audit_candidates(path: Path, records: list[dict]) -> list[str]:
-    """Recount CSV events in streaming order; keep at most one candidate event."""
+    """Recount either evidence format; keep at most one expanded candidate event."""
     fields = ('round', 'training_epoch', 'event_key', 'user_id', 'candidate_id', 'source',
               'score', 'label', 'rank', 'cue', 'alpha', 'probability', 'clicked',
               'training_count', 'in_top3', 'in_top5')
@@ -97,42 +101,38 @@ def audit_candidates(path: Path, records: list[dict]) -> list[str]:
                 c[f'exposure_count_at{k}'] += flag
                 c[f'exposure_llm_at{k}'] += flag * (r['source'] == 'llm')
     try:
-        with path.open(newline='', encoding='utf-8') as handle:
-            reader = csv.DictReader(handle)
-            if not set(fields).issubset(reader.fieldnames or []):
-                return ['missing candidate diagnostics columns']
-            for raw in reader:
-                key = (int(raw['round']), int(raw['training_epoch']), raw['event_key'])
-                if current != key:
-                    flush()
-                    current, event = key, []
-                r = dict(raw)
-                for name in ('clicked', 'training_count'):
+        for raw in iter_candidate_rows(path, fields):
+            key = (int(raw['round']), int(raw['training_epoch']), raw['event_key'])
+            if current != key:
+                flush()
+                current, event = key, []
+            r = dict(raw)
+            for name in ('clicked', 'training_count'):
+                r[name] = int(raw[name])
+            if r['clicked'] not in (0, 1) or r['training_count'] < r['clicked']:
+                raise ValueError('invalid click/training multiplicity')
+            if r['source'] not in ('human', 'llm') or not r['candidate_id'].endswith('-' + r['source']):
+                raise ValueError('candidate source suffix mismatch')
+            initial = json.loads(key[2])[0] == 'initial'
+            if not initial:
+                for name in ('score', 'cue', 'alpha', 'probability'):
+                    r[name] = float(raw[name])
+                    if not math.isfinite(r[name]):
+                        raise ValueError('non-finite candidate value')
+                if any(not 0 <= r[name] <= 1 for name in ('probability', 'cue', 'alpha')):
+                    raise ValueError('candidate probability/cue/alpha must lie in [0, 1]')
+                for name in ('rank', 'in_top3', 'in_top5'):
                     r[name] = int(raw[name])
-                if r['clicked'] not in (0, 1) or r['training_count'] < r['clicked']:
-                    raise ValueError('invalid click/training multiplicity')
-                if r['source'] not in ('human', 'llm') or not r['candidate_id'].endswith('-' + r['source']):
-                    raise ValueError('candidate source suffix mismatch')
-                initial = json.loads(key[2])[0] == 'initial'
-                if not initial:
-                    for name in ('score', 'cue', 'alpha', 'probability'):
-                        r[name] = float(raw[name])
-                        if not math.isfinite(r[name]):
-                            raise ValueError('non-finite candidate value')
-                    if any(not 0 <= r[name] <= 1 for name in ('probability', 'cue', 'alpha')):
-                        raise ValueError('candidate probability/cue/alpha must lie in [0, 1]')
-                    for name in ('rank', 'in_top3', 'in_top5'):
-                        r[name] = int(raw[name])
-                    r['label'] = int(raw['label'])
-                    if r['label'] not in (0, 1) or r['clicked'] > r['label'] or (r['label'] == 0 and r['probability'] != 0):
-                        raise ValueError('click/probability must respect relevance label')
-                    if r['clicked'] and r['probability'] <= 0:
-                        raise ValueError('clicked candidate must have positive probability')
-                    for k in (3, 5):
-                        if r[f'in_top{k}'] != int(r['rank'] <= k):
-                            raise ValueError('top-k flag differs from rank')
-                event.append(r)
-            flush()
+                r['label'] = int(raw['label'])
+                if r['label'] not in (0, 1) or r['clicked'] > r['label'] or (r['label'] == 0 and r['probability'] != 0):
+                    raise ValueError('click/probability must respect relevance label')
+                if r['clicked'] and r['probability'] <= 0:
+                    raise ValueError('clicked candidate must have positive probability')
+                for k in (3, 5):
+                    if r[f'in_top{k}'] != int(r['rank'] <= k):
+                        raise ValueError('top-k flag differs from rank')
+            event.append(r)
+        flush()
         expected = {(r['round'], r['training_epoch']): r for r in records}
         if set(counts) != set(expected):
             issues.append('candidate round/epoch events incomplete or unexpected (including header-only CSV)')
@@ -153,17 +153,16 @@ def audit_candidates(path: Path, records: list[dict]) -> list[str]:
 
 def compare_zero_candidates(left: Path, right: Path) -> list[str]:
     """Compare matched candidate rows with numeric tolerance, using bounded memory."""
-    with left.open(newline='', encoding='utf-8') as a, right.open(newline='', encoding='utf-8') as b:
-        for index, (x, y) in enumerate(zip_longest(csv.DictReader(a), csv.DictReader(b)), 1):
-            if x is None or y is None:
-                return ['PBM/zero candidate event counts differ']
-            for name in ('round', 'training_epoch', 'event_key', 'user_id', 'candidate_id',
-                         'source', 'clicked', 'training_count', 'rank', 'in_top3', 'in_top5'):
-                if x[name] != y[name]:
-                    return [f'PBM/zero matched candidate mismatch row {index}: {name}']
-            if x['probability'] or y['probability']:
-                if not x['probability'] or not y['probability'] or abs(float(x['probability']) - float(y['probability'])) > 1e-12:
-                    return [f'PBM/zero probability differs beyond 1e-12 row {index}']
+    for index, (x, y) in enumerate(zip_longest(iter_candidate_rows(left), iter_candidate_rows(right)), 1):
+        if x is None or y is None:
+            return ['PBM/zero candidate event counts differ']
+        for name in ('round', 'training_epoch', 'event_key', 'user_id', 'candidate_id',
+                     'source', 'clicked', 'training_count', 'rank', 'in_top3', 'in_top5'):
+            if x[name] != y[name]:
+                return [f'PBM/zero matched candidate mismatch row {index}: {name}']
+        if x['probability'] or y['probability']:
+            if not x['probability'] or not y['probability'] or abs(float(x['probability']) - float(y['probability'])) > 1e-12:
+                return [f'PBM/zero probability differs beyond 1e-12 row {index}']
     return []
 
 
@@ -243,10 +242,11 @@ def analyze(root: Path, stage: str, phase: str = 'all', *, run_paths=None, requi
         rounds = summarize(records)
         if {r['round'] for r in rounds} != set(range(1, expected_rounds + 1)):
             issues.append(f'{key}: missing or unexpected rounds')
-        if not (path.parent / 'candidates.csv').is_file() or (path.parent / 'candidates.csv').stat().st_size == 0:
+        candidate_path = find_candidates(path.parent)
+        if not candidate_path.is_file() or candidate_path.stat().st_size == 0:
             issues.append(f'{key}: missing candidate diagnostics')
         else:
-            issues.extend(f'{key}: {problem}' for problem in audit_candidates(path.parent / 'candidates.csv', records))
+            issues.extend(f'{key}: {problem}' for problem in audit_candidates(candidate_path, records))
         metrics_path = path.parent / 'metrics.jsonl'
         if metrics_path.is_file():
             try:
@@ -279,7 +279,7 @@ def analyze(root: Path, stage: str, phase: str = 'all', *, run_paths=None, requi
         if len(issues) == before:
             runs[key] = rounds
             utility[key] = metric_rows
-            candidates[key] = path.parent / 'candidates.csv'
+            candidates[key] = candidate_path
     for seed in seeds:
         if ('pbm', seed) in runs and ('zero', seed) in runs:
             issues.extend(compare_zero_candidates(candidates[('pbm', seed)], candidates[('zero', seed)]))

@@ -3,13 +3,16 @@ from __future__ import annotations
 
 import argparse
 from collections import defaultdict
-import csv
+import sys
 import hashlib
 import itertools
 import json
 import math
 from pathlib import Path
 from typing import Any
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+from candidate_archive import ARCHIVE_NAME, find_candidates, iter_candidate_rows
 
 
 def sha256(path: Path) -> str:
@@ -91,35 +94,31 @@ def audit_file(path: Path) -> dict[str, Any]:
     rounds: dict[tuple[int, int], dict[str, int]] = {}
     total = new_counts()
     seen: set[tuple[str, str, str]] = set()
-    with path.open(newline='', encoding='utf-8-sig') as handle:
-        reader = csv.DictReader(handle)
-        required = {'round', 'training_epoch', 'event_key', 'candidate_id', 'source', 'score', 'rank', 'label'}
-        if not required.issubset(reader.fieldnames or []):
-            raise ValueError('Missing candidate CSV columns')
-        for key, iterator in itertools.groupby(reader, lambda r: (r['round'], r['training_epoch'], r['event_key'])):
-            if key in seen:
-                raise ValueError(f'Non-contiguous repeated event: {key}')
-            seen.add(key)
-            try:
-                rows = list(iterator)
-                if int(key[0]) < 1 or int(key[1]) < 1:
-                    raise ValueError('Round/training epoch must be positive integers')
-                event = json.loads(key[2])
-                initial = isinstance(event, list) and bool(event) and event[0] == 'initial'
-                if (int(key[0]) == 1) != initial:
-                    raise ValueError('Round/initial event identity mismatch')
-                if initial and any(row['score'] != '' for row in rows):
-                    raise ValueError('Initialization unexpectedly has scores')
-                if not initial and not any(row['score'] != '' for row in rows):
-                    raise ValueError('Simulated impression has no scores')
-                counts = count_event(rows)
-            except (ValueError, KeyError) as error:
-                raise ValueError(f'{path} impression {key}: {error}') from error
-            epoch = (int(key[0]), int(key[1]))
-            aggregate = rounds.setdefault(epoch, new_counts())
-            for field, value in counts.items():
-                aggregate[field] += value
-                total[field] += value
+    required = {'round', 'training_epoch', 'event_key', 'candidate_id', 'source', 'score', 'rank', 'label'}
+    for key, iterator in itertools.groupby(iter_candidate_rows(path, required), lambda r: (r['round'], r['training_epoch'], r['event_key'])):
+        if key in seen:
+            raise ValueError(f'Non-contiguous repeated event: {key}')
+        seen.add(key)
+        try:
+            rows = list(iterator)
+            if int(key[0]) < 1 or int(key[1]) < 1:
+                raise ValueError('Round/training epoch must be positive integers')
+            event = json.loads(key[2])
+            initial = isinstance(event, list) and bool(event) and event[0] == 'initial'
+            if (int(key[0]) == 1) != initial:
+                raise ValueError('Round/initial event identity mismatch')
+            if initial and any(row['score'] != '' for row in rows):
+                raise ValueError('Initialization unexpectedly has scores')
+            if not initial and not any(row['score'] != '' for row in rows):
+                raise ValueError('Simulated impression has no scores')
+            counts = count_event(rows)
+        except (ValueError, KeyError) as error:
+            raise ValueError(f'{path} impression {key}: {error}') from error
+        epoch = (int(key[0]), int(key[1]))
+        aggregate = rounds.setdefault(epoch, new_counts())
+        for field, value in counts.items():
+            aggregate[field] += value
+            total[field] += value
     if not seen:
         raise ValueError('Empty candidate CSV')
     manifest_path = path.parent / 'manifest.json'
@@ -132,18 +131,20 @@ def audit_file(path: Path) -> dict[str, Any]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('input', type=Path, help='candidates.csv, run directory or cohort directory')
+    parser.add_argument('input', type=Path, help='candidate_events.jsonl.gz, legacy candidates.csv, run or cohort directory')
     parser.add_argument('--output', type=Path, help='New JSON file; existing outputs are never overwritten')
     args = parser.parse_args()
     if args.output and args.output.exists():
         parser.error('Output already exists')
-    paths = [args.input] if args.input.is_file() else sorted(args.input.rglob('candidates.csv'))
+    directories = ({p.parent for name in (ARCHIVE_NAME, 'candidates.csv') for p in args.input.rglob(name)}
+                   if args.input.is_dir() else set())
+    paths = [args.input] if args.input.is_file() else [find_candidates(p) for p in sorted(directories)]
     if not paths:
-        parser.error('No candidate CSVs found')
+        parser.error('No candidate evidence found')
     runs = [audit_file(path) for path in paths]
     total = {key: sum(run['totals'][key] for run in runs) for key in new_counts()}
     payload = dict(schema_version=1, equality='exact finite score equality, no tolerance',
-                   pair_unit='(base item, label) per-source CSV occurrence; repeated positions retained',
+                   pair_unit='(base item, label) per-source candidate occurrence; repeated positions retained',
                    scope='logged click ranking, not native evaluation or unscored initialization',
                    runs=runs, totals=with_ratios(total))
     output = json.dumps(payload, ensure_ascii=False, indent=2, allow_nan=False)

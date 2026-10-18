@@ -1,6 +1,5 @@
 """Two-round micro integration, without pretrained weights or GPU execution."""
 import contextlib
-import csv
 import io
 import json
 import random
@@ -18,6 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from Dataset import BaseDataset
 from click_models import ClickConfig, ClickPolicy
 from click_observations import ClickObservations
+from candidate_archive import iter_candidate_rows, ARCHIVE_NAME
 from metrics import fast_recall_score
 
 
@@ -75,8 +75,8 @@ class DatasetSACMTests(unittest.TestCase):
             optimizer.step()
             self.assertTrue(torch.isfinite(loss))
             self.assertFalse(torch.equal(previous, learnable_user))
-        with (self.root / "obs" / "candidates.csv").open(encoding="utf-8", newline="") as handle:
-            all_rows = list(csv.DictReader(handle))
+        self.assertFalse((self.root / "obs" / "candidates.csv").exists())
+        all_rows = list(iter_candidate_rows(self.root / "obs" / ARCHIVE_NAME))
         initial_rows = [r for r in all_rows if r["score"] == ""]
         rows = [r for r in all_rows if r["score"] != ""]
         self.assertEqual(len(all_rows), 14)
@@ -124,8 +124,7 @@ class DatasetSACMTests(unittest.TestCase):
         self.assertEqual(summary["training_llm"], 3)
         self.assertEqual(summary["training_ratio"], .75)
         self.assertEqual(summary["click_ratio"], 0)
-        with (self.root/"duplicates"/"candidates.csv").open(encoding="utf-8", newline="") as handle:
-            rows = list(csv.DictReader(handle))
+        rows = list(iter_candidate_rows(self.root / "duplicates" / ARCHIVE_NAME))
         self.assertEqual([int(row["training_count"]) for row in rows], [1, 2, 0, 1])
 
     def test_actual_trainer_run_bridge_two_rounds(self):
